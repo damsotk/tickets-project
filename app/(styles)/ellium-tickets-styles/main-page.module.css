@@ -1,0 +1,37 @@
+:global(body) {
+  background-color: #1a1a1e !important;
+  margin: 0 !important;
+  max-width: none !important;
+  padding: 0 clamp(16px, 8vw, 240px) !important;
+  width: 100vw !important;
+  overflow-x: hidden;
+}
+
+.app {
+  min-height: 100vh;
+  color: #ffffff;
+  font-family: 'minecraftFont', monospace;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+  .main {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+}

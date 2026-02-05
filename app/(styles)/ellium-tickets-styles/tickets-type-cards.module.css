@@ -1,0 +1,215 @@
+.cardsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.ticketCard {
+  position: relative;
+  background-color: #242429;
+  border-radius: 12px;
+  padding: 2rem 2rem 1.5rem 2rem;
+  min-height: 200px;
+  height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.ticketCard:hover {
+  transform: translateY(-4px);
+}
+
+.ticketCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.12;
+  z-index: 0;
+}
+
+.ticketCard::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  width: 120px;
+  height: 120px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.complaint::after,
+.lore::after,
+.tech::after {
+  top: 35%;
+  right: 30px;
+  width: 200px;
+  height: 200px;
+}
+
+.complaint::before {
+  background:
+    linear-gradient(135deg, #8b0000 0%, transparent 60%),
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 35px,
+      rgba(139, 0, 0, 0.08) 35px,
+      rgba(139, 0, 0, 0.08) 70px
+    );
+}
+
+.complaint::after {
+  background-image: url('/ellium-tickets-images/ban.png');
+}
+
+.lore::before {
+  background:
+    linear-gradient(135deg, #006400 0%, transparent 60%),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 35px,
+      rgba(0, 100, 0, 0.08) 35px,
+      rgba(0, 100, 0, 0.08) 70px
+    );
+}
+
+.lore::after {
+  background-image: url('/ellium-tickets-images/book-alt.png');
+}
+
+.tech::before {
+  background:
+    linear-gradient(135deg, #00008b 0%, transparent 60%),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 35px,
+      rgba(0, 0, 139, 0.08) 35px,
+      rgba(0, 0, 139, 0.08) 70px
+    );
+}
+
+.tech::after {
+  background-image: url('/ellium-tickets-images/microchip.png');
+}
+
+.cardTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  line-height: 1.2;
+}
+
+.cardSubtitle {
+  font-size: 0.75rem;
+  color: #cccccc;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.cardSubtitle::after {
+  content: 'Contact';
+  display: block;
+  margin-top: 1rem;
+  padding: 0.7rem 2rem;
+  background-color: #ffffff;
+  color: #000000;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.ticketCard:hover .cardSubtitle::after {
+  background-color: #f0f0f0;
+}
+
+.complaint .cardTitle {
+  color: #ff6b6b;
+}
+
+.lore .cardTitle {
+  color: #51cf66;
+}
+
+.tech .cardTitle {
+  color: #4dabf7;
+}
+
+@media (max-width: 768px) {
+  .cardsContainer {
+    gap: 1rem;
+  }
+
+  .ticketCard {
+    min-height: 180px;
+    height: 180px;
+    padding: 1.5rem;
+  }
+
+  .ticketCard::after {
+    width: 100px;
+    height: 100px;
+    right: 3%;
+  }
+
+  .cardTitle {
+    font-size: 1.5rem;
+  }
+
+  .cardSubtitle {
+    font-size: 0.65rem;
+  }
+
+  .cardSubtitle::after {
+    font-size: 0.65rem;
+    padding: 0.6rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ticketCard {
+    min-height: 160px;
+    height: 160px;
+    padding: 1.2rem;
+  }
+
+  .ticketCard::after {
+    width: 80px;
+    height: 80px;
+    right: 2%;
+  }
+
+  .cardTitle {
+    font-size: 1.2rem;
+  }
+
+  .cardSubtitle {
+    font-size: 0.6rem;
+  }
+
+  .cardSubtitle::after {
+    font-size: 0.6rem;
+    padding: 0.5rem 1rem;
+    margin-top: 0.8rem;
+  }
+}

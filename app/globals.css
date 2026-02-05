@@ -1,0 +1,22 @@
+body {
+  background-color: #1a1a1e !important;
+  margin: 0 !important;
+  max-width: none !important;
+  padding: 0 clamp(16px, 8vw, 240px) !important;
+  width: 100vw !important;
+  overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "minecraftFont";
+  src: url("/fonts/minecraft.ttf") format("truetype");
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+}

@@ -1,0 +1,67 @@
+'use client';
+import styles from '@/app/(styles)/ellium-tickets-styles/auth-styles/auth-styles.module.css';
+import { useRouter } from 'next/navigation';
+import { ApiClient } from '@/utils/api';
+import { useValidateAuthForm } from '@/app/(hooks)/ellium-tickets-hooks/validate-hooks/auth/use-validate-auth-form';
+import { useAuthFormHandlers } from '@/app/(hooks)/ellium-tickets-hooks/validate-hooks/auth/use-auth-form-handlers';
+import { FormField } from './FormField';
+
+export default function LoginForm() {
+  const router = useRouter();
+  const { validatePassword, validateEmail } = useValidateAuthForm();
+  const { formData, fieldErrors, handleChange, handleBlur, handleSubmit, error, loading } =
+    useAuthFormHandlers(
+      { email: '', password: '' },
+      { email: validateEmail, password: validatePassword },
+      {
+        onSuccess: () => {
+          router.push('/');
+          router.refresh();
+        },
+      },
+    );
+
+  return (
+    <div className={styles.formCard}>
+      <h1 className={styles.title}>Welcome back!</h1>
+      <p className={styles.subtitle}>We&apos;re happy to see you again!</p>
+
+      {error && <div className={styles.error}>{error}</div>}
+
+      <form
+        onSubmit={(e) => handleSubmit(e, () => ApiClient.login(formData.email, formData.password))}
+        noValidate
+      >
+        <FormField
+          label="Email"
+          type="email"
+          name="email"
+          value={formData.email}
+          error={fieldErrors.email}
+          placeholder="Enter your email"
+          onChange={(value) => handleChange('email', value)}
+          onBlur={() => handleBlur('email')}
+        />
+
+        <FormField
+          label="Password"
+          type="password"
+          name="password"
+          value={formData.password}
+          error={fieldErrors.password}
+          placeholder="Enter your password"
+          onChange={(value) => handleChange('password', value)}
+          onBlur={() => handleBlur('password')}
+        />
+
+        <button
+          type="submit"
+          disabled={loading}
+          className={`${styles.button} ${loading ? styles['button--loading'] : ''}`}
+        >
+          {loading ? 'Logging in...' : 'Log In'}
+        </button>
+      </form>
+    </div>
+  );
+}
