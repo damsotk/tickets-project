@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/app/(hooks)/ellium-tickets-hooks/use-auth';
+import { useAuth } from '@/app/(hooks)/use-auth';
 import styles from '@/app/(styles)/ellium-tickets-styles/header.module.css';
 
 export default function Header() {

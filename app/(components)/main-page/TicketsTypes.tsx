@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRequireAuth } from '@/app/(hooks)/ellium-tickets-hooks/use-require-auth';
+import { useRequireAuth } from '@/app/(hooks)/use-require-auth';
 import styles from '@/app/(styles)/ellium-tickets-styles/tickets-type-cards.module.css';
 
 const TICKET_TYPES = [
