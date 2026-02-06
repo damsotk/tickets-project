@@ -36,9 +36,45 @@ export default function TicketsTypes() {
     try {
       const isAuthenticated = await checkAuthAndRedirect();
       if (!isAuthenticated) return;
+      const response = await fetch('/api/tickets/create-ticket', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ category: type }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log('Ticket created: ', data.ticket);
+      } else {
+        console.error('Error create ticket: ', data.error);
+      }
+
       console.log('Create ticket:', type);
+    } catch (error) {
+      console.error(error);
     } finally {
       setChecking(false);
+    }
+  };
+
+  const handleTestGetClick = async () => {
+    try {
+      const response = await fetch('/api/tickets/get-tickets', {
+        method: 'GET',
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log('Tickets:', data.tickets);
+      } else {
+        console.error('Error fetching tickets:', data.error);
+      }
+    } catch (error) {
+      console.error('Fetch error:', error);
     }
   };
 
@@ -58,6 +94,7 @@ export default function TicketsTypes() {
           <div className={styles.cardSubtitle}>{ticket.description}</div>
         </div>
       ))}
+      <button onClick={() => handleTestGetClick()}>test button for get tickets</button>
     </div>
   );
 }
