@@ -46,7 +46,7 @@ model Ticket {
   
   // Connect with user who create ticket
   userId    String
-  user      User   q  @relation(fields: [userId], references: [id], onDelete: Cascade) // When user deleted, delete him tickets
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade) // When user deleted, delete him tickets
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) // Update when new message
