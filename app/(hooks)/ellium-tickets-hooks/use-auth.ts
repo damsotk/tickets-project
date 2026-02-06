@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useState, useEffect, useCallback } from "react";
-import { useRouter } from "next/navigation";
-import { ApiClient } from "@/utils/api";
-import type { User } from "@/types/user";
+import { useState, useEffect, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
+import { AuthClient } from '@/utils/api/auth-client';
+import type { User } from '@/types/user';
 
 interface UseAuthReturn {
   user: User | null;
@@ -23,10 +23,10 @@ export function useAuth(): UseAuthReturn {
     try {
       setLoading(true);
       setError(null);
-      const data = await ApiClient.getCurrentUser();
+      const data = await AuthClient.getCurrentUser();
       setUser(data.user);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to fetch user");
+      setError(err instanceof Error ? err.message : 'Failed to fetch user');
       setUser(null);
     } finally {
       setLoading(false);
@@ -35,11 +35,11 @@ export function useAuth(): UseAuthReturn {
 
   const logout = useCallback(async () => {
     try {
-      await ApiClient.logout();
+      await AuthClient.logout();
       setUser(null);
       router.refresh();
     } catch (err) {
-      console.error("Logout failed:", err);
+      console.error('Logout failed:', err);
     }
   }, [router]);
 

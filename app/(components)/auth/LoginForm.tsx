@@ -1,7 +1,7 @@
 'use client';
 import styles from '@/app/(styles)/ellium-tickets-styles/auth-styles/auth-styles.module.css';
 import { useRouter } from 'next/navigation';
-import { ApiClient } from '@/utils/api';
+import { AuthClient } from '@/utils/api/auth-client';
 import { useValidateAuthForm } from '@/app/(hooks)/ellium-tickets-hooks/validate-hooks/auth/use-validate-auth-form';
 import { useAuthFormHandlers } from '@/app/(hooks)/ellium-tickets-hooks/validate-hooks/auth/use-auth-form-handlers';
 import { FormField } from './FormField';
@@ -29,7 +29,7 @@ export default function LoginForm() {
       {error && <div className={styles.error}>{error}</div>}
 
       <form
-        onSubmit={(e) => handleSubmit(e, () => ApiClient.login(formData.email, formData.password))}
+        onSubmit={(e) => handleSubmit(e, () => AuthClient.login(formData.email, formData.password))}
         noValidate
       >
         <FormField

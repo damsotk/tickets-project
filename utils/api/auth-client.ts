@@ -1,4 +1,4 @@
-export class ApiClient {
+export class AuthClient {
   private static async request<T>(url: string, options?: RequestInit): Promise<T> {
     const response = await fetch(url, {
       ...options,

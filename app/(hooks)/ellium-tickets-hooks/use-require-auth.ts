@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { ApiClient } from '@/utils/api';
+import { AuthClient } from '@/utils/api/auth-client';
 
 interface UseRequireAuthReturn {
   isAuthenticated: boolean;
@@ -18,7 +18,7 @@ export function useRequireAuth(): UseRequireAuthReturn {
 
   const checkAuth = useCallback(async () => {
     try {
-      await ApiClient.getCurrentUser();
+      await AuthClient.getCurrentUser();
       setIsAuthenticated(true);
       return true;
     } catch {

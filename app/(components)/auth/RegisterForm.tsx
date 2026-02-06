@@ -1,7 +1,7 @@
 'use client';
 import styles from '@/app/(styles)/ellium-tickets-styles/auth-styles/auth-styles.module.css';
 import { useRouter } from 'next/navigation';
-import { ApiClient } from '@/utils/api';
+import { AuthClient } from '@/utils/api/auth-client';
 import { useAuthFormHandlers } from '@/app/(hooks)/ellium-tickets-hooks/validate-hooks/auth/use-auth-form-handlers';
 import { useValidateAuthForm } from '@/app/(hooks)/ellium-tickets-hooks/validate-hooks/auth/use-validate-auth-form';
 import { FormField } from './FormField';
@@ -31,7 +31,7 @@ export default function RegisterForm() {
       <form
         onSubmit={(e) =>
           handleSubmit(e, () =>
-            ApiClient.register(formData.name, formData.email, formData.password),
+            AuthClient.register(formData.name, formData.email, formData.password),
           )
         }
         noValidate
