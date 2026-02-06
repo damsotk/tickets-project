@@ -5,9 +5,24 @@ import { useRequireAuth } from '@/app/(hooks)/ellium-tickets-hooks/use-require-a
 import styles from '@/app/(styles)/ellium-tickets-styles/tickets-type-cards.module.css';
 
 const TICKET_TYPES = [
-  { id: 'complaint', title: 'Complaint', className: styles.complaint },
-  { id: 'lore', title: 'Lore', className: styles.lore },
-  { id: 'tech', title: 'Tech', className: styles.tech },
+  {
+    id: 'complaint',
+    title: 'Complaint',
+    description: 'Write a complaint against a player',
+    className: styles.complaint,
+  },
+  {
+    id: 'lore',
+    title: 'Lore',
+    description: 'Ask a question about server lore',
+    className: styles.lore,
+  },
+  {
+    id: 'tech',
+    title: 'Tech',
+    description: 'Ask a question about the technical side of the server',
+    className: styles.tech,
+  },
 ] as const;
 
 export default function TicketsTypes() {
@@ -40,7 +55,7 @@ export default function TicketsTypes() {
           }}
         >
           <div className={styles.cardTitle}>{ticket.title}</div>
-          <div className={styles.cardSubtitle}>Submit a ticket</div>
+          <div className={styles.cardSubtitle}>{ticket.description}</div>
         </div>
       ))}
     </div>

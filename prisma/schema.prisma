@@ -25,6 +25,9 @@ model User {
   
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  tickets   Ticket[]
+  messages  Message[]
   
   @@map("users")
 }
@@ -32,4 +35,46 @@ model User {
 enum UserRole {
   USER
   ADMIN
+}
+
+model Ticket {
+  id        String   @id @default(cuid())
+  title     String   // Name of ticket
+  
+  // Theme (complaint, lore, tech) - use ENUM
+  category  TicketCategory 
+  
+  // Connect with user who create ticket
+  userId    String
+  user      User   q  @relation(fields: [userId], references: [id], onDelete: Cascade) // When user deleted, delete him tickets
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) // Update when new message
+
+  // Connect with messages
+  messages  Message[]
+
+  @@map("tickets")
+}
+
+enum TicketCategory {
+  COMPLAINT
+  LORE
+  TECH
+  OTHER
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  text      String   @db.Text
+
+  ticketId  String
+  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade) // When ticket deleted, delete him message
+
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Restrict) // Doesnt delete user, if he has message
+
+  createdAt DateTime @default(now())
+
+  @@map("messages")
 }
