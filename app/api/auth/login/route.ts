@@ -15,13 +15,13 @@ export async function POST(request: Request) {
     });
 
     if (!user || !user.password) {
-      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+      return NextResponse.json({ error: 'Email is incorrect' }, { status: 401 });
     }
 
     const isValid = await verifyPassword(password, user.password);
 
     if (!isValid) {
-      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+      return NextResponse.json({ error: 'Password is incorrect' }, { status: 401 });
     }
 
     const accessToken = generateAccessToken(user.id);
