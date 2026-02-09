@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styles from '@/app/(styles)/tickets-styles/main-page-tickets.module.css';
 import AllUserTickets from '@/app/(components)/tickets-page/AllUserTickets';
 import TicketMessanger from '@/app/(components)/tickets-page/Messanger';
+import { GetTicketResponse, TicketClient } from '@/utils/api/ticket-client';
 
 export default function TicketsPage() {
   const [selectedTicket, setSelectedTicket] = useState<number | null>(null);
@@ -36,15 +37,8 @@ export default function TicketsPage() {
 
   const handleTestGetClick = async () => {
     try {
-      const response = await fetch('/api/tickets/get-tickets', {
-        method: 'GET',
-      });
-      const data = await response.json();
-      if (response.ok) {
-        console.log('Tickets:', data.tickets);
-      } else {
-        console.error('Error fetching tickets:', data.error);
-      }
+      const response: GetTicketResponse = await TicketClient.getTickets();
+      console.log('Ticket created: ', response.tickets);
     } catch (error) {
       console.error('Fetch error:', error);
     }
@@ -52,6 +46,7 @@ export default function TicketsPage() {
 
   return (
     <div className={styles.container}>
+      <button onClick={() => handleTestGetClick()}>test</button>
       <AllUserTickets
         tickets={mockTickets}
         selectedTicket={selectedTicket}
