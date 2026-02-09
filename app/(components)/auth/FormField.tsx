@@ -1,4 +1,4 @@
-import styles from '@/app/(styles)/ellium-tickets-styles/auth-styles/auth-styles.module.css';
+import styles from '@/app/(styles)/auth-styles/auth-styles.module.css';
 
 interface FormFieldProps {
   label: string;

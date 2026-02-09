@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import styles from '@/app/(styles)/ellium-tickets-styles/main-page.module.css';
+import styles from '@/app/(styles)/main-page.module.css';
 import Header from '@/app/(components)/main-page/Header';
 import TicketsTypes from '@/app/(components)/main-page/TicketsTypes';
 import StaffList from '@/app/(components)/main-page/StaffList';

@@ -1,5 +1,5 @@
 'use client';
-import styles from '@/app/(styles)/ellium-tickets-styles/auth-styles/auth-styles.module.css';
+import styles from '@/app/(styles)/auth-styles/auth-styles.module.css';
 import { useRouter } from 'next/navigation';
 import { AuthClient } from '@/utils/api/auth-client';
 import { useValidateAuthForm } from '@/app/(hooks)/validate-hooks/auth/use-validate-auth-form';

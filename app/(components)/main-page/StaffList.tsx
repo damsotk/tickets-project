@@ -1,4 +1,4 @@
-import styles from '@/app/(styles)/ellium-tickets-styles/staff-list.module.css';
+import styles from '@/app/(styles)/staff-list.module.css';
 
 export default function StaffList() {
   return (
