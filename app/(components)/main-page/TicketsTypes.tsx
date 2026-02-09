@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRequireAuth } from '@/app/(hooks)/use-require-auth';
 import styles from '@/app/(styles)/ellium-tickets-styles/tickets-type-cards.module.css';
+import { CreateTicketResponse, TicketClient } from '@/utils/api/ticket-client';
 
 const TICKET_TYPES = [
   {
@@ -36,22 +37,8 @@ export default function TicketsTypes() {
     try {
       const isAuthenticated = await checkAuthAndRedirect();
       if (!isAuthenticated) return;
-      const response = await fetch('/api/tickets/create-ticket', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ category: type }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        console.log('Ticket created: ', data.ticket);
-      } else {
-        console.error('Error create ticket: ', data.error);
-      }
-
+      const response: CreateTicketResponse = await TicketClient.createTicket(type);
+      console.log('Ticket created: ', response.ticket);
       console.log('Create ticket:', type);
     } catch (error) {
       console.error(error);
