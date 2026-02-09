@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useRequireAuth } from '@/app/(hooks)/auth-hooks/use-require-auth';
-import { CreateTicketResponse, TicketClient } from '@/utils/api/ticket-client';
+import { TicketClient } from '@/utils/api/ticket-client';
+import { CreateTicketResponse } from '@/types/tickets';
 
 export function useCreateTicket() {
   const [checking, setChecking] = useState(false);
