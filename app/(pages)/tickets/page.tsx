@@ -3,54 +3,32 @@ import { useState } from 'react';
 import styles from '@/app/(styles)/tickets-styles/main-page-tickets.module.css';
 import AllUserTickets from '@/app/(components)/tickets-page/AllUserTickets';
 import TicketMessanger from '@/app/(components)/tickets-page/Messanger';
-import { GetTicketResponse, TicketClient } from '@/utils/api/ticket-client';
+import { useGetTickets } from '@/app/(hooks)/ticket-hooks/use-get-tickets';
 
 export default function TicketsPage() {
-  const [selectedTicket, setSelectedTicket] = useState<number | null>(null);
-
-  const mockTickets = [
-    { id: 1, title: 'Authorization Issue', status: 'open', date: '2024-01-15' },
-    { id: 2, title: 'Payment Question', status: 'closed', date: '2024-01-14' },
-    { id: 3, title: 'Technical Support', status: 'pending', date: '2024-01-13' },
-    { id: 4, title: 'System Bug', status: 'open', date: '2024-01-12' },
-    { id: 5, title: 'Feature Request', status: 'open', date: '2024-01-11' },
-  ];
+  const [selectedTicket, setSelectedTicket] = useState<string | null>(null);
+  const { tickets, isLoading, error } = useGetTickets();
 
   const mockMessages = selectedTicket
     ? [
-        { id: 1, text: 'Hello! I have a problem...', author: 'user', time: '14:30' },
+        { id: `asddasdasd`, text: 'Hello! I have a problem...', author: 'user', time: '14:30' },
         {
-          id: 2,
+          id: `asdasddasdasdasd`,
           text: 'Hello! We received your request.',
           author: 'support',
           time: '14:35',
         },
-        {
-          id: 3,
-          text: 'Could you describe the issue in more detail?',
-          author: 'support',
-          time: '14:36',
-        },
-        { id: 4, text: 'Sure, here are the details...', author: 'user', time: '14:40' },
       ]
     : [];
 
-  const handleTestGetClick = async () => {
-    try {
-      const response: GetTicketResponse = await TicketClient.getTickets();
-      console.log('Ticket created: ', response.tickets);
-    } catch (error) {
-      console.error('Fetch error:', error);
-    }
-  };
-
   return (
     <div className={styles.container}>
-      <button onClick={() => handleTestGetClick()}>test</button>
       <AllUserTickets
-        tickets={mockTickets}
+        tickets={tickets}
         selectedTicket={selectedTicket}
         onSelectTicket={setSelectedTicket}
+        isLoading={isLoading}
+        error={error}
       />
 
       <div className={styles.messengerSection}>

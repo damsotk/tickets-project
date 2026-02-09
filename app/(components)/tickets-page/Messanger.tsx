@@ -1,7 +1,7 @@
 import styles from '@/app/(styles)/tickets-styles/messanger.module.css';
 
 interface Message {
-  id: number;
+  id: string;
   text: string;
   author: string;
   time: string;
@@ -9,7 +9,7 @@ interface Message {
 
 interface TicketMessangerProps {
   messages: Message[];
-  selectedTicket: number | null;
+  selectedTicket: string | null;
 }
 
 export default function TicketMessanger({ messages, selectedTicket }: TicketMessangerProps) {

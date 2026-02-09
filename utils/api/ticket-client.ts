@@ -1,20 +1,4 @@
-export interface Ticket {
-  id: string;
-  title: string;
-  category: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface CreateTicketResponse {
-  success: boolean;
-  ticket: Ticket;
-}
-
-export interface GetTicketResponse {
-  success: boolean;
-  tickets: Ticket[];
-}
+import { GetTicketResponse, CreateTicketResponse } from '@/types/tickets';
 
 export class TicketClient {
   private static async request<T>(url: string, options?: RequestInit): Promise<T> {
