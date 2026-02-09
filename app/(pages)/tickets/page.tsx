@@ -1,6 +1,8 @@
 'use client';
 import { useState } from 'react';
 import styles from '@/app/(styles)/tickets-styles/main-page-tickets.module.css';
+import AllUserTickets from '@/app/(components)/tickets-page/AllUserTickets';
+import TicketMessanger from '@/app/(components)/tickets-page/Messanger';
 
 export default function TicketsPage() {
   const [selectedTicket, setSelectedTicket] = useState<number | null>(null);
@@ -50,67 +52,15 @@ export default function TicketsPage() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.ticketsSection}>
-        <div className={styles.ticketsHeader}>
-          <h2>My Tickets</h2>
-          <button className={styles.newTicketBtn}>+ Create</button>
-        </div>
-        <div className={styles.ticketsList}>
-          {mockTickets.map((ticket) => (
-            <div
-              key={ticket.id}
-              className={`${styles.ticketItem} ${selectedTicket === ticket.id ? styles.active : ''}`}
-              onClick={() => setSelectedTicket(ticket.id)}
-            >
-              <div className={styles.ticketInfo}>
-                <h3>{ticket.title}</h3>
-                <span className={styles.ticketDate}>{ticket.date}</span>
-              </div>
-              <span className={`${styles.ticketStatus} ${styles[ticket.status]}`}>
-                {ticket.status}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
+      <AllUserTickets
+        tickets={mockTickets}
+        selectedTicket={selectedTicket}
+        onSelectTicket={setSelectedTicket}
+      />
 
       <div className={styles.messengerSection}>
         {selectedTicket ? (
-          <>
-            <div className={styles.messengerHeader}>
-              <h3>Ticket #{selectedTicket}</h3>
-              <button className={styles.closeTicketBtn}>Close Ticket</button>
-            </div>
-
-            <div className={styles.messagesContainer}>
-              {mockMessages.map((message) => (
-                <div
-                  key={message.id}
-                  className={`${styles.message} ${message.author === 'user' ? styles.userMessage : styles.supportMessage}`}
-                >
-                  <div className={styles.messageContent}>
-                    <p>{message.text}</p>
-                    <span className={styles.messageTime}>{message.time}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className={styles.inputContainer}>
-              <input type="text" placeholder="Type a message..." className={styles.messageInput} />
-              <button className={styles.sendBtn}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-            </div>
-          </>
+          <TicketMessanger messages={mockMessages} selectedTicket={selectedTicket} />
         ) : (
           <div className={styles.emptyState}>
             <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
