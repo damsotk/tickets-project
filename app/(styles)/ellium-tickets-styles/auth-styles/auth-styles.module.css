@@ -19,9 +19,9 @@
   position: fixed;
   top: 0;
   right: 0;
-  width: 55vw;
-  height: 100vh;
-  background-image: url('/ellium-tickets-images/background-auth.png');
+  width: 80vw;
+  height: 100%;
+  background-image: url('/ellium-tickets-images/background-auth.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -31,7 +31,7 @@
 .waveTransition {
   position: fixed;
   top: 0;
-  right: 50vw;
+  left: 20vw;
   width: 120px;
   height: 100vh;
   margin-left: -1px;

@@ -15,7 +15,7 @@ export default function AuthPage() {
       <div className={styles.waveTransition}>
         <svg viewBox="0 0 120 1200" preserveAspectRatio="none">
           <path
-            d="M120,0 C60,200 80,400 40,600 C20,800 80,1000 60,1200 L0,1200 L0,0 Z"
+            d="M120,0 C40,300 40,600 80,900 C100,1050 120,1150 120,1200 L0,1200 L0,0 Z"
             fill="#1a1a1e"
           ></path>
         </svg>
