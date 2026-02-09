@@ -2,22 +2,29 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useRequireAuth } from '@/app/(hooks)/auth-hooks/use-require-auth';
 import { TicketClient } from '@/utils/api/ticket-client';
 import { CreateTicketResponse } from '@/types/tickets';
+import type { User } from '@/types/user';
 
-export function useCreateTicket() {
+interface UseCreateTicketProps {
+  user: User | null;
+}
+
+export function useCreateTicket({ user }: UseCreateTicketProps) {
   const [checking, setChecking] = useState(false);
-  const { checkAuthAndRedirect } = useRequireAuth();
   const router = useRouter();
 
   const handleTicketClick = async (type: string) => {
     if (checking) return;
 
+    if (!user) {
+      alert('Please login to submit a ticket');
+      router.push('/auth');
+      return;
+    }
+
     setChecking(true);
     try {
-      const isAuthenticated = await checkAuthAndRedirect();
-      if (!isAuthenticated) return;
       const response: CreateTicketResponse = await TicketClient.createTicket(type);
       router.push('/tickets');
       console.log('Ticket created: ', response.ticket);

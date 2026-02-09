@@ -2,6 +2,7 @@
 
 import { useCreateTicket } from '@/app/(hooks)/ticket-hooks/use-create-ticket';
 import styles from '@/app/(styles)/tickets-type-cards.module.css';
+import type { User } from '@/types/user';
 
 const TICKET_TYPES = [
   {
@@ -24,8 +25,12 @@ const TICKET_TYPES = [
   },
 ] as const;
 
-export default function TicketsTypes() {
-  const { checking, handleTicketClick } = useCreateTicket();
+interface TicketsTypesProps {
+  user: User | null;
+}
+
+export default function TicketsTypes({ user }: TicketsTypesProps) {
+  const { checking, handleTicketClick } = useCreateTicket({ user });
 
   return (
     <div className={styles.cardsContainer}>

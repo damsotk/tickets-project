@@ -17,10 +17,6 @@ export class AuthClient {
     return data;
   }
 
-  static async getCurrentUser() {
-    return this.request<{ user: any }>('/api/auth/me');
-  }
-
   static async login(email: string, password: string) {
     return this.request<{ user: any; message: string }>('/api/auth/login', {
       method: 'POST',

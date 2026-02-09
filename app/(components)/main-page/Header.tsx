@@ -1,12 +1,21 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/app/(hooks)/auth-hooks/use-auth';
 import styles from '@/app/(styles)/header.module.css';
+import type { User } from '@/types/user';
+import { logout } from '@/app/(actions)/auth-actions';
 
-export default function Header() {
+interface HeaderProps {
+  user: User | null;
+}
+
+export default function Header({ user }: HeaderProps) {
   const router = useRouter();
-  const { user, logout } = useAuth();
+
+  const handleLogout = async () => {
+    await logout();
+    router.refresh();
+  };
 
   return (
     <header className={styles.header}>
@@ -14,50 +23,48 @@ export default function Header() {
         <h1 className={styles.title}>Ellium tickets</h1>
       </div>
       <div className={styles.headerRight}>
-        <>
-          {user ? (
-            <>
-              <div className={styles.chatIcon}>
-                <div className={styles.notificationBadge}>1</div>
-                <img src="/icons/ticket-alt.png" alt="" />
-              </div>
-              <img
-                src={user.avatar || 'https://api.dicebear.com/9.x/adventurer-neutral/svg?radius=0'}
-                alt="User avatar"
-                className={styles.userAvatar}
-                title={user.name}
-              />
-              <button
-                onClick={logout}
-                style={{
-                  padding: '8px 16px',
-                  background: '#ff4444',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '4px',
-                  cursor: 'pointer',
-                  marginLeft: '12px',
-                }}
-              >
-                Logout
-              </button>
-            </>
-          ) : (
+        {user ? (
+          <>
+            <div className={styles.chatIcon}>
+              <div className={styles.notificationBadge}>1</div>
+              <img src="/icons/ticket-alt.png" alt="" />
+            </div>
+            <img
+              src={user.avatar || 'https://api.dicebear.com/9.x/adventurer-neutral/svg?radius=0'}
+              alt="User avatar"
+              className={styles.userAvatar}
+              title={user.name}
+            />
             <button
-              onClick={() => router.push('/auth')}
+              onClick={handleLogout}
               style={{
                 padding: '8px 16px',
-                background: '#0070f3',
+                background: '#ff4444',
                 color: 'white',
                 border: 'none',
                 borderRadius: '4px',
                 cursor: 'pointer',
+                marginLeft: '12px',
               }}
             >
-              Login
+              Logout
             </button>
-          )}
-        </>
+          </>
+        ) : (
+          <button
+            onClick={() => router.push('/auth')}
+            style={{
+              padding: '8px 16px',
+              background: '#0070f3',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+            }}
+          >
+            Login
+          </button>
+        )}
       </div>
     </header>
   );
