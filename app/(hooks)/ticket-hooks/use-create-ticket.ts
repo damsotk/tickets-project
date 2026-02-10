@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { TicketClient } from '@/utils/api/ticket-client';
+import { TicketClient } from '@/utils/api-client/ticket-client';
 import { CreateTicketResponse } from '@/types/tickets';
 import type { User } from '@/types/user';
 

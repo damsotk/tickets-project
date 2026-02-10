@@ -1,4 +1,4 @@
-import { TicketClient } from '@/utils/api/ticket-client';
+import { TicketClient } from '@/utils/api-client/ticket-client';
 import { Ticket } from '@/types/tickets';
 import { useState, useEffect } from 'react';
 

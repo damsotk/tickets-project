@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import styles from '@/app/(styles)/main-page.module.css';
 import TicketsTypes from '@/app/(components)/main-page/TicketsTypes';
 import StaffList from '@/app/(components)/main-page/StaffList';
-import { getCurrentUser } from '@/lib/auth-server';
+import { getCurrentUser } from '@/utils/api-server/auth-server';
 import Header from './(components)/main-page/Header';
 
 export const metadata: Metadata = {
