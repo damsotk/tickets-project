@@ -9,20 +9,6 @@ export interface Ticket {
   userId: string;
 }
 
-export interface Message {
-  id: string;
-  text: string;
-  author: 'user' | 'support';
-  time: string;
-  ticketId: string;
-  createdAt: string;
-}
-
-export interface GetTicketByIdResponse {
-  ticket: Ticket;
-  messages: Message[];
-}
-
 export interface CreateTicketResponse {
   success: boolean;
   ticket: Ticket;
