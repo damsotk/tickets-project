@@ -4,23 +4,38 @@ import { TicketClient } from '@/utils/api-client/ticket-client';
 
 export function useGetMessages() {
   const [selectedTicket, setSelectedTicket] = useState<string | null>(null);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messagesCache, setMessagesCache] = useState<Record<string, Message[]>>({});
   const [isLoadingMessages, setIsLoadingMessages] = useState(false);
 
   const handleSelectTicket = async (ticketId: string) => {
     if (ticketId === selectedTicket) return;
+
     setSelectedTicket(ticketId);
+    if (messagesCache[ticketId]) {
+      return;
+    }
     setIsLoadingMessages(true);
+
     try {
       const response = await TicketClient.getTicketMessagesById(ticketId);
-      setMessages(response.messages);
+
+      setMessagesCache((prev) => ({
+        ...prev,
+        [ticketId]: response.messages,
+      }));
     } catch (error) {
       console.error('Failed to load messages:', error);
-      setMessages([]);
+
+      setMessagesCache((prev) => ({
+        ...prev,
+        [ticketId]: [],
+      }));
     } finally {
       setIsLoadingMessages(false);
     }
   };
+
+  const messages = selectedTicket ? messagesCache[selectedTicket] || [] : [];
 
   return {
     selectedTicket,
