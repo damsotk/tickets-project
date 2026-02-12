@@ -1,3 +1,4 @@
+import { GetMessagesResponse } from '@/types/message';
 import { CreateTicketResponse } from '@/types/tickets';
 
 export class TicketClient {
@@ -23,5 +24,9 @@ export class TicketClient {
       method: 'POST',
       body: JSON.stringify({ category: type }),
     });
+  }
+
+  static async getTicketMessagesById(ticketId: string) {
+    return this.request<GetMessagesResponse>(`/api/tickets/messages?ticketId=${ticketId}`);
   }
 }

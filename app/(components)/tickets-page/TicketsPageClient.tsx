@@ -4,6 +4,8 @@ import styles from '@/app/(styles)/tickets-styles/main-page-tickets.module.css';
 import AllUserTickets from '@/app/(components)/tickets-page/AllUserTickets';
 import TicketMessanger from '@/app/(components)/tickets-page/Messanger';
 import { Ticket } from '@/types/tickets';
+import { Message } from '@/types/message';
+import { TicketClient } from '@/utils/api-client/ticket-client';
 
 interface TicketsPageClientProps {
   initialTickets: Ticket[] | null;
@@ -11,30 +13,39 @@ interface TicketsPageClientProps {
 
 export default function TicketsPageClient({ initialTickets }: TicketsPageClientProps) {
   const [selectedTicket, setSelectedTicket] = useState<string | null>(null);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [isLoadingMessages, setIsLoadingMessages] = useState(false);
 
-  const mockMessages = selectedTicket
-    ? [
-        { id: `asddasdasd`, text: 'Hello! I have a problem...', author: 'user', time: '14:30' },
-        {
-          id: `asdasddasdasdasd`,
-          text: 'Hello! We received your request.',
-          author: 'support',
-          time: '14:35',
-        },
-      ]
-    : [];
+  const handleSelectTicket = async (ticketId: string) => {
+    if (ticketId === selectedTicket) return;
+    setSelectedTicket(ticketId);
+    setIsLoadingMessages(true);
+    try {
+      const response = await TicketClient.getTicketMessagesById(ticketId);
+      setMessages(response.messages);
+    } catch (error) {
+      console.error('Failed to load messages:', error);
+      setMessages([]);
+    } finally {
+      setIsLoadingMessages(false);
+    }
+  };
 
   return (
     <div className={styles.container}>
       <AllUserTickets
         tickets={initialTickets}
         selectedTicket={selectedTicket}
-        onSelectTicket={setSelectedTicket}
+        onSelectTicket={handleSelectTicket}
       />
 
       <div className={styles.messengerSection}>
         {selectedTicket ? (
-          <TicketMessanger messages={mockMessages} selectedTicket={selectedTicket} />
+          <TicketMessanger
+            messages={messages}
+            selectedTicket={selectedTicket}
+            isLoading={isLoadingMessages}
+          />
         ) : (
           <div className={styles.emptyState}>
             <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
