@@ -1,4 +1,4 @@
-import { GetTicketResponse, CreateTicketResponse } from '@/types/tickets';
+import { CreateTicketResponse } from '@/types/tickets';
 
 export class TicketClient {
   private static async request<T>(url: string, options?: RequestInit): Promise<T> {
@@ -22,12 +22,6 @@ export class TicketClient {
     return this.request<CreateTicketResponse>('/api/tickets/create-ticket', {
       method: 'POST',
       body: JSON.stringify({ category: type }),
-    });
-  }
-
-  static async getTickets() {
-    return this.request<GetTicketResponse>('/api/tickets/get-tickets', {
-      method: 'GET',
     });
   }
 }

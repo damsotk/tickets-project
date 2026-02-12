@@ -1,3 +1,5 @@
+import { TicketCategory } from '@prisma/client';
+
 export interface Ticket {
   id: string;
   title: string;
@@ -7,12 +9,6 @@ export interface Ticket {
   userId: string;
 }
 
-export enum TicketCategory {
-  COMPLAINT = 'complaint',
-  LORE = 'lore',
-  TECH = 'tech',
-}
-
 export interface Message {
   id: string;
   text: string;
@@ -20,10 +16,6 @@ export interface Message {
   time: string;
   ticketId: string;
   createdAt: string;
-}
-
-export interface GetTicketResponse {
-  tickets: Ticket[];
 }
 
 export interface GetTicketByIdResponse {

@@ -1,38 +1,27 @@
 import styles from '@/app/(styles)/tickets-styles/all-user-tickets.module.css';
 import { Ticket } from '@/types/tickets';
+import { formatDate } from '@/utils/format-date';
 
 interface AllUserTicketsProps {
-  tickets: Ticket[];
+  tickets: Ticket[] | null;
   selectedTicket: string | null;
   onSelectTicket: (id: string) => void;
-  onCreateTicket?: () => void;
-  isLoading?: boolean;
-  error?: string | null;
 }
 
 export default function AllUserTickets({
   tickets,
   selectedTicket,
   onSelectTicket,
-  onCreateTicket,
-  isLoading,
-  error,
 }: AllUserTicketsProps) {
   return (
     <div className={styles.ticketsSection}>
       <div className={styles.ticketsHeader}>
         <h2>My Tickets</h2>
-        <button className={styles.newTicketBtn} onClick={onCreateTicket}>
-          + Create
-        </button>
+        <button className={styles.newTicketBtn}>+ Create</button>
       </div>
 
       <div className={styles.ticketsList}>
-        {isLoading ? (
-          <p>Loading tickets...</p>
-        ) : error ? (
-          <p style={{ color: 'red' }}>Error: {error}</p>
-        ) : !tickets || tickets.length === 0 ? (
+        {!tickets || tickets.length === 0 ? (
           <p>No tickets yet.</p>
         ) : (
           tickets.map((ticket) => (
@@ -43,9 +32,7 @@ export default function AllUserTickets({
             >
               <div className={styles.ticketInfo}>
                 <h3>{ticket.title}</h3>
-                <span className={styles.ticketDate}>
-                  {new Date(ticket.createdAt).toLocaleDateString()}
-                </span>
+                <span className={styles.ticketDate}>{formatDate(ticket.createdAt)}</span>
               </div>
               <span className={`${styles.ticketStatus} ${styles[ticket.category]}`}>
                 {ticket.category}
