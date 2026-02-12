@@ -1,35 +1,16 @@
 'use client';
-import { useState } from 'react';
 import styles from '@/app/(styles)/tickets-styles/main-page-tickets.module.css';
 import AllUserTickets from '@/app/(components)/tickets-page/AllUserTickets';
 import TicketMessanger from '@/app/(components)/tickets-page/Messanger';
 import { Ticket } from '@/types/tickets';
-import { Message } from '@/types/message';
-import { TicketClient } from '@/utils/api-client/ticket-client';
+import { useGetMessages } from '@/app/(hooks)/ticket-hooks/use-get-messages';
 
 interface TicketsPageClientProps {
   initialTickets: Ticket[] | null;
 }
 
 export default function TicketsPageClient({ initialTickets }: TicketsPageClientProps) {
-  const [selectedTicket, setSelectedTicket] = useState<string | null>(null);
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [isLoadingMessages, setIsLoadingMessages] = useState(false);
-
-  const handleSelectTicket = async (ticketId: string) => {
-    if (ticketId === selectedTicket) return;
-    setSelectedTicket(ticketId);
-    setIsLoadingMessages(true);
-    try {
-      const response = await TicketClient.getTicketMessagesById(ticketId);
-      setMessages(response.messages);
-    } catch (error) {
-      console.error('Failed to load messages:', error);
-      setMessages([]);
-    } finally {
-      setIsLoadingMessages(false);
-    }
-  };
+  const { selectedTicket, messages, isLoadingMessages, handleSelectTicket } = useGetMessages();
 
   return (
     <div className={styles.container}>
