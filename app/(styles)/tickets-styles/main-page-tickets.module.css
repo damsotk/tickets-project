@@ -1,7 +1,6 @@
 .container {
   display: flex;
   height: 100vh;
-  background-color: #36393f;
   color: #dcddde;
   overflow: hidden;
 }
@@ -10,7 +9,6 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  background-color: #36393f;
   position: relative;
   min-width: 0;
 }

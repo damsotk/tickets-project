@@ -1,10 +1,9 @@
 .ticketsSection {
   width: 340px;
   min-width: 340px;
-  background-color: #2f3136;
+  background-color: #1a1a1e;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid #202225;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
