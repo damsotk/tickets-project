@@ -1,0 +1,275 @@
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #0a0a0a;
+
+  margin-left: calc(-1 * clamp(16px, 8vw, 240px));
+  margin-right: calc(-1 * clamp(16px, 8vw, 240px));
+  width: calc(100vw);
+}
+
+.background {
+  object-fit: cover;
+  z-index: 0;
+}
+
+.legend {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  color: white;
+  z-index: 10;
+  font-family: 'Georgia', serif;
+}
+
+.legendTitle {
+  font-size: 20px;
+  font-weight: 300;
+  margin: 0 0 20px 0;
+  line-height: 1.4;
+}
+
+.legendItems {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.iconDiamond,
+.iconCircle,
+.iconBars,
+.iconWave {
+  font-size: 18px;
+  width: 24px;
+  display: inline-block;
+  text-align: center;
+}
+
+.schemeWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+}
+
+.pointContainer {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.point {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+  z-index: 3;
+}
+
+.pointHovered {
+  width: 18px;
+  height: 18px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+.pointIcon {
+  font-size: 10px;
+  color: #0a0a0a;
+}
+
+.line {
+  position: absolute;
+  background: white;
+  transition: all 0.4s ease;
+  z-index: 1;
+}
+
+.line-right {
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  height: 1px;
+}
+
+.line-left {
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  height: 1px;
+}
+
+.line-top {
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 60px;
+}
+
+.line-bottom {
+  left: 50%;
+  top: 14px;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 60px;
+}
+
+.lineActive {
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+.label {
+  position: absolute;
+  color: white;
+  font-size: 14px;
+  white-space: nowrap;
+  font-family: 'Georgia', serif;
+  pointer-events: none;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  z-index: 2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.label-right {
+  left: 80px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.label-left {
+  right: 80px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.label-top {
+  left: 50%;
+  bottom: 80px;
+  transform: translateX(-50%);
+}
+
+.label-bottom {
+  left: 50%;
+  top: 80px;
+  transform: translateX(-50%);
+}
+
+.labelHidden {
+  opacity: 0;
+  transform: translateY(-50%) scale(0.8);
+}
+
+.label-left.labelHidden {
+  transform: translateY(-50%) scale(0.8);
+}
+
+.label-top.labelHidden {
+  transform: translateX(-50%) scale(0.8);
+}
+
+.label-bottom.labelHidden {
+  transform: translateX(-50%) scale(0.8);
+}
+
+.infoCard {
+  position: absolute;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  min-width: 250px;
+  max-width: 300px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 4;
+}
+
+.infoCard-right {
+  left: 80px;
+  top: -20px;
+  transform: translateY(-20px);
+}
+
+.infoCard-left {
+  right: 80px;
+  top: -20px;
+  transform: translateY(-20px);
+}
+
+.infoCard-top {
+  left: 50%;
+  bottom: 80px;
+  transform: translateX(-50%) translateY(20px);
+}
+
+.infoCard-bottom {
+  left: 50%;
+  top: 80px;
+  transform: translateX(-50%) translateY(-20px);
+}
+
+.infoCardVisible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.infoCard-right.infoCardVisible,
+.infoCard-left.infoCardVisible {
+  transform: translateY(0);
+}
+
+.infoCard-top.infoCardVisible {
+  transform: translateX(-50%) translateY(0);
+}
+
+.infoCard-bottom.infoCardVisible {
+  transform: translateX(-50%) translateY(0);
+}
+
+.infoTitle {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #0a0a0a;
+  font-family: 'Georgia', serif;
+}
+
+.infoDescription {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
