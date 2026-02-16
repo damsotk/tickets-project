@@ -8,6 +8,7 @@ interface UseSendMessageProps {
   onOptimisticUpdate: (ticketId: string, message: Message) => void;
   onOptimisticRemove: (ticketId: string, tempId: string) => void;
   currentUserId: string | undefined;
+  onSendSuccess?: () => void;
 }
 
 export function useSendMessage({
@@ -16,6 +17,7 @@ export function useSendMessage({
   onOptimisticUpdate,
   onOptimisticRemove,
   currentUserId,
+  onSendSuccess,
 }: UseSendMessageProps) {
   const [messageToSend, setMessageToSend] = useState('');
   const [isSending, setIsSending] = useState(false);
@@ -56,6 +58,7 @@ export function useSendMessage({
     setMessageToSend('');
     setIsSending(true);
 
+    onSendSuccess?.();
     try {
       const response = await TicketClient.sendMessage(textToSend, selectedTicket);
       console.log('Message sent:', response);

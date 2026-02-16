@@ -1,3 +1,4 @@
+import { useAutoScroll } from '@/app/(hooks)/ticket-hooks/use-auto-scroll';
 import { useSendMessage } from '@/app/(hooks)/ticket-hooks/use-send-message';
 import styles from '@/app/(styles)/tickets-styles/messanger.module.css';
 import { Message } from '@/types/message';
@@ -23,6 +24,11 @@ export default function TicketMessanger({
   onOptimisticRemove,
   currentUserId,
 }: TicketMessangerProps) {
+  const { containerRef, endRef, scrollToBottom } = useAutoScroll({
+    dependencies: [messages],
+    enabled: !isLoading,
+  });
+
   const { messageToSend, setMessageToSend, handleSendMessage, handleKeyDown, isSending } =
     useSendMessage({
       selectedTicket,
@@ -30,6 +36,7 @@ export default function TicketMessanger({
       onOptimisticUpdate,
       onOptimisticRemove,
       currentUserId,
+      onSendSuccess: () => setTimeout(() => scrollToBottom('smooth'), 100),
     });
 
   return (
@@ -39,7 +46,7 @@ export default function TicketMessanger({
         <button className={styles.closeTicketBtn}>Close Ticket</button>
       </div>
 
-      <div className={styles.messagesContainer}>
+      <div className={styles.messagesContainer} ref={containerRef}>
         {isLoading ? (
           <div className={styles.loadingState}>
             <div className={styles.spinner}></div>
@@ -59,45 +66,48 @@ export default function TicketMessanger({
             <p>No messages yet. Start the conversation!</p>
           </div>
         ) : (
-          messages.map((message) => {
-            const isCurrentUser = message.author.id === currentUserId;
-            const isPending = message.isPending;
+          <>
+            {messages.map((message) => {
+              const isCurrentUser = message.author.id === currentUserId;
+              const isPending = message.isPending;
 
-            return (
-              <div
-                key={message.id}
-                className={`${styles.message} ${
-                  isCurrentUser ? styles.userMessage : styles.supportMessage
-                } ${isPending ? styles.pendingMessage : ''}`}
-              >
-                <div className={styles.messageContent}>
-                  <div className={styles.messageHeader}>
-                    <strong className={styles.authorName} title={message.author.name}>
-                      {truncateName(message.author.name)}
-                    </strong>
-                    <span className={styles.messageRole}>
-                      {isCurrentUser
-                        ? 'You'
-                        : message.author.role === 'ADMIN'
-                          ? 'Support'
-                          : message.author.name}
+              return (
+                <div
+                  key={message.id}
+                  className={`${styles.message} ${
+                    isCurrentUser ? styles.userMessage : styles.supportMessage
+                  } ${isPending ? styles.pendingMessage : ''}`}
+                >
+                  <div className={styles.messageContent}>
+                    <div className={styles.messageHeader}>
+                      <strong className={styles.authorName} title={message.author.name}>
+                        {truncateName(message.author.name)}
+                      </strong>
+                      <span className={styles.messageRole}>
+                        {isCurrentUser
+                          ? 'You'
+                          : message.author.role === 'ADMIN'
+                            ? 'Support'
+                            : message.author.name}
+                      </span>
+                    </div>
+                    <p>{message.text}</p>
+                    <span className={styles.messageTime}>
+                      {isPending ? (
+                        <span className={styles.sendingIndicator}>
+                          <span className={styles.sendingDot}></span>
+                          Sending...
+                        </span>
+                      ) : (
+                        formatDate(message.createdAt)
+                      )}
                     </span>
                   </div>
-                  <p>{message.text}</p>
-                  <span className={styles.messageTime}>
-                    {isPending ? (
-                      <span className={styles.sendingIndicator}>
-                        <span className={styles.sendingDot}></span>
-                        Sending...
-                      </span>
-                    ) : (
-                      formatDate(message.createdAt)
-                    )}
-                  </span>
                 </div>
-              </div>
-            );
-          })
+              );
+            })}
+            <div ref={endRef} />
+          </>
         )}
       </div>
 
