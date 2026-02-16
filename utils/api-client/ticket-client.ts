@@ -1,4 +1,4 @@
-import { GetMessagesResponse } from '@/types/message';
+import { GetMessagesResponse, SendMessageResponse } from '@/types/message';
 import { CreateTicketResponse } from '@/types/tickets';
 
 export class TicketClient {
@@ -28,5 +28,12 @@ export class TicketClient {
 
   static async getTicketMessagesById(ticketId: string) {
     return this.request<GetMessagesResponse>(`/api/tickets/messages?ticketId=${ticketId}`);
+  }
+
+  static async sendMessage(text: string, ticketId: string) {
+    return this.request<SendMessageResponse>('/api/tickets/send-message', {
+      method: 'POST',
+      body: JSON.stringify({ text, ticketId }),
+    });
   }
 }

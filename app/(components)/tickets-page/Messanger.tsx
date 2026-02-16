@@ -1,7 +1,9 @@
 import styles from '@/app/(styles)/tickets-styles/messanger.module.css';
 import { Message } from '@/types/message';
+import { TicketClient } from '@/utils/api-client/ticket-client';
 import { formatDate } from '@/utils/format-date';
 import { truncateName } from '@/utils/truncate-name';
+import { useState } from 'react';
 
 interface TicketMessangerProps {
   messages: Message[];
@@ -14,6 +16,24 @@ export default function TicketMessanger({
   selectedTicket,
   isLoading = false,
 }: TicketMessangerProps) {
+  const [messageToSend, setMessageToSend] = useState('');
+  const handleSend = async (text: string, selectedTicket: string | null) => {
+    try {
+      if (!selectedTicket) {
+        console.error('No ticket selected');
+        return;
+      }
+      if (!text.trim()) {
+        console.error('Message is empty');
+        return;
+      }
+      const response = TicketClient.sendMessage(text, selectedTicket);
+      setMessageToSend('');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className={styles.messengerWrapper}>
       <div className={styles.messengerHeader}>
@@ -71,8 +91,20 @@ export default function TicketMessanger({
           placeholder="Type a message..."
           className={styles.messageInput}
           disabled={isLoading}
+          value={messageToSend}
+          onChange={(e) => setMessageToSend(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+              e.preventDefault();
+              handleSend(messageToSend, selectedTicket);
+            }
+          }}
         />
-        <button className={styles.sendBtn} disabled={isLoading}>
+        <button
+          onClick={() => handleSend(messageToSend, selectedTicket)}
+          className={styles.sendBtn}
+          disabled={isLoading}
+        >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path
               d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13"

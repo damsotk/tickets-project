@@ -15,3 +15,7 @@ export interface Message {
 export interface GetMessagesResponse {
   messages: Message[];
 }
+
+export interface SendMessageResponse {
+  message: Message;
+}
