@@ -12,8 +12,15 @@ interface TicketsPageClientProps {
 }
 
 export default function TicketsPageClient({ initialTickets, currentUser }: TicketsPageClientProps) {
-  const { selectedTicket, messages, isLoadingMessages, handleSelectTicket, addMessageToCache } =
-    useGetMessages();
+  const {
+    selectedTicket,
+    messages,
+    isLoadingMessages,
+    handleSelectTicket,
+    addMessageToCache,
+    addOptimisticMessage,
+    removeOptimisticMessage,
+  } = useGetMessages();
 
   return (
     <div className={styles.container}>
@@ -30,6 +37,8 @@ export default function TicketsPageClient({ initialTickets, currentUser }: Ticke
             selectedTicket={selectedTicket}
             isLoading={isLoadingMessages}
             addMessageToCache={addMessageToCache}
+            onOptimisticUpdate={addOptimisticMessage}
+            onOptimisticRemove={removeOptimisticMessage}
             currentUserId={currentUser?.id}
           />
         ) : (

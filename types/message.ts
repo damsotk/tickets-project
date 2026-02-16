@@ -10,6 +10,7 @@ export interface Message {
   authorId: string;
   createdAt: string;
   author: MessageAuthor;
+  isPending?: boolean;
 }
 
 export interface GetMessagesResponse {

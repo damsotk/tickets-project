@@ -42,6 +42,19 @@ export function useGetMessages() {
     }));
   };
 
+  const addOptimisticMessage = (ticketId: string, message: Message) => {
+    setMessagesCache((prev) => ({
+      ...prev,
+      [ticketId]: [...(prev[ticketId] || []), message],
+    }));
+  };
+  const removeOptimisticMessage = (ticketId: string, tempId: string) => {
+    setMessagesCache((prev) => ({
+      ...prev,
+      [ticketId]: (prev[ticketId] || []).filter((msg) => msg.id !== tempId),
+    }));
+  };
+
   const messages = selectedTicket ? messagesCache[selectedTicket] || [] : [];
 
   return {
@@ -50,5 +63,7 @@ export function useGetMessages() {
     isLoadingMessages,
     handleSelectTicket,
     addMessageToCache,
+    addOptimisticMessage,
+    removeOptimisticMessage,
   };
 }

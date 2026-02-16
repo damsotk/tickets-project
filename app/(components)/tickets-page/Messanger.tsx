@@ -9,6 +9,8 @@ interface TicketMessangerProps {
   selectedTicket: string | null;
   isLoading?: boolean;
   addMessageToCache: (ticketId: string, message: Message) => void;
+  onOptimisticUpdate: (ticketId: string, message: Message) => void;
+  onOptimisticRemove: (ticketId: string, tempId: string) => void;
   currentUserId?: string;
 }
 
@@ -17,10 +19,18 @@ export default function TicketMessanger({
   selectedTicket,
   isLoading = false,
   addMessageToCache,
+  onOptimisticUpdate,
+  onOptimisticRemove,
   currentUserId,
 }: TicketMessangerProps) {
   const { messageToSend, setMessageToSend, handleSendMessage, handleKeyDown, isSending } =
-    useSendMessage({ selectedTicket, addMessageToCache });
+    useSendMessage({
+      selectedTicket,
+      addMessageToCache,
+      onOptimisticUpdate,
+      onOptimisticRemove,
+      currentUserId,
+    });
 
   return (
     <div className={styles.messengerWrapper}>
@@ -51,12 +61,14 @@ export default function TicketMessanger({
         ) : (
           messages.map((message) => {
             const isCurrentUser = message.author.id === currentUserId;
+            const isPending = message.isPending;
+
             return (
               <div
                 key={message.id}
                 className={`${styles.message} ${
                   isCurrentUser ? styles.userMessage : styles.supportMessage
-                }`}
+                } ${isPending ? styles.pendingMessage : ''}`}
               >
                 <div className={styles.messageContent}>
                   <div className={styles.messageHeader}>
@@ -72,7 +84,16 @@ export default function TicketMessanger({
                     </span>
                   </div>
                   <p>{message.text}</p>
-                  <span className={styles.messageTime}>{formatDate(message.createdAt)}</span>
+                  <span className={styles.messageTime}>
+                    {isPending ? (
+                      <span className={styles.sendingIndicator}>
+                        <span className={styles.sendingDot}></span>
+                        Sending...
+                      </span>
+                    ) : (
+                      formatDate(message.createdAt)
+                    )}
+                  </span>
                 </div>
               </div>
             );
