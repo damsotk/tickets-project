@@ -35,6 +35,13 @@ export function useGetMessages() {
     }
   };
 
+  const addMessageToCache = (ticketId: string, message: Message) => {
+    setMessagesCache((prev) => ({
+      ...prev,
+      [ticketId]: [...(prev[ticketId] || []), message],
+    }));
+  };
+
   const messages = selectedTicket ? messagesCache[selectedTicket] || [] : [];
 
   return {
@@ -42,5 +49,6 @@ export function useGetMessages() {
     messages,
     isLoadingMessages,
     handleSelectTicket,
+    addMessageToCache,
   };
 }

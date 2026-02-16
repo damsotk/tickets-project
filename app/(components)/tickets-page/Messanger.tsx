@@ -8,14 +8,19 @@ interface TicketMessangerProps {
   messages: Message[];
   selectedTicket: string | null;
   isLoading?: boolean;
+  addMessageToCache: (ticketId: string, message: Message) => void;
+  currentUserId?: string;
 }
 
 export default function TicketMessanger({
   messages,
   selectedTicket,
   isLoading = false,
+  addMessageToCache,
+  currentUserId,
 }: TicketMessangerProps) {
-  const { setMessageToSend, messageToSend, handleSendMessage } = useSendMessage();
+  const { messageToSend, setMessageToSend, handleSendMessage, handleKeyDown, isSending } =
+    useSendMessage({ selectedTicket, addMessageToCache });
 
   return (
     <div className={styles.messengerWrapper}>
@@ -44,27 +49,34 @@ export default function TicketMessanger({
             <p>No messages yet. Start the conversation!</p>
           </div>
         ) : (
-          messages.map((message) => (
-            <div
-              key={message.id}
-              className={`${styles.message} ${
-                message.author.role === 'USER' ? styles.userMessage : styles.supportMessage
-              }`}
-            >
-              <div className={styles.messageContent}>
-                <div className={styles.messageHeader}>
-                  <strong className={styles.authorName} title={message.author.name}>
-                    {truncateName(message.author.name)}
-                  </strong>
-                  <span className={styles.messageRole}>
-                    {message.author.role === 'ADMIN' ? 'Support' : 'You'}
-                  </span>
+          messages.map((message) => {
+            const isCurrentUser = message.author.id === currentUserId;
+            return (
+              <div
+                key={message.id}
+                className={`${styles.message} ${
+                  isCurrentUser ? styles.userMessage : styles.supportMessage
+                }`}
+              >
+                <div className={styles.messageContent}>
+                  <div className={styles.messageHeader}>
+                    <strong className={styles.authorName} title={message.author.name}>
+                      {truncateName(message.author.name)}
+                    </strong>
+                    <span className={styles.messageRole}>
+                      {isCurrentUser
+                        ? 'You'
+                        : message.author.role === 'ADMIN'
+                          ? 'Support'
+                          : message.author.name}
+                    </span>
+                  </div>
+                  <p>{message.text}</p>
+                  <span className={styles.messageTime}>{formatDate(message.createdAt)}</span>
                 </div>
-                <p>{message.text}</p>
-                <span className={styles.messageTime}>{formatDate(message.createdAt)}</span>
               </div>
-            </div>
-          ))
+            );
+          })
         )}
       </div>
 
@@ -73,20 +85,15 @@ export default function TicketMessanger({
           type="text"
           placeholder="Type a message..."
           className={styles.messageInput}
-          disabled={isLoading}
+          disabled={isLoading || isSending}
           value={messageToSend}
           onChange={(e) => setMessageToSend(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-              e.preventDefault();
-              handleSendMessage(messageToSend, selectedTicket);
-            }
-          }}
+          onKeyDown={handleKeyDown}
         />
         <button
-          onClick={() => handleSendMessage(messageToSend, selectedTicket)}
+          onClick={handleSendMessage}
           className={styles.sendBtn}
-          disabled={isLoading}
+          disabled={isLoading || isSending || !messageToSend.trim()}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path

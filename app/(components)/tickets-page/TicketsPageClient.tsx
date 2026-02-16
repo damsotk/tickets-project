@@ -4,13 +4,16 @@ import AllUserTickets from '@/app/(components)/tickets-page/AllUserTickets';
 import TicketMessanger from '@/app/(components)/tickets-page/Messanger';
 import { Ticket } from '@/types/tickets';
 import { useGetMessages } from '@/app/(hooks)/ticket-hooks/use-get-messages';
+import { User } from '@/types/user';
 
 interface TicketsPageClientProps {
   initialTickets: Ticket[] | null;
+  currentUser: User | null;
 }
 
-export default function TicketsPageClient({ initialTickets }: TicketsPageClientProps) {
-  const { selectedTicket, messages, isLoadingMessages, handleSelectTicket } = useGetMessages();
+export default function TicketsPageClient({ initialTickets, currentUser }: TicketsPageClientProps) {
+  const { selectedTicket, messages, isLoadingMessages, handleSelectTicket, addMessageToCache } =
+    useGetMessages();
 
   return (
     <div className={styles.container}>
@@ -26,6 +29,8 @@ export default function TicketsPageClient({ initialTickets }: TicketsPageClientP
             messages={messages}
             selectedTicket={selectedTicket}
             isLoading={isLoadingMessages}
+            addMessageToCache={addMessageToCache}
+            currentUserId={currentUser?.id}
           />
         ) : (
           <div className={styles.emptyState}>
