@@ -1,28 +1,39 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
+import { Message } from '@/types/message';
 
-interface UseAutoScrollOptions {
-  dependencies?: any[];
-  enabled?: boolean;
+interface UseMessengerScrollOptions {
+  messages: Message[];
+  isLoading: boolean;
 }
 
-export function useAutoScroll({ dependencies = [], enabled = true }: UseAutoScrollOptions = {}) {
+export function useAutoScroll({ messages, isLoading }: UseMessengerScrollOptions) {
   const containerRef = useRef<HTMLDivElement>(null);
   const endRef = useRef<HTMLDivElement>(null);
 
-  const scrollToBottom = (behavior: ScrollBehavior = 'smooth') => {
-    if (!enabled) return;
+  const scrollToBottom = useCallback((behavior: ScrollBehavior = 'smooth') => {
     endRef.current?.scrollIntoView({ behavior });
-  };
+  }, []);
 
   useEffect(() => {
-    if (enabled && dependencies.length > 0) {
+    if (!isLoading && messages.length > 0) {
       scrollToBottom('smooth');
     }
-  }, dependencies);
+  }, [messages, isLoading, scrollToBottom]);
+
+  useEffect(() => {
+    if (!isLoading && messages.length > 0) {
+      scrollToBottom('auto');
+    }
+  }, [isLoading]);
+
+  const scrollAfterSend = useCallback(() => {
+    setTimeout(() => scrollToBottom('smooth'), 100);
+  }, [scrollToBottom]);
 
   return {
     containerRef,
     endRef,
     scrollToBottom,
+    scrollAfterSend,
   };
 }

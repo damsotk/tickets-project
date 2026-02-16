@@ -24,9 +24,9 @@ export default function TicketMessanger({
   onOptimisticRemove,
   currentUserId,
 }: TicketMessangerProps) {
-  const { containerRef, endRef, scrollToBottom } = useAutoScroll({
-    dependencies: [messages],
-    enabled: !isLoading,
+  const { containerRef, endRef, scrollAfterSend } = useAutoScroll({
+    messages,
+    isLoading,
   });
 
   const { messageToSend, setMessageToSend, handleSendMessage, handleKeyDown, isSending } =
@@ -36,7 +36,7 @@ export default function TicketMessanger({
       onOptimisticUpdate,
       onOptimisticRemove,
       currentUserId,
-      onSendSuccess: () => setTimeout(() => scrollToBottom('smooth'), 100),
+      onSendSuccess: scrollAfterSend,
     });
 
   return (
