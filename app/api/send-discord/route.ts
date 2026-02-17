@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
-export async function POST(request: NextRequest) {
-  const { username, message } = await request.json();
+export async function POST(request: Request) {
+  const { username, message, avatarUrl } = await request.json();
 
   if (!username || !message) {
     return NextResponse.json({ error: 'Username and message are required' }, { status: 400 });
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         username: username,
         content: message,
-        avatar_url: 'https://cdn.discordapp.com/embed/avatars/0.png',
+        avatar_url: avatarUrl || 'https://cdn.discordapp.com/embed/avatars/0.png',
       }),
     });
 
