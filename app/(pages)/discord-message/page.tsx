@@ -1,74 +1,19 @@
 'use client';
-
-import { useState, FormEvent, ChangeEvent } from 'react';
+import { PRESET_AVATARS } from '@/public/urls_default_icons_ds';
 import styles from '@/app/(styles)/discord-message-styles/discord-message.module.css';
-
-type StatusType = '' | 'success' | 'error';
-
-const PRESET_AVATARS = [
-  'https://cdn.discordapp.com/embed/avatars/0.png',
-  'https://cdn.discordapp.com/embed/avatars/1.png',
-  'https://cdn.discordapp.com/embed/avatars/2.png',
-  'https://cdn.discordapp.com/embed/avatars/3.png',
-  'https://cdn.discordapp.com/embed/avatars/4.png',
-  'https://cdn.discordapp.com/embed/avatars/5.png',
-];
+import { useDsMsgForm } from '@/app/(hooks)/discord-message-hooks/use-ds-msg-form';
 
 export default function DiscordMessage() {
-  const [username, setUsername] = useState<string>('');
-  const [message, setMessage] = useState<string>('');
-  const [avatarUrl, setAvatarUrl] = useState<string>(PRESET_AVATARS[0]);
-  const [customAvatarUrl, setCustomAvatarUrl] = useState<string>('');
-  const [useCustomAvatar, setUseCustomAvatar] = useState<boolean>(false);
-  const [status, setStatus] = useState<StatusType>('');
-  const [loading, setLoading] = useState<boolean>(false);
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-    setStatus('');
-
-    const finalAvatarUrl = useCustomAvatar && customAvatarUrl ? customAvatarUrl : avatarUrl;
-
-    try {
-      const response = await fetch('/api/send-discord', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username,
-          message,
-          avatarUrl: finalAvatarUrl,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setStatus('success');
-        setUsername('');
-        setMessage('');
-        setTimeout(() => setStatus(''), 3000);
-      } else {
-        setStatus('error');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      setStatus('error');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleAvatarSelect = (url: string) => {
-    setAvatarUrl(url);
-    setUseCustomAvatar(false);
-  };
-
-  const handleCustomAvatarToggle = () => {
-    setUseCustomAvatar(!useCustomAvatar);
-  };
+  const {
+    handleChange,
+    handleSubmit,
+    handleAvatarSelect,
+    handleCustomAvatarToggle,
+    status,
+    loading,
+    formData,
+    useCustomAvatar,
+  } = useDsMsgForm();
 
   return (
     <div className={styles.container}>
@@ -96,8 +41,8 @@ export default function DiscordMessage() {
                 type="text"
                 id="username"
                 className={styles.input}
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={formData.username}
+                onChange={(e) => handleChange('username', e.target.value)}
                 placeholder="Type your name"
                 required
                 maxLength={80}
@@ -114,7 +59,7 @@ export default function DiscordMessage() {
                       <button
                         key={url}
                         type="button"
-                        className={`${styles.avatarOption} ${avatarUrl === url ? styles.avatarActive : ''}`}
+                        className={`${styles.avatarOption} ${formData.avatarUrl === url ? styles.avatarActive : ''}`}
                         onClick={() => handleAvatarSelect(url)}
                       >
                         <img src={url} alt={`Avatar ${index + 1}`} />
@@ -134,14 +79,14 @@ export default function DiscordMessage() {
                   <input
                     type="url"
                     className={styles.input}
-                    value={customAvatarUrl}
-                    onChange={(e) => setCustomAvatarUrl(e.target.value)}
+                    value={formData.customAvatarUrl}
+                    onChange={(e) => handleChange('customAvatarUrl', e.target.value)}
                     placeholder="https://example.com/avatar.png"
                   />
-                  {customAvatarUrl && (
+                  {formData.customAvatarUrl && (
                     <div className={styles.avatarPreview}>
                       <img
-                        src={customAvatarUrl}
+                        src={formData.customAvatarUrl}
                         alt="Custom avatar preview"
                         onError={(e) => {
                           e.currentTarget.src = PRESET_AVATARS[0];
@@ -167,14 +112,14 @@ export default function DiscordMessage() {
               <textarea
                 id="message"
                 className={styles.textarea}
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
+                value={formData.message}
+                onChange={(e) => handleChange('message', e.target.value)}
                 placeholder="Your message..."
                 required
                 maxLength={2000}
                 rows={6}
               />
-              <div className={styles.charCount}>{message.length}/2000</div>
+              <div className={styles.charCount}>{formData.message.length}/2000</div>
             </div>
 
             <button type="submit" className={styles.button} disabled={loading}>
