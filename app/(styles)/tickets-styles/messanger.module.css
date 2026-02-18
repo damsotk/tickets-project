@@ -6,7 +6,7 @@
 }
 
 .messengerHeader {
-  padding: 16px 20px;
+  padding: 16px;
   border-bottom: 1px solid #202225;
   display: flex;
   justify-content: space-between;
@@ -19,6 +19,7 @@
 
 .messengerHeader h3 {
   font-size: 18px;
+  font-family: 'minecraftFont', monospace;
   font-weight: 600;
   margin: 0;
   color: #fff;
@@ -32,6 +33,7 @@
   padding: 8px 16px;
   font-size: 14px;
   font-weight: 500;
+  font-family: 'minecraftFont', monospace;
   cursor: pointer;
   transition: all 0.2s ease;
 }
