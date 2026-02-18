@@ -4,6 +4,7 @@ import styles from '@/app/(styles)/tickets-styles/messanger.module.css';
 import { Message } from '@/types/message';
 import { formatDate } from '@/utils/format-date';
 import { truncateName } from '@/utils/truncate-name';
+import { User } from '@/types/user';
 
 interface TicketMessangerProps {
   messages: Message[];
@@ -12,7 +13,7 @@ interface TicketMessangerProps {
   addMessageToCache: (ticketId: string, message: Message) => void;
   onOptimisticUpdate: (ticketId: string, message: Message) => void;
   onOptimisticRemove: (ticketId: string, tempId: string) => void;
-  currentUserId?: string;
+  currentUser: User | null;
 }
 
 export default function TicketMessanger({
@@ -22,7 +23,7 @@ export default function TicketMessanger({
   addMessageToCache,
   onOptimisticUpdate,
   onOptimisticRemove,
-  currentUserId,
+  currentUser,
 }: TicketMessangerProps) {
   const { containerRef, endRef, scrollAfterSend } = useAutoScroll({
     messages,
@@ -35,7 +36,7 @@ export default function TicketMessanger({
       addMessageToCache,
       onOptimisticUpdate,
       onOptimisticRemove,
-      currentUserId,
+      currentUser,
       onSendSuccess: scrollAfterSend,
     });
 
@@ -68,7 +69,7 @@ export default function TicketMessanger({
         ) : (
           <>
             {messages.map((message) => {
-              const isCurrentUser = message.author.id === currentUserId;
+              const isCurrentUser = message.author.id === currentUser?.id;
               const isPending = message.isPending;
 
               return (

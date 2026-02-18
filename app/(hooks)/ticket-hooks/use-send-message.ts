@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { TicketClient } from '@/utils/api-client/ticket-client';
 import { Message } from '@/types/message';
+import { User } from '@/types/user';
 
 interface UseSendMessageProps {
   selectedTicket: string | null;
   addMessageToCache: (ticketId: string, message: Message) => void;
   onOptimisticUpdate: (ticketId: string, message: Message) => void;
   onOptimisticRemove: (ticketId: string, tempId: string) => void;
-  currentUserId: string | undefined;
+  currentUser: User | null;
   onSendSuccess?: () => void;
 }
 
@@ -16,7 +17,7 @@ export function useSendMessage({
   addMessageToCache,
   onOptimisticUpdate,
   onOptimisticRemove,
-  currentUserId,
+  currentUser,
   onSendSuccess,
 }: UseSendMessageProps) {
   const [messageToSend, setMessageToSend] = useState('');
@@ -33,7 +34,7 @@ export function useSendMessage({
       return;
     }
 
-    if (!currentUserId) {
+    if (!currentUser?.id) {
       console.error('User not authenticated');
       return;
     }
@@ -42,11 +43,11 @@ export function useSendMessage({
     const optimisticMessage: Message = {
       id: tempId,
       text: messageToSend,
-      authorId: currentUserId,
+      authorId: currentUser.id,
       createdAt: new Date().toString(),
       author: {
-        id: currentUserId,
-        name: 'You',
+        id: currentUser.id,
+        name: currentUser.name,
         role: 'USER',
       },
       isPending: true,

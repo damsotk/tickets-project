@@ -39,7 +39,7 @@ export default function TicketsPageClient({ initialTickets, currentUser }: Ticke
             addMessageToCache={addMessageToCache}
             onOptimisticUpdate={addOptimisticMessage}
             onOptimisticRemove={removeOptimisticMessage}
-            currentUserId={currentUser?.id}
+            currentUser={currentUser}
           />
         ) : (
           <div className={styles.emptyState}>
