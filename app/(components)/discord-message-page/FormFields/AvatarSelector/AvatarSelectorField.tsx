@@ -1,0 +1,41 @@
+import styles from '@/app/(styles)/discord-message-styles/discord-message.module.css';
+import PresetAvatars from '@/app/(components)/discord-message-page/FormFields/AvatarSelector/AvatarSelectorFields/PresetAvatars';
+import CustomAvatar from './AvatarSelectorFields/CustomAvatar';
+
+interface AvatarSelectorProps {
+  selectedAvatarUrl: string;
+  customAvatarUrl: string;
+  useCustomAvatar: boolean;
+  handleAvatarSelect: (url: string) => void;
+  onCustomAvatarChange: (url: string) => void;
+  handleCustomAvatarToggle: () => void;
+}
+
+export default function AvatarSelectorField({
+  selectedAvatarUrl,
+  customAvatarUrl,
+  useCustomAvatar,
+  handleAvatarSelect,
+  onCustomAvatarChange,
+  handleCustomAvatarToggle,
+}: AvatarSelectorProps) {
+  return (
+    <div className={styles.inputGroup}>
+      <label className={styles.label}>Avatar</label>
+
+      {!useCustomAvatar ? (
+        <PresetAvatars
+          selectedAvatarUrl={selectedAvatarUrl}
+          handleAvatarSelect={handleAvatarSelect}
+          handleCustomAvatarToggle={handleCustomAvatarToggle}
+        />
+      ) : (
+        <CustomAvatar
+          customAvatarUrl={customAvatarUrl}
+          onCustomAvatarChange={onCustomAvatarChange}
+          handleCustomAvatarToggle={handleCustomAvatarToggle}
+        />
+      )}
+    </div>
+  );
+}
