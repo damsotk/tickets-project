@@ -2,8 +2,8 @@
 import styles from '@/app/(styles)/auth-styles/auth-styles.module.css';
 import { useRouter } from 'next/navigation';
 import { AuthClient } from '@/utils/api-client/auth-client';
-import { useValidateAuthForm } from '@/app/(hooks)/validate-hooks/auth/use-validate-auth-form';
-import { useAuthFormHandlers } from '@/app/(hooks)/validate-hooks/auth/use-auth-form-handlers';
+import { useValidateAuthForm } from '@/app/(hooks)/auth-hooks/use-validate-auth-form';
+import { useAuthFormHandlers } from '@/app/(hooks)/auth-hooks/use-auth-form-handlers';
 import { FormField } from './FormField';
 
 export default function LoginForm() {
