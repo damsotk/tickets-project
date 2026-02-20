@@ -1,5 +1,5 @@
 import { useState, FormEvent } from 'react';
-import { PRESET_AVATARS } from '@/public/urls_default_icons_ds';
+import { PRESET_AVATARS } from '@/constants/urls_default_icons_ds';
 
 interface FormData {
   username: string;

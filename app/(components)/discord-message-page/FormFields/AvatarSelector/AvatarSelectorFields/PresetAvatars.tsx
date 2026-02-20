@@ -1,5 +1,5 @@
 import styles from '@/app/(styles)/discord-message-styles/discord-message.module.css';
-import { PRESET_AVATARS } from '@/public/urls_default_icons_ds';
+import { PRESET_AVATARS } from '@/constants/urls_default_icons_ds';
 
 interface PresetAvatarsProps {
   selectedAvatarUrl: string;
