@@ -2,18 +2,16 @@
 
 import { useRouter } from 'next/navigation';
 import styles from '@/app/(styles)/header.module.css';
-import type { User } from '@/types/user';
 import { logout } from '@/app/(actions)/auth-actions';
+import useUser from '@/contexts/UserContext';
 
-interface HeaderProps {
-  user: User | null;
-}
-
-export default function Header({ user }: HeaderProps) {
+export default function Header() {
   const router = useRouter();
+  const { user, setUser } = useUser();
 
   const handleLogout = async () => {
     await logout();
+    setUser(null);
     router.refresh();
   };
 

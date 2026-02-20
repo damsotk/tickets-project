@@ -11,12 +11,11 @@ export const metadata: Metadata = {
 };
 
 export default async function ElliumTickets() {
-  const user = await getCurrentUser();
   return (
     <div className={styles.app}>
-      <Header user={user} />
+      <Header />
       <main className={styles.main}>
-        <TicketsTypes user={user} />
+        <TicketsTypes />
         <StaffList />
       </main>
     </div>

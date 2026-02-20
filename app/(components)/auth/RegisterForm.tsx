@@ -5,16 +5,25 @@ import { AuthClient } from '@/utils/api-client/auth-client';
 import { useAuthFormHandlers } from '@/app/(hooks)/auth-hooks/use-auth-form-handlers';
 import { useValidateAuthForm } from '@/app/(hooks)/auth-hooks/use-validate-auth-form';
 import { FormField } from './FormField';
+import { User } from '@/types/user';
+import useUser from '@/contexts/UserContext';
+
+interface RegisterResponse {
+  user: User;
+  message: string;
+}
 
 export default function RegisterForm() {
   const router = useRouter();
+  const { setUser } = useUser();
   const { validatePassword, validateEmail, validateName } = useValidateAuthForm();
   const { formData, fieldErrors, handleChange, handleBlur, handleSubmit, loading, error } =
-    useAuthFormHandlers(
+    useAuthFormHandlers<RegisterResponse>(
       { name: '', email: '', password: '' },
       { email: validateEmail, password: validatePassword, name: validateName },
       {
-        onSuccess: () => {
+        onSuccess: (data: RegisterResponse) => {
+          setUser(data.user);
           router.push('/');
           router.refresh();
         },

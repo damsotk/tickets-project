@@ -2,7 +2,7 @@
 
 import { useCreateTicket } from '@/app/(hooks)/ticket-hooks/use-create-ticket';
 import styles from '@/app/(styles)/tickets-type-cards.module.css';
-import type { User } from '@/types/user';
+import useUser from '@/contexts/UserContext';
 
 const TICKET_TYPES = [
   {
@@ -25,11 +25,8 @@ const TICKET_TYPES = [
   },
 ] as const;
 
-interface TicketsTypesProps {
-  user: User | null;
-}
-
-export default function TicketsTypes({ user }: TicketsTypesProps) {
+export default function TicketsTypes() {
+  const { user } = useUser();
   const { checking, handleTicketClick } = useCreateTicket({ user });
 
   return (

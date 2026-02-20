@@ -5,18 +5,26 @@ import { AuthClient } from '@/utils/api-client/auth-client';
 import { useValidateAuthForm } from '@/app/(hooks)/auth-hooks/use-validate-auth-form';
 import { useAuthFormHandlers } from '@/app/(hooks)/auth-hooks/use-auth-form-handlers';
 import { FormField } from './FormField';
+import useUser from '@/contexts/UserContext';
+import { User } from '@prisma/client';
+
+interface LoginResponse {
+  user: User;
+  message: string;
+}
 
 export default function LoginForm() {
   const router = useRouter();
+  const { setUser } = useUser();
   const { validatePassword, validateEmail } = useValidateAuthForm();
   const { formData, fieldErrors, handleChange, handleBlur, handleSubmit, error, loading } =
-    useAuthFormHandlers(
+    useAuthFormHandlers<LoginResponse>(
       { email: '', password: '' },
       { email: validateEmail, password: validatePassword },
       {
-        onSuccess: () => {
+        onSuccess: (data: LoginResponse) => {
+          setUser(data.user);
           router.push('/');
-          router.refresh();
         },
       },
     );

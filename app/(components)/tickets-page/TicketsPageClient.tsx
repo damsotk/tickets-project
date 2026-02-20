@@ -4,14 +4,13 @@ import AllUserTickets from '@/app/(components)/tickets-page/AllUserTickets';
 import TicketMessanger from '@/app/(components)/tickets-page/Messanger';
 import { Ticket } from '@/types/tickets';
 import { useGetMessages } from '@/app/(hooks)/ticket-hooks/use-get-messages';
-import { User } from '@/types/user';
+import useUser from '@/contexts/UserContext';
 
 interface TicketsPageClientProps {
   initialTickets: Ticket[] | null;
-  currentUser: User | null;
 }
 
-export default function TicketsPageClient({ initialTickets, currentUser }: TicketsPageClientProps) {
+export default function TicketsPageClient({ initialTickets }: TicketsPageClientProps) {
   const {
     selectedTicket,
     messages,
@@ -21,6 +20,8 @@ export default function TicketsPageClient({ initialTickets, currentUser }: Ticke
     addOptimisticMessage,
     removeOptimisticMessage,
   } = useGetMessages();
+
+  const { user } = useUser();
 
   return (
     <div className={styles.container}>
@@ -39,7 +40,7 @@ export default function TicketsPageClient({ initialTickets, currentUser }: Ticke
             addMessageToCache={addMessageToCache}
             onOptimisticUpdate={addOptimisticMessage}
             onOptimisticRemove={removeOptimisticMessage}
-            currentUser={currentUser}
+            currentUser={user}
           />
         ) : (
           <div className={styles.emptyState}>

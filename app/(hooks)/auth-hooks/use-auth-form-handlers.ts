@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 interface FormData {
   [key: string]: string;
 }
@@ -11,15 +12,15 @@ interface ValidationRules {
   [key: string]: (value: string) => string;
 }
 
-interface UseAuthFormHandlersOptions {
-  onSuccess?: () => void;
+interface UseAuthFormHandlersOptions<T> {
+  onSuccess?: (data: T) => void;
   onError?: (error: string) => void;
 }
 
-export function useAuthFormHandlers(
+export function useAuthFormHandlers<T = unknown>(
   initialData: FormData,
   validationRules: ValidationRules,
-  options?: UseAuthFormHandlersOptions,
+  options?: UseAuthFormHandlersOptions<T>,
 ) {
   const [formData, setFormData] = useState(initialData);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
@@ -34,13 +35,11 @@ export function useAuthFormHandlers(
     }));
 
     const error = touchedFields.has(field) ? validationRules[field]?.(value) || '' : '';
-
     setFieldErrors((prev) => ({ ...prev, [field]: error }));
   };
 
   const handleBlur = (field: string) => {
     setTouchedFields((prev) => new Set(prev).add(field));
-
     const error = validationRules[field]?.(formData[field]) || '';
     setFieldErrors((prev) => ({
       ...prev,
@@ -66,7 +65,7 @@ export function useAuthFormHandlers(
     return !hasErrors;
   };
 
-  const handleSubmit = async (e: React.FormEvent, submitFn: () => Promise<unknown>) => {
+  const handleSubmit = async (e: React.FormEvent, submitFn: () => Promise<T>) => {
     e.preventDefault();
     setError('');
 
@@ -80,8 +79,8 @@ export function useAuthFormHandlers(
     setLoading(true);
 
     try {
-      await submitFn();
-      options?.onSuccess?.();
+      const data = await submitFn();
+      options?.onSuccess?.(data);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'An error occurred';
       setError(errorMessage);
