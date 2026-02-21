@@ -1,14 +1,15 @@
+import { useParams } from 'next/navigation';
 import en from '@/locales/en';
 import uk from '@/locales/uk';
-import { useRouter } from 'next/router';
 
 const translations = { en, uk };
+type Locale = keyof typeof translations;
+
 export function useTranslation() {
-  const router = useRouter();
-  const { locale } = router;
+  const params = useParams();
+  const locale = (params?.locale as Locale) ?? 'en';
 
-  const currentLocale = (locale ?? 'en') as keyof typeof translations;
-  const translate = translations[currentLocale];
+  const translate = translations[locale] || translations.en;
 
-  return { translate, locale: currentLocale };
+  return { translate, locale };
 }
