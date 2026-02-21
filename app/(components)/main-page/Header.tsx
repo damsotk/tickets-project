@@ -3,11 +3,13 @@
 import { useRouter } from 'next/navigation';
 import styles from '@/app/(styles)/header.module.css';
 import { logout } from '@/app/(actions)/auth-actions';
+import { useTranslation } from '@/app/(hooks)/use-translation';
 import useUser from '@/contexts/UserContext';
 
 export default function Header() {
   const router = useRouter();
   const { user, setUser } = useUser();
+  const { translate, locale } = useTranslation();
 
   const handleLogout = async () => {
     await logout();
@@ -15,21 +17,27 @@ export default function Header() {
     router.refresh();
   };
 
+  const handleLogin = () => {
+    router.push(`/${locale}/auth`);
+  };
+
+  const t = translate.home.header;
+
   return (
     <header className={styles.header}>
       <div className={styles.headerLeft}>
-        <h1 className={styles.title}>Ellium tickets</h1>
+        <h1 className={styles.title}>{t.title}</h1>
       </div>
       <div className={styles.headerRight}>
         {user ? (
           <>
             <div className={styles.chatIcon}>
               <div className={styles.notificationBadge}>1</div>
-              <img src="/icons/ticket-alt.png" alt="" />
+              <img src="/icons/ticket-alt.png" alt={t.ticketIconAlt} />
             </div>
             <img
               src={user.avatar || 'https://api.dicebear.com/9.x/adventurer-neutral/svg?radius=0'}
-              alt="User avatar"
+              alt={t.userAvatarAlt}
               className={styles.userAvatar}
               title={user.name}
             />
@@ -45,12 +53,12 @@ export default function Header() {
                 marginLeft: '12px',
               }}
             >
-              Logout
+              {t.logout}
             </button>
           </>
         ) : (
           <button
-            onClick={() => router.push('/auth')}
+            onClick={handleLogin}
             style={{
               padding: '8px 16px',
               background: '#0070f3',
@@ -60,7 +68,7 @@ export default function Header() {
               cursor: 'pointer',
             }}
           >
-            Login
+            {t.login}
           </button>
         )}
       </div>

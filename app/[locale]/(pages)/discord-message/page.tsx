@@ -1,12 +1,14 @@
 'use client';
 import styles from '@/app/(styles)/discord-message-styles/discord-message.module.css';
 import { useDsMsgForm } from '@/app/(hooks)/discord-message-hooks/use-ds-msg-form';
+import { useTranslation } from '@/app/(hooks)/use-translation';
 import Header from '@/app/(components)/discord-message-page/Header';
 import InputField from '@/app/(components)/discord-message-page/FormFields/InputField';
 import TextareaField from '@/app/(components)/discord-message-page/FormFields/TextareaField';
 import AvatarSelectorField from '@/app/(components)/discord-message-page/FormFields/AvatarSelector/AvatarSelectorField';
 
 export default function DiscordMessage() {
+  const { translate } = useTranslation();
   const {
     handleChange,
     handleSubmit,
@@ -18,6 +20,8 @@ export default function DiscordMessage() {
     useCustomAvatar,
   } = useDsMsgForm();
 
+  const t = translate.discordMessage;
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
@@ -26,11 +30,11 @@ export default function DiscordMessage() {
 
           <form onSubmit={handleSubmit} className={styles.form}>
             <InputField
-              label="Sender name"
+              label={t.fields.username}
               id="username"
               value={formData.username}
               onChangeUsername={(value) => handleChange('username', value)}
-              placeholder="Type your name"
+              placeholder={t.fields.usernamePlaceholder}
               maxLength={80}
               required
             />
@@ -44,10 +48,10 @@ export default function DiscordMessage() {
             />
             <TextareaField
               id="message"
-              label="Message"
+              label={t.fields.message}
               value={formData.message}
               onChangeMessage={(e) => handleChange('message', e)}
-              placeholder="Your message..."
+              placeholder={t.fields.messagePlaceholder}
               required={true}
               maxLength={2000}
               rows={6}
@@ -55,16 +59,12 @@ export default function DiscordMessage() {
             />
 
             <button type="submit" className={styles.button} disabled={loading}>
-              {loading ? 'Sending...' : 'Send'}
+              {loading ? t.button.sending : t.button.send}
             </button>
 
-            {status === 'success' && (
-              <div className={styles.success}>✓ Message sent successfully!</div>
-            )}
+            {status === 'success' && <div className={styles.success}>{t.status.success}</div>}
 
-            {status === 'error' && (
-              <div className={styles.error}>✗ Error sending. Please try again.</div>
-            )}
+            {status === 'error' && <div className={styles.error}>{t.status.error}</div>}
           </form>
         </div>
       </div>

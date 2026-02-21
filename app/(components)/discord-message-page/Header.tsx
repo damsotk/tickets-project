@@ -1,5 +1,10 @@
 import styles from '@/app/(styles)/discord-message-styles/discord-message.module.css';
+import { useTranslation } from '@/app/(hooks)/use-translation';
+
 export default function Header() {
+  const { translate } = useTranslation();
+  const t = translate.discordMessage.header;
+
   return (
     <div className={styles.header}>
       <svg width="48" height="48" viewBox="0 0 71 55" fill="none">
@@ -10,8 +15,8 @@ export default function Header() {
           />
         </g>
       </svg>
-      <h1 className={styles.title}>Send an anonymous message</h1>
-      <p className={styles.subtitle}>Fill out the form to send a message to the channel</p>
+      <h1 className={styles.title}>{t.title}</h1>
+      <p className={styles.subtitle}>{t.subtitle}</p>
     </div>
   );
 }

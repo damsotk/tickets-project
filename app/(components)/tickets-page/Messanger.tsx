@@ -1,5 +1,8 @@
+'use client';
+
 import { useAutoScroll } from '@/app/(hooks)/ticket-hooks/use-auto-scroll';
 import { useSendMessage } from '@/app/(hooks)/ticket-hooks/use-send-message';
+import { useTranslation } from '@/app/(hooks)/use-translation';
 import styles from '@/app/(styles)/tickets-styles/messanger.module.css';
 import { Message } from '@/types/message';
 import { formatDate } from '@/utils/format-date';
@@ -25,6 +28,9 @@ export default function TicketMessanger({
   onOptimisticRemove,
   currentUser,
 }: TicketMessangerProps) {
+  const { translate } = useTranslation();
+  const t = translate.tickets.messenger;
+
   const { containerRef, endRef, scrollAfterSend } = useAutoScroll({
     messages,
     isLoading,
@@ -43,15 +49,18 @@ export default function TicketMessanger({
   return (
     <div className={styles.messengerWrapper}>
       <div className={styles.messengerHeader}>
-        <h3>Ticket #{selectedTicket?.slice(0, 8)}</h3>
-        <button className={styles.closeTicketBtn}>Close Ticket</button>
+        <h3>
+          {t.header}
+          {selectedTicket?.slice(0, 8)}
+        </h3>
+        <button className={styles.closeTicketBtn}>{t.closeButton}</button>
       </div>
 
       <div className={styles.messagesContainer} ref={containerRef}>
         {isLoading ? (
           <div className={styles.loadingState}>
             <div className={styles.spinner}></div>
-            <p>Loading messages...</p>
+            <p>{t.loading}</p>
           </div>
         ) : messages.length === 0 ? (
           <div className={styles.emptyMessages}>
@@ -64,7 +73,7 @@ export default function TicketMessanger({
                 strokeLinejoin="round"
               />
             </svg>
-            <p>No messages yet. Start the conversation!</p>
+            <p>{t.noMessages}</p>
           </div>
         ) : (
           <>
@@ -86,9 +95,9 @@ export default function TicketMessanger({
                       </strong>
                       <span className={styles.messageRole}>
                         {isCurrentUser
-                          ? 'You'
+                          ? t.you
                           : message.author.role === 'ADMIN'
-                            ? 'Support'
+                            ? t.support
                             : message.author.name}
                       </span>
                     </div>
@@ -97,7 +106,7 @@ export default function TicketMessanger({
                       {isPending ? (
                         <span className={styles.sendingIndicator}>
                           <span className={styles.sendingDot}></span>
-                          Sending...
+                          {t.sending}
                         </span>
                       ) : (
                         formatDate(message.createdAt)
@@ -115,7 +124,7 @@ export default function TicketMessanger({
       <div className={styles.inputContainer}>
         <input
           type="text"
-          placeholder="Type a message..."
+          placeholder={t.inputPlaceholder}
           className={styles.messageInput}
           disabled={isLoading || isSending}
           value={messageToSend}

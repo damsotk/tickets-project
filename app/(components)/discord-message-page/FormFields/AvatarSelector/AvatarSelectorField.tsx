@@ -1,4 +1,5 @@
 import styles from '@/app/(styles)/discord-message-styles/discord-message.module.css';
+import { useTranslation } from '@/app/(hooks)/use-translation';
 import PresetAvatars from '@/app/(components)/discord-message-page/FormFields/AvatarSelector/AvatarSelectorFields/PresetAvatars';
 import CustomAvatar from './AvatarSelectorFields/CustomAvatar';
 
@@ -19,9 +20,12 @@ export default function AvatarSelectorField({
   onCustomAvatarChange,
   handleCustomAvatarToggle,
 }: AvatarSelectorProps) {
+  const { translate } = useTranslation();
+  const t = translate.discordMessage.fields;
+
   return (
     <div className={styles.inputGroup}>
-      <label className={styles.label}>Avatar</label>
+      <label className={styles.label}>{t.avatar}</label>
 
       {!useCustomAvatar ? (
         <PresetAvatars

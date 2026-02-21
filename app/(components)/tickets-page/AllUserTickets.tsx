@@ -1,4 +1,7 @@
+'use client';
+
 import styles from '@/app/(styles)/tickets-styles/all-user-tickets.module.css';
+import { useTranslation } from '@/app/(hooks)/use-translation';
 import { Ticket } from '@/types/tickets';
 import { formatDate } from '@/utils/format-date';
 
@@ -13,16 +16,19 @@ export default function AllUserTickets({
   selectedTicket,
   onSelectTicket,
 }: AllUserTicketsProps) {
+  const { translate } = useTranslation();
+  const t = translate.tickets.allTickets;
+
   return (
     <div className={styles.ticketsSection}>
       <div className={styles.ticketsHeader}>
-        <h2>My Tickets</h2>
-        <button className={styles.newTicketBtn}>+ Create</button>
+        <h2>{t.title}</h2>
+        <button className={styles.newTicketBtn}>{t.createButton}</button>
       </div>
 
       <div className={styles.ticketsList}>
         {!tickets || tickets.length === 0 ? (
-          <p>No tickets yet.</p>
+          <p>{t.noTickets}</p>
         ) : (
           tickets.map((ticket) => (
             <div
@@ -35,7 +41,7 @@ export default function AllUserTickets({
                 <span className={styles.ticketDate}>{formatDate(ticket.createdAt)}</span>
               </div>
               <span className={`${styles.ticketStatus} ${styles[ticket.category]}`}>
-                {ticket.category}
+                {t.categories[ticket.category as keyof typeof t.categories] || ticket.category}
               </span>
             </div>
           ))

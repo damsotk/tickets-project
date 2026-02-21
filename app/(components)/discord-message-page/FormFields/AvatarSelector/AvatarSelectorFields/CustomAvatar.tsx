@@ -1,4 +1,5 @@
 import styles from '@/app/(styles)/discord-message-styles/discord-message.module.css';
+import { useTranslation } from '@/app/(hooks)/use-translation';
 
 interface CustomAvatarProps {
   customAvatarUrl: string;
@@ -11,6 +12,9 @@ export default function CustomAvatar({
   onCustomAvatarChange,
   handleCustomAvatarToggle,
 }: CustomAvatarProps) {
+  const { translate } = useTranslation();
+  const t = translate.discordMessage.avatar;
+
   return (
     <>
       <input
@@ -18,15 +22,15 @@ export default function CustomAvatar({
         className={styles.input}
         value={customAvatarUrl}
         onChange={(e) => onCustomAvatarChange(e.target.value)}
-        placeholder="https://example.com/avatar.png"
+        placeholder={t.customPlaceholder}
       />
       {customAvatarUrl && (
         <div className={styles.avatarPreview}>
-          <img src={customAvatarUrl} alt="Custom avatar preview" />
+          <img src={customAvatarUrl} alt={t.customPreview} />
         </div>
       )}
       <button type="button" className={styles.customAvatarBtn} onClick={handleCustomAvatarToggle}>
-        Choose from ready-made
+        {t.chooseFromPreset}
       </button>
     </>
   );

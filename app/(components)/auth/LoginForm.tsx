@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { AuthClient } from '@/utils/api-client/auth-client';
 import { useValidateAuthForm } from '@/app/(hooks)/auth-hooks/use-validate-auth-form';
 import { useAuthFormHandlers } from '@/app/(hooks)/auth-hooks/use-auth-form-handlers';
+import { useTranslation } from '@/app/(hooks)/use-translation';
 import { FormField } from './FormField';
 import useUser from '@/contexts/UserContext';
 import { User } from '@prisma/client';
@@ -16,6 +17,7 @@ interface LoginResponse {
 export default function LoginForm() {
   const router = useRouter();
   const { setUser } = useUser();
+  const { translate } = useTranslation();
   const { validatePassword, validateEmail } = useValidateAuthForm();
   const { formData, fieldErrors, handleChange, handleBlur, handleSubmit, error, loading } =
     useAuthFormHandlers<LoginResponse>(
@@ -29,10 +31,12 @@ export default function LoginForm() {
       },
     );
 
+  const t = translate.auth;
+
   return (
     <div className={styles.formCard}>
-      <h1 className={styles.title}>Welcome back!</h1>
-      <p className={styles.subtitle}>We&apos;re happy to see you again!</p>
+      <h1 className={styles.title}>{t.login.title}</h1>
+      <p className={styles.subtitle}>{t.login.subtitle}</p>
 
       {error && <div className={styles.error}>{error}</div>}
 
@@ -41,23 +45,23 @@ export default function LoginForm() {
         noValidate
       >
         <FormField
-          label="Email"
+          label={t.fields.email}
           type="email"
           name="email"
           value={formData.email}
           error={fieldErrors.email}
-          placeholder="Enter your email"
+          placeholder={t.fields.emailPlaceholder}
           onChange={(value) => handleChange('email', value)}
           onBlur={() => handleBlur('email')}
         />
 
         <FormField
-          label="Password"
+          label={t.fields.password}
           type="password"
           name="password"
           value={formData.password}
           error={fieldErrors.password}
-          placeholder="Enter your password"
+          placeholder={t.fields.passwordPlaceholder}
           onChange={(value) => handleChange('password', value)}
           onBlur={() => handleBlur('password')}
         />
@@ -67,7 +71,7 @@ export default function LoginForm() {
           disabled={loading}
           className={`${styles.button} ${loading ? styles['button--loading'] : ''}`}
         >
-          {loading ? 'Logging in...' : 'Log In'}
+          {loading ? t.login.buttonLoading : t.login.button}
         </button>
       </form>
     </div>

@@ -1,5 +1,6 @@
 'use client';
 import styles from '@/app/(styles)/tickets-styles/main-page-tickets.module.css';
+import { useTranslation } from '@/app/(hooks)/use-translation';
 import AllUserTickets from '@/app/(components)/tickets-page/AllUserTickets';
 import TicketMessanger from '@/app/(components)/tickets-page/Messanger';
 import { Ticket } from '@/types/tickets';
@@ -11,6 +12,7 @@ interface TicketsPageClientProps {
 }
 
 export default function TicketsPageClient({ initialTickets }: TicketsPageClientProps) {
+  const { translate } = useTranslation();
   const {
     selectedTicket,
     messages,
@@ -22,6 +24,7 @@ export default function TicketsPageClient({ initialTickets }: TicketsPageClientP
   } = useGetMessages();
 
   const { user } = useUser();
+  const t = translate.tickets.messenger;
 
   return (
     <div className={styles.container}>
@@ -53,7 +56,7 @@ export default function TicketsPageClient({ initialTickets }: TicketsPageClientP
                 strokeLinejoin="round"
               />
             </svg>
-            <p>Select a ticket to start chatting</p>
+            <p>{t.emptyState}</p>
           </div>
         )}
       </div>
