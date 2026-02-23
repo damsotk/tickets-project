@@ -46,6 +46,27 @@ export default function TicketMessanger({
       onSendSuccess: scrollAfterSend,
     });
 
+  const handleTest = async () => {
+    try {
+      const response = await fetch(`/api/tickets/close-ticket/${selectedTicket}/`, {
+        method: 'PATCH',
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Failed to close ticket');
+      }
+
+      const data = await response.json();
+      console.log('Ticket closed:', data);
+
+      return data;
+    } catch (error) {
+      console.error('Error closing ticket:', error);
+    }
+  };
+
   return (
     <div className={styles.messengerWrapper}>
       <div className={styles.messengerHeader}>
@@ -53,7 +74,9 @@ export default function TicketMessanger({
           {t.header}
           {selectedTicket?.slice(0, 8)}
         </h3>
-        <button className={styles.closeTicketBtn}>{t.closeButton}</button>
+        <button onClick={handleTest} className={styles.closeTicketBtn}>
+          {t.closeButton}
+        </button>
       </div>
 
       <div className={styles.messagesContainer} ref={containerRef}>
