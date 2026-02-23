@@ -28,6 +28,7 @@ model User {
 
   tickets   Ticket[]
   messages  Message[]
+  closedTickets Ticket[] @relation("ClosedBy")
   
   @@map("users")
 }
@@ -43,6 +44,14 @@ model Ticket {
   
   // Theme (complaint, lore, tech) - use ENUM
   category  TicketCategory 
+  
+  // Status of ticket
+  status    TicketStatus @default(OPEN)
+  
+  // Date and user of close
+  closedAt  DateTime?
+  closedById String?
+  closedBy  User?     @relation("ClosedBy", fields: [closedById], references: [id], onDelete: SetNull)
   
   // Connect with user who create ticket
   userId    String
@@ -62,6 +71,11 @@ enum TicketCategory {
   LORE
   TECH
   OTHER
+}
+
+enum TicketStatus {
+  OPEN
+  CLOSED
 }
 
 model Message {
