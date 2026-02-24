@@ -6,10 +6,18 @@ interface TicketsPageClientProps {
   initialTickets: Ticket[] | null;
 }
 
-export function useUpdateTickets({ initialTickets }: TicketsPageClientProps) {
+interface UseUpdateTicketsProps extends TicketsPageClientProps {
+  onTicketStatusChange?: (ticketId: string, status: 'OPEN' | 'CLOSED') => void;
+}
+
+export function useUpdateTickets({ initialTickets, onTicketStatusChange }: UseUpdateTicketsProps) {
   const [tickets, setTickets] = useState<Ticket[] | null>(initialTickets);
+  const [isClosing, setIsClosing] = useState(false);
 
   const handleTicketClose = async (ticketId: string) => {
+    if (isClosing) return;
+
+    setIsClosing(true);
     let previousTickets: Ticket[] | null = null;
 
     setTickets((prevTickets) => {
@@ -23,14 +31,18 @@ export function useUpdateTickets({ initialTickets }: TicketsPageClientProps) {
 
     try {
       await TicketClient.closeTicket(ticketId);
+      onTicketStatusChange?.(ticketId, 'CLOSED');
     } catch (error) {
       console.error('Failed to close ticket: ', error);
       setTickets(previousTickets);
+    } finally {
+      setIsClosing(false);
     }
   };
 
   return {
     handleTicketClose,
     tickets,
+    isClosing,
   };
 }

@@ -101,6 +101,8 @@ const en = {
       you: 'You',
       support: 'Support',
       sending: 'Sending...',
+      ticketClosed: 'Ticket Closed',
+      closingProcess: 'Closing...',
     },
   },
 };

@@ -11,13 +11,17 @@ import { User } from '@/types/user';
 
 interface TicketMessangerProps {
   messages: Message[];
-  selectedTicket: string | null;
+  selectedTicket: {
+    id: string;
+    status: 'OPEN' | 'CLOSED';
+  } | null;
   isLoading?: boolean;
   addMessageToCache: (ticketId: string, message: Message) => void;
   onOptimisticUpdate: (ticketId: string, message: Message) => void;
   onOptimisticRemove: (ticketId: string, tempId: string) => void;
   currentUser: User | null;
   handleTicketClose: (ticketId: string) => void;
+  isClosing: boolean;
 }
 
 export default function TicketMessanger({
@@ -29,6 +33,7 @@ export default function TicketMessanger({
   onOptimisticRemove,
   currentUser,
   handleTicketClose,
+  isClosing,
 }: TicketMessangerProps) {
   const { translate } = useTranslation();
   const t = translate.tickets.messenger;
@@ -40,7 +45,7 @@ export default function TicketMessanger({
 
   const { messageToSend, setMessageToSend, handleSendMessage, handleKeyDown, isSending } =
     useSendMessage({
-      selectedTicket,
+      selectedTicket: selectedTicket?.id || null,
       addMessageToCache,
       onOptimisticUpdate,
       onOptimisticRemove,
@@ -53,13 +58,18 @@ export default function TicketMessanger({
       <div className={styles.messengerHeader}>
         <h3>
           {t.header}
-          {selectedTicket?.slice(0, 8)}
+          {selectedTicket?.id.slice(0, 8)}
         </h3>
         <button
-          onClick={() => selectedTicket && handleTicketClose(selectedTicket)}
+          onClick={() => selectedTicket && handleTicketClose(selectedTicket.id)}
           className={styles.closeTicketBtn}
+          disabled={selectedTicket?.status === 'CLOSED' || isClosing}
         >
-          {t.closeButton}
+          {isClosing
+            ? t.closingProcess
+            : selectedTicket?.status === 'OPEN'
+              ? t.closeButton
+              : t.ticketClosed}
         </button>
       </div>
 

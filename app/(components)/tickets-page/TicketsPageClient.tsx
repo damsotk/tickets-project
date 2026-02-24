@@ -25,9 +25,13 @@ export default function TicketsPageClient({ initialTickets }: TicketsPageClientP
     addMessageToCache,
     addOptimisticMessage,
     removeOptimisticMessage,
+    updateTicketStatus,
   } = useGetMessages();
 
-  const { handleTicketClose, tickets } = useUpdateTickets({ initialTickets });
+  const { handleTicketClose, tickets, isClosing } = useUpdateTickets({
+    initialTickets,
+    onTicketStatusChange: updateTicketStatus,
+  });
 
   return (
     <div className={styles.container}>
@@ -48,6 +52,7 @@ export default function TicketsPageClient({ initialTickets }: TicketsPageClientP
             onOptimisticRemove={removeOptimisticMessage}
             currentUser={user}
             handleTicketClose={handleTicketClose}
+            isClosing={isClosing}
           />
         ) : (
           <div className={styles.emptyState}>

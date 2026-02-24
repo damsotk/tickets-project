@@ -101,6 +101,8 @@ const uk = {
       you: 'Ви',
       support: 'Підтримка',
       sending: 'Надсилання...',
+      ticketClosed: 'Тікет закритий',
+      closingProcess: 'Закриття...',
     },
   },
 };

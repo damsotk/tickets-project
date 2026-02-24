@@ -2,15 +2,20 @@ import { useState } from 'react';
 import { Message } from '@/types/message';
 import { TicketClient } from '@/utils/api-client/ticket-client';
 
+interface SelectedTicket {
+  id: string;
+  status: 'OPEN' | 'CLOSED';
+}
+
 export function useGetMessages() {
-  const [selectedTicket, setSelectedTicket] = useState<string | null>(null);
+  const [selectedTicket, setSelectedTicket] = useState<SelectedTicket | null>(null);
   const [messagesCache, setMessagesCache] = useState<Record<string, Message[]>>({});
   const [isLoadingMessages, setIsLoadingMessages] = useState(false);
 
-  const handleSelectTicket = async (ticketId: string) => {
-    if (ticketId === selectedTicket) return;
+  const handleSelectTicket = async (ticketId: string, status: 'OPEN' | 'CLOSED') => {
+    if (ticketId === selectedTicket?.id) return;
 
-    setSelectedTicket(ticketId);
+    setSelectedTicket({ id: ticketId, status: status });
     if (messagesCache[ticketId]) {
       return;
     }
@@ -35,6 +40,15 @@ export function useGetMessages() {
     }
   };
 
+  const updateTicketStatus = (ticketId: string, status: 'OPEN' | 'CLOSED') => {
+    setSelectedTicket((prev) => {
+      if (prev?.id === ticketId) {
+        return { ...prev, status };
+      }
+      return prev;
+    });
+  };
+
   const addMessageToCache = (ticketId: string, message: Message) => {
     setMessagesCache((prev) => ({
       ...prev,
@@ -48,6 +62,7 @@ export function useGetMessages() {
       [ticketId]: [...(prev[ticketId] || []), message],
     }));
   };
+
   const removeOptimisticMessage = (ticketId: string, tempId: string) => {
     setMessagesCache((prev) => ({
       ...prev,
@@ -55,7 +70,7 @@ export function useGetMessages() {
     }));
   };
 
-  const messages = selectedTicket ? messagesCache[selectedTicket] || [] : [];
+  const messages = selectedTicket ? messagesCache[selectedTicket.id] || [] : [];
 
   return {
     selectedTicket,
@@ -65,5 +80,6 @@ export function useGetMessages() {
     addMessageToCache,
     addOptimisticMessage,
     removeOptimisticMessage,
+    updateTicketStatus,
   };
 }

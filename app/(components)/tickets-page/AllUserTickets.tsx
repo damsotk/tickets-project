@@ -7,8 +7,8 @@ import { formatDate } from '@/utils/format-date';
 
 interface AllUserTicketsProps {
   tickets: Ticket[] | null;
-  selectedTicket: string | null;
-  onSelectTicket: (id: string) => void;
+  selectedTicket: { id: string; status: string } | null;
+  onSelectTicket: (id: string, status: 'OPEN' | 'CLOSED') => void;
 }
 
 export default function AllUserTickets({
@@ -34,9 +34,9 @@ export default function AllUserTickets({
             <div
               key={ticket.id}
               className={`${styles.ticketItem} ${
-                selectedTicket === ticket.id ? styles.active : ''
+                selectedTicket?.id === ticket.id ? styles.active : ''
               } ${ticket.status === 'CLOSED' ? styles.closedTicket : ''}`}
-              onClick={() => onSelectTicket(ticket.id)}
+              onClick={() => onSelectTicket(ticket.id, ticket.status)}
             >
               <div className={styles.ticketInfo}>
                 <h3>{ticket.title}</h3>
