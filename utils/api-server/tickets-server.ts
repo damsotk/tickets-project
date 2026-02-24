@@ -28,6 +28,7 @@ export async function getTicketsCurrentUser(): Promise<Ticket[] | null> {
       createdAt: true,
       updatedAt: true,
       userId: true,
+      status: true,
     },
   });
 

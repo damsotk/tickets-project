@@ -7,6 +7,7 @@ export interface Ticket {
   createdAt: string;
   updatedAt: string;
   userId: string;
+  status: 'OPEN' | 'CLOSED';
 }
 
 export interface CreateTicketResponse {

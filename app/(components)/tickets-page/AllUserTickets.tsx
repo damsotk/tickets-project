@@ -33,7 +33,9 @@ export default function AllUserTickets({
           tickets.map((ticket) => (
             <div
               key={ticket.id}
-              className={`${styles.ticketItem} ${selectedTicket === ticket.id ? styles.active : ''}`}
+              className={`${styles.ticketItem} ${
+                selectedTicket === ticket.id ? styles.active : ''
+              } ${ticket.status === 'CLOSED' ? styles.closedTicket : ''}`}
               onClick={() => onSelectTicket(ticket.id)}
             >
               <div className={styles.ticketInfo}>
