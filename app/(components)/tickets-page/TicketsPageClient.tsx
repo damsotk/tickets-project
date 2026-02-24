@@ -6,6 +6,7 @@ import TicketMessanger from '@/app/(components)/tickets-page/Messanger';
 import { Ticket } from '@/types/tickets';
 import { useGetMessages } from '@/app/(hooks)/ticket-hooks/use-get-messages';
 import useUser from '@/contexts/UserContext';
+import { useUpdateTickets } from '@/app/(hooks)/ticket-hooks/use-update-tickets';
 
 interface TicketsPageClientProps {
   initialTickets: Ticket[] | null;
@@ -13,6 +14,9 @@ interface TicketsPageClientProps {
 
 export default function TicketsPageClient({ initialTickets }: TicketsPageClientProps) {
   const { translate } = useTranslation();
+  const { user } = useUser();
+  const t = translate.tickets.messenger;
+
   const {
     selectedTicket,
     messages,
@@ -23,13 +27,12 @@ export default function TicketsPageClient({ initialTickets }: TicketsPageClientP
     removeOptimisticMessage,
   } = useGetMessages();
 
-  const { user } = useUser();
-  const t = translate.tickets.messenger;
+  const { handleTicketClose, tickets } = useUpdateTickets({ initialTickets });
 
   return (
     <div className={styles.container}>
       <AllUserTickets
-        tickets={initialTickets}
+        tickets={tickets}
         selectedTicket={selectedTicket}
         onSelectTicket={handleSelectTicket}
       />
@@ -44,6 +47,7 @@ export default function TicketsPageClient({ initialTickets }: TicketsPageClientP
             onOptimisticUpdate={addOptimisticMessage}
             onOptimisticRemove={removeOptimisticMessage}
             currentUser={user}
+            handleTicketClose={handleTicketClose}
           />
         ) : (
           <div className={styles.emptyState}>

@@ -17,6 +17,7 @@ interface TicketMessangerProps {
   onOptimisticUpdate: (ticketId: string, message: Message) => void;
   onOptimisticRemove: (ticketId: string, tempId: string) => void;
   currentUser: User | null;
+  handleTicketClose: (ticketId: string) => void;
 }
 
 export default function TicketMessanger({
@@ -27,6 +28,7 @@ export default function TicketMessanger({
   onOptimisticUpdate,
   onOptimisticRemove,
   currentUser,
+  handleTicketClose,
 }: TicketMessangerProps) {
   const { translate } = useTranslation();
   const t = translate.tickets.messenger;
@@ -46,27 +48,6 @@ export default function TicketMessanger({
       onSendSuccess: scrollAfterSend,
     });
 
-  const handleTest = async () => {
-    try {
-      const response = await fetch(`/api/tickets/close-ticket/${selectedTicket}/`, {
-        method: 'PATCH',
-        credentials: 'include',
-      });
-
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || 'Failed to close ticket');
-      }
-
-      const data = await response.json();
-      console.log('Ticket closed:', data);
-
-      return data;
-    } catch (error) {
-      console.error('Error closing ticket:', error);
-    }
-  };
-
   return (
     <div className={styles.messengerWrapper}>
       <div className={styles.messengerHeader}>
@@ -74,7 +55,10 @@ export default function TicketMessanger({
           {t.header}
           {selectedTicket?.slice(0, 8)}
         </h3>
-        <button onClick={handleTest} className={styles.closeTicketBtn}>
+        <button
+          onClick={() => selectedTicket && handleTicketClose(selectedTicket)}
+          className={styles.closeTicketBtn}
+        >
           {t.closeButton}
         </button>
       </div>

@@ -14,3 +14,8 @@ export interface CreateTicketResponse {
   success: boolean;
   ticket: Ticket;
 }
+
+export interface CloseTicketResponse {
+  success: boolean;
+  ticket: Ticket;
+}

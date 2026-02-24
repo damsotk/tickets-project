@@ -1,5 +1,5 @@
 import { GetMessagesResponse, SendMessageResponse } from '@/types/message';
-import { CreateTicketResponse } from '@/types/tickets';
+import { CreateTicketResponse, CloseTicketResponse } from '@/types/tickets';
 
 export class TicketClient {
   private static async request<T>(url: string, options?: RequestInit): Promise<T> {
@@ -34,6 +34,13 @@ export class TicketClient {
     return this.request<SendMessageResponse>('/api/tickets/send-message', {
       method: 'POST',
       body: JSON.stringify({ text, ticketId }),
+    });
+  }
+
+  static async closeTicket(ticketId: string) {
+    return this.request<CloseTicketResponse>(`/api/tickets/close-ticket/${ticketId}/`, {
+      method: 'PATCH',
+      credentials: 'include',
     });
   }
 }
