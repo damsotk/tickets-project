@@ -1,6 +1,5 @@
 'use client';
 import { usePathname, useRouter } from 'next/navigation';
-import styles from './LanguageSwitcher.module.css';
 
 export default function LanguageSwitcher() {
   const router = useRouter();
@@ -15,19 +14,9 @@ export default function LanguageSwitcher() {
   const currentLocale = pathname.split('/')[1] || 'en';
 
   return (
-    <div className={styles.switcher}>
-      <button
-        onClick={() => changeLanguage('en')}
-        className={currentLocale === 'en' ? styles.active : ''}
-      >
-        EN
-      </button>
-      <button
-        onClick={() => changeLanguage('uk')}
-        className={currentLocale === 'uk' ? styles.active : ''}
-      >
-        UK
-      </button>
+    <div>
+      <button onClick={() => changeLanguage('en')}>EN</button>
+      <button onClick={() => changeLanguage('uk')}>UK</button>
     </div>
   );
 }

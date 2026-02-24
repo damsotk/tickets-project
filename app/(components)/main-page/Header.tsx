@@ -5,6 +5,7 @@ import styles from '@/app/(styles)/header.module.css';
 import { logout } from '@/app/(actions)/auth-actions';
 import { useTranslation } from '@/app/(hooks)/use-translation';
 import useUser from '@/contexts/UserContext';
+import LanguageSwitcher from '../LanguageSwitcher';
 
 export default function Header() {
   const router = useRouter();
@@ -29,6 +30,7 @@ export default function Header() {
         <h1 className={styles.title}>{t.title}</h1>
       </div>
       <div className={styles.headerRight}>
+        <LanguageSwitcher></LanguageSwitcher>
         {user ? (
           <>
             <div className={styles.chatIcon}>
