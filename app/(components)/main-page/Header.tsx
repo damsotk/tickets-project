@@ -32,8 +32,12 @@ export default function Header() {
         {user ? (
           <>
             <div className={styles.chatIcon}>
-              <div className={styles.notificationBadge}>1</div>
-              <img src="/icons/ticket-alt.png" alt={t.ticketIconAlt} />
+              {/* <div className={styles.notificationBadge}>0</div> */}
+              <img
+                onClick={() => router.push('/tickets')}
+                src="/icons/ticket-alt.png"
+                alt={t.ticketIconAlt}
+              />
             </div>
             <img
               src={user.avatar || 'https://api.dicebear.com/9.x/adventurer-neutral/svg?radius=0'}
