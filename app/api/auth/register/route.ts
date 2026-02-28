@@ -6,7 +6,6 @@ export async function POST(request: Request) {
   try {
     const { email, password, name } = await request.json();
 
-    // Validation
     if (!email || !password || !name) {
       return NextResponse.json({ error: 'Email, password and name are required' }, { status: 400 });
     }
@@ -18,7 +17,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // Check if user exists
     const existingUser = await prisma.user.findUnique({
       where: { email },
     });
@@ -27,20 +25,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'User with this email already exists' }, { status: 400 });
     }
 
-    // Hash password
     const hashedPassword = await hashPassword(password);
 
-    // Generate tokens
-    const accessToken = generateAccessToken(email);
-    const refreshToken = generateRefreshToken(email);
-
-    // Create user
     const user = await prisma.user.create({
       data: {
         email,
         password: hashedPassword,
         name,
-        refreshToken,
+        refreshToken: '',
       },
       select: {
         id: true,
@@ -52,7 +44,14 @@ export async function POST(request: Request) {
       },
     });
 
-    // Set cookies
+    const accessToken = generateAccessToken(user.id);
+    const refreshToken = generateRefreshToken(user.id);
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { refreshToken },
+    });
+
     const response = NextResponse.json(
       {
         user,
