@@ -155,7 +155,6 @@
   color: #b9bbbe;
 }
 
-/* Мобильная версия */
 @media (max-width: 768px) {
   .ticketsSection {
     width: 100%;

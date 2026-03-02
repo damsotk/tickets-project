@@ -30,7 +30,7 @@ export default function Header() {
         <h1 className={styles.title}>{t.title}</h1>
       </div>
       <div className={styles.headerRight}>
-        <LanguageSwitcher></LanguageSwitcher>
+        <LanguageSwitcher />
         {user ? (
           <>
             <div className={styles.chatIcon}>
