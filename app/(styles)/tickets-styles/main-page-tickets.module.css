@@ -1,15 +1,23 @@
 .container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
-  height: 100vh;
-  color: #dcddde;
+  background-color: #36393f;
   overflow: hidden;
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: none !important;
+  width: 100vw !important;
 }
 
 .messengerSection {
   flex: 1;
   display: flex;
   flex-direction: column;
-  position: relative;
+  background-color: #36393f;
   min-width: 0;
 }
 
@@ -19,33 +27,20 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #72767d;
   gap: 16px;
-  animation: fadeIn 0.5s ease;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  color: #b9bbbe;
+  font-size: 16px;
 }
 
 .emptyState svg {
+  color: #72767d;
   opacity: 0.5;
 }
 
 .emptyState p {
-  font-size: 16px;
-  margin: 0;
-}
-
-@media (max-width: 1024px) {
-  .container {
-    flex-direction: row;
-  }
+  font-family: 'minecraftFont', monospace;
+  color: #72767d;
+  font-size: 14px;
 }
 
 @media (max-width: 768px) {
@@ -54,13 +49,7 @@
   }
 
   .messengerSection {
-    height: 60vh;
+    flex: 1;
     min-height: 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .messengerSection {
-    height: 65vh;
   }
 }
