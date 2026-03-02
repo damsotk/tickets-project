@@ -1,4 +1,3 @@
-// app/[locale]/layout.tsx
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { getCurrentUser } from '@/utils/api-server/auth-server';
