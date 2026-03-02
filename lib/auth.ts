@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { jwtVerify } from 'jose';
 
 const JWT_SECRET = process.env.JWT_SECRET!;
 const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET!;
@@ -37,6 +38,16 @@ export function verifyAccessToken(token: string): { userId: string } | null {
 export function verifyRefreshToken(token: string): { userId: string } | null {
   try {
     return jwt.verify(token, JWT_REFRESH_SECRET) as { userId: string };
+  } catch {
+    return null;
+  }
+}
+//  Verify access token (Edge Runtime compatible)
+export async function verifyAccessTokenEdge(token: string): Promise<{ userId: string } | null> {
+  try {
+    const secret = new TextEncoder().encode(JWT_SECRET);
+    const { payload } = await jwtVerify(token, secret);
+    return payload as { userId: string };
   } catch {
     return null;
   }

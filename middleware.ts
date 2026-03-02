@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { verifyAccessTokenEdge } from './lib/auth';
 
 const locales = ['en', 'uk'];
 const defaultLocale = 'en';
@@ -23,16 +24,25 @@ function getLocale(request: NextRequest): string {
   return defaultLocale;
 }
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+  const locale = getLocale(request);
 
   const isProtectedPath = protectedPaths.some((path) => pathname.includes(path));
 
   if (isProtectedPath) {
     const token = request.cookies.get('accessToken')?.value;
+
     if (!token) {
-      const locale = getLocale(request);
       return NextResponse.redirect(new URL(`/${locale}/auth`, request.url));
+    }
+
+    const isValid = await verifyAccessTokenEdge(token);
+    if (!isValid) {
+      const response = NextResponse.redirect(new URL(`/${locale}/auth`, request.url));
+      response.cookies.delete('accessToken');
+      response.cookies.delete('refreshToken');
+      return response;
     }
   }
 
