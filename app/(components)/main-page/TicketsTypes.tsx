@@ -11,12 +11,12 @@ export default function TicketsTypes() {
   const { translate } = useTranslation();
   const { checking, handleTicketClick } = useCreateTicket({ user });
 
-  const t = translate.home.tickets.types;
+  const translated = translate.home.tickets.types;
 
   return (
     <div className={styles.cardsContainer}>
       {TICKET_TYPES.map((ticket) => {
-        const ticketTranslation = t[ticket.id as keyof typeof t];
+        const ticketTranslation = translated[ticket.id as keyof typeof translated];
 
         return (
           <div

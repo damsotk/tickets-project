@@ -17,18 +17,18 @@ export default function AllUserTickets({
   onSelectTicket,
 }: AllUserTicketsProps) {
   const { translate } = useTranslation();
-  const t = translate.tickets.allTickets;
+  const translated = translate.tickets.allTickets;
 
   return (
     <div className={styles.ticketsSection}>
       <div className={styles.ticketsHeader}>
-        <h2>{t.title}</h2>
-        <button className={styles.newTicketBtn}>{t.createButton}</button>
+        <h2>{translated.title}</h2>
+        <button className={styles.newTicketBtn}>{translated.createButton}</button>
       </div>
 
       <div className={styles.ticketsList}>
         {!tickets || tickets.length === 0 ? (
-          <p>{t.noTickets}</p>
+          <p>{translated.noTickets}</p>
         ) : (
           tickets.map((ticket) => (
             <div
@@ -43,7 +43,8 @@ export default function AllUserTickets({
                 <span className={styles.ticketDate}>{formatDate(ticket.createdAt)}</span>
               </div>
               <span className={`${styles.ticketStatus} ${styles[ticket.category]}`}>
-                {t.categories[ticket.category as keyof typeof t.categories] || ticket.category}
+                {translated.categories[ticket.category as keyof typeof translated.categories] ||
+                  ticket.category}
               </span>
             </div>
           ))

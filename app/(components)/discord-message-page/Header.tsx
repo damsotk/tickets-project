@@ -3,7 +3,7 @@ import { useTranslation } from '@/app/(hooks)/use-translation';
 
 export default function Header() {
   const { translate } = useTranslation();
-  const t = translate.discordMessage.header;
+  const translated = translate.discordMessage.header;
 
   return (
     <div className={styles.header}>
@@ -15,8 +15,8 @@ export default function Header() {
           />
         </g>
       </svg>
-      <h1 className={styles.title}>{t.title}</h1>
-      <p className={styles.subtitle}>{t.subtitle}</p>
+      <h1 className={styles.title}>{translated.title}</h1>
+      <p className={styles.subtitle}>{translated.subtitle}</p>
     </div>
   );
 }

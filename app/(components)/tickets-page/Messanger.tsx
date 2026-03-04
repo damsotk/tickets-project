@@ -36,7 +36,7 @@ export default function TicketMessanger({
   isClosing,
 }: TicketMessangerProps) {
   const { translate } = useTranslation();
-  const t = translate.tickets.messenger;
+  const translated = translate.tickets.messenger;
 
   const { containerRef, endRef, scrollAfterSend } = useAutoScroll({
     messages,
@@ -57,7 +57,7 @@ export default function TicketMessanger({
     <div className={styles.messengerWrapper}>
       <div className={styles.messengerHeader}>
         <h3>
-          {t.header}
+          {translated.header}
           {selectedTicket?.id.slice(0, 8)}
         </h3>
         <button
@@ -66,10 +66,10 @@ export default function TicketMessanger({
           disabled={selectedTicket?.status === 'CLOSED' || isClosing}
         >
           {isClosing
-            ? t.closingProcess
+            ? translated.closingProcess
             : selectedTicket?.status === 'OPEN'
-              ? t.closeButton
-              : t.ticketClosed}
+              ? translated.closeButton
+              : translated.ticketClosed}
         </button>
       </div>
 
@@ -77,7 +77,7 @@ export default function TicketMessanger({
         {isLoading ? (
           <div className={styles.loadingState}>
             <div className={styles.spinner}></div>
-            <p>{t.loading}</p>
+            <p>{translated.loading}</p>
           </div>
         ) : messages.length === 0 ? (
           <div className={styles.emptyMessages}>
@@ -90,7 +90,7 @@ export default function TicketMessanger({
                 strokeLinejoin="round"
               />
             </svg>
-            <p>{t.noMessages}</p>
+            <p>{translated.noMessages}</p>
           </div>
         ) : (
           <>
@@ -112,9 +112,9 @@ export default function TicketMessanger({
                       </strong>
                       <span className={styles.messageRole}>
                         {isCurrentUser
-                          ? t.you
+                          ? translated.you
                           : message.author.role === 'ADMIN'
-                            ? t.support
+                            ? translated.support
                             : message.author.name}
                       </span>
                     </div>
@@ -123,7 +123,7 @@ export default function TicketMessanger({
                       {isPending ? (
                         <span className={styles.sendingIndicator}>
                           <span className={styles.sendingDot}></span>
-                          {t.sending}
+                          {translated.sending}
                         </span>
                       ) : (
                         formatDate(message.createdAt)
@@ -141,7 +141,7 @@ export default function TicketMessanger({
       <div className={styles.inputContainer}>
         <input
           type="text"
-          placeholder={t.inputPlaceholder}
+          placeholder={translated.inputPlaceholder}
           className={styles.messageInput}
           disabled={isLoading || isSending}
           value={messageToSend}

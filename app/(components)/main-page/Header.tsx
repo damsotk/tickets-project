@@ -63,12 +63,12 @@ export default function Header() {
     };
   }, [isMobileMenuOpen]);
 
-  const t = translate.home.header;
+  const translated = translate.home.header;
 
   return (
     <header className={styles.header}>
       <div className={styles.headerLeft}>
-        <h1 className={styles.title}>{t.title}</h1>
+        <h1 className={styles.title}>{translated.title}</h1>
       </div>
 
       {/* Desktop Navigation */}
@@ -79,21 +79,21 @@ export default function Header() {
             <>
               <div className={styles.chatIcon} onClick={handleTicketsClick}>
                 {/* <div className={styles.notificationBadge}>0</div> */}
-                <img src="/icons/ticket-alt.png" alt={t.ticketIconAlt} />
+                <img src="/icons/ticket-alt.png" alt={translated.ticketIconAlt} />
               </div>
               <img
                 src={user.avatar || 'https://api.dicebear.com/9.x/adventurer-neutral/svg?radius=0'}
-                alt={t.userAvatarAlt}
+                alt={translated.userAvatarAlt}
                 className={styles.userAvatar}
                 title={user.name}
               />
               <button onClick={handleLogout} className={styles.logoutBtn}>
-                {t.logout}
+                {translated.logout}
               </button>
             </>
           ) : (
             <button onClick={handleLogin} className={styles.loginBtn}>
-              {t.login}
+              {translated.login}
             </button>
           )}
         </div>
@@ -115,7 +115,7 @@ export default function Header() {
         <div className={styles.mobileMenuOverlay}>
           <div className={styles.mobileMenu} ref={mobileMenuRef}>
             <div className={styles.mobileMenuHeader}>
-              <h3>{t.title}</h3>
+              <h3>{translated.title}</h3>
               <button
                 className={styles.closeButton}
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -155,7 +155,7 @@ export default function Header() {
 
                 {user && (
                   <button className={styles.mobileMenuItem} onClick={handleTicketsClick}>
-                    <img src="/icons/ticket-alt.png" alt={t.ticketIconAlt} />
+                    <img src="/icons/ticket-alt.png" alt={translated.ticketIconAlt} />
                     <span>Tickets</span>
                     {/* <span className={styles.mobileBadge}>0</span> */}
                   </button>
@@ -172,7 +172,7 @@ export default function Header() {
                         strokeLinejoin="round"
                       />
                     </svg>
-                    {t.logout}
+                    {translated.logout}
                   </button>
                 ) : (
                   <button onClick={handleLogin} className={styles.mobileLoginBtn}>
@@ -185,7 +185,7 @@ export default function Header() {
                         strokeLinejoin="round"
                       />
                     </svg>
-                    {t.login}
+                    {translated.login}
                   </button>
                 )}
               </div>

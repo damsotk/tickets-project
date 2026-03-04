@@ -14,7 +14,7 @@ export default function PresetAvatars({
   handleCustomAvatarToggle,
 }: PresetAvatarsProps) {
   const { translate } = useTranslation();
-  const t = translate.discordMessage.avatar;
+  const translated = translate.discordMessage.avatar;
 
   return (
     <>
@@ -26,12 +26,12 @@ export default function PresetAvatars({
             className={`${styles.avatarOption} ${selectedAvatarUrl === url ? styles.avatarActive : ''}`}
             onClick={() => handleAvatarSelect(url)}
           >
-            <img src={url} alt={`${t.altText} ${index + 1}`} />
+            <img src={url} alt={`${translated.altText} ${index + 1}`} />
           </button>
         ))}
       </div>
       <button type="button" className={styles.customAvatarBtn} onClick={handleCustomAvatarToggle}>
-        {t.useOwnUrl}
+        {translated.useOwnUrl}
       </button>
     </>
   );

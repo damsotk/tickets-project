@@ -32,12 +32,12 @@ export default function RegisterForm() {
       },
     );
 
-  const t = translate.auth;
+  const translated = translate.auth;
 
   return (
     <div className={styles.formCard}>
-      <h1 className={styles.title}>{t.register.title}</h1>
-      <p className={styles.subtitle}>{t.register.subtitle}</p>
+      <h1 className={styles.title}>{translated.register.title}</h1>
+      <p className={styles.subtitle}>{translated.register.subtitle}</p>
 
       {error && <div className={styles.error}>{error}</div>}
 
@@ -50,34 +50,34 @@ export default function RegisterForm() {
         noValidate
       >
         <FormField
-          label={t.fields.name}
+          label={translated.fields.name}
           type="name"
           name="name"
           value={formData.name}
           error={fieldErrors.name}
-          placeholder={t.fields.namePlaceholder}
+          placeholder={translated.fields.namePlaceholder}
           onChange={(value) => handleChange('name', value)}
           onBlur={() => handleBlur('name')}
         />
 
         <FormField
-          label={t.fields.email}
+          label={translated.fields.email}
           type="email"
           name="email"
           value={formData.email}
           error={fieldErrors.email}
-          placeholder={t.fields.emailPlaceholder}
+          placeholder={translated.fields.emailPlaceholder}
           onChange={(value) => handleChange('email', value)}
           onBlur={() => handleBlur('email')}
         />
 
         <FormField
-          label={t.fields.password}
+          label={translated.fields.password}
           type="password"
           name="password"
           value={formData.password}
           error={fieldErrors.password}
-          placeholder={t.fields.passwordPlaceholder}
+          placeholder={translated.fields.passwordPlaceholder}
           onChange={(value) => handleChange('password', value)}
           onBlur={() => handleBlur('password')}
         />
@@ -87,7 +87,7 @@ export default function RegisterForm() {
           disabled={loading}
           className={`${styles.button} ${loading ? styles['button--loading'] : ''}`}
         >
-          {loading ? t.register.buttonLoading : t.register.button}
+          {loading ? translated.register.buttonLoading : translated.register.button}
         </button>
       </form>
     </div>

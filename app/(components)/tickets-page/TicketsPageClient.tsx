@@ -15,7 +15,7 @@ interface TicketsPageClientProps {
 export default function TicketsPageClient({ initialTickets }: TicketsPageClientProps) {
   const { translate } = useTranslation();
   const { user } = useUser();
-  const t = translate.tickets.messenger;
+  const translated = translate.tickets.messenger;
 
   const {
     selectedTicket,
@@ -65,7 +65,7 @@ export default function TicketsPageClient({ initialTickets }: TicketsPageClientP
                 strokeLinejoin="round"
               />
             </svg>
-            <p>{t.emptyState}</p>
+            <p>{translated.emptyState}</p>
           </div>
         )}
       </div>

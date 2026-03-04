@@ -31,12 +31,12 @@ export default function LoginForm() {
       },
     );
 
-  const t = translate.auth;
+  const translated = translate.auth;
 
   return (
     <div className={styles.formCard}>
-      <h1 className={styles.title}>{t.login.title}</h1>
-      <p className={styles.subtitle}>{t.login.subtitle}</p>
+      <h1 className={styles.title}>{translated.login.title}</h1>
+      <p className={styles.subtitle}>{translated.login.subtitle}</p>
 
       {error && <div className={styles.error}>{error}</div>}
 
@@ -45,23 +45,23 @@ export default function LoginForm() {
         noValidate
       >
         <FormField
-          label={t.fields.email}
+          label={translated.fields.email}
           type="email"
           name="email"
           value={formData.email}
           error={fieldErrors.email}
-          placeholder={t.fields.emailPlaceholder}
+          placeholder={translated.fields.emailPlaceholder}
           onChange={(value) => handleChange('email', value)}
           onBlur={() => handleBlur('email')}
         />
 
         <FormField
-          label={t.fields.password}
+          label={translated.fields.password}
           type="password"
           name="password"
           value={formData.password}
           error={fieldErrors.password}
-          placeholder={t.fields.passwordPlaceholder}
+          placeholder={translated.fields.passwordPlaceholder}
           onChange={(value) => handleChange('password', value)}
           onBlur={() => handleBlur('password')}
         />
@@ -71,7 +71,7 @@ export default function LoginForm() {
           disabled={loading}
           className={`${styles.button} ${loading ? styles['button--loading'] : ''}`}
         >
-          {loading ? t.login.buttonLoading : t.login.button}
+          {loading ? translated.login.buttonLoading : translated.login.button}
         </button>
       </form>
     </div>

@@ -13,7 +13,7 @@ export default function CustomAvatar({
   handleCustomAvatarToggle,
 }: CustomAvatarProps) {
   const { translate } = useTranslation();
-  const t = translate.discordMessage.avatar;
+  const translated = translate.discordMessage.avatar;
 
   return (
     <>
@@ -22,15 +22,15 @@ export default function CustomAvatar({
         className={styles.input}
         value={customAvatarUrl}
         onChange={(e) => onCustomAvatarChange(e.target.value)}
-        placeholder={t.customPlaceholder}
+        placeholder={translated.customPlaceholder}
       />
       {customAvatarUrl && (
         <div className={styles.avatarPreview}>
-          <img src={customAvatarUrl} alt={t.customPreview} />
+          <img src={customAvatarUrl} alt={translated.customPreview} />
         </div>
       )}
       <button type="button" className={styles.customAvatarBtn} onClick={handleCustomAvatarToggle}>
-        {t.chooseFromPreset}
+        {translated.chooseFromPreset}
       </button>
     </>
   );

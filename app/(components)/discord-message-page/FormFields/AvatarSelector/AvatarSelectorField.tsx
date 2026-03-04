@@ -21,11 +21,11 @@ export default function AvatarSelectorField({
   handleCustomAvatarToggle,
 }: AvatarSelectorProps) {
   const { translate } = useTranslation();
-  const t = translate.discordMessage.fields;
+  const translated = translate.discordMessage.fields;
 
   return (
     <div className={styles.inputGroup}>
-      <label className={styles.label}>{t.avatar}</label>
+      <label className={styles.label}>{translated.avatar}</label>
 
       {!useCustomAvatar ? (
         <PresetAvatars

@@ -20,7 +20,7 @@ export default function DiscordMessage() {
     useCustomAvatar,
   } = useDsMsgForm();
 
-  const t = translate.discordMessage;
+  const translated = translate.discordMessage;
 
   return (
     <div className={styles.container}>
@@ -30,11 +30,11 @@ export default function DiscordMessage() {
 
           <form onSubmit={handleSubmit} className={styles.form}>
             <InputField
-              label={t.fields.username}
+              label={translated.fields.username}
               id="username"
               value={formData.username}
               onChangeUsername={(value) => handleChange('username', value)}
-              placeholder={t.fields.usernamePlaceholder}
+              placeholder={translated.fields.usernamePlaceholder}
               maxLength={80}
               required
             />
@@ -48,10 +48,10 @@ export default function DiscordMessage() {
             />
             <TextareaField
               id="message"
-              label={t.fields.message}
+              label={translated.fields.message}
               value={formData.message}
               onChangeMessage={(e) => handleChange('message', e)}
-              placeholder={t.fields.messagePlaceholder}
+              placeholder={translated.fields.messagePlaceholder}
               required={true}
               maxLength={2000}
               rows={6}
@@ -59,12 +59,14 @@ export default function DiscordMessage() {
             />
 
             <button type="submit" className={styles.button} disabled={loading}>
-              {loading ? t.button.sending : t.button.send}
+              {loading ? translated.button.sending : translated.button.send}
             </button>
 
-            {status === 'success' && <div className={styles.success}>{t.status.success}</div>}
+            {status === 'success' && (
+              <div className={styles.success}>{translated.status.success}</div>
+            )}
 
-            {status === 'error' && <div className={styles.error}>{t.status.error}</div>}
+            {status === 'error' && <div className={styles.error}>{translated.status.error}</div>}
           </form>
         </div>
       </div>
