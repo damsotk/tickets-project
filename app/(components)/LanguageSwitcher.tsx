@@ -1,73 +1,17 @@
 'use client';
-import { usePathname, useRouter } from 'next/navigation';
-import { useState, useRef, useEffect } from 'react';
 import styles from '@/app/(styles)/header.module.css';
-
-interface Language {
-  code: string;
-  name: string;
-  flag: string;
-}
-
-const languages: Language[] = [
-  { code: 'en', name: 'English', flag: '🇬🇧' },
-  { code: 'uk', name: 'Українська', flag: '🇺🇦' },
-];
+import { useLanguageSwitcher } from '../(hooks)/use-language-switcher';
+import { AVAILABLE_LANGUAGES } from '@/constants/available_translations_language';
 
 export default function LanguageSwitcher() {
-  const router = useRouter();
-  const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  const currentLocale = pathname.split('/')[1] || 'en';
-  const currentLanguage = languages.find((lang) => lang.code === currentLocale) || languages[0];
-
-  const changeLanguage = (newLocale: string) => {
-    const pathnameWithoutLocale = pathname.replace(/^\/[a-z]{2}/, '');
-    const newPath = `/${newLocale}${pathnameWithoutLocale || ''}`;
-    document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000`;
-    router.push(newPath);
-    setIsOpen(false);
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isOpen]);
-
-  useEffect(() => {
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setIsOpen(false);
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape);
-    };
-  }, [isOpen]);
+  const { isOpen, dropdownRef, currentLocale, currentLanguage, changeLanguage, toggleDropdown } =
+    useLanguageSwitcher();
 
   return (
     <div className={styles.languageSwitcher} ref={dropdownRef}>
       <button
         className={styles.triggerButton}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => toggleDropdown()}
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
@@ -95,7 +39,7 @@ export default function LanguageSwitcher() {
             <span>Select Language</span>
           </div>
           <div className={styles.languageList}>
-            {languages.map((language) => (
+            {AVAILABLE_LANGUAGES.map((language) => (
               <button
                 key={language.code}
                 className={`${styles.languageItem} ${
