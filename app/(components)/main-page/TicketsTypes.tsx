@@ -1,6 +1,6 @@
 'use client';
 
-import { useCreateTicket } from '@/app/(hooks)/ticket-hooks/use-create-ticket';
+import { useCreateTicket } from '@/app/(hooks)/tickets-page-hooks/use-create-ticket';
 import { useTranslation } from '@/app/(hooks)/use-translation';
 import styles from '@/app/(styles)/tickets-type-cards.module.css';
 import useUser from '@/contexts/UserContext';

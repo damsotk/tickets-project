@@ -2,8 +2,8 @@
 import styles from '@/app/(styles)/auth-styles/auth-styles.module.css';
 import { useRouter } from 'next/navigation';
 import { AuthClient } from '@/utils/api-client/auth-client';
-import { useAuthFormHandlers } from '@/app/(hooks)/auth-hooks/use-auth-form-handlers';
-import { useValidateAuthForm } from '@/app/(hooks)/auth-hooks/use-validate-auth-form';
+import { useAuthFormHandlers } from '@/app/(hooks)/auth-page-hooks/use-auth-form-handlers';
+import { useValidateAuthForm } from '@/app/(hooks)/auth-page-hooks/use-validate-auth-form';
 import { useTranslation } from '@/app/(hooks)/use-translation';
 import { FormField } from './FormField';
 import { User } from '@/types/user';

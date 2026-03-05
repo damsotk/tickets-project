@@ -1,69 +1,21 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import styles from '@/app/(styles)/header.module.css';
-import { logout } from '@/app/(actions)/auth-actions';
-import { useTranslation } from '@/app/(hooks)/use-translation';
-import useUser from '@/contexts/UserContext';
 import LanguageSwitcher from '../LanguageSwitcher';
-import { useState, useEffect, useRef } from 'react';
+import { useHeader } from '@/app/(hooks)/main-page-hooks/useHeader';
 
 export default function Header() {
-  const router = useRouter();
-  const { user, setUser } = useUser();
-  const { translate, locale } = useTranslation();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const mobileMenuRef = useRef<HTMLDivElement>(null);
-
-  const handleLogout = async () => {
-    await logout();
-    setUser(null);
-    setIsMobileMenuOpen(false);
-    router.refresh();
-  };
-
-  const handleLogin = () => {
-    setIsMobileMenuOpen(false);
-    router.push(`/${locale}/auth`);
-  };
-
-  const handleTicketsClick = () => {
-    setIsMobileMenuOpen(false);
-    router.push(`/${locale}/tickets`);
-  };
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
-        setIsMobileMenuOpen(false);
-      }
-    };
-
-    if (isMobileMenuOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isMobileMenuOpen]);
-
-  useEffect(() => {
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setIsMobileMenuOpen(false);
-      }
-    };
-
-    if (isMobileMenuOpen) {
-      document.addEventListener('keydown', handleEscape);
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape);
-    };
-  }, [isMobileMenuOpen]);
-
-  const translated = translate.home.header;
+  const {
+    user,
+    translated,
+    isMobileMenuOpen,
+    mobileMenuRef,
+    handleLogout,
+    handleLogin,
+    handleTicketsClick,
+    toggleMobileMenu,
+    closeMobileMenu,
+  } = useHeader();
 
   return (
     <header className={styles.header}>
@@ -101,7 +53,7 @@ export default function Header() {
         {/* Mobile Menu Button */}
         <button
           className={`${styles.mobileMenuButton} ${isMobileMenuOpen ? styles.open : ''}`}
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          onClick={() => toggleMobileMenu()}
           aria-label="Toggle menu"
         >
           <span></span>
@@ -118,7 +70,7 @@ export default function Header() {
               <h3>{translated.title}</h3>
               <button
                 className={styles.closeButton}
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => closeMobileMenu()}
                 aria-label="Close menu"
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">

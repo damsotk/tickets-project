@@ -1,7 +1,7 @@
 'use client';
 
-import { useAutoScroll } from '@/app/(hooks)/ticket-hooks/use-auto-scroll';
-import { useSendMessage } from '@/app/(hooks)/ticket-hooks/use-send-message';
+import { useAutoScroll } from '@/app/(hooks)/tickets-page-hooks/use-auto-scroll';
+import { useSendMessage } from '@/app/(hooks)/tickets-page-hooks/use-send-message';
 import { useTranslation } from '@/app/(hooks)/use-translation';
 import styles from '@/app/(styles)/tickets-styles/messanger.module.css';
 import { Message } from '@/types/message';

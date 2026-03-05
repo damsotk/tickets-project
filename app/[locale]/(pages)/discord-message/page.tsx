@@ -1,6 +1,6 @@
 'use client';
 import styles from '@/app/(styles)/discord-message-styles/discord-message.module.css';
-import { useDsMsgForm } from '@/app/(hooks)/discord-message-hooks/use-ds-msg-form';
+import { useDsMsgForm } from '@/app/(hooks)/discord-message-page-hooks/use-ds-msg-form';
 import { useTranslation } from '@/app/(hooks)/use-translation';
 import Header from '@/app/(components)/discord-message-page/Header';
 import InputField from '@/app/(components)/discord-message-page/FormFields/InputField';

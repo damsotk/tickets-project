@@ -4,9 +4,9 @@ import { useTranslation } from '@/app/(hooks)/use-translation';
 import AllUserTickets from '@/app/(components)/tickets-page/AllUserTickets';
 import TicketMessanger from '@/app/(components)/tickets-page/Messanger';
 import { Ticket } from '@/types/tickets';
-import { useGetMessages } from '@/app/(hooks)/ticket-hooks/use-get-messages';
+import { useGetMessages } from '@/app/(hooks)/tickets-page-hooks/use-get-messages';
 import useUser from '@/contexts/UserContext';
-import { useUpdateTickets } from '@/app/(hooks)/ticket-hooks/use-update-tickets';
+import { useUpdateTickets } from '@/app/(hooks)/tickets-page-hooks/use-update-tickets';
 
 interface TicketsPageClientProps {
   initialTickets: Ticket[] | null;
