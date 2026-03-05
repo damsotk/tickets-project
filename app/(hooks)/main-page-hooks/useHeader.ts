@@ -11,29 +11,29 @@ export function useHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
-  const handleLogout = async () => {
-    await logout();
-    setUser(null);
-    setIsMobileMenuOpen(false);
-    router.refresh();
-  };
-
-  const handleLogin = () => {
-    setIsMobileMenuOpen(false);
-    router.push(`/${locale}/auth`);
-  };
-
-  const handleTicketsClick = () => {
-    setIsMobileMenuOpen(false);
-    router.push(`/${locale}/tickets`);
-  };
-
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    setUser(null);
+    closeMobileMenu();
+    router.refresh();
+  };
+
+  const handleLogin = () => {
+    closeMobileMenu();
+    router.push(`/${locale}/auth`);
+  };
+
+  const handleTicketsClick = () => {
+    closeMobileMenu();
+    router.push(`/${locale}/tickets`);
   };
 
   useEffect(() => {

@@ -12,16 +12,16 @@ export function useLanguageSwitcher() {
   const currentLanguage =
     AVAILABLE_LANGUAGES.find((lang) => lang.code === currentLocale) || AVAILABLE_LANGUAGES[0];
 
+  const toggleDropdown = () => setIsOpen(!isOpen);
+  const closeDropdown = () => setIsOpen(false);
+
   const changeLanguage = (newLocale: string) => {
     const pathnameWithoutLocale = pathname.replace(/^\/[a-z]{2}/, '');
     const newPath = `/${newLocale}${pathnameWithoutLocale || ''}`;
     document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000`;
     router.push(newPath);
-    setIsOpen(false);
+    closeDropdown();
   };
-
-  const toggleDropdown = () => setIsOpen(!isOpen);
-  const closeDropdown = () => setIsOpen(false);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
