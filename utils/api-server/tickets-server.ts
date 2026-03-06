@@ -75,7 +75,6 @@ export async function getAllTicketsForAdmin(): Promise<Ticket[] | null> {
         select: {
           id: true,
           name: true,
-          email: true,
         },
       },
     },
