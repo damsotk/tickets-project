@@ -1,8 +1,8 @@
 'use client';
 import styles from '@/app/(styles)/auth-styles/auth-styles.module.css';
 import { useState } from 'react';
-import RegisterForm from '@/app/(components)/auth/RegisterForm';
-import LoginForm from '@/app/(components)/auth/LoginForm';
+import RegisterForm from '@/app/(components)/auth-page/RegisterForm';
+import LoginForm from '@/app/(components)/auth-page/LoginForm';
 
 type AuthMode = 'login' | 'register';
 

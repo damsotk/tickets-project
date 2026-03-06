@@ -115,7 +115,7 @@ export default function TicketMessanger({
                           ? translated.you
                           : message.author.role === 'ADMIN'
                             ? translated.support
-                            : message.author.name}
+                            : message.author.role}
                       </span>
                     </div>
                     <p>{message.text}</p>

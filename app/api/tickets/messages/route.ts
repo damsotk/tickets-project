@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
     if (!ticket) {
       return NextResponse.json({ error: 'Ticket not found' }, { status: 404 });
     }
-    if (ticket.userId !== payload.userId) {
+    if (ticket.userId !== payload.userId && payload.role !== 'ADMIN') {
       return NextResponse.json({ error: 'Access denied' }, { status: 403 });
     }
 
