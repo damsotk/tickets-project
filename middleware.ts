@@ -25,12 +25,20 @@ function getLocale(request: NextRequest): string {
   return defaultLocale;
 }
 
+function matchesProtectedPath(pathname: string, protectedPaths: string[]): boolean {
+  const pathnameWithoutLocale = pathname.replace(/^\/(en|uk)/, '');
+
+  return protectedPaths.some((path) => {
+    return pathnameWithoutLocale === path || pathnameWithoutLocale.startsWith(`${path}/`);
+  });
+}
+
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const locale = getLocale(request);
 
-  const isUserProtectedPath = protectedUserPaths.some((path) => pathname.includes(path));
-  const isAdminProtectedPath = protectedAdminPaths.some((path) => pathname.includes(path));
+  const isUserProtectedPath = matchesProtectedPath(pathname, protectedUserPaths);
+  const isAdminProtectedPath = matchesProtectedPath(pathname, protectedAdminPaths);
 
   if (isUserProtectedPath || isAdminProtectedPath) {
     const token = request.cookies.get('accessToken')?.value;
