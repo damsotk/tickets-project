@@ -22,6 +22,23 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid message' }, { status: 400 });
     }
 
+    const ticket = await prisma.ticket.findUnique({
+      where: { id: ticketId },
+      select: { userId: true, status: true },
+    });
+
+    if (!ticket) {
+      return NextResponse.json({ error: 'Ticket not found' }, { status: 404 });
+    }
+
+    if (ticket.userId !== payload.userId && payload.role !== 'ADMIN') {
+      return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+    }
+
+    if (ticket.status === 'CLOSED') {
+      return NextResponse.json({ error: 'Cannot send message to closed ticket' }, { status: 400 });
+    }
+
     const user = await prisma.user.findUnique({
       where: { id: payload.userId },
       select: {
