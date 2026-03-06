@@ -3,6 +3,9 @@ import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
+const MAX_MESSAGE_LENGTH = 5000;
+const MIN_MESSAGE_LENGTH = 1;
+
 export async function POST(request: NextRequest) {
   try {
     const cookieStore = await cookies();
@@ -17,9 +20,24 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
+
     const { text, ticketId } = body;
-    if (!text || !ticketId) {
-      return NextResponse.json({ error: 'Invalid message' }, { status: 400 });
+
+    if (!text || typeof text !== 'string') {
+      return NextResponse.json({ error: 'Text must be a string' }, { status: 400 });
+    }
+
+    const trimmedText = text.trim();
+
+    if (trimmedText.length < MIN_MESSAGE_LENGTH) {
+      return NextResponse.json({ error: 'Message cannot be empty' }, { status: 400 });
+    }
+
+    if (trimmedText.length > MAX_MESSAGE_LENGTH) {
+      return NextResponse.json(
+        { error: `Message too long (max ${MAX_MESSAGE_LENGTH} characters)` },
+        { status: 400 },
+      );
     }
 
     const ticket = await prisma.ticket.findUnique({
