@@ -4,7 +4,8 @@ import { verifyAccessTokenEdge } from './lib/auth';
 const locales = ['en', 'uk'];
 const defaultLocale = 'en';
 
-const protectedPaths = ['/discord-message', '/tickets'];
+const protectedUserPaths = ['/discord-message', '/tickets'];
+const protectedAdminPaths = ['/admin/all-tickets'];
 
 function getLocale(request: NextRequest): string {
   const localeCookie = request.cookies.get('NEXT_LOCALE')?.value;
@@ -28,21 +29,26 @@ export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const locale = getLocale(request);
 
-  const isProtectedPath = protectedPaths.some((path) => pathname.includes(path));
+  const isUserProtectedPath = protectedUserPaths.some((path) => pathname.includes(path));
+  const isAdminProtectedPath = protectedAdminPaths.some((path) => pathname.includes(path));
 
-  if (isProtectedPath) {
+  if (isUserProtectedPath || isAdminProtectedPath) {
     const token = request.cookies.get('accessToken')?.value;
 
     if (!token) {
       return NextResponse.redirect(new URL(`/${locale}/auth`, request.url));
     }
+    const payload = await verifyAccessTokenEdge(token);
 
-    const isValid = await verifyAccessTokenEdge(token);
-    if (!isValid) {
+    if (!payload) {
       const response = NextResponse.redirect(new URL(`/${locale}/auth`, request.url));
       response.cookies.delete('accessToken');
       response.cookies.delete('refreshToken');
       return response;
+    }
+
+    if (isAdminProtectedPath && payload.role !== 'ADMIN') {
+      return NextResponse.redirect(new URL(`/${locale}/`, request.url));
     }
   }
 

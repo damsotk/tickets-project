@@ -44,8 +44,8 @@ export async function POST(request: Request) {
       },
     });
 
-    const accessToken = generateAccessToken(user.id);
-    const refreshToken = generateRefreshToken(user.id);
+    const accessToken = generateAccessToken(user.id, user.role);
+    const refreshToken = generateRefreshToken(user.id, user.role);
 
     await prisma.user.update({
       where: { id: user.id },
