@@ -27,6 +27,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid ticket category' }, { status: 400 });
     }
 
+    const categoryEnum = category.toUpperCase() as 'COMPLAINT' | 'LORE' | 'TECH';
+
     const user = await prisma.user.findUnique({
       where: { id: payload.userId },
       select: {
@@ -39,7 +41,40 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    const categoryEnum = category.toUpperCase() as 'COMPLAINT' | 'LORE' | 'TECH';
+    const existingTicket = await prisma.ticket.findFirst({
+      where: {
+        userId: user.id,
+        category: categoryEnum,
+        status: {
+          not: 'CLOSED',
+        },
+      },
+      select: {
+        id: true,
+        title: true,
+        category: true,
+        status: true,
+        createdAt: true,
+      },
+    });
+
+    if (existingTicket) {
+      return NextResponse.json(
+        {
+          error: 'Ticket already exists',
+          message: `You already have an open ticket in the "${category}" category. Please close it before creating a new one.`,
+          existingTicket: {
+            id: existingTicket.id,
+            title: existingTicket.title,
+            category: existingTicket.category,
+            status: existingTicket.status,
+            createdAt: existingTicket.createdAt,
+          },
+        },
+        { status: 409 },
+      );
+    }
+
     const ticket = await prisma.ticket.create({
       data: {
         title: `${user.name} ticket`,
