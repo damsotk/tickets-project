@@ -1,9 +1,6 @@
 .container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: absolute;
+  inset: 0;
   display: flex;
   background-color: #36393f;
   overflow: hidden;
@@ -11,6 +8,8 @@
   padding: 0 !important;
   max-width: none !important;
   width: 100vw !important;
+  height: 100vh;
+  height: 100dvh;
 }
 
 .messengerSection {
