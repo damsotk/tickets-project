@@ -1,8 +1,9 @@
 import { useParams } from 'next/navigation';
 import en from '@/locales/en';
 import uk from '@/locales/uk';
+import by from '@/locales/by';
 
-const translations = { en, uk };
+const translations = { en, uk, by };
 type Locale = keyof typeof translations;
 
 export function useTranslation() {
