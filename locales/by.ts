@@ -51,7 +51,7 @@ const by = {
   },
   home: {
     header: {
-      title: 'Квіткі Элліум',
+      title: 'Квіткі Элліум ЎЎЎЎЎЎ ўўўўў',
       logout: 'Выйсці',
       login: 'Увайсці',
       userAvatarAlt: 'Аватар карыстальніка',
