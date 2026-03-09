@@ -1,6 +1,7 @@
 import { Ticket } from '@/types/tickets';
 import { TicketClient } from '@/utils/api-client/ticket-client';
 import { useState } from 'react';
+import { toast } from 'sonner';
 
 interface TicketsPageClientProps {
   initialTickets: Ticket[] | null;
@@ -33,7 +34,7 @@ export function useUpdateTickets({ initialTickets, onTicketStatusChange }: UseUp
       await TicketClient.closeTicket(ticketId);
       onTicketStatusChange?.(ticketId, 'CLOSED');
     } catch (error) {
-      console.error('Failed to close ticket: ', error);
+      toast.error(`'Failed to close ticket: ${error}`);
       setTickets(previousTickets);
     } finally {
       setIsClosing(false);

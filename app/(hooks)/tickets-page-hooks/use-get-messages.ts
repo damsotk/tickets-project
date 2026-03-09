@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Message } from '@/types/message';
 import { TicketClient } from '@/utils/api-client/ticket-client';
+import { toast } from 'sonner';
 
 interface SelectedTicket {
   id: string;
@@ -29,7 +30,7 @@ export function useGetMessages() {
         [ticketId]: response.messages,
       }));
     } catch (error) {
-      console.error('Failed to load messages:', error);
+      toast.error(`Failed to load messages: ${error}`);
 
       setMessagesCache((prev) => ({
         ...prev,

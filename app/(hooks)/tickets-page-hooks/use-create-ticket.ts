@@ -5,6 +5,11 @@ import { useRouter } from 'next/navigation';
 import { TicketClient } from '@/utils/api-client/ticket-client';
 import { CreateTicketResponse } from '@/types/tickets';
 import type { User } from '@/types/user';
+import { toast } from 'sonner';
+
+interface UseCreateTicketProps {
+  user: User | null;
+}
 
 interface UseCreateTicketProps {
   user: User | null;
@@ -18,7 +23,7 @@ export function useCreateTicket({ user }: UseCreateTicketProps) {
     if (checking) return;
 
     if (!user) {
-      alert('Please login to submit a ticket');
+      toast.error('Please login to submit a ticket');
       router.push('/auth');
       return;
     }
@@ -26,10 +31,11 @@ export function useCreateTicket({ user }: UseCreateTicketProps) {
     setChecking(true);
     try {
       const response: CreateTicketResponse = await TicketClient.createTicket(type);
+      toast.success('Ticket created successfully!');
       router.push('/tickets');
-      console.log('Ticket created: ', response.ticket);
     } catch (error) {
-      console.error(error);
+      const message = error instanceof Error ? error.message : 'Failed to create ticket';
+      toast.error(message);
     } finally {
       setChecking(false);
     }

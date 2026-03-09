@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { TicketClient } from '@/utils/api-client/ticket-client';
 import { Message } from '@/types/message';
 import { User } from '@/types/user';
+import { toast } from 'sonner';
 
 interface UseSendMessageProps {
   selectedTicket: string | null;
@@ -25,17 +26,17 @@ export function useSendMessage({
 
   const handleSendMessage = async () => {
     if (!selectedTicket) {
-      console.error('No ticket selected');
+      toast.error('No ticket selected');
       return;
     }
 
     if (!messageToSend.trim()) {
-      console.error('Message is empty');
+      toast.error('Message is empty');
       return;
     }
 
     if (!currentUser?.id) {
-      console.error('User not authenticated');
+      toast.error('User not authenticated');
       return;
     }
 
@@ -62,15 +63,13 @@ export function useSendMessage({
     onSendSuccess?.();
     try {
       const response = await TicketClient.sendMessage(textToSend, selectedTicket);
-      console.log('Message sent:', response);
-
       onOptimisticRemove(selectedTicket, tempId);
 
       if (response.message) {
         addMessageToCache(selectedTicket, response.message);
       }
     } catch (error) {
-      console.error('Failed to send message:', error);
+      toast.error(`${error}`);
 
       onOptimisticRemove(selectedTicket, tempId);
 

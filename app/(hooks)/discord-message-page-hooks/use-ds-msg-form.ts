@@ -1,5 +1,6 @@
 import { useState, FormEvent } from 'react';
 import { PRESET_AVATARS } from '@/constants/urls_default_icons_ds';
+import { toast } from 'sonner';
 
 interface FormData {
   username: string;
@@ -87,7 +88,7 @@ export function useDsMsgForm() {
         setStatus('error');
       }
     } catch (error) {
-      console.error('Error:', error);
+      toast.error(`Error: ${error}`);
       setStatus('error');
     } finally {
       setLoading(false);

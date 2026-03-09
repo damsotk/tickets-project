@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { getCurrentUser } from '@/utils/api-server/auth-server';
 import { UserProvider } from '@/contexts/UserContext';
+import { Toaster } from 'sonner';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,6 +25,7 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <body className={inter.className}>
         <UserProvider initialUser={user}>{children}</UserProvider>
+        <Toaster theme="dark" richColors position="top-right" />
       </body>
     </html>
   );
