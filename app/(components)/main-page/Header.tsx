@@ -23,7 +23,6 @@ export default function Header() {
         <h1 className={styles.title}>{translated.title}</h1>
       </div>
 
-      {/* Desktop Navigation */}
       <div className={styles.headerRight}>
         <div className={styles.desktopNav}>
           <LanguageSwitcher />
@@ -50,7 +49,6 @@ export default function Header() {
           )}
         </div>
 
-        {/* Mobile Menu Button */}
         <button
           className={`${styles.mobileMenuButton} ${isMobileMenuOpen ? styles.open : ''}`}
           onClick={() => toggleMobileMenu()}
@@ -62,7 +60,6 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className={styles.mobileMenuOverlay}>
           <div className={styles.mobileMenu} ref={mobileMenuRef}>

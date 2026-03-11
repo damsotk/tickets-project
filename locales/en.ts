@@ -57,27 +57,9 @@ const en = {
       userAvatarAlt: 'User avatar',
       ticketIconAlt: 'Tickets',
     },
-    staff: {
-      title: 'Staff online:',
-      admins: 'Admins',
-      lore: 'Lore',
-      tech: 'Tech',
-    },
-    tickets: {
-      types: {
-        complaint: {
-          title: 'Complaint',
-          description: 'Write a complaint against a player',
-        },
-        lore: {
-          title: 'Lore',
-          description: 'Ask a question about server lore',
-        },
-        tech: {
-          title: 'Tech',
-          description: 'Ask a question about the technical side of the server',
-        },
-      },
+    heroSection: {
+      title: 'Welcome to Ellium',
+      subtitle: 'Minecraft Roleplay Server',
     },
   },
   tickets: {
@@ -103,6 +85,28 @@ const en = {
       sending: 'Sending...',
       ticketClosed: 'Ticket Closed',
       closingProcess: 'Closing...',
+    },
+    createTicketsTypes: {
+      types: {
+        complaint: {
+          title: 'Complaint',
+          description: 'Write a complaint against a player',
+        },
+        lore: {
+          title: 'Lore',
+          description: 'Ask a question about server lore',
+        },
+        tech: {
+          title: 'Tech',
+          description: 'Ask a question about the technical side of the server',
+        },
+      },
+    },
+    staff: {
+      title: 'Staff online:',
+      admins: 'Admins',
+      lore: 'Lore',
+      tech: 'Tech',
     },
   },
 };

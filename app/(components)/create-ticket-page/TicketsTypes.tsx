@@ -11,7 +11,7 @@ export default function TicketsTypes() {
   const { translate } = useTranslation();
   const { checking, handleTicketClick } = useCreateTicket({ user });
 
-  const translated = translate.home.tickets.types;
+  const translated = translate.tickets.createTicketsTypes.types;
 
   return (
     <div className={styles.cardsContainer}>

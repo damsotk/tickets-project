@@ -5,7 +5,7 @@ import { useTranslation } from '@/app/(hooks)/use-translation';
 
 export default function StaffList() {
   const { translate } = useTranslation();
-  const translated = translate.home.staff;
+  const translated = translate.tickets.staff;
 
   return (
     <div className={styles.staffContainer}>

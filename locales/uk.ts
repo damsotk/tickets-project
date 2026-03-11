@@ -57,27 +57,9 @@ const uk = {
       userAvatarAlt: 'Аватар користувача',
       ticketIconAlt: 'Тікети',
     },
-    staff: {
-      title: 'Персонал онлайн:',
-      admins: 'Адміни',
-      lore: 'Лор',
-      tech: 'Тех',
-    },
-    tickets: {
-      types: {
-        complaint: {
-          title: 'Скарга',
-          description: 'Написати скаргу на гравця',
-        },
-        lore: {
-          title: 'Лор',
-          description: 'Поставити питання про лор сервера',
-        },
-        tech: {
-          title: 'Тех',
-          description: 'Поставити питання про технічну частину сервера',
-        },
-      },
+    heroSection: {
+      title: 'Welcome to Ellium',
+      subtitle: 'Minecraft Roleplay Server',
     },
   },
   tickets: {
@@ -103,6 +85,28 @@ const uk = {
       sending: 'Надсилання...',
       ticketClosed: 'Тікет закритий',
       closingProcess: 'Закриття...',
+    },
+    createTicketsTypes: {
+      types: {
+        complaint: {
+          title: 'Скарга',
+          description: 'Написати скаргу на гравця',
+        },
+        lore: {
+          title: 'Лор',
+          description: 'Поставити питання про лор сервера',
+        },
+        tech: {
+          title: 'Тех',
+          description: 'Поставити питання про технічну частину сервера',
+        },
+      },
+    },
+    staff: {
+      title: 'Персонал онлайн:',
+      admins: 'Адміни',
+      lore: 'Лор',
+      tech: 'Тех',
     },
   },
 };

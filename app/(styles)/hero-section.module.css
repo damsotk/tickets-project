@@ -1,0 +1,102 @@
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px 0 10px;
+}
+
+.iconWrapper {
+  width: 180px;
+  height: 180px;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(59, 130, 246, 0.2));
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.icon {
+  font-size: 2.5rem;
+}
+
+.title {
+  font-family: var(--font-minecraft), monospace;
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  color: #9ca3af;
+  font-size: 1.1rem;
+  margin: 0 0 28px 0;
+}
+
+.ipButton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 24px;
+  background: #1a1a2e;
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ipButton:hover {
+  background: #1f1f35;
+  border-color: rgba(34, 197, 94, 0.7);
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.15);
+}
+
+.ip {
+  font-family: var(--font-minecraft), monospace;
+  font-size: 1.25rem;
+  color: #22c55e;
+  letter-spacing: 0.5px;
+}
+
+.copyIcon {
+  width: 20px;
+  height: 20px;
+  color: #9ca3af;
+  transition: color 0.2s ease;
+}
+
+.ipButton:hover .copyIcon {
+  color: #22c55e;
+}
+
+.copyText {
+  font-size: 0.9rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .iconWrapper {
+    width: 64px;
+    height: 64px;
+  }
+
+  .icon {
+    font-size: 2rem;
+  }
+
+  .ipButton {
+    padding: 12px 20px;
+  }
+
+  .ip {
+    font-size: 1.1rem;
+  }
+}
