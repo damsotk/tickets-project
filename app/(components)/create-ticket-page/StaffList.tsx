@@ -1,6 +1,6 @@
 'use client';
 
-import styles from '@/app/(styles)/staff-list.module.css';
+import styles from '@/app/(styles)/create-ticket-styles/staff-list.module.css';
 import { useTranslation } from '@/app/(hooks)/use-translation';
 
 export default function StaffList() {
