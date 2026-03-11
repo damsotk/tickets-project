@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import { getCurrentUser } from '@/utils/api-server/auth-server';
 import { UserProvider } from '@/contexts/UserContext';
 import { Toaster } from 'sonner';
+import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -26,6 +27,7 @@ export default async function LocaleLayout({
       <body className={inter.className}>
         <UserProvider initialUser={user}>{children}</UserProvider>
         <Toaster theme="dark" richColors position="top-right" />
+        <Analytics />
       </body>
     </html>
   );
