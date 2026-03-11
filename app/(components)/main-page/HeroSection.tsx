@@ -5,7 +5,7 @@ import Image from 'next/image';
 import styles from '@/app/(styles)/hero-section.module.css';
 import { useTranslation } from '@/app/(hooks)/use-translation';
 
-const SERVER_IP = 'play.ellium.net';
+const SERVER_IP = 'mc.chroniclesofelium.com';
 
 export default function HeroSection() {
   const [copied, setCopied] = useState(false);
