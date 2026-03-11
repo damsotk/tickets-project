@@ -1,55 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import styles from '@/app/(styles)/online-stats.module.css';
-
-interface OnlineData {
-  players: string[];
-  count: number;
-}
+import { getInitials } from '@/utils/get-initials';
+import { getRandomColorByText } from '@/utils/get-random-color-by-text';
+import { useServerOnline } from '@/app/(hooks)/main-page-hooks/useServerOnline';
 
 export default function OnlineStats() {
-  const [data, setData] = useState<OnlineData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    const fetchOnline = async () => {
-      try {
-        const res = await fetch('/api/server-online');
-        if (!res.ok) throw new Error('Failed to fetch');
-        const json: OnlineData = await res.json();
-        setData(json);
-        setError(false);
-      } catch (e) {
-        console.error('Failed to fetch online:', e);
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchOnline();
-  }, []);
-
-  const getInitials = (name: string) => {
-    return name.charAt(0).toUpperCase();
-  };
-
-  const getAvatarColor = (name: string) => {
-    const colors = [
-      '#ef4444',
-      '#f97316',
-      '#eab308',
-      '#22c55e',
-      '#14b8a6',
-      '#3b82f6',
-      '#8b5cf6',
-      '#ec4899',
-    ];
-    const index = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    return colors[index % colors.length];
-  };
+  const { data, loading, error } = useServerOnline();
 
   if (loading) {
     return (
@@ -94,7 +51,7 @@ export default function OnlineStats() {
               <div key={playerName} className={styles.playerCard}>
                 <div
                   className={styles.playerAvatar}
-                  style={{ backgroundColor: getAvatarColor(playerName) }}
+                  style={{ backgroundColor: getRandomColorByText(playerName) }}
                 >
                   {getInitials(playerName)}
                 </div>

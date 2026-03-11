@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import styles from '@/app/(styles)/main-page.module.css';
+import styles from '@/app/(styles)/create-ticket-styles/main-page.module.css';
 import TicketsTypes from '@/app/(components)/create-ticket-page/TicketsTypes';
 import StaffList from '@/app/(components)/create-ticket-page/StaffList';
 import Header from '@/app/(components)/main-page/Header';

@@ -1,27 +1,16 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
 import styles from '@/app/(styles)/hero-section.module.css';
 import { useTranslation } from '@/app/(hooks)/use-translation';
-
-const SERVER_IP = 'mc.chroniclesofelium.com';
+import { useCopyToClipboard } from '@/app/(hooks)/use-copy-to-clipboard';
+import { SERVER_IP } from '@/constants/main_page';
 
 export default function HeroSection() {
-  const [copied, setCopied] = useState(false);
+  const { copied, handleCopy } = useCopyToClipboard();
+
   const { translate } = useTranslation();
-
   const tranlated = translate.home.heroSection;
-
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(SERVER_IP);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy:', err);
-    }
-  };
 
   return (
     <section className={styles.hero}>
@@ -37,7 +26,7 @@ export default function HeroSection() {
       <h1 className={styles.title}>{tranlated.title}</h1>
       <p className={styles.subtitle}>{tranlated.subtitle}</p>
 
-      <button className={styles.ipButton} onClick={handleCopy}>
+      <button className={styles.ipButton} onClick={() => handleCopy(SERVER_IP)}>
         <span className={styles.ip}>{SERVER_IP}</span>
         <span className={styles.copyIcon}>
           {copied ? (

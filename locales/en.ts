@@ -61,6 +61,23 @@ const en = {
       title: 'Welcome to Ellium',
       subtitle: 'Minecraft Roleplay Server',
     },
+    navigatesButtons: {
+      tickets: {
+        title: 'Tickets',
+        description:
+          'Contact the server administration. File a complaint against a player, ask a lore question, get technical support, or resolve other issues.',
+      },
+      articles: {
+        title: 'Articles',
+        description:
+          'Explore the world of Ellium. Here you`ll find articles about server lore, guides for newcomers, update news, and important announcements.',
+      },
+      rumors: {
+        title: 'Rumors',
+        description:
+          'Send an anonymous rumor to the server. Your message will appear in the game without identifying the author—intrigue, gossip, and secrets.',
+      },
+    },
   },
   tickets: {
     allTickets: {
