@@ -16,7 +16,7 @@ export default function OnlineStats() {
   useEffect(() => {
     const fetchOnline = async () => {
       try {
-        const res = await fetch('http://213.152.43.20:25960/api/online');
+        const res = await fetch('/api/server-online');
         if (!res.ok) throw new Error('Failed to fetch');
         const json: OnlineData = await res.json();
         setData(json);
