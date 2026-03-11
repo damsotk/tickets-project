@@ -3,6 +3,7 @@ import styles from '@/app/(styles)/main-page.module.css';
 import Header from '@/app/(components)/main-page/Header';
 import HeroSection from '../(components)/main-page/HeroSection';
 import OnlineStats from '../(components)/main-page/OnlineStats';
+import NavigationGrid from '../(components)/main-page/NavigationGrid';
 
 export const metadata: Metadata = {
   title: 'Ellium',
@@ -15,6 +16,7 @@ export default function ElliumMain() {
       <Header />
       <main className={styles.main}>
         <HeroSection />
+        <NavigationGrid />
         <OnlineStats />
       </main>
     </div>

@@ -30,8 +30,6 @@ export default function OnlineStats() {
     };
 
     fetchOnline();
-    const interval = setInterval(fetchOnline, 30000);
-    return () => clearInterval(interval);
   }, []);
 
   const getInitials = (name: string) => {
