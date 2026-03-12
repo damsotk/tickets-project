@@ -9,6 +9,8 @@ const protectedAdminPaths = ['/admin/all-tickets'];
 
 function getLocale(request: NextRequest): string {
   const localeCookie = request.cookies.get('NEXT_LOCALE')?.value;
+  console.log(localeCookie);
+
   if (localeCookie && locales.includes(localeCookie)) {
     return localeCookie;
   }
@@ -26,7 +28,7 @@ function getLocale(request: NextRequest): string {
 }
 
 function matchesProtectedPath(pathname: string, protectedPaths: string[]): boolean {
-  const pathnameWithoutLocale = pathname.replace(/^\/(en|uk)/, '');
+  const pathnameWithoutLocale = pathname.replace(/^\/(en|uk|by|ru)/, '');
 
   return protectedPaths.some((path) => {
     return pathnameWithoutLocale === path || pathnameWithoutLocale.startsWith(`${path}/`);
