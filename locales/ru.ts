@@ -51,7 +51,7 @@ const ru = {
   },
   home: {
     header: {
-      title: 'Ellium тикеты',
+      title: 'Ellium',
       logout: 'Выйти',
       login: 'Войти',
       userAvatarAlt: 'Аватар пользователя',

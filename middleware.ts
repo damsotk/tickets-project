@@ -9,8 +9,6 @@ const protectedAdminPaths = ['/admin/all-tickets'];
 
 function getLocale(request: NextRequest): string {
   const localeCookie = request.cookies.get('NEXT_LOCALE')?.value;
-  console.log(localeCookie);
-
   if (localeCookie && locales.includes(localeCookie)) {
     return localeCookie;
   }

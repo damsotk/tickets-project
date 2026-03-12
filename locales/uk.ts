@@ -51,7 +51,7 @@ const uk = {
   },
   home: {
     header: {
-      title: 'Ellium тікети',
+      title: 'Ellium',
       logout: 'Вийти',
       login: 'Увійти',
       userAvatarAlt: 'Аватар користувача',

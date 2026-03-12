@@ -51,7 +51,7 @@ const en = {
   },
   home: {
     header: {
-      title: 'Ellium tickets',
+      title: 'Ellium',
       logout: 'Logout',
       login: 'Login',
       userAvatarAlt: 'User avatar',

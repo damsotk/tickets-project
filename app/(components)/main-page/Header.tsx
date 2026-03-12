@@ -3,6 +3,8 @@
 import styles from '@/app/(styles)/header.module.css';
 import LanguageSwitcher from '../LanguageSwitcher';
 import { useHeader } from '@/app/(hooks)/main-page-hooks/useHeader';
+import { useRouter, useParams } from 'next/navigation';
+import Image from 'next/image';
 
 export default function Header() {
   const {
@@ -17,10 +19,28 @@ export default function Header() {
     closeMobileMenu,
   } = useHeader();
 
+  const router = useRouter();
+  const params = useParams();
+  const locale = (params?.locale as string) || 'en';
+
+  const handleTitleClick = () => {
+    router.push(`/${locale}`);
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.headerLeft}>
-        <h1 className={styles.title}>{translated.title}</h1>
+        <Image
+          src="/ellium-tickets-images/logo.png"
+          alt="Ellium Logo"
+          width={54}
+          height={54}
+          className={styles.iconWrapper}
+          priority
+        />
+        <h1 className={styles.title} onClick={handleTitleClick} style={{ cursor: 'pointer' }}>
+          {translated.title}
+        </h1>
       </div>
 
       <div className={styles.headerRight}>
