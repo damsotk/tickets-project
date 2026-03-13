@@ -1,0 +1,160 @@
+.carouselContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 80px;
+  padding: 20px 0;
+}
+
+.navButton {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-size: 3rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'minecraftFont', monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navButton:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.categoryCard {
+  background: linear-gradient(135deg, rgba(42, 42, 50, 0.9) 0%, rgba(26, 26, 30, 0.9) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 48px;
+  min-width: 600px;
+  max-width: 800px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.categoryCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.cardContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+}
+
+.textSection {
+  flex: 1;
+}
+
+.categoryTitle {
+  font-family: 'minecraftFont', monospace;
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.categoryDescription {
+  font-family: 'minecraftFont', monospace;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.iconSection {
+  flex-shrink: 0;
+}
+
+.categoryIcon {
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+  transition: transform 0.3s ease;
+}
+
+.categoryCard:hover .categoryIcon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.indicators {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.indicator.active {
+  background: #ffffff;
+  width: 32px;
+  border-radius: 6px;
+}
+
+@media (max-width: 968px) {
+  .categoryCard {
+    min-width: 500px;
+    padding: 36px;
+  }
+
+  .categoryTitle {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .carouselContainer {
+    gap: 12px;
+    margin-bottom: 60px;
+  }
+
+  .navButton {
+    width: 48px;
+    height: 48px;
+    font-size: 2rem;
+  }
+
+  .categoryCard {
+    min-width: auto;
+    padding: 24px;
+  }
+
+  .cardContent {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .categoryTitle {
+    font-size: 1.75rem;
+  }
+
+  .categoryDescription {
+    font-size: 1rem;
+  }
+
+  .categoryIcon {
+    width: 80px;
+    height: 80px;
+  }
+}
