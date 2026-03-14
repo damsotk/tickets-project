@@ -1,0 +1,28 @@
+.articlesContainer {
+  margin-top: 40px;
+}
+
+.sectionTitle {
+  font-family: 'minecraftFont', monospace;
+  font-size: 1.8rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 32px;
+  padding-left: 8px;
+  border-left: 4px solid rgba(255, 255, 255, 0.3);
+}
+
+.articlesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .articlesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+}
