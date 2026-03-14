@@ -21,6 +21,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .navButton:hover {
@@ -34,10 +35,12 @@
   border: 2px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   padding: 48px;
-  min-width: 600px;
-  max-width: 800px;
+  width: 700px;
+  min-height: 280px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .categoryCard:hover {
@@ -51,10 +54,15 @@
   justify-content: space-between;
   align-items: center;
   gap: 32px;
+  flex: 1;
 }
 
 .textSection {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
 }
 
 .categoryTitle {
@@ -63,6 +71,7 @@
   color: #ffffff;
   margin: 0 0 16px 0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  word-wrap: break-word;
 }
 
 .categoryDescription {
@@ -71,10 +80,15 @@
   color: rgba(255, 255, 255, 0.7);
   margin: 0;
   line-height: 1.6;
+  word-wrap: break-word;
 }
 
 .iconSection {
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  width: 120px;
+  justify-content: center;
 }
 
 .categoryIcon {
@@ -114,7 +128,8 @@
 
 @media (max-width: 968px) {
   .categoryCard {
-    min-width: 500px;
+    width: 550px;
+    min-height: 260px;
     padding: 36px;
   }
 
@@ -136,7 +151,9 @@
   }
 
   .categoryCard {
-    min-width: auto;
+    width: calc(100vw - 120px);
+    max-width: 400px;
+    min-height: 350px;
     padding: 24px;
   }
 
@@ -145,12 +162,20 @@
     text-align: center;
   }
 
+  .textSection {
+    width: 100%;
+  }
+
   .categoryTitle {
     font-size: 1.75rem;
   }
 
   .categoryDescription {
     font-size: 1rem;
+  }
+
+  .iconSection {
+    width: 80px;
   }
 
   .categoryIcon {
