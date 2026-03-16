@@ -1,9 +1,9 @@
 'use client';
 import styles from '@/app/(styles)/articles-styles/articles-page.module.css';
-import LoreCategoryCarousel from '@/app/(components)/article-page/LoreCategoryCarousel';
+import LoreCategoryCarousel from '@/app/(components)/article-page/main-page/LoreCategoryCarousel';
 import { useState } from 'react';
 import Header from '@/app/(components)/main-page/Header';
-import ArticlesList from '@/app/(components)/article-page/ArticlesList';
+import ArticlesList from '@/app/(components)/article-page/main-page/ArticlesList';
 
 export default function ArticlesPage() {
   const [currentCategory, setCurrentCategory] = useState<'characters' | 'faith' | 'cities'>(
