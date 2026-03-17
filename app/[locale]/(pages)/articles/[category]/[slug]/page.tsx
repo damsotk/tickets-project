@@ -1,30 +1,33 @@
 import { getAllArticleSlugs, getArticleBySlug } from '@/lib/articles';
 import styles from '@/app/(styles)/articles-styles/single-article-page.module.css';
 import { notFound } from 'next/navigation';
-import Header from '@/app/(components)/main-page/Header';
 import ArticleContent from '@/app/(components)/article-page/single-article/ArticleContent';
 import ArticleInfobox from '@/app/(components)/article-page/single-article/ArticleInfobox';
+import Header from '@/app/(components)/main-page/Header';
 
 interface ArticlePageProps {
-  params: Promise<{
+  params: {
     locale: string;
     category: 'characters' | 'faith' | 'cities';
     slug: string;
-  }>;
+  };
 }
 
 export async function generateStaticParams() {
   const slugs = getAllArticleSlugs();
+  const locales = ['en', 'uk', 'by', 'ru'];
 
-  return slugs.map((item) => ({
-    category: item.category,
-    slug: item.slug,
-  }));
+  return slugs.flatMap((item) =>
+    locales.map((locale) => ({
+      locale,
+      category: item.category,
+      slug: item.slug,
+    })),
+  );
 }
 
 export async function generateMetadata({ params }: ArticlePageProps) {
-  const resolvedParams = await params;
-  const article = await getArticleBySlug(resolvedParams.category, resolvedParams.slug);
+  const article = await getArticleBySlug(params.category, params.slug);
 
   if (!article) {
     return {
@@ -39,8 +42,7 @@ export async function generateMetadata({ params }: ArticlePageProps) {
 }
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
-  const resolvedParams = await params;
-  const article = await getArticleBySlug(resolvedParams.category, resolvedParams.slug);
+  const article = await getArticleBySlug(params.category, params.slug);
 
   if (!article) {
     notFound();
@@ -49,10 +51,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   return (
     <div className={styles.pageWrapper}>
       <Header />
-
       <div className={styles.articleLayout}>
         <ArticleContent article={article} />
-
         <ArticleInfobox article={article} />
       </div>
     </div>
