@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { remark } from 'remark';
+import html from 'remark-html';
 
 export interface ArticleMetadata {
   slug: string;
@@ -71,4 +73,33 @@ export function getAllArticleSlugs(): { category: string; slug: string }[] {
   });
 
   return slugs;
+}
+
+export async function getArticleBySlug(
+  category: 'characters' | 'faith' | 'cities',
+  slug: string,
+): Promise<Article | null> {
+  try {
+    const fullPath = path.join(contentDirectory, category, `${slug}.md`);
+    const fileContents = fs.readFileSync(fullPath, 'utf-8');
+
+    const { data, content } = matter(fileContents);
+    const processedContent = await remark().use(html, { sanitize: false }).process(content);
+
+    const contentHtml = processedContent.toString();
+
+    return {
+      slug,
+      title: data.title,
+      preview: data.preview,
+      date: data.date,
+      author: data.author,
+      category: data.category || category,
+      infobox: data.infobox,
+      content: contentHtml,
+    };
+  } catch (error) {
+    console.error(`Error loading article ${category}/${slug}:`, error);
+    return null;
+  }
 }
