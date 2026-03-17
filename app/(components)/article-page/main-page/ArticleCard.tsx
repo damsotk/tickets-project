@@ -1,22 +1,15 @@
 'use client';
 import Link from 'next/link';
 import styles from '@/app/(styles)/articles-styles/article-card.module.css';
+import { ArticleMetadata } from '@/lib/articles';
 
-interface Article {
-  id: string;
-  title: string;
-  preview: string;
-  date: string;
-  author: string;
+interface ArticleCardProps {
+  article: ArticleMetadata;
 }
 
-interface Props {
-  article: Article;
-}
-
-export default function ArticleCard({ article }: Props) {
+export default function ArticleCard({ article }: ArticleCardProps) {
   return (
-    <Link href={`/articles/${article.id}`} className={styles.card}>
+    <Link href={`/articles/${article.category}/${article.slug}`} className={styles.card}>
       <div className={styles.cardHeader}>
         <h4 className={styles.articleTitle}>{article.title}</h4>
       </div>
