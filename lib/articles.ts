@@ -103,3 +103,15 @@ export async function getArticleBySlug(
     return null;
   }
 }
+
+export function getAllArticles() {
+  const categories: ('characters' | 'faith' | 'cities')[] = ['characters', 'faith', 'cities'];
+  const allArticles: ArticleMetadata[] = [];
+
+  categories.forEach((category) => {
+    const articles = getArticlesByCategory(category);
+    allArticles.push(...articles);
+  });
+
+  return allArticles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+}
