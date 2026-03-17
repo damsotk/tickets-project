@@ -6,10 +6,11 @@ import ArticleContent from '@/app/(components)/article-page/single-article/Artic
 import ArticleInfobox from '@/app/(components)/article-page/single-article/ArticleInfobox';
 
 interface ArticlePageProps {
-  params: {
+  params: Promise<{
+    locale: string;
     category: 'characters' | 'faith' | 'cities';
     slug: string;
-  };
+  }>;
 }
 
 export async function generateStaticParams() {
@@ -22,7 +23,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: ArticlePageProps) {
-  const article = await getArticleBySlug(params.category, params.slug);
+  const resolvedParams = await params;
+  const article = await getArticleBySlug(resolvedParams.category, resolvedParams.slug);
 
   if (!article) {
     return {
@@ -37,7 +39,8 @@ export async function generateMetadata({ params }: ArticlePageProps) {
 }
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
-  const article = await getArticleBySlug(params.category, params.slug);
+  const resolvedParams = await params;
+  const article = await getArticleBySlug(resolvedParams.category, resolvedParams.slug);
 
   if (!article) {
     notFound();

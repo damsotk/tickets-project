@@ -1,5 +1,6 @@
 import { Article } from '@/lib/articles';
 import styles from '@/app/(styles)/articles-styles/article-content.module.css';
+import Link from 'next/link';
 
 interface ArticleContentProps {
   article: Article;
@@ -9,7 +10,7 @@ export default function ArticleContent({ article }: ArticleContentProps) {
   return (
     <article className={styles.contentWrapper}>
       <nav className={styles.breadcrumbs}>
-        <a href="/articles">Library</a>
+        <Link href="/articles">Library</Link>
         <span className={styles.separator}>›</span>
         <span className={styles.category}>{article.category}</span>
       </nav>
