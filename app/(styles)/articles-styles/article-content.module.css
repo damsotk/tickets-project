@@ -1,0 +1,148 @@
+.contentWrapper {
+  background: rgba(20, 20, 20, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2.5rem;
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 1.5rem;
+}
+
+.breadcrumbs a {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.breadcrumbs a:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.separator {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.category {
+  text-transform: capitalize;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.metadata {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.author {
+  color: rgba(255, 215, 0, 0.8);
+}
+
+.date {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.content {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.content h1 {
+  font-size: 2rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.content h2 {
+  font-size: 1.6rem;
+  margin-top: 2rem;
+  margin-bottom: 0.8rem;
+  color: #ffffff;
+  border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+  padding-bottom: 0.5rem;
+}
+
+.content h3 {
+  font-size: 1.3rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.6rem;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.content p {
+  margin-bottom: 1.2rem;
+}
+
+.content strong {
+  color: rgba(255, 215, 0, 0.9);
+  font-weight: 600;
+}
+
+.content em {
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+}
+
+.content ul,
+.content ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.content li {
+  margin-bottom: 0.5rem;
+}
+
+.content a {
+  color: rgba(100, 150, 255, 0.9);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(100, 150, 255, 0.3);
+  transition: all 0.2s;
+}
+
+.content a:hover {
+  color: rgba(150, 200, 255, 1);
+  border-bottom-color: rgba(150, 200, 255, 0.8);
+}
+
+.content blockquote {
+  border-left: 4px solid rgba(255, 215, 0, 0.5);
+  padding-left: 1.5rem;
+  margin: 1.5rem 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .contentWrapper {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .content {
+    font-size: 1rem;
+  }
+}
