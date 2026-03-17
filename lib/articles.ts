@@ -51,3 +51,24 @@ export function getArticlesByCategory(
 
   return articles;
 }
+
+export function getAllArticleSlugs(): { category: string; slug: string }[] {
+  const categories = ['characters', 'faith', 'cities'];
+  const slugs: { category: string; slug: string }[] = [];
+
+  categories.forEach((category) => {
+    const categoryPath = path.join(contentDirectory, category);
+
+    if (fs.existsSync(categoryPath)) {
+      const fileNames = fs.readdirSync(categoryPath);
+
+      fileNames
+        .filter((fileName) => fileName.endsWith('.md'))
+        .forEach((fileName) => {
+          slugs.push({ category, slug: fileName.replace(/\.md$/, '') });
+        });
+    }
+  });
+
+  return slugs;
+}
