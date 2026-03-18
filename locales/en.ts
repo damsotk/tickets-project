@@ -126,6 +126,24 @@ const en = {
       tech: 'Tech',
     },
   },
+  articles: {
+    mainPage: {
+      titleOfCategory: {
+        characters: 'Characters',
+        faith: 'Faith',
+        cities: 'Cities',
+      },
+      descOfCategory: {
+        characters: 'Legends and heroes of our world',
+        faith: 'Gods, cults and sacred rituals',
+        cities: 'Great settlements and their history',
+      },
+    },
+    articlesList: {
+      title: 'Articles of page',
+      noArticles: 'No articles found in this category.',
+    },
+  },
 };
 
 export default en;

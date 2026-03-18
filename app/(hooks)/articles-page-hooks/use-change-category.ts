@@ -12,8 +12,6 @@ interface UseCategoryNavigationReturn {
   currentIndex: number;
   activeCategory: {
     id: CategoryId;
-    title: string;
-    description: string;
     iconPath: string;
   };
   handleNext: () => void;
@@ -28,7 +26,11 @@ export function useCategoryNavigation({
   const currentIndex = ARTICLE_CATEGORIES.findIndex((cat) => cat.id === currentCategory);
 
   const activeCategory = useMemo(() => {
-    return ARTICLE_CATEGORIES[currentIndex] || ARTICLE_CATEGORIES[0];
+    const category = ARTICLE_CATEGORIES[currentIndex] || ARTICLE_CATEGORIES[0];
+    return {
+      id: category.id,
+      iconPath: category.iconPath,
+    };
   }, [currentIndex]);
 
   const handleNext = () => {

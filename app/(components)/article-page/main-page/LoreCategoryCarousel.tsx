@@ -3,6 +3,7 @@ import Image from 'next/image';
 import styles from '@/app/(styles)/articles-styles/lore-category-carousel.module.css';
 import { ARTICLE_CATEGORIES } from '@/constants/available_article_categories';
 import { useCategoryNavigation } from '@/app/(hooks)/articles-page-hooks/use-change-category';
+import { useTranslation } from '@/app/(hooks)/use-translation';
 
 interface LoreCategoryCarouselProps {
   currentCategory: 'characters' | 'faith' | 'cities';
@@ -13,10 +14,13 @@ export default function LoreCategoryCarousel({
   currentCategory,
   onCurrentCategoryChange,
 }: LoreCategoryCarouselProps) {
+  const { translate } = useTranslation();
   const { currentIndex, activeCategory, handleNext, handlePrev } = useCategoryNavigation({
     currentCategory,
     onCategoryChange: onCurrentCategoryChange,
   });
+
+  const translated = translate.articles.mainPage;
 
   return (
     <div className={styles.carouselContainer}>
@@ -27,14 +31,18 @@ export default function LoreCategoryCarousel({
       <div className={styles.categoryCard}>
         <div className={styles.cardContent}>
           <div className={styles.textSection}>
-            <h2 className={styles.categoryTitle}>{activeCategory.title}</h2>
-            <p className={styles.categoryDescription}>{activeCategory.description}</p>
+            <h2 className={styles.categoryTitle}>
+              {translated.titleOfCategory[activeCategory.id]}
+            </h2>
+            <p className={styles.categoryDescription}>
+              {translated.descOfCategory[activeCategory.id]}
+            </p>
           </div>
 
           <div className={styles.iconSection}>
             <Image
               src={activeCategory.iconPath}
-              alt={activeCategory.title}
+              alt={translated.titleOfCategory[activeCategory.id]}
               width={120}
               height={120}
               className={styles.categoryIcon}

@@ -125,6 +125,24 @@ const ru = {
       tech: 'Тех',
     },
   },
+  articles: {
+    mainPage: {
+      titleOfCategory: {
+        characters: 'Персонажи',
+        faith: 'Вера',
+        cities: 'Города',
+      },
+      descOfCategory: {
+        characters: 'Легенды и герои нашего мира',
+        faith: 'Боги, культы и священные ритуалы',
+        cities: 'Великие поселения и их история',
+      },
+    },
+    articlesList: {
+      title: 'Статьи страницы',
+      noArticles: 'Статьи в этой категории не найдены.',
+    },
+  },
 };
 
 export default ru;

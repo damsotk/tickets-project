@@ -125,6 +125,24 @@ const uk = {
       tech: 'Тех',
     },
   },
+  articles: {
+    mainPage: {
+      titleOfCategory: {
+        characters: 'Персонажі',
+        faith: 'Віра',
+        cities: 'Міста',
+      },
+      descOfCategory: {
+        characters: 'Легенди та герої нашого світу',
+        faith: 'Боги, культи та священні ритуали',
+        cities: 'Великі поселення та їхня історія',
+      },
+    },
+    articlesList: {
+      title: 'Статті сторінки',
+      noArticles: 'Статті в цій категорії не знайдені.',
+    },
+  },
 };
 
 export default uk;

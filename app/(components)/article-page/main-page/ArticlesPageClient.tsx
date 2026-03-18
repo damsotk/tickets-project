@@ -25,8 +25,6 @@ export default function ArticlesPageClient({ initialArticles }: ArticlesPageClie
     <div className={styles.pageWrapper}>
       <Header />
       <div className={styles.contentContainer}>
-        <h1 className={styles.pageTitle}>Library of Knowledge</h1>
-
         <LoreCategoryCarousel
           currentCategory={currentCategory}
           onCurrentCategoryChange={setCurrentCategory}

@@ -1,6 +1,6 @@
 ---
 title: 'Кодекс'
-preview: 'Кодекс важен.'
+preview: 'Кодекс важен'
 date: '01.10.2026'
 author: 'damsot'
 category: 'faith'
