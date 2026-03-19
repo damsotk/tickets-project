@@ -34,9 +34,9 @@
 }
 
 .infoItem {
-  display: grid;
-  grid-template-columns: 110px 1fr;
-  gap: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
   padding: 0.65rem 0;
   border-bottom: 1px solid #3f4147;
 }
@@ -63,18 +63,14 @@
 @media (max-width: 1024px) {
   .infobox {
     position: static;
-    max-width: 500px;
+    width: 100%;
     margin: 0 auto;
+    order: -1;
   }
 }
 
 @media (max-width: 768px) {
   .imageWrapper {
-    height: 250px;
-  }
-
-  .infoItem {
-    grid-template-columns: 1fr;
-    gap: 0.25rem;
+    height: 450px;
   }
 }
