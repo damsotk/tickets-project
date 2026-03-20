@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <div style={{ color: 'whitesmoke' }} className={styles.pageWrapper}>
+    <div className={styles.pageWrapper}>
       <Header />
       <div className={styles.contentContainer}>
         <h1 className={styles.pageTitle}>Privacy Policy</h1>
@@ -21,9 +21,9 @@ export default function PrivacyPolicyPage() {
 
             <h2>Introduction</h2>
             <p>
-              Welcome to Ellium Site. We respect your privacy and are committed to protecting your
-              personal data. This privacy policy explains how we use cookies and collect data when
-              you use our service.
+              Welcome to Ellium Tickets. We respect your privacy and are committed to protecting
+              your personal data. This privacy policy explains how we use cookies and collect data
+              when you use our service.
             </p>
 
             <h2>What Data We Collect</h2>
@@ -133,7 +133,7 @@ export default function PrivacyPolicyPage() {
             <p>We use the following third-party services:</p>
             <ul>
               <li>
-                <strong>Vercel Analytics:</strong> Privacy-focused analytics that doesn't use
+                <strong>Vercel Analytics:</strong> Privacy-focused analytics that doesn&apos;t use
                 cookies or collect personal data.{' '}
                 <a
                   href="https://vercel.com/docs/analytics/privacy-policy"
@@ -148,8 +148,8 @@ export default function PrivacyPolicyPage() {
             <h2>Changes to This Policy</h2>
             <p>
               We may update this privacy policy from time to time. We will notify you of any
-              significant changes by posting the new policy on this page and updating the "Last
-              updated" date.
+              significant changes by posting the new policy on this page and updating the &quot;Last
+              updated&quot; date.
             </p>
 
             <h2>Contact Us</h2>
