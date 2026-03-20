@@ -1,0 +1,159 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 9998;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.banner {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px);
+  max-width: 520px;
+  background: #2b2d31;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translate(-50%, 20px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+.content {
+  padding: 1.5rem;
+}
+
+.header {
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #f2f3f5;
+  margin: 0;
+}
+
+.description {
+  font-size: 0.95rem;
+  color: #dbdee1;
+  line-height: 1.5;
+  margin: 0 0 0.75rem 0;
+}
+
+.note {
+  font-size: 0.85rem;
+  color: #b5bac1;
+  line-height: 1.4;
+  margin: 0 0 1.25rem 0;
+}
+
+.link {
+  color: #00a8fc;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.link:hover {
+  color: #0091d9;
+  text-decoration: underline;
+}
+
+.buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.acceptButton,
+.declineButton {
+  flex: 1;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.acceptButton {
+  background: #5865f2;
+  color: #ffffff;
+}
+
+.acceptButton:hover {
+  background: #4752c4;
+}
+
+.acceptButton:active {
+  transform: scale(0.98);
+}
+
+.declineButton {
+  background: transparent;
+  color: #f2f3f5;
+  border: 1px solid #4e5058;
+}
+
+.declineButton:hover {
+  background: #3f4147;
+  border-color: #6d6f78;
+}
+
+.declineButton:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 768px) {
+  .banner {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: none;
+    transform: none;
+    border-radius: 8px 8px 0 0;
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .content {
+    padding: 1.25rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+}
