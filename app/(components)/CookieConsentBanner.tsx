@@ -1,5 +1,5 @@
 'use client';
-
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import styles from '@/app/(styles)/cookie-consent-banner.module.css';
@@ -45,9 +45,9 @@ export default function CookieConsentBanner() {
           <p className={styles.note}>
             Essential cookies for authentication, language preferences, and messaging are always
             active.{' '}
-            <a href="/privacy-policy" className={styles.link}>
+            <Link href="/privacy-policy" className={styles.link}>
               Learn more
-            </a>
+            </Link>
           </p>
           <div className={styles.buttons}>
             <button onClick={handleAccept} className={styles.acceptButton}>
