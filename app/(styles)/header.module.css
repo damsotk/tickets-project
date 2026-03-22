@@ -171,12 +171,13 @@
   height: 3px;
   background-color: #ffffff;
   border-radius: 2px;
-  transition: all 0.3s ease;
+  transition: all 0.1s ease;
   transform-origin: center;
 }
 
 .mobileMenuButton.open span:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
+  opacity: 0;
 }
 
 .mobileMenuButton.open span:nth-child(2) {
@@ -185,6 +186,7 @@
 
 .mobileMenuButton.open span:nth-child(3) {
   transform: translateY(-8px) rotate(-45deg);
+  opacity: 0;
 }
 
 .mobileMenuOverlay {
