@@ -46,6 +46,6 @@ export class MinecraftInfoClient {
       page: (params.page || 1).toString(),
     });
 
-    return this.request<LogsResponse>(`/api/logs?${searchParams.toString()}`);
+    return this.request<LogsResponse>(`/api/get-server-logs?${searchParams.toString()}`);
   }
 }
