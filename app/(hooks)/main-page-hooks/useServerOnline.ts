@@ -5,6 +5,7 @@ interface OnlineData {
   players: string[];
   count: number;
 }
+
 export function useServerOnline() {
   const [data, setData] = useState<OnlineData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -25,7 +26,7 @@ export function useServerOnline() {
     };
 
     fetchOnline();
-  });
+  }, []);
 
   return { data, loading, error };
 }
