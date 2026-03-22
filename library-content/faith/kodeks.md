@@ -6,7 +6,7 @@ author: 'damsot'
 category: 'faith'
 
 infobox:
-  # image: '/articles/faith/kodeks.png'
+  image: '/articles/faith/kodeks.png'
   Тип: 'Культ'
   Основан: '10.12.2025'
   Основатели: 'Дамсот, Незнакомец, Иохан'

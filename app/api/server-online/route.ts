@@ -5,7 +5,7 @@ export const revalidate = 0;
 
 export async function GET() {
   try {
-    const res = await fetch('http://213.152.43.20:25960/api/online', {
+    const res = await fetch(`${process.env.SERVER_API_FOR_ONLINE}`, {
       cache: 'no-store',
       headers: {
         'Content-Type': 'application/json',

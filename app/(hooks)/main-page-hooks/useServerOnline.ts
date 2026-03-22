@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { MinecraftInfoClient } from '@/utils/api-client/minecraft-info-client';
 
 interface OnlineData {
   players: string[];
@@ -7,26 +8,24 @@ interface OnlineData {
 export function useServerOnline() {
   const [data, setData] = useState<OnlineData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchOnline = async () => {
       try {
-        const res = await fetch('/api/server-online');
-        if (!res.ok) throw new Error('Failed to fetch');
-        const json: OnlineData = await res.json();
+        const json = await MinecraftInfoClient.getOnlinePlayers();
         setData(json);
-        setError(false);
+        setError(null);
       } catch (e) {
         console.error('Failed to fetch online:', e);
-        setError(true);
+        setError(e instanceof Error ? e.message : 'Failed to fetch online players');
       } finally {
         setLoading(false);
       }
     };
 
     fetchOnline();
-  }, []);
+  });
 
   return { data, loading, error };
 }
