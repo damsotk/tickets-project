@@ -7,9 +7,9 @@ const REQUEST_TIMEOUT = 10000;
 
 interface MinecraftLogsResponse {
   page: number;
+  totalPages: number;
+  totalLogs: number;
   count: number;
-  totalCount?: number;
-  totalPages?: number;
   logs: string[];
 }
 
@@ -43,6 +43,7 @@ export async function GET(request: NextRequest) {
 
     const searchParams = request.nextUrl.searchParams;
     const player = searchParams.get('player');
+    const category = searchParams.get('category');
     const page = searchParams.get('page') || '1';
 
     const pageNum = parseInt(page, 10);
@@ -50,13 +51,18 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid page number' }, { status: 400 });
     }
 
-    if (!player || player.trim().length === 0) {
-      return NextResponse.json({ error: 'Player parameter is required' }, { status: 400 });
+    if (!player && !category) {
+      return NextResponse.json(
+        { error: 'Player or category parameter is required' },
+        { status: 400 },
+      );
     }
 
-    const playerNameRegex = /^[a-zA-Z0-9_]{3,16}$/;
-    if (!playerNameRegex.test(player)) {
-      return NextResponse.json({ error: 'Invalid player name format' }, { status: 400 });
+    if (player) {
+      const playerNameRegex = /^[a-zA-Z0-9_]{3,16}$/;
+      if (!playerNameRegex.test(player)) {
+        return NextResponse.json({ error: 'Invalid player name format' }, { status: 400 });
+      }
     }
 
     const serverApiUrl = process.env.SERVER_API_FOR_LOGS;
@@ -66,7 +72,8 @@ export async function GET(request: NextRequest) {
     }
 
     const minecraftApiUrl = new URL(serverApiUrl);
-    minecraftApiUrl.searchParams.set('player', player);
+    if (player) minecraftApiUrl.searchParams.set('player', player);
+    if (category) minecraftApiUrl.searchParams.set('category', category);
     minecraftApiUrl.searchParams.set('page', pageNum.toString());
 
     const controller = new AbortController();
@@ -97,7 +104,10 @@ export async function GET(request: NextRequest) {
     if (!response.ok) {
       if (response.status === 404) {
         const errorData: MinecraftErrorResponse = await response.json();
-        return NextResponse.json({ error: errorData.error || 'Player not found' }, { status: 404 });
+        return NextResponse.json(
+          { error: errorData.error || 'Resource not found' },
+          { status: 404 },
+        );
       }
 
       return NextResponse.json(
@@ -117,11 +127,10 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({
       page: data.page,
-      count: data.count,
-      totalCount: data.totalCount,
       totalPages: data.totalPages,
+      totalLogs: data.totalLogs,
+      count: data.count,
       logs: data.logs,
-      player: player,
     });
   } catch (error) {
     console.error('Logs API Error:', error);

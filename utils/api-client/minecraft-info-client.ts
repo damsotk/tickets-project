@@ -5,15 +5,15 @@ interface OnlineData {
 
 interface LogsResponse {
   page: number;
+  totalPages: number;
+  totalLogs: number;
   count: number;
-  totalCount?: number;
-  totalPages?: number;
   logs: string[];
-  player: string;
 }
 
 interface LogsParams {
-  player: string;
+  player?: string;
+  category?: string;
   page?: number;
 }
 
@@ -41,10 +41,11 @@ export class MinecraftInfoClient {
   }
 
   static async getLogs(params: LogsParams) {
-    const searchParams = new URLSearchParams({
-      player: params.player,
-      page: (params.page || 1).toString(),
-    });
+    const searchParams = new URLSearchParams();
+
+    if (params.player) searchParams.set('player', params.player);
+    if (params.category) searchParams.set('category', params.category);
+    searchParams.set('page', (params.page || 1).toString());
 
     return this.request<LogsResponse>(`/api/get-server-logs?${searchParams.toString()}`);
   }

@@ -32,6 +32,12 @@
   align-items: flex-end;
 }
 
+.inputGroup {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
 .inputWrapper {
   flex: 1;
 }
@@ -70,6 +76,38 @@
 
 .input::placeholder {
   color: #6d6f78;
+}
+
+.select {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  background: #1e1f22;
+  border: 1px solid #3f4147;
+  border-radius: 6px;
+  color: #f2f3f5;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.select:hover:not(:disabled) {
+  border-color: #5d6169;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #00a8fc;
+  box-shadow: 0 0 0 3px rgba(0, 168, 252, 0.1);
+}
+
+.select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.select option {
+  background: #1e1f22;
+  color: #f2f3f5;
 }
 
 .searchButton {
@@ -122,6 +160,11 @@
 }
 
 .playerName {
+  color: #00a8fc;
+  font-weight: 600;
+}
+
+.categoryName {
   color: #00a8fc;
   font-weight: 600;
 }
@@ -251,13 +294,20 @@
   line-height: 1.5;
 }
 
+.paginationWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #232428;
+  border-top: 1px solid #3f4147;
+}
+
 .pagination {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem;
-  background: #232428;
-  border-top: 1px solid #3f4147;
+  gap: 1rem;
 }
 
 .paginationButton {
@@ -270,6 +320,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
+  white-space: nowrap;
 }
 
 .paginationButton:hover:not(:disabled) {
@@ -283,20 +334,112 @@
   opacity: 0.5;
 }
 
-.paginationInfo {
+.paginationButtons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pageButton {
+  min-width: 2.5rem;
+  height: 2.5rem;
+  padding: 0 0.75rem;
+  border: 1px solid #3f4147;
+  border-radius: 6px;
+  background: #2b2d31;
+  color: #b5bac1;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pageButton:hover:not(:disabled) {
+  border-color: #00a8fc;
+  color: #00a8fc;
+  background: #1e1f22;
+}
+
+.pageButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pageButtonActive {
+  border-color: #5865f2;
+  background: #5865f2;
+  color: #ffffff;
+}
+
+.pageButtonActive:hover {
+  background: #4752c4;
+  border-color: #4752c4;
+}
+
+.ellipsis {
+  color: #6d6f78;
+  font-weight: 600;
+  padding: 0 0.5rem;
+}
+
+.pageJumpForm {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid #3f4147;
+}
+
+.pageJumpLabel {
   font-size: 0.9rem;
+  color: #b5bac1;
+  font-weight: 500;
 }
 
-.currentPage {
+.pageJumpInput {
+  width: 80px;
+  padding: 0.5rem;
+  background: #1e1f22;
+  border: 1px solid #3f4147;
+  border-radius: 6px;
   color: #f2f3f5;
-  font-weight: 600;
+  font-size: 0.9rem;
+  text-align: center;
+  transition: all 0.2s;
 }
 
-.totalPages {
-  color: #949ba4;
+.pageJumpInput:focus {
+  outline: none;
+  border-color: #00a8fc;
+  box-shadow: 0 0 0 3px rgba(0, 168, 252, 0.1);
+}
+
+.pageJumpInput:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pageJumpButton {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background: #5865f2;
+  color: #ffffff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pageJumpButton:hover:not(:disabled) {
+  background: #4752c4;
+}
+
+.pageJumpButton:disabled {
+  background: #4e5058;
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .emptyState {
@@ -347,6 +490,10 @@
     align-items: stretch;
   }
 
+  .inputGroup {
+    flex-direction: column;
+  }
+
   .searchButton {
     width: 100%;
     justify-content: center;
@@ -378,6 +525,24 @@
   }
 
   .paginationButton {
+    width: 100%;
+  }
+
+  .paginationButtons {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .pageJumpForm {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .pageJumpInput {
+    width: 100%;
+  }
+
+  .pageJumpButton {
     width: 100%;
   }
 }

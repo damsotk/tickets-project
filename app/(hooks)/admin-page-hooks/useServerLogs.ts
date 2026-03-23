@@ -3,11 +3,16 @@ import { useState, useCallback } from 'react';
 
 interface LogsResponse {
   page: number;
+  totalPages: number;
+  totalLogs: number;
   count: number;
-  totalCount?: number;
-  totalPages?: number;
   logs: string[];
-  player: string;
+}
+
+interface FetchParams {
+  player?: string;
+  category?: string;
+  page?: number;
 }
 
 export function useServerLogs() {
@@ -15,11 +20,14 @@ export function useServerLogs() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [currentPlayer, setCurrentPlayer] = useState('');
+  const [currentCategory, setCurrentCategory] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
-  const fetchLogs = useCallback(async (player: string, page: number = 1) => {
-    if (!player || player.trim().length === 0) {
-      setError('Player name is required');
+  const fetchLogs = useCallback(async (params: FetchParams) => {
+    const { player = '', category = '', page = 1 } = params;
+
+    if (!player && !category) {
+      setError('Player name or category is required');
       return;
     }
 
@@ -27,9 +35,15 @@ export function useServerLogs() {
     setError(null);
 
     try {
-      const json = await MinecraftInfoClient.getLogs({ player, page });
+      const json = await MinecraftInfoClient.getLogs({
+        player: player || undefined,
+        category: category || undefined,
+        page,
+      });
+
       setData(json);
       setCurrentPlayer(player);
+      setCurrentCategory(category);
       setCurrentPage(page);
     } catch (e) {
       console.error('Failed to fetch logs:', e);
@@ -40,45 +54,52 @@ export function useServerLogs() {
     }
   }, []);
 
-  const handlePageChange = useCallback(
-    async (newPage: number) => {
-      if (newPage < 1 || !currentPlayer) return;
-      await fetchLogs(currentPlayer, newPage);
+  const goToPage = useCallback(
+    async (pageNumber: number) => {
+      if (pageNumber < 1) return;
+      if (data && pageNumber > data.totalPages) return;
+
+      await fetchLogs({
+        player: currentPlayer,
+        category: currentCategory,
+        page: pageNumber,
+      });
     },
-    [currentPlayer, fetchLogs],
+    [currentPlayer, currentCategory, data, fetchLogs],
   );
 
   const nextPage = useCallback(() => {
-    handlePageChange(currentPage + 1);
-  }, [currentPage, handlePageChange]);
+    if (data && currentPage < data.totalPages) {
+      goToPage(currentPage + 1);
+    }
+  }, [currentPage, data, goToPage]);
 
   const prevPage = useCallback(() => {
-    handlePageChange(currentPage - 1);
-  }, [currentPage, handlePageChange]);
+    if (currentPage > 1) {
+      goToPage(currentPage - 1);
+    }
+  }, [currentPage, goToPage]);
 
   const reset = useCallback(() => {
     setData(null);
     setError(null);
     setLoading(false);
     setCurrentPlayer('');
+    setCurrentCategory('');
     setCurrentPage(1);
   }, []);
-
-  const hasNextPage = data ? data.count === 300 : false;
-  const hasPrevPage = currentPage > 1;
 
   return {
     data,
     loading,
     error,
     currentPlayer,
+    currentCategory,
     currentPage,
     fetchLogs,
-    handlePageChange,
+    goToPage,
     nextPage,
     prevPage,
     reset,
-    hasNextPage,
-    hasPrevPage,
   };
 }
