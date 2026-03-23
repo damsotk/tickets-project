@@ -1,4 +1,4 @@
-import AdminTicketsClient from '@/app/(components)/admin-pages/AdminTickets';
+import AdminTicketsClient from '@/app/(components)/admin-pages/tickets/AdminTickets';
 import { getAllTicketsForAdmin } from '@/utils/api-server/tickets-server';
 
 export default async function AdminTicketsServer() {
