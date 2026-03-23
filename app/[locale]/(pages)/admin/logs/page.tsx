@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import { useServerLogs } from '@/app/(hooks)/admin-page-hooks/useServerLogs';
 import styles from '@/app/(styles)/admin-styles/logs-page.module.css';
+import Header from '@/app/(components)/main-page/Header';
 
 const CATEGORIES = [
   { value: '', label: 'All Categories', icon: '📋' },
@@ -120,9 +121,8 @@ export default function LogsPage() {
 
   return (
     <div className={styles.pageWrapper}>
+      <Header />
       <div className={styles.contentContainer}>
-        <h1 className={styles.pageTitle}>Server Logs</h1>
-
         <div className={styles.searchSection}>
           <form onSubmit={handleSearch} className={styles.searchForm}>
             <div className={styles.inputGroup}>

@@ -1,12 +1,13 @@
 .pageWrapper {
   min-height: 100vh;
-  padding: 80px 0 40px;
+  padding: 0 0 40px;
 }
 
 .contentContainer {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 24px;
+  margin-top: 50px;
 }
 
 .pageTitle {
