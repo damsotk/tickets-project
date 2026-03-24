@@ -144,6 +144,31 @@ const en = {
       noArticles: 'No articles found in this category.',
     },
   },
+  profile: {
+    defaultName: 'Player',
+    avatarAlt: 'User avatar',
+    infoCards: {
+      role: 'Role',
+      userId: 'User ID',
+      registrationDate: 'Registration date',
+      lastUpdate: 'Last update',
+      notUpdated: 'Not updated',
+    },
+    stats: {
+      title: 'Account statistics',
+      accountAge: 'Account age',
+      exactCreationDate: 'Exact creation date',
+      lastModification: 'Last modification',
+      timeUnits: {
+        days: 'd.',
+        months: 'mo.',
+        years: 'y.',
+      },
+    },
+    badges: {
+      admin: 'Administrator',
+    },
+  },
 };
 
 export default en;

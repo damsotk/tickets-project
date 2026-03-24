@@ -143,6 +143,31 @@ const uk = {
       noArticles: 'Статті в цій категорії не знайдені.',
     },
   },
+  profile: {
+    defaultName: 'Гравець',
+    avatarAlt: 'Аватар користувача',
+    infoCards: {
+      role: 'Роль',
+      userId: 'ID користувача',
+      registrationDate: 'Дата реєстрації',
+      lastUpdate: 'Останнє оновлення',
+      notUpdated: 'Не оновлювалося',
+    },
+    stats: {
+      title: 'Статистика акаунта',
+      accountAge: 'Вік акаунта',
+      exactCreationDate: 'Точна дата створення',
+      lastModification: 'Остання зміна',
+      timeUnits: {
+        days: 'дн.',
+        months: 'міс.',
+        years: 'р.',
+      },
+    },
+    badges: {
+      admin: 'Адміністратор',
+    },
+  },
 };
 
 export default uk;

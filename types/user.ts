@@ -4,6 +4,8 @@ export interface User {
   email: string;
   avatar: string | null;
   role: 'USER' | 'ADMIN';
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface AuthResponse {

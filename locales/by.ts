@@ -142,6 +142,31 @@ const by = {
       noArticles: 'Статті в цій категорії не знайдені.',
     },
   },
+  profile: {
+    defaultName: 'Гулец',
+    avatarAlt: 'Аватар карыстальніка',
+    infoCards: {
+      role: 'Роля',
+      userId: 'ID карыстальніка',
+      registrationDate: 'Дата рэгістрацыі',
+      lastUpdate: 'Апошняе абнаўленне',
+      notUpdated: 'Не абнаўлялася',
+    },
+    stats: {
+      title: 'Статыстыка акаўнта',
+      accountAge: 'Узрост акаўнта',
+      exactCreationDate: 'Дакладная дата стварэння',
+      lastModification: 'Апошняе змяненне',
+      timeUnits: {
+        days: 'дз.',
+        months: 'мес.',
+        years: 'г.',
+      },
+    },
+    badges: {
+      admin: 'Адміністратар',
+    },
+  },
 };
 
 export default by;

@@ -17,6 +17,7 @@ export default function Header() {
     handleTicketsClick,
     toggleMobileMenu,
     closeMobileMenu,
+    handleProfileClick,
   } = useHeader();
 
   const router = useRouter();
@@ -53,6 +54,7 @@ export default function Header() {
                 <img src="/icons/ticket-alt.png" alt={translated.ticketIconAlt} />
               </div>
               <img
+                onClick={handleProfileClick}
                 src={user.avatar || 'https://api.dicebear.com/9.x/adventurer-neutral/svg?radius=0'}
                 alt={translated.userAvatarAlt}
                 className={styles.userAvatar}

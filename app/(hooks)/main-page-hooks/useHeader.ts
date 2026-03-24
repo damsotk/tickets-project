@@ -36,6 +36,11 @@ export function useHeader() {
     router.push(`/${locale}/tickets`);
   };
 
+  const handleProfileClick = () => {
+    closeMobileMenu();
+    router.push(`/${locale}/profile`);
+  };
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
@@ -78,5 +83,6 @@ export function useHeader() {
     handleTicketsClick,
     toggleMobileMenu,
     closeMobileMenu,
+    handleProfileClick,
   };
 }

@@ -143,6 +143,31 @@ const ru = {
       noArticles: 'Статьи в этой категории не найдены.',
     },
   },
+  profile: {
+    defaultName: 'Игрок',
+    avatarAlt: 'Аватар пользователя',
+    infoCards: {
+      role: 'Роль',
+      userId: 'ID пользователя',
+      registrationDate: 'Дата регистрации',
+      lastUpdate: 'Последнее обновление',
+      notUpdated: 'Не обновлялось',
+    },
+    stats: {
+      title: 'Статистика аккаунта',
+      accountAge: 'Возраст аккаунта',
+      exactCreationDate: 'Точная дата создания',
+      lastModification: 'Последнее изменение',
+      timeUnits: {
+        days: 'дн.',
+        months: 'мес.',
+        years: 'г.',
+      },
+    },
+    badges: {
+      admin: 'Администратор',
+    },
+  },
 };
 
 export default ru;
