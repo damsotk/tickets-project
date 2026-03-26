@@ -6,7 +6,7 @@ author: 'damsot'
 category: 'characters'
 
 infobox:
-  image: '/articles/characters/morok.png'
+  image: '/articles/characters/morok.webp'
   Статус: 'Живой'
   Организация: 'Кодекс'
   Место жительства: 'Топи Падших'

@@ -6,7 +6,7 @@ author: 'damsot'
 category: 'characters'
 
 infobox:
-  image: '/articles/characters/umbra.jpg'
+  image: '/articles/characters/umbra.webp'
   Статус: 'Пропал'
   Организация: 'Неизвестно'
   Место жительства: 'Неизвестно'

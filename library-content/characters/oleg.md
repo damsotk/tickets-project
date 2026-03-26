@@ -6,7 +6,7 @@ author: 'damsot'
 category: 'characters'
 
 infobox:
-  image: '/articles/characters/oleg.png'
+  image: '/articles/characters/oleg.webp'
   Статус: 'Живой'
   Организация: 'Почтовая Резиденция'
   Место жительства: 'Дом у почты'

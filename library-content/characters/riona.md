@@ -6,7 +6,7 @@ author: 'PURO'
 category: 'characters'
 
 infobox:
-  image: '/articles/characters/riona.png'
+  image: '/articles/characters/riona.webp'
   Статус: 'Живой'
   Организация: 'Нету'
   Место жительства: 'Храм'

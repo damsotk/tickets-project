@@ -6,7 +6,7 @@ author: 'Ervia'
 category: 'characters'
 
 infobox:
-  image: '/articles/characters/damsot.jpg'
+  image: '/articles/characters/damsot.webp'
   Статус: 'Живой'
   Организация: 'Кодекс'
   Место жительства: 'Поместье Эйнмана'

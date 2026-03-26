@@ -6,7 +6,7 @@ author: 'damsot'
 category: 'characters'
 
 infobox:
-  image: '/articles/characters/sng.png'
+  image: '/articles/characters/sng.webp'
   Статус: 'Живой'
   Организация: 'Кодекс'
   Место жительства: 'Пещеры Кодекса'
