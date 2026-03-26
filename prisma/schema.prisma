@@ -10,13 +10,13 @@ datasource db {
 
 model User {
   id        String   @id @default(cuid())
-  email     String   @unique
-  password  String?  // null if entry by Discord
-  name      String
-  avatar    String?  // URL avatar
+  email     String   @unique @db.VarChar(255)
+  password  String?  @db.VarChar(255) // null if entry by Discord
+  name      String   @db.VarChar(100)
+  avatar    String?  @db.VarChar(500) // URL avatar
   
   // Discord data (if entry from DS)
-  discordId String?  @unique
+  discordId String?  @unique @db.VarChar(50)
   
   // Tokens
   refreshToken String? @db.Text
@@ -40,7 +40,7 @@ enum UserRole {
 
 model Ticket {
   id        String   @id @default(cuid())
-  title     String   // Name of ticket
+  title     String   @db.VarChar(200)
   
   // Theme (complaint, lore, tech) - use ENUM
   category  TicketCategory 
@@ -55,10 +55,10 @@ model Ticket {
   
   // Connect with user who create ticket
   userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade) // When user deleted, delete him tickets
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) // Update when new message
+  updatedAt DateTime @default(now())
 
   // Connect with messages
   messages  Message[]
@@ -80,13 +80,13 @@ enum TicketStatus {
 
 model Message {
   id        String   @id @default(cuid())
-  text      String   @db.Text
+  text      String   @db.VarChar(5000)
 
   ticketId  String
-  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade) // When ticket deleted, delete him message
+  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
 
   authorId  String
-  author    User     @relation(fields: [authorId], references: [id], onDelete: Restrict) // Doesnt delete user, if he has message
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Restrict)
 
   createdAt DateTime @default(now())
 
