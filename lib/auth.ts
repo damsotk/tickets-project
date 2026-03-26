@@ -2,8 +2,19 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { jwtVerify } from 'jose';
 
-const JWT_SECRET = process.env.JWT_SECRET!;
-const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET!;
+function getRequiredEnvVar(name: string): string {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(
+      `❌ Fatal error: Environment variable ${name} is not set. ` +
+        `Please add it to the .env file on the service where the project is hosted.`,
+    );
+  }
+  return value;
+}
+
+const JWT_SECRET = getRequiredEnvVar('JWT_SECRET');
+const JWT_REFRESH_SECRET = getRequiredEnvVar('JWT_REFRESH_SECRET');
 
 interface CustomJWTPayload {
   userId: string;
@@ -47,7 +58,8 @@ export function verifyRefreshToken(token: string): CustomJWTPayload | null {
     return null;
   }
 }
-//  Verify access token (Edge Runtime compatible)
+
+// Verify access token (Edge Runtime compatible)
 export async function verifyAccessTokenEdge(token: string): Promise<CustomJWTPayload | null> {
   try {
     const secret = new TextEncoder().encode(JWT_SECRET);
