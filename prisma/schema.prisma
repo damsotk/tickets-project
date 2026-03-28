@@ -84,8 +84,8 @@ model Message {
   ticketId  String
   ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
   
-  authorId  String
-  author    User     @relation(fields: [authorId], references: [id], onDelete: Restrict)
+  authorId  String?                                          
+  author    User?    @relation(fields: [authorId], references: [id], onDelete: SetNull)
   
   createdAt DateTime @default(now())
 
