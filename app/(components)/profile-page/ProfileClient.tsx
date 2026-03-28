@@ -120,12 +120,13 @@ export default function ProfileClient({ user }: ProfileClientProps) {
               <span className={styles.statValue}>{formatDateTime(user.createdAt)}</span>
             </div>
 
-            {user.updatedAt && user.updatedAt.getTime() !== user.createdAt.getTime() && (
-              <div className={styles.statItem}>
-                <span className={styles.statLabel}>{t.stats.lastModification}</span>
-                <span className={styles.statValue}>{formatDateTime(user.updatedAt)}</span>
-              </div>
-            )}
+            {user.updatedAt &&
+              new Date(user.updatedAt).getTime() !== new Date(user.createdAt).getTime() && (
+                <div className={styles.statItem}>
+                  <span className={styles.statLabel}>{t.stats.lastModification}</span>
+                  <span className={styles.statValue}>{formatDateTime(user.updatedAt)}</span>
+                </div>
+              )}
           </div>
 
           {user.role === 'ADMIN' && (
