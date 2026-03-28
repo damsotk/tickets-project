@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+import jwt, { TokenExpiredError } from 'jsonwebtoken';
 import { jwtVerify } from 'jose';
 
 function getRequiredEnvVar(name: string): string {
@@ -45,7 +45,10 @@ export function generateRefreshToken(userId: string, role: 'USER' | 'ADMIN'): st
 export function verifyAccessToken(token: string): CustomJWTPayload | null {
   try {
     return jwt.verify(token, JWT_SECRET) as CustomJWTPayload;
-  } catch {
+  } catch (error) {
+    if (!(error instanceof TokenExpiredError)) {
+      console.error('[Auth] Access token verification failed:', error);
+    }
     return null;
   }
 }
@@ -54,7 +57,10 @@ export function verifyAccessToken(token: string): CustomJWTPayload | null {
 export function verifyRefreshToken(token: string): CustomJWTPayload | null {
   try {
     return jwt.verify(token, JWT_REFRESH_SECRET) as CustomJWTPayload;
-  } catch {
+  } catch (error) {
+    if (!(error instanceof TokenExpiredError)) {
+      console.error('[Auth] Refresh token verification failed:', error);
+    }
     return null;
   }
 }

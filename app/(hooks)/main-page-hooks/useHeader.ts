@@ -53,7 +53,9 @@ export function useHeader() {
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      if (isMobileMenuOpen) {
+        document.removeEventListener('mousedown', handleClickOutside);
+      }
     };
   }, [isMobileMenuOpen]);
 
