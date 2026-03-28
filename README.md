@@ -1,47 +1,77 @@
-# Ticket Support System
+<div align="center">
 
-> A modern web application for seamless communication between users and support team
-> [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org/)
-> [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
-> [![Prisma](https://img.shields.io/badge/Prisma-ORM-2D3748?style=flat-square&logo=prisma)](https://www.prisma.io/)
-> [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-336791?style=flat-square&logo=postgresql)](https://www.postgresql.org/)
+# Community Portal
+
+A full-stack web platform for an online game community — support tickets, real-time messaging, a lore wiki, Discord integration, and a live admin panel.
+
+[![Next.js](https://img.shields.io/badge/Next.js_15-000000?style=flat-square&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=flat-square&logo=prisma&logoColor=white)](https://www.prisma.io/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Redis](https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white)](https://upstash.com/)
+[![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white)](https://vercel.com/)
+
+**[→ Live Demo](https://tickets-project-delta.vercel.app/)**
+
+</div>
+
+---
 
 ## Overview
 
-This is a comprehensive ticket support system designed to facilitate efficient communication between product users and support staff. The platform enables users to submit complaints, ask questions, request technical assistance, and engage in real-time conversations with the support team.
-**Live Demo:** [tickets-project-delta.vercel.app](https://tickets-project-delta.vercel.app/)
+Community Portal is a production web application serving an active online roleplay community of 30–60 concurrent players. The platform covers the full communication layer between players and staff: structured support tickets, a real-time messenger, a lore wiki, and a Discord integration — all available in 5 languages.
 
-> **Note:** This repository is for demonstration purposes. The application is already deployed and running. Local setup is not intended for external contributors.
+---
+
+## Pages & Features
+
+### For Players
+
+| Route              | Description                                                                     |
+| ------------------ | ------------------------------------------------------------------------------- |
+| `/articles`        | Lore wiki — characters, cities, factions, beliefs, and world history            |
+| `/create-ticket`   | Open a support ticket by category: complaint, lore question, or technical issue |
+| `/tickets`         | Real-time conversation with support staff on an open ticket                     |
+| `/discord-message` | Send an anonymous message to the community Discord via Webhooks                 |
+| `/auth`            | Auth with email/password or Discord OAuth2                                      |
+| `/profile`         | User profile with account info and stats                                        |
+
+### For Admins
+
+| Route                | Description                                                         |
+| -------------------- | ------------------------------------------------------------------- |
+| `/admin/all-tickets` | Unified inbox — all player tickets with status and category filters |
+| `/admin/logs`        | Live player activity streamed from the game server                  |
+
+---
 
 ## Tech Stack
 
-### Frontend
+| Layer                       | Technology                                                 |
+| --------------------------- | ---------------------------------------------------------- |
+| **Framework**               | Next.js 15 — App Router, Server Components, Server Actions |
+| **Language**                | TypeScript                                                 |
+| **Database**                | PostgreSQL via Neon                                        |
+| **ORM**                     | Prisma                                                     |
+| **Caching / Rate limiting** | Upstash Redis                                              |
+| **Auth**                    | JWT · bcrypt · Discord OAuth2                              |
+| **Styling**                 | CSS Modules                                                |
+| **Deployment**              | Vercel                                                     |
 
-- **[Next.js 15](https://nextjs.org/)**
-- **[TypeScript](https://www.typescriptlang.org/)**
-- **[React 19](https://react.dev/)**
-- **CSS Modules**
+---
 
-### Backend
+## Architecture Notes
 
-- **[Next.js API Routes](https://nextjs.org/docs/api-routes/introduction)**
-- **[Server Components](https://nextjs.org/docs/app/building-your-application/rendering/server-components)**
-- **[Server Actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations)**
+**Authentication** — Stateless JWT with 7-day access tokens and 30-day refresh tokens stored in `httpOnly` cookies. Refresh token rotation on each use. Edge-compatible token verification in middleware with role-based route protection (user / admin).
 
-### Database & ORM
+**Rate limiting** — Sliding window counters in Upstash Redis. Auth endpoints (login, register) limited by IP. Write endpoints (send message, create ticket) limited by user ID after token verification.
 
-- **[PostgreSQL](https://www.postgresql.org/)**
-- **[Prisma](https://www.prisma.io/)**
-- **[Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres)**
+**Optimistic UI** — Messages appear instantly before server confirmation, with silent automatic rollback on failure.
 
-### Authentication
+**Discord integration** — Anonymous messages route through Discord Webhooks to a community announcement channel. No user data is attached.
 
-- **[JWT (jsonwebtoken)](https://github.com/auth0/node-jsonwebtoken)**
-- **[bcrypt](https://github.com/kelektiv/node.bcrypt.js)**
-- **[Discord OAuth2](https://discord.com/developers/docs/topics/oauth2)**
+**i18n** — All UI strings are externalized to locale files. Route-level locale detection with 5 supported languages across every page and component.
 
-### Development Tools
+**Admin logs** — Player actions and server events are fetched from the game server API and rendered in the admin panel in real time.
 
-- **[ESLint](https://eslint.org/)**
-- **[Prettier](https://prettier.io/)**
-- **[TypeScript ESLint](https://typescript-eslint.io/)**
+---
