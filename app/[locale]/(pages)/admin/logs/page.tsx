@@ -22,10 +22,11 @@ export default function LogsPage() {
     prevPage,
   } = useServerLogs();
 
-  const handleSearch = async (params: { player: string; category: string }) => {
+  const handleSearch = async (params: { player: string; category: string; search: string }) => {
     await fetchLogs({
       player: params.player,
       category: params.category,
+      search: params.search,
       page: 1,
     });
   };

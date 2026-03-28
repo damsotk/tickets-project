@@ -5,7 +5,7 @@ import styles from '@/app/(styles)/admin-styles/logs-page.module.css';
 import { CATEGORIES } from '@/constants/available_admin_logs_categories';
 
 interface LogsSearchSectionProps {
-  onSearch: (params: { player: string; category: string }) => Promise<void>;
+  onSearch: (params: { player: string; category: string; search: string }) => Promise<void>;
   loading: boolean;
   currentPlayer: string;
   currentCategory: string;
@@ -21,6 +21,7 @@ export default function LogsSearchSection({
 }: LogsSearchSectionProps) {
   const [playerInput, setPlayerInput] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [searchInput, setSearchInput] = useState('');
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,6 +34,7 @@ export default function LogsSearchSection({
     await onSearch({
       player: trimmedPlayer,
       category: selectedCategory,
+      search: searchInput.trim(),
     });
   };
 
@@ -58,6 +60,21 @@ export default function LogsSearchSection({
               className={styles.input}
               disabled={loading}
               maxLength={16}
+            />
+          </div>
+
+          <div className={styles.inputWrapper}>
+            <label htmlFor="search" className={styles.inputLabel}>
+              Search in logs
+            </label>
+            <input
+              id="search"
+              type="text"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              placeholder="Search text in logs..."
+              className={styles.input}
+              disabled={loading}
             />
           </div>
 

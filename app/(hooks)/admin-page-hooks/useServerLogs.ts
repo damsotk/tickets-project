@@ -12,6 +12,7 @@ interface LogsResponse {
 interface FetchParams {
   player?: string;
   category?: string;
+  search?: string;
   page?: number;
 }
 
@@ -22,9 +23,10 @@ export function useServerLogs() {
   const [currentPlayer, setCurrentPlayer] = useState('');
   const [currentCategory, setCurrentCategory] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentSearch, setCurrentSearch] = useState('');
 
   const fetchLogs = useCallback(async (params: FetchParams) => {
-    const { player = '', category = '', page = 1 } = params;
+    const { player = '', category = '', search = '', page = 1 } = params;
 
     if (!player && !category) {
       setError('Player name or category is required');
@@ -38,6 +40,7 @@ export function useServerLogs() {
       const json = await MinecraftInfoClient.getLogs({
         player: player || undefined,
         category: category || undefined,
+        search: search || undefined,
         page,
       });
 
@@ -45,6 +48,7 @@ export function useServerLogs() {
       setCurrentPlayer(player);
       setCurrentCategory(category);
       setCurrentPage(page);
+      setCurrentSearch(search);
     } catch (e) {
       console.error('Failed to fetch logs:', e);
       setError(e instanceof Error ? e.message : 'Failed to fetch logs');
@@ -62,6 +66,7 @@ export function useServerLogs() {
       await fetchLogs({
         player: currentPlayer,
         category: currentCategory,
+        search: currentSearch,
         page: pageNumber,
       });
     },
@@ -95,6 +100,7 @@ export function useServerLogs() {
     error,
     currentPlayer,
     currentCategory,
+    currentSearch,
     currentPage,
     fetchLogs,
     goToPage,

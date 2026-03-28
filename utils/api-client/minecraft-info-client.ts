@@ -14,6 +14,7 @@ interface LogsResponse {
 interface LogsParams {
   player?: string;
   category?: string;
+  search?: string;
   page?: number;
 }
 
@@ -45,6 +46,7 @@ export class MinecraftInfoClient {
 
     if (params.player) searchParams.set('player', params.player);
     if (params.category) searchParams.set('category', params.category);
+    if (params.search) searchParams.set('search', params.search);
     searchParams.set('page', (params.page || 1).toString());
 
     return this.request<LogsResponse>(`/api/get-server-logs?${searchParams.toString()}`);

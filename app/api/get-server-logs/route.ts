@@ -43,6 +43,7 @@ export async function GET(request: NextRequest) {
 
     const searchParams = request.nextUrl.searchParams;
     const player = searchParams.get('player');
+    const search = searchParams.get('search');
     const category = searchParams.get('category');
     const page = searchParams.get('page') || '1';
 
@@ -74,6 +75,7 @@ export async function GET(request: NextRequest) {
     const minecraftApiUrl = new URL(serverApiUrl);
     if (player) minecraftApiUrl.searchParams.set('player', player);
     if (category) minecraftApiUrl.searchParams.set('category', category);
+    if (search) minecraftApiUrl.searchParams.set('search', search);
     minecraftApiUrl.searchParams.set('page', pageNum.toString());
 
     const controller = new AbortController();
