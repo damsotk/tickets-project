@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { prisma } from '@/lib/prisma';
 import { verifyAccessToken } from '@/lib/auth';
+import { rateLimiters } from '@/lib/rate-limit';
 
 export async function POST(request: NextRequest) {
   try {
@@ -16,6 +17,11 @@ export async function POST(request: NextRequest) {
 
     if (!payload) {
       return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
+    }
+
+    const { success } = await rateLimiters.tickets.limit(payload.userId);
+    if (!success) {
+      return NextResponse.json({ error: 'Too many requests.' }, { status: 429 });
     }
 
     const body = await request.json();

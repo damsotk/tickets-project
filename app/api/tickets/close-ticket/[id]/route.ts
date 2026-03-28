@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { verifyAccessToken } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { rateLimiters } from '@/lib/rate-limit';
 
 export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
@@ -17,6 +18,11 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
 
     if (!payload) {
       return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
+    }
+
+    const { success } = await rateLimiters.tickets.limit(payload.userId);
+    if (!success) {
+      return NextResponse.json({ error: 'Too many requests.' }, { status: 429 });
     }
 
     const user = await prisma.user.findUnique({

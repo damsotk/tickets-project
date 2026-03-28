@@ -2,6 +2,7 @@ import { verifyAccessToken } from '@/lib/auth';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { rateLimiters } from '@/lib/rate-limit';
 
 const MAX_MESSAGE_LENGTH = 5000;
 const MIN_MESSAGE_LENGTH = 1;
@@ -17,6 +18,11 @@ export async function POST(request: NextRequest) {
     const payload = verifyAccessToken(accessToken);
     if (!payload) {
       return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
+    }
+
+    const { success } = await rateLimiters.messages.limit(payload.userId);
+    if (!success) {
+      return NextResponse.json({ error: 'Too many requests.' }, { status: 429 });
     }
 
     const body = await request.json();
