@@ -2,7 +2,6 @@
 import styles from '@/app/(styles)/articles-styles/articles-page.module.css';
 import LoreCategoryCarousel from '@/app/(components)/article-page/main-page/LoreCategoryCarousel';
 import { useState } from 'react';
-import Header from '@/app/(components)/main-page/Header';
 import ArticlesList from '@/app/(components)/article-page/main-page/ArticlesList';
 import { ArticleMetadata } from '@/lib/articles';
 
@@ -23,7 +22,6 @@ export default function ArticlesPageClient({ initialArticles }: ArticlesPageClie
 
   return (
     <div className={styles.pageWrapper}>
-      <Header />
       <div className={styles.contentContainer}>
         <LoreCategoryCarousel
           currentCategory={currentCategory}

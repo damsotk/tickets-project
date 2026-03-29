@@ -2,7 +2,6 @@
 
 import { useServerLogs } from '@/app/(hooks)/admin-page-hooks/useServerLogs';
 import styles from '@/app/(styles)/admin-styles/logs-page.module.css';
-import Header from '@/app/(components)/main-page/Header';
 import LogsSearchSection from '@/app/(components)/admin-pages/logs/LogsSearchSection';
 import LogsListSection from '@/app/(components)/admin-pages/logs/LogsListSection';
 import ErrorMessage from '@/app/(components)/admin-pages/logs/ErrorMessage';
@@ -37,7 +36,6 @@ export default function LogsPage() {
 
   return (
     <div className={styles.pageWrapper}>
-      <Header />
       <div className={styles.contentContainer}>
         <LogsSearchSection
           onSearch={handleSearch}

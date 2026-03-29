@@ -4,7 +4,6 @@ import Image from 'next/image';
 import type { User } from '@/types/user';
 import { useTranslation } from '@/app/(hooks)/use-translation';
 import styles from '@/app/(styles)/profile-styles/profile-client.module.css';
-import Header from '../main-page/Header';
 
 interface ProfileClientProps {
   user: User;
@@ -58,8 +57,6 @@ export default function ProfileClient({ user }: ProfileClientProps) {
 
   return (
     <div className={styles.profileWrapper}>
-      <Header />
-
       <div className={styles.profileContent}>
         <div className={styles.avatarSection}>
           <div className={styles.avatarWrapper}>

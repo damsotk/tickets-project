@@ -1,4 +1,3 @@
-import Header from '@/app/(components)/main-page/Header';
 import styles from '@/app/(styles)/articles-styles/single-article-page.module.css';
 
 export const metadata = {
@@ -9,7 +8,6 @@ export const metadata = {
 export default function PrivacyPolicyPage() {
   return (
     <div className={styles.pageWrapper}>
-      <Header />
       <div className={styles.contentContainer}>
         <h1 className={styles.pageTitle}>Privacy Policy</h1>
 

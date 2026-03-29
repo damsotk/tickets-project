@@ -3,7 +3,6 @@ import styles from '@/app/(styles)/articles-styles/single-article-page.module.cs
 import { notFound } from 'next/navigation';
 import ArticleContent from '@/app/(components)/article-page/single-article/ArticleContent';
 import ArticleInfobox from '@/app/(components)/article-page/single-article/ArticleInfobox';
-import Header from '@/app/(components)/main-page/Header';
 
 interface ArticlePageProps {
   params: Promise<{
@@ -52,7 +51,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
   return (
     <div className={styles.pageWrapper}>
-      <Header />
       <div className={styles.articleLayout}>
         <ArticleContent article={article} />
         <ArticleInfobox article={article} />
