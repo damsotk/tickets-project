@@ -4,6 +4,7 @@ import styles from '@/app/(styles)/tickets-styles/all-user-tickets.module.css';
 import { useTranslation } from '@/app/(hooks)/use-translation';
 import { Ticket } from '@/types/tickets';
 import { formatDate } from '@/utils/format-date';
+import { useParams, useRouter } from 'next/navigation';
 
 interface AllUserTicketsProps {
   tickets: Ticket[] | null;
@@ -18,12 +19,20 @@ export default function AllUserTickets({
 }: AllUserTicketsProps) {
   const { translate } = useTranslation();
   const translated = translate.tickets.allTickets;
+  const router = useRouter();
+  const params = useParams();
+  const locale = (params?.locale as string) || 'en';
 
+  const createTicketRedirect = () => {
+    router.push(`/${locale}/create-ticket`);
+  };
   return (
     <div className={styles.ticketsSection}>
       <div className={styles.ticketsHeader}>
         <h2>{translated.title}</h2>
-        <button className={styles.newTicketBtn}>{translated.createButton}</button>
+        <button onClick={createTicketRedirect} className={styles.newTicketBtn}>
+          {translated.createButton}
+        </button>
       </div>
 
       <div className={styles.ticketsList}>
