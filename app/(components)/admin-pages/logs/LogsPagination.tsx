@@ -1,13 +1,14 @@
 'use client';
 
-import { useState } from 'react';
 import styles from '@/app/(styles)/admin-styles/logs-page.module.css';
+import { usePageJump } from '@/app/(hooks)/admin-page-hooks/usePageJump';
+import { PaginationButton } from '@/utils/pagination-generate-buttons';
 
 interface LogsPaginationProps {
   currentPage: number;
   totalPages: number;
   loading: boolean;
-  paginationButtons: (number | string)[];
+  paginationButtons: PaginationButton[];
   onNextPage: () => void;
   onPrevPage: () => void;
   onGoToPage: (page: number) => void;
@@ -22,19 +23,11 @@ export default function LogsPagination({
   onPrevPage,
   onGoToPage,
 }: LogsPaginationProps) {
-  const [pageInput, setPageInput] = useState('');
-
-  const handlePageJump = (e: React.FormEvent) => {
-    e.preventDefault();
-    const pageNum = parseInt(pageInput, 10);
-
-    if (isNaN(pageNum) || pageNum < 1 || pageNum > totalPages) {
-      return;
-    }
-
-    onGoToPage(pageNum);
-    setPageInput('');
-  };
+  const { pageInput, setPageInput, handleSubmit, canSubmit } = usePageJump({
+    totalPages,
+    loading,
+    onGoToPage,
+  });
 
   return (
     <div className={styles.paginationWrapper}>
@@ -49,19 +42,19 @@ export default function LogsPagination({
         </button>
 
         <div className={styles.paginationButtons}>
-          {paginationButtons.map((btn, idx) => {
-            if (btn === '...') {
+          {paginationButtons.map((btn) => {
+            if (btn.type === 'ellipsis') {
               return (
-                <span key={`ellipsis-${idx}`} className={styles.ellipsis}>
+                <span key={btn.key} className={styles.ellipsis}>
                   ...
                 </span>
               );
             }
 
-            const pageNum = btn as number;
+            const pageNum = btn.value!;
             return (
               <button
-                key={pageNum}
+                key={btn.key}
                 onClick={() => onGoToPage(pageNum)}
                 disabled={loading}
                 className={`${styles.pageButton} ${
@@ -86,7 +79,7 @@ export default function LogsPagination({
         </button>
       </div>
 
-      <form onSubmit={handlePageJump} className={styles.pageJumpForm}>
+      <form onSubmit={handleSubmit} className={styles.pageJumpForm}>
         <label htmlFor="pageJump" className={styles.pageJumpLabel}>
           Go to page:
         </label>
@@ -101,7 +94,7 @@ export default function LogsPagination({
           className={styles.pageJumpInput}
           disabled={loading}
         />
-        <button type="submit" disabled={loading || !pageInput} className={styles.pageJumpButton}>
+        <button type="submit" disabled={!canSubmit} className={styles.pageJumpButton}>
           Go
         </button>
       </form>

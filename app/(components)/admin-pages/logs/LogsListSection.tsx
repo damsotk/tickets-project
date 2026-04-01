@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import styles from '@/app/(styles)/admin-styles/logs-page.module.css';
 import LogsList from './LogsList';
 import LogsPagination from './LogsPagination';
+import { generatePaginationButtons } from '@/utils/pagination-generate-buttons';
 
 interface LogsListSectionProps {
   data: {
@@ -27,35 +28,10 @@ export default function LogsListSection({
   onPrevPage,
   onGoToPage,
 }: LogsListSectionProps) {
-  const paginationButtons = useMemo(() => {
-    const { totalPages } = data;
-    const buttons: (number | string)[] = [];
-    const maxButtons = 7;
-
-    if (totalPages <= maxButtons) {
-      for (let i = 1; i <= totalPages; i++) {
-        buttons.push(i);
-      }
-    } else {
-      if (currentPage <= 4) {
-        for (let i = 1; i <= 5; i++) buttons.push(i);
-        buttons.push('...');
-        buttons.push(totalPages);
-      } else if (currentPage >= totalPages - 3) {
-        buttons.push(1);
-        buttons.push('...');
-        for (let i = totalPages - 4; i <= totalPages; i++) buttons.push(i);
-      } else {
-        buttons.push(1);
-        buttons.push('...');
-        for (let i = currentPage - 1; i <= currentPage + 1; i++) buttons.push(i);
-        buttons.push('...');
-        buttons.push(totalPages);
-      }
-    }
-
-    return buttons;
-  }, [data.totalPages, currentPage]);
+  const paginationButtons = useMemo(
+    () => generatePaginationButtons(currentPage, data.totalPages),
+    [currentPage, data.totalPages],
+  );
 
   return (
     <div className={styles.logsContainer}>

@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
-import styles from '@/app/(styles)/admin-styles/logs-page.module.css';
 import { CATEGORIES } from '@/constants/available_admin_logs_categories';
+import styles from '@/app/(styles)/admin-styles/logs-page.module.css';
+import { formatCategoryLabel } from '@/utils/admin-logs-search';
+import { useLogsSearchForm } from '@/app/(hooks)/admin-page-hooks/useLogsSearchForm';
 
 interface LogsSearchSectionProps {
   onSearch: (params: { player: string; category: string; search: string }) => Promise<void>;
@@ -19,33 +20,24 @@ export default function LogsSearchSection({
   currentCategory,
   totalLogs,
 }: LogsSearchSectionProps) {
-  const [playerInput, setPlayerInput] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [searchInput, setSearchInput] = useState('');
+  const {
+    playerInput,
+    setPlayerInput,
+    selectedCategory,
+    setSelectedCategory,
+    searchInput,
+    setSearchInput,
+    handleSubmit,
+    canSubmit,
+  } = useLogsSearchForm({ onSearch, loading });
 
-  const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const trimmedPlayer = playerInput.trim();
-
-    if (!trimmedPlayer && !selectedCategory) {
-      return;
-    }
-
-    await onSearch({
-      player: trimmedPlayer,
-      category: selectedCategory,
-      search: searchInput.trim(),
-    });
-  };
-
-  const getCurrentCategoryLabel = () => {
-    const category = CATEGORIES.find((c) => c.value === currentCategory);
-    return category ? `${category.icon} ${category.label}` : currentCategory;
-  };
+  const currentCategoryLabel = currentCategory
+    ? formatCategoryLabel(currentCategory, CATEGORIES)
+    : '';
 
   return (
     <div className={styles.searchSection}>
-      <form onSubmit={handleSearch} className={styles.searchForm}>
+      <form onSubmit={handleSubmit} className={styles.searchForm}>
         <div className={styles.inputGroup}>
           <div className={styles.inputWrapper}>
             <label htmlFor="player" className={styles.inputLabel}>
@@ -98,11 +90,7 @@ export default function LogsSearchSection({
           </div>
         </div>
 
-        <button
-          type="submit"
-          disabled={loading || (!playerInput.trim() && !selectedCategory)}
-          className={styles.searchButton}
-        >
+        <button type="submit" disabled={!canSubmit} className={styles.searchButton}>
           {loading ? (
             <>
               <span className={styles.spinner}></span>
@@ -126,7 +114,7 @@ export default function LogsSearchSection({
           {currentCategory && (
             <>
               {' in category: '}
-              <span className={styles.categoryName}>{getCurrentCategoryLabel()}</span>
+              <span className={styles.categoryName}>{currentCategoryLabel}</span>
             </>
           )}
           {totalLogs !== undefined && (
