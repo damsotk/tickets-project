@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import styles from '@/app/(styles)/main-page.module.css';
-import HeroSection from '../(components)/main-page/HeroSection';
-import OnlineStats from '../(components)/main-page/OnlineStats';
-import NavigationGrid from '../(components)/main-page/NavigationGrid';
+import HeroSection from '../../(components)/main-page/HeroSection';
+import OnlineStats from '../../(components)/main-page/OnlineStats';
+import NavigationGrid from '../../(components)/main-page/NavigationGrid';
 
 export const metadata: Metadata = {
   title: 'Ellium',
