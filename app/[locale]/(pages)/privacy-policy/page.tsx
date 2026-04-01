@@ -7,14 +7,14 @@ export const metadata = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <div className={styles.pageWrapper}>
+    <div className={styles.pageWrapper} style={{ color: 'white' }}>
       <div className={styles.contentContainer}>
         <h1 className={styles.pageTitle}>Privacy Policy</h1>
 
         <div className={styles.contentWrapper}>
           <div className={styles.content}>
             <p>
-              <strong>Last updated:</strong> {new Date().toLocaleDateString()}
+              <strong>Last updated:</strong> 28.03.2026
             </p>
 
             <h2>Introduction</h2>

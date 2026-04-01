@@ -5,6 +5,7 @@ import { UserProvider } from '@/contexts/UserContext';
 import { Toaster } from 'sonner';
 import CookieConsentBanner from '../(components)/CookieConsentBanner';
 import Header from '../(components)/main-page/Header';
+import Footer from '../(components)/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -29,6 +30,7 @@ export default async function LocaleLayout({
         <UserProvider initialUser={user}>
           <Header />
           {children}
+          <Footer />
         </UserProvider>
         <Toaster theme="dark" richColors position="top-right" />
         <CookieConsentBanner />

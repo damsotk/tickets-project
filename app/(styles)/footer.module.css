@@ -1,0 +1,236 @@
+.footer {
+  background-color: #121214;
+  color: #b9bbbe;
+  margin-top: 80px;
+  border-radius: 8px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.footerContent {
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr);
+  gap: 48px;
+  padding: 48px 32px;
+  border-bottom: 1px solid #202225;
+}
+
+.footerSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.brandContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.footerLogo {
+  border-radius: 10px;
+}
+
+.brandTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  font-family: 'minecraftFont', monospace;
+  letter-spacing: 0.5px;
+}
+
+.brandDescription {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #72767d;
+  margin: 0;
+  max-width: 280px;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.socialLink {
+  width: 40px;
+  height: 40px;
+  background-color: #40444b;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b9bbbe;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+}
+
+.socialLink:hover {
+  background-color: #5865f2;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.socialLink:active {
+  transform: translateY(0) scale(0.95);
+}
+
+.sectionTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 4px 0;
+  font-family: 'minecraftFont', monospace;
+}
+
+.linkList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footerLink {
+  color: #b9bbbe;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s ease;
+  display: inline-block;
+  position: relative;
+}
+
+.footerLink::before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #5865f2;
+  transition: width 0.3s ease;
+}
+
+.footerLink:hover {
+  color: #ffffff;
+}
+
+.footerLink:hover::before {
+  width: 100%;
+}
+
+.footerBottom {
+  padding: 24px 32px;
+  background-color: #0d0d0f;
+  text-align: center;
+}
+
+.copyright {
+  font-size: 13px;
+  color: #72767d;
+  margin: 0;
+  font-family: 'minecraftFont', monospace;
+  letter-spacing: 0.3px;
+}
+
+@media (max-width: 1024px) {
+  .footerContent {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    padding: 40px 24px;
+  }
+
+  .footerSection:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    margin-top: 60px;
+    border-radius: 12px;
+  }
+
+  .footerContent {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 32px 20px;
+  }
+
+  .footerSection:first-child {
+    grid-column: auto;
+  }
+
+  .brandDescription {
+    max-width: 100%;
+  }
+
+  .footerBottom {
+    padding: 20px;
+  }
+
+  .copyright {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    margin-top: 40px;
+  }
+
+  .footerContent {
+    gap: 28px;
+    padding: 28px 16px;
+  }
+
+  .brandContainer {
+    gap: 10px;
+  }
+
+  .brandTitle {
+    font-size: 18px;
+  }
+
+  .brandDescription {
+    font-size: 13px;
+  }
+
+  .socialLinks {
+    gap: 10px;
+  }
+
+  .socialLink {
+    width: 36px;
+    height: 36px;
+  }
+
+  .socialLink svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .sectionTitle {
+    font-size: 13px;
+  }
+
+  .footerLink {
+    font-size: 13px;
+  }
+
+  .footerBottom {
+    padding: 16px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .footer {
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+  }
+}

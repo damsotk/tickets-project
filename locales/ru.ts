@@ -168,6 +168,21 @@ const ru = {
       admin: 'Администратор',
     },
   },
+  footer: {
+    title: 'Ellium Tickets',
+    description: 'Создано, спроектировано Денисом Пияком',
+    quickLinks: 'Быстрые ссылки',
+    home: 'Главная',
+    tickets: 'Тикеты',
+    support: 'Поддержка',
+    community: 'Сообщество',
+    discord: 'Discord',
+    github: 'GitHub',
+    twitter: 'Twitter',
+    legal: 'Правовая информация',
+    privacy: 'Политика конфиденциальности',
+    copyright: 'Все права защищены',
+  },
 };
 
 export default ru;

@@ -167,6 +167,21 @@ const by = {
       admin: 'Адміністратар',
     },
   },
+  footer: {
+    title: 'Ellium Tickets',
+    description: 'Распрацаваў і дызайн Дзяніс Піак',
+    quickLinks: 'Хуткія спасылкі',
+    home: 'Галоўная',
+    tickets: 'Тыкеты',
+    support: 'Падтрымка',
+    community: 'Супольнасць',
+    discord: 'Discord',
+    github: 'GitHub',
+    twitter: 'Twitter',
+    legal: 'Прававая інфармацыя',
+    privacy: 'Палітыка прыватнасці',
+    copyright: 'Усе правы абаронены',
+  },
 };
 
 export default by;

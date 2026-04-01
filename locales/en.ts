@@ -169,6 +169,21 @@ const en = {
       admin: 'Administrator',
     },
   },
+  footer: {
+    title: 'Ellium Tickets',
+    description: 'Created and designed by Denys Piiak',
+    quickLinks: 'Quick Links',
+    home: 'Home',
+    tickets: 'Tickets',
+    support: 'Support',
+    community: 'Community',
+    discord: 'Discord',
+    github: 'GitHub',
+    twitter: 'Twitter',
+    legal: 'Legal',
+    privacy: 'Privacy Policy',
+    copyright: 'All rights reserved',
+  },
 };
 
 export default en;
