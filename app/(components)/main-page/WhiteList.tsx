@@ -3,10 +3,13 @@
 import { useWhiteListForm } from '@/app/(hooks)/main-page-hooks/useWhiteListForm';
 import { useModal } from '@/app/(hooks)/modal-hooks/use-modal';
 import { useModalNavigation } from '@/app/(hooks)/modal-hooks/use-modal-navigation';
+import { useTranslation } from '@/app/(hooks)/use-translation';
 import styles from '@/app/(styles)/white-list.module.css';
 import useUser from '@/contexts/UserContext';
 
 export default function WhiteList() {
+  const { translate } = useTranslation();
+  const translated = translate.modal.whilelistmodal;
   const { user } = useUser();
 
   const { isOpen, openModal, closeModal } = useModal(false, {
@@ -30,16 +33,13 @@ export default function WhiteList() {
         <div className={styles.content}>
           <div className={styles.badge}>
             <span className={styles.badgeIcon}>🛡️</span>
-            <span className={styles.badgeText}>Закрытое сообщество</span>
+            <span className={styles.badgeText}>{translated.card.badge}</span>
           </div>
 
-          <p className={styles.description}>
-            На нашем сервере действует система вайт-листа. Подайте заявку, чтобы присоединиться к
-            нашему закрытому сообществу!
-          </p>
+          <p className={styles.description}>{translated.card.description}</p>
 
           <button onClick={openModal} className={styles.button}>
-            <span className={styles.buttonText}>Подать заявку</span>
+            <span className={styles.buttonText}>{translated.card.button}</span>
             <span className={styles.buttonIcon}>→</span>
           </button>
         </div>
@@ -49,7 +49,7 @@ export default function WhiteList() {
         <div className={styles.modalOverlay} onClick={handleClose}>
           <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
             <div className={styles.modalHeader}>
-              <h2 className={styles.modalTitle}>Заявка в White List</h2>
+              <h2 className={styles.modalTitle}>{translated.modal.title}</h2>
               <button onClick={handleClose} className={styles.closeButton}>
                 ✕
               </button>
@@ -58,47 +58,51 @@ export default function WhiteList() {
             <div className={styles.modalBody}>
               {currentPage === 1 && (
                 <div className={styles.page}>
-                  <p className={styles.pageText}>
-                    Нам нужно задать тебе несколько вопросов, перед тем как пустить на сервер. Мы
-                    хотим узнать о тебе побольше, дабы администрации было проще работать с тобой!
-                  </p>
+                  <p className={styles.pageText}>{translated.modal.pages.page1.text}</p>
                 </div>
               )}
               {currentPage === 2 && (
                 <div className={styles.page}>
-                  <p className={styles.hint}>Постарайтесь отвечать коротко и по существу</p>
+                  <p className={styles.hint}>{translated.modal.pages.page2.hint}</p>
 
                   <div className={styles.inputGroup}>
-                    <label className={styles.label}>Откуда вы узнали о проекте?</label>
+                    <label className={styles.label}>
+                      {translated.modal.pages.page2.source.label}
+                    </label>
                     <input
                       type="text"
                       className={styles.input}
                       value={formData.source}
                       onChange={(e) => handleInputChange('source', e.target.value)}
-                      placeholder="Ваш ответ..."
-                    />
-                  </div>
-
-                  <div className={styles.inputGroup}>
-                    <label className={styles.label}>Имеется ли опыт в РП?</label>
-                    <input
-                      type="text"
-                      className={styles.input}
-                      value={formData.rpExperience}
-                      onChange={(e) => handleInputChange('rpExperience', e.target.value)}
-                      placeholder="Ваш ответ..."
+                      placeholder={translated.modal.pages.page2.source.placeholder}
                     />
                   </div>
 
                   <div className={styles.inputGroup}>
                     <label className={styles.label}>
-                      Какие планы на игру? <span className={styles.optional}>(необязательно)</span>
+                      {translated.modal.pages.page2.rpExperience.label}
+                    </label>
+                    <input
+                      type="text"
+                      className={styles.input}
+                      value={formData.rpExperience}
+                      onChange={(e) => handleInputChange('rpExperience', e.target.value)}
+                      placeholder={translated.modal.pages.page2.rpExperience.placeholder}
+                    />
+                  </div>
+
+                  <div className={styles.inputGroup}>
+                    <label className={styles.label}>
+                      {translated.modal.pages.page2.plans.label}{' '}
+                      <span className={styles.optional}>
+                        {translated.modal.pages.page2.plans.optional}
+                      </span>
                     </label>
                     <textarea
                       className={styles.textarea}
                       value={formData.plans}
                       onChange={(e) => handleInputChange('plans', e.target.value)}
-                      placeholder="Ваш ответ..."
+                      placeholder={translated.modal.pages.page2.plans.placeholder}
                       rows={3}
                     />
                   </div>
@@ -108,37 +112,41 @@ export default function WhiteList() {
               {currentPage === 3 && (
                 <div className={styles.page}>
                   <div className={styles.successIcon}>✓</div>
-                  <p className={styles.successText}>
-                    Успешно! Мы получили ваши ответы, введите свой ник ниже, пожалуйста.
-                  </p>
+                  <p className={styles.successText}>{translated.modal.pages.page3.successText}</p>
 
                   <div className={styles.inputGroup}>
-                    <label className={styles.label}>Ваш ник в Minecraft</label>
+                    <label className={styles.label}>
+                      {translated.modal.pages.page3.minecraftNick.label}
+                    </label>
                     <input
                       type="text"
                       className={styles.input}
                       value={formData.minecraftNick}
                       onChange={(e) => handleInputChange('minecraftNick', e.target.value)}
-                      placeholder="Steve"
+                      placeholder={translated.modal.pages.page3.minecraftNick.placeholder}
                     />
                   </div>
 
                   <div className={styles.inputGroup}>
-                    <label className={styles.label}>Ваш ник в Discord</label>
+                    <label className={styles.label}>
+                      {translated.modal.pages.page3.discordNick.label}
+                    </label>
                     <input
                       type="text"
                       className={styles.input}
                       value={formData.discordNick}
                       onChange={(e) => handleInputChange('discordNick', e.target.value)}
-                      placeholder="username#0000"
+                      placeholder={translated.modal.pages.page3.discordNick.placeholder}
                     />
                   </div>
 
                   <div className={styles.discordInfo}>
                     <p className={styles.discordText}>
-                      После этого перейдите по ссылке в Discord и прочтите канал{' '}
-                      <span className={styles.channel}>#как-играть</span>. Добавят вас в вайтлист в
-                      течении 24 часов.
+                      {translated.modal.pages.page3.discordInfo.text}{' '}
+                      <span className={styles.channel}>
+                        {translated.modal.pages.page3.discordInfo.channel}
+                      </span>
+                      {translated.modal.pages.page3.discordInfo.textContinue}
                     </p>
                     <a
                       href="https://discord.gg/your-server"
@@ -147,7 +155,7 @@ export default function WhiteList() {
                       className={styles.discordLink}
                     >
                       <span className={styles.discordIcon}>💬</span>
-                      <span>Присоединиться к Discord</span>
+                      <span>{translated.modal.pages.page3.discordInfo.linkText}</span>
                     </a>
                   </div>
                 </div>
@@ -157,11 +165,11 @@ export default function WhiteList() {
             <div className={styles.modalFooter}>
               {currentPage < 3 ? (
                 <button onClick={handleNext} className={styles.nextButton}>
-                  Далее
+                  {translated.modal.buttons.next}
                 </button>
               ) : (
                 <button onClick={handleClose} className={styles.submitButton}>
-                  Отослать заявку в вайтлист!
+                  {translated.modal.buttons.submit}
                 </button>
               )}
             </div>
