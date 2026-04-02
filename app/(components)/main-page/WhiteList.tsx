@@ -8,8 +8,12 @@ import { useState } from 'react';
 
 export default function WhiteList() {
   const { user } = useWhiteList();
-  const { isOpen, openModal, closeModal } = useModal();
-  const router = useRouter();
+
+  const { isOpen, openModal, closeModal } = useModal(false, {
+    redirectUrl: '/auth',
+    checkAccess: () => !!user,
+  });
+
   const [currentPage, setCurrentPage] = useState(1);
   const [formData, setFormData] = useState({
     source: '',
@@ -18,14 +22,6 @@ export default function WhiteList() {
     minecraftNick: '',
     discordNick: '',
   });
-
-  const handleOpenModal = () => {
-    if (!user) {
-      router.push('/auth');
-      return;
-    }
-    openModal();
-  };
 
   const handleClose = () => {
     closeModal();
@@ -66,7 +62,7 @@ export default function WhiteList() {
             нашему закрытому сообществу!
           </p>
 
-          <button onClick={handleOpenModal} className={styles.button}>
+          <button onClick={openModal} className={styles.button}>
             <span className={styles.buttonText}>Подать заявку</span>
             <span className={styles.buttonIcon}>→</span>
           </button>
