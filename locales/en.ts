@@ -184,28 +184,31 @@ const en = {
     privacy: 'Privacy Policy',
     copyright: 'All rights reserved',
   },
-  modal: {
+  modals: {
     whilelistmodal: {
       card: {
-        badge: 'Private Community',
+        badge: 'Closed Community',
         description:
-          'Our server has a whitelist system. Submit an application to join our private community!',
-        button: 'Apply Now',
+          'Our server uses a whitelist system. Submit an application to join our closed community!',
+        button: 'Apply',
       },
       modal: {
         title: 'White List Application',
+        validation: {
+          required: 'This field is required',
+        },
         pages: {
           page1: {
-            text: 'We need to ask you a few questions before letting you on the server. We want to learn more about you so that the administration can work with you more easily!',
+            text: 'We need to ask you a few questions before letting you onto the server. We want to learn more about you so the administration can work with you more easily!',
           },
           page2: {
-            hint: 'Please try to answer briefly and to the point',
+            hint: 'Try to answer briefly and to the point',
             source: {
-              label: 'How did you hear about the project?',
+              label: 'How did you find out about the project?',
               placeholder: 'Your answer...',
             },
             rpExperience: {
-              label: 'Do you have RP experience?',
+              label: 'Do you have any RP experience?',
               placeholder: 'Your answer...',
             },
             plans: {
@@ -215,8 +218,7 @@ const en = {
             },
           },
           page3: {
-            successText:
-              'Success! We have received your answers, please enter your nickname below.',
+            almostDoneText: 'Almost done! Just enter your Minecraft and Discord nicknames',
             minecraftNick: {
               label: 'Your Minecraft nickname',
               placeholder: 'Steve',
@@ -225,8 +227,12 @@ const en = {
               label: 'Your Discord nickname',
               placeholder: 'username#0000',
             },
+          },
+          page4: {
+            successText:
+              "Success! We have received your application. All that's left is to join Discord!",
             discordInfo: {
-              text: 'After that, follow the link to Discord and read the channel',
+              text: 'Follow the link to Discord and read the channel',
               channel: '#how-to-play',
               textContinue: '. You will be added to the whitelist within 24 hours.',
               linkText: 'Join Discord',

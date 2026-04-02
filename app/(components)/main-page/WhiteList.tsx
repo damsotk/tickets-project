@@ -9,7 +9,7 @@ import useUser from '@/contexts/UserContext';
 
 export default function WhiteList() {
   const { translate } = useTranslation();
-  const translated = translate.modal.whilelistmodal;
+  const translated = translate.modals.whilelistmodal;
   const { user } = useUser();
 
   const { isOpen, openModal, closeModal } = useModal(false, {
@@ -18,13 +18,26 @@ export default function WhiteList() {
   });
   const { currentPage, handleNext, resetPage } = useModalNavigation();
 
-  const { formData, handleInputChange, resetForm, handleSubmit } = useWhiteListForm();
+  const {
+    formData,
+    errors,
+    handleInputChange,
+    resetForm,
+    validatePage2,
+    validatePage3,
+    handleSubmit,
+  } = useWhiteListForm();
 
   const handleClose = () => {
-    handleSubmit();
     closeModal();
     resetPage();
     resetForm();
+  };
+
+  const handleFinalSubmit = () => {
+    handleSubmit();
+    closeModal();
+    resetPage();
   };
 
   return (
@@ -61,6 +74,7 @@ export default function WhiteList() {
                   <p className={styles.pageText}>{translated.modal.pages.page1.text}</p>
                 </div>
               )}
+
               {currentPage === 2 && (
                 <div className={styles.page}>
                   <p className={styles.hint}>{translated.modal.pages.page2.hint}</p>
@@ -71,11 +85,16 @@ export default function WhiteList() {
                     </label>
                     <input
                       type="text"
-                      className={styles.input}
+                      className={`${styles.input} ${errors.source ? styles.inputError : ''}`}
                       value={formData.source}
                       onChange={(e) => handleInputChange('source', e.target.value)}
                       placeholder={translated.modal.pages.page2.source.placeholder}
                     />
+                    {errors.source && (
+                      <span className={styles.errorText}>
+                        {translated.modal.validation.required}
+                      </span>
+                    )}
                   </div>
 
                   <div className={styles.inputGroup}>
@@ -84,11 +103,16 @@ export default function WhiteList() {
                     </label>
                     <input
                       type="text"
-                      className={styles.input}
+                      className={`${styles.input} ${errors.rpExperience ? styles.inputError : ''}`}
                       value={formData.rpExperience}
                       onChange={(e) => handleInputChange('rpExperience', e.target.value)}
                       placeholder={translated.modal.pages.page2.rpExperience.placeholder}
                     />
+                    {errors.rpExperience && (
+                      <span className={styles.errorText}>
+                        {translated.modal.validation.required}
+                      </span>
+                    )}
                   </div>
 
                   <div className={styles.inputGroup}>
@@ -111,8 +135,10 @@ export default function WhiteList() {
 
               {currentPage === 3 && (
                 <div className={styles.page}>
-                  <div className={styles.successIcon}>✓</div>
-                  <p className={styles.successText}>{translated.modal.pages.page3.successText}</p>
+                  <div className={styles.almostDoneIcon}>📝</div>
+                  <p className={styles.almostDoneText}>
+                    {translated.modal.pages.page3.almostDoneText}
+                  </p>
 
                   <div className={styles.inputGroup}>
                     <label className={styles.label}>
@@ -120,11 +146,16 @@ export default function WhiteList() {
                     </label>
                     <input
                       type="text"
-                      className={styles.input}
+                      className={`${styles.input} ${errors.minecraftNick ? styles.inputError : ''}`}
                       value={formData.minecraftNick}
                       onChange={(e) => handleInputChange('minecraftNick', e.target.value)}
                       placeholder={translated.modal.pages.page3.minecraftNick.placeholder}
                     />
+                    {errors.minecraftNick && (
+                      <span className={styles.errorText}>
+                        {translated.modal.validation.required}
+                      </span>
+                    )}
                   </div>
 
                   <div className={styles.inputGroup}>
@@ -133,29 +164,41 @@ export default function WhiteList() {
                     </label>
                     <input
                       type="text"
-                      className={styles.input}
+                      className={`${styles.input} ${errors.discordNick ? styles.inputError : ''}`}
                       value={formData.discordNick}
                       onChange={(e) => handleInputChange('discordNick', e.target.value)}
                       placeholder={translated.modal.pages.page3.discordNick.placeholder}
                     />
+                    {errors.discordNick && (
+                      <span className={styles.errorText}>
+                        {translated.modal.validation.required}
+                      </span>
+                    )}
                   </div>
+                </div>
+              )}
+
+              {currentPage === 4 && (
+                <div className={styles.page}>
+                  <div className={styles.successIcon}>✓</div>
+                  <p className={styles.successText}>{translated.modal.pages.page4.successText}</p>
 
                   <div className={styles.discordInfo}>
                     <p className={styles.discordText}>
-                      {translated.modal.pages.page3.discordInfo.text}{' '}
+                      {translated.modal.pages.page4.discordInfo.text}{' '}
                       <span className={styles.channel}>
-                        {translated.modal.pages.page3.discordInfo.channel}
+                        {translated.modal.pages.page4.discordInfo.channel}
                       </span>
-                      {translated.modal.pages.page3.discordInfo.textContinue}
+                      {translated.modal.pages.page4.discordInfo.textContinue}
                     </p>
                     <a
-                      href="https://discord.gg/your-server"
+                      href="https://discord.gg/U6muwVtSa"
                       target="_blank"
                       rel="noopener noreferrer"
                       className={styles.discordLink}
                     >
                       <span className={styles.discordIcon}>💬</span>
-                      <span>{translated.modal.pages.page3.discordInfo.linkText}</span>
+                      <span>{translated.modal.pages.page4.discordInfo.linkText}</span>
                     </a>
                   </div>
                 </div>
@@ -163,12 +206,23 @@ export default function WhiteList() {
             </div>
 
             <div className={styles.modalFooter}>
-              {currentPage < 3 ? (
-                <button onClick={handleNext} className={styles.nextButton}>
+              {currentPage === 1 && (
+                <button onClick={() => handleNext()} className={styles.nextButton}>
                   {translated.modal.buttons.next}
                 </button>
-              ) : (
-                <button onClick={handleClose} className={styles.submitButton}>
+              )}
+              {currentPage === 2 && (
+                <button onClick={() => handleNext(validatePage2)} className={styles.nextButton}>
+                  {translated.modal.buttons.next}
+                </button>
+              )}
+              {currentPage === 3 && (
+                <button onClick={() => handleNext(validatePage3)} className={styles.nextButton}>
+                  {translated.modal.buttons.next}
+                </button>
+              )}
+              {currentPage === 4 && (
+                <button onClick={handleFinalSubmit} className={styles.submitButton}>
                   {translated.modal.buttons.submit}
                 </button>
               )}

@@ -183,7 +183,7 @@ const ru = {
     privacy: 'Политика конфиденциальности',
     copyright: 'Все права защищены',
   },
-  modal: {
+  modals: {
     whilelistmodal: {
       card: {
         badge: 'Закрытое сообщество',
@@ -193,6 +193,9 @@ const ru = {
       },
       modal: {
         title: 'Заявка в White List',
+        validation: {
+          required: 'Это поле обязательно для заполнения',
+        },
         pages: {
           page1: {
             text: 'Нам нужно задать тебе несколько вопросов, перед тем как пустить на сервер. Мы хотим узнать о тебе побольше, дабы администрации было проще работать с тобой!',
@@ -214,7 +217,7 @@ const ru = {
             },
           },
           page3: {
-            successText: 'Успешно! Мы получили ваши ответы, введите свой ник ниже, пожалуйста.',
+            almostDoneText: 'Почти готово! Осталось ввести свой ник в Minecraft и Discord',
             minecraftNick: {
               label: 'Ваш ник в Minecraft',
               placeholder: 'Steve',
@@ -223,8 +226,11 @@ const ru = {
               label: 'Ваш ник в Discord',
               placeholder: 'username#0000',
             },
+          },
+          page4: {
+            successText: 'Успешно! Мы получили вашу заявку. Осталось только зайти в Discord!',
             discordInfo: {
-              text: 'После этого перейдите по ссылке в Discord и прочтите канал',
+              text: 'Перейдите по ссылке в Discord и прочтите канал',
               channel: '#как-играть',
               textContinue: '. Добавят вас в вайтлист в течении 24 часов.',
               linkText: 'Присоединиться к Discord',
