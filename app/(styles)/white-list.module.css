@@ -1,0 +1,506 @@
+.container {
+  width: 100%;
+}
+
+.card {
+  position: relative;
+  padding: 0;
+  background: transparent;
+  text-align: center;
+}
+
+.content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(168, 85, 247, 0.08);
+  border-radius: 16px;
+  margin-bottom: 16px;
+  font-size: 0.8rem;
+  color: #a855f7;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.badgeIcon {
+  font-size: 0.9rem;
+}
+
+.badgeText {
+  text-transform: uppercase;
+}
+
+.title {
+  font-family: var(--font-minecraft), monospace;
+  font-size: 1.8rem;
+  margin: 0 0 12px 0;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  font-weight: 400;
+}
+
+.description {
+  font-size: 0.95rem;
+  color: #6b7280;
+  line-height: 1.6;
+  margin: 0 0 24px 0;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: transparent;
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  border-radius: 8px;
+  font-family: var(--font-minecraft), monospace;
+  font-size: 0.9rem;
+  color: #a855f7;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  letter-spacing: 0.3px;
+}
+
+.button:hover {
+  background: rgba(168, 85, 247, 0.1);
+  border-color: #a855f7;
+  transform: scale(1.02);
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.buttonText {
+  letter-spacing: 0.5px;
+}
+
+.buttonIcon {
+  font-size: 1.1rem;
+  transition: transform 0.25s ease;
+}
+
+.button:hover .buttonIcon {
+  transform: translateX(3px);
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal {
+  background: #1a1a2e;
+  border-radius: 16px;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  max-width: 550px;
+  width: 100%;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.25s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+
+.modalTitle {
+  font-family: var(--font-minecraft), monospace;
+  font-size: 1.3rem;
+  margin: 0;
+  color: #ffffff;
+  letter-spacing: 0.3px;
+}
+
+.closeButton {
+  background: transparent;
+  border: none;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 6px;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #a855f7;
+}
+
+.modalBody {
+  padding: 28px;
+  overflow-y: auto;
+  flex: 1;
+
+  scrollbar-width: thin;
+  scrollbar-color: rgba(168, 85, 247, 0.3) transparent;
+}
+
+.modalBody::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modalBody::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.modalBody::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.3);
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+
+.modalBody::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 85, 247, 0.5);
+}
+
+@supports (scrollbar-width: thin) {
+  .modalBody {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(168, 85, 247, 0.3) transparent;
+  }
+}
+
+.modalBody * {
+  scroll-behavior: smooth;
+}
+
+.modalFooter {
+  padding: 20px 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+
+.page {
+  animation: fadeSlideIn 0.3s ease;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.pageText {
+  font-size: 0.95rem;
+  color: #9ca3af;
+  line-height: 1.7;
+  margin: 0;
+  text-align: center;
+}
+
+.hint {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin: 0 0 24px 0;
+  text-align: center;
+  font-style: italic;
+}
+
+.inputGroup {
+  margin-bottom: 24px;
+}
+
+.inputGroup:last-of-type {
+  margin-bottom: 0;
+}
+
+.label {
+  display: block;
+  font-size: 0.9rem;
+  color: #d1d5db;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.optional {
+  font-size: 0.8rem;
+  color: #6b7280;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.input:focus {
+  outline: none;
+  border-color: rgba(168, 85, 247, 0.5);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.input::placeholder {
+  color: #4b5563;
+}
+
+.textarea {
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 80px;
+
+  scrollbar-width: thin;
+  scrollbar-color: rgba(168, 85, 247, 0.3) transparent;
+}
+
+.textarea::-webkit-scrollbar {
+  width: 6px;
+}
+
+.textarea::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.textarea::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.3);
+  border-radius: 10px;
+}
+
+.textarea::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 85, 247, 0.5);
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: rgba(168, 85, 247, 0.5);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.textarea::placeholder {
+  color: #4b5563;
+}
+
+.successIcon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 20px;
+  background: rgba(34, 197, 94, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #22c55e;
+}
+
+.successText {
+  font-size: 0.95rem;
+  color: #9ca3af;
+  line-height: 1.7;
+  margin: 0 0 28px 0;
+  text-align: center;
+}
+
+.discordInfo {
+  margin-top: 28px;
+  padding: 20px;
+  background: rgba(88, 101, 242, 0.08);
+  border: 1px solid rgba(88, 101, 242, 0.2);
+  border-radius: 12px;
+}
+
+.discordText {
+  font-size: 0.9rem;
+  color: #9ca3af;
+  line-height: 1.6;
+  margin: 0 0 16px 0;
+  text-align: center;
+}
+
+.channel {
+  color: #5865f2;
+  font-weight: 600;
+  font-family: var(--font-minecraft), monospace;
+}
+
+.discordLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: #5865f2;
+  border-radius: 8px;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.discordLink:hover {
+  background: #4752c4;
+  transform: translateY(-2px);
+}
+
+.discordIcon {
+  font-size: 1.2rem;
+}
+
+.nextButton,
+.submitButton {
+  width: 100%;
+  padding: 14px 24px;
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  border-radius: 8px;
+  font-family: var(--font-minecraft), monospace;
+  font-size: 0.95rem;
+  color: #a855f7;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  letter-spacing: 0.3px;
+}
+
+.nextButton:hover,
+.submitButton:hover {
+  background: rgba(168, 85, 247, 0.25);
+  border-color: #a855f7;
+  transform: translateY(-2px);
+}
+
+.nextButton:active,
+.submitButton:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
+  }
+
+  .button {
+    padding: 11px 24px;
+    font-size: 0.85rem;
+  }
+
+  .modalHeader {
+    padding: 20px 24px;
+  }
+
+  .modalTitle {
+    font-size: 1.2rem;
+  }
+
+  .modalBody {
+    padding: 24px;
+  }
+
+  .modalFooter {
+    padding: 16px 24px;
+  }
+
+  .modalBody::-webkit-scrollbar {
+    width: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.3rem;
+  }
+
+  .description {
+    font-size: 0.85rem;
+  }
+
+  .badge {
+    font-size: 0.75rem;
+    padding: 5px 12px;
+  }
+
+  .input,
+  .textarea {
+    font-size: 0.85rem;
+  }
+
+  .modalBody::-webkit-scrollbar {
+    width: 3px;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .modalBody::-webkit-scrollbar {
+    width: 0;
+    display: none;
+  }
+
+  .modalBody {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+}
