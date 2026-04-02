@@ -1,8 +1,7 @@
 'use client';
 
 import { useWhiteList } from '@/app/(hooks)/main-page-hooks/useWhiteList';
-import { useModal } from '@/app/(hooks)/useModal';
-import { useRouter } from 'next/navigation';
+import { useModal } from '@/app/(hooks)/modal-hooks/use-modal';
 import styles from '@/app/(styles)/white-list.module.css';
 import { useState } from 'react';
 
