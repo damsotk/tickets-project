@@ -1,50 +1,27 @@
 'use client';
 
-import { useWhiteList } from '@/app/(hooks)/main-page-hooks/useWhiteList';
+import { useWhiteListForm } from '@/app/(hooks)/main-page-hooks/useWhiteListForm';
 import { useModal } from '@/app/(hooks)/modal-hooks/use-modal';
+import { useModalNavigation } from '@/app/(hooks)/modal-hooks/use-modal-navigation';
 import styles from '@/app/(styles)/white-list.module.css';
-import { useState } from 'react';
+import useUser from '@/contexts/UserContext';
 
 export default function WhiteList() {
-  const { user } = useWhiteList();
+  const { user } = useUser();
 
   const { isOpen, openModal, closeModal } = useModal(false, {
     redirectUrl: '/auth',
     checkAccess: () => !!user,
   });
+  const { currentPage, handleNext, resetPage } = useModalNavigation();
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [formData, setFormData] = useState({
-    source: '',
-    rpExperience: '',
-    plans: '',
-    minecraftNick: '',
-    discordNick: '',
-  });
+  const { formData, handleInputChange, resetForm, handleSubmit } = useWhiteListForm();
 
   const handleClose = () => {
+    handleSubmit();
     closeModal();
-    setCurrentPage(1);
-    setFormData({
-      source: '',
-      rpExperience: '',
-      plans: '',
-      minecraftNick: '',
-      discordNick: '',
-    });
-  };
-
-  const handleNext = () => {
-    setCurrentPage((prev) => prev + 1);
-  };
-
-  const handleInputChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
-
-  const handleSubmit = () => {
-    console.log('Форма отправлена:', formData);
-    handleClose();
+    resetPage();
+    resetForm();
   };
 
   return (
@@ -183,7 +160,7 @@ export default function WhiteList() {
                   Далее
                 </button>
               ) : (
-                <button onClick={handleSubmit} className={styles.submitButton}>
+                <button onClick={handleClose} className={styles.submitButton}>
                   Отослать заявку в вайтлист!
                 </button>
               )}
