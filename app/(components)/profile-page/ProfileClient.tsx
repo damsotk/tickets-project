@@ -65,12 +65,10 @@ export default function ProfileClient({ user }: ProfileClientProps) {
         <div className={styles.avatarSection}>
           <div className={styles.avatarWrapper}>
             {user.avatar ? (
-              <Image
-                src={user.avatar}
-                alt={t.avatarAlt}
-                width={128}
-                height={128}
-                className={styles.avatar}
+              <img
+                src={user.avatar || 'https://api.dicebear.com/9.x/adventurer-neutral/svg?radius=0'}
+                className={styles.userAvatar}
+                title={user.name}
               />
             ) : (
               <div className={styles.avatarPlaceholder}>{getInitials()}</div>

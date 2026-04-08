@@ -410,6 +410,44 @@
   opacity: 0.7;
 }
 
+.discordButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: #5865f2;
+  color: #ffffff;
+  width: 100%;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+
+.discordButton:hover {
+  background-color: #4752c4;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  gap: 12px;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.dividerText {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
 @media (max-width: 768px) {
   .backgroundImage {
     width: 100%;
