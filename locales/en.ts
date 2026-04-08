@@ -77,6 +77,15 @@ const en = {
         description:
           'Send an anonymous rumor to the server. Your message will appear in the game without identifying the author—intrigue, gossip, and secrets.',
       },
+      shop: {
+        title: 'Shop',
+        description: 'Buy unique items with in-site currency. Cosmetics, abilities and much more!',
+      },
+      howToPlay: {
+        title: 'How to Play',
+        description:
+          'Learn everything about the server concept, mechanics, classes and where to start your adventure.',
+      },
     },
   },
   tickets: {

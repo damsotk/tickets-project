@@ -1,7 +1,93 @@
 .container {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
+.featuredSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.featuredCard {
+  position: relative;
+  overflow: hidden;
+  padding: 32px 36px;
+  border-radius: 20px;
+  border-width: 2px;
+}
+
+.featuredCard .iconWrapper {
+  width: 68px;
+  height: 68px;
+  border-radius: 16px;
+}
+
+.featuredCard .icon {
+  font-size: 2.2rem;
+}
+
+.featuredCard .title {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+}
+
+.featuredCard .description {
+  font-size: 1rem;
+}
+
+.featuredCard .arrow {
+  font-size: 2rem;
+}
+
+.featuredBackground {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.featuredCard:hover .featuredBackground {
+  opacity: 1;
+}
+
+.featuredInner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.featuredBadge {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 1.1rem;
+  opacity: 0.6;
+  z-index: 1;
+  animation: badgePulse 2.5s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.15);
+  }
+}
+
+/* ========================
+   Regular Grid
+   ======================== */
 .grid {
   display: flex;
   flex-direction: column;
@@ -22,6 +108,10 @@
 
 .card:hover {
   transform: translateX(6px);
+}
+
+.featuredCard:hover {
+  transform: translateX(0) translateY(-3px);
 }
 
 .iconWrapper {
@@ -72,6 +162,40 @@
 .card:hover .arrow {
   transform: translateX(4px);
 }
+
+.card.gold {
+  border-color: rgba(251, 191, 36, 0.3);
+  background: linear-gradient(135deg, #1a1a2e 0%, rgba(251, 191, 36, 0.06) 100%);
+}
+
+.card.gold .iconWrapper {
+  background: rgba(251, 191, 36, 0.15);
+}
+
+.card.gold .title {
+  color: #fbbf24;
+}
+
+.card.gold .featuredBadge {
+  color: #fbbf24;
+}
+
+.card.gold .featuredBackground {
+  background: radial-gradient(ellipse at 20% 50%, rgba(251, 191, 36, 0.12) 0%, transparent 70%);
+}
+
+.card.gold:hover {
+  background: linear-gradient(135deg, #1a1a2e 0%, rgba(251, 191, 36, 0.15) 100%);
+  box-shadow:
+    0 12px 40px rgba(251, 191, 36, 0.2),
+    inset 0 1px 0 rgba(251, 191, 36, 0.1);
+  border-color: rgba(251, 191, 36, 0.5);
+}
+
+.card.gold:hover .arrow {
+  color: #fbbf24;
+}
+
 .card.red {
   border-color: rgba(239, 68, 68, 0.25);
 }
@@ -166,6 +290,31 @@
     gap: 16px;
   }
 
+  .featuredCard {
+    padding: 24px 20px;
+  }
+
+  .featuredCard .iconWrapper {
+    width: 56px;
+    height: 56px;
+  }
+
+  .featuredCard .icon {
+    font-size: 1.8rem;
+  }
+
+  .featuredCard .title {
+    font-size: 1.3rem;
+  }
+
+  .featuredCard .description {
+    font-size: 0.9rem;
+  }
+
+  .featuredInner {
+    gap: 16px;
+  }
+
   .iconWrapper {
     width: 48px;
     height: 48px;
@@ -184,6 +333,10 @@
   }
 
   .arrow {
+    display: none;
+  }
+
+  .featuredCard .arrow {
     display: none;
   }
 }
