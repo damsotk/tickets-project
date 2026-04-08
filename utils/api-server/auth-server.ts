@@ -23,6 +23,7 @@ export async function getCurrentUser(): Promise<User | null> {
       name: true,
       avatar: true,
       email: true,
+      balance: true,
       createdAt: true,
       updatedAt: true,
       role: true,

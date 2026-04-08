@@ -55,6 +55,10 @@ export default function ProfileClient({ user }: ProfileClientProps) {
     return user.email.charAt(0).toUpperCase();
   };
 
+  const formatBalance = (balance: number) => {
+    return balance.toLocaleString('en-US');
+  };
+
   return (
     <div className={styles.profileWrapper}>
       <div className={styles.profileContent}>
@@ -76,6 +80,17 @@ export default function ProfileClient({ user }: ProfileClientProps) {
           <div className={styles.userInfo}>
             <h1 className={styles.userName}>{user.name || t.defaultName}</h1>
             <p className={styles.userEmail}>{user.email}</p>
+
+            <div className={styles.balanceDisplay}>
+              <Image
+                src="/icons/custom_gold_ingot.png"
+                alt={'Balance'}
+                width={24}
+                height={24}
+                className={styles.coinIcon}
+              />
+              <span className={styles.balanceAmount}>{formatBalance(user.balance)}</span>
+            </div>
           </div>
         </div>
 

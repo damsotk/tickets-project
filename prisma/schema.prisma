@@ -31,6 +31,9 @@ model User {
   name            String    @db.VarChar(100)
   avatar          String?   @db.VarChar(500)
   
+  // Currency
+  balance         Int       @default(0)
+  
   // Discord data
   discordId       String?   @unique @db.VarChar(50)
   

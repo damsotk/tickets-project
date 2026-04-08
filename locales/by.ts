@@ -151,6 +151,7 @@ const by = {
       registrationDate: 'Дата рэгістрацыі',
       lastUpdate: 'Апошняе абнаўленне',
       notUpdated: 'Не абнаўлялася',
+      balance: 'Баланс',
     },
     stats: {
       title: 'Статыстыка акаўнта',

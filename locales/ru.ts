@@ -152,6 +152,7 @@ const ru = {
       registrationDate: 'Дата регистрации',
       lastUpdate: 'Последнее обновление',
       notUpdated: 'Не обновлялось',
+      balance: 'Баланс',
     },
     stats: {
       title: 'Статистика аккаунта',

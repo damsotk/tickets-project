@@ -6,6 +6,7 @@ export interface User {
   role: 'USER' | 'ADMIN';
   createdAt: Date;
   updatedAt: Date;
+  balance: number;
 }
 
 export interface AuthResponse {

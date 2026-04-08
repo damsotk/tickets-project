@@ -152,6 +152,7 @@ const uk = {
       registrationDate: 'Дата реєстрації',
       lastUpdate: 'Останнє оновлення',
       notUpdated: 'Не оновлювалося',
+      balance: 'Баланс',
     },
     stats: {
       title: 'Статистика акаунта',

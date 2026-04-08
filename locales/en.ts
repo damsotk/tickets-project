@@ -153,6 +153,7 @@ const en = {
       registrationDate: 'Registration date',
       lastUpdate: 'Last update',
       notUpdated: 'Not updated',
+      balance: 'Balance',
     },
     stats: {
       title: 'Account statistics',
