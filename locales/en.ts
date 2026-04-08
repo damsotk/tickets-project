@@ -185,6 +185,48 @@ const en = {
     privacy: 'Privacy Policy',
     copyright: 'All rights reserved',
   },
+  shop: {
+    title: 'Elium Shop',
+    subtitle: 'Support the server and get unique abilities for your gameplay',
+    from: 'from',
+    notice:
+      'You can buy something useful for yourself with the site currency, which is issued for various activities or for some actions that the administration has considered useful for the server. Currency cannot be purchased for real money. So far, this store is only a price list, without the ability to automatically buy something, the site developer is actively working on automation. Currently, if you have enough currency for what you want, write a ticket, they will give you everything.',
+    items: {
+      createTwink: {
+        name: 'Create a Twink',
+        description:
+          'Create an additional account on the server to play with a different nickname.',
+        badge: '',
+      },
+      addSchematic: {
+        name: 'Add Your Schematic to the Server',
+        description:
+          'Your own build will be uploaded to the server as a schematic. Price depends on complexity.',
+        badge: 'Individual',
+      },
+      customMechanic: {
+        name: 'Custom Mechanic Addition',
+        description:
+          'A unique mechanic developed specifically for you. Requires prior discussion with the administration.',
+        badge: 'After Discussion',
+      },
+      flightAbility: {
+        name: 'RP Granting the Power of Flight',
+        description: 'Gain the ability to fly on the server through a roleplay event.',
+        badge: '',
+      },
+      reduceBan: {
+        name: 'Reduce Ban Duration',
+        description: 'Reduction of your ban duration on the server.',
+        badge: '',
+      },
+      escapeKant: {
+        name: 'Escape from Kant',
+        description: 'Rescue your character from the Kant location.',
+        badge: '',
+      },
+    },
+  },
   modals: {
     whilelistmodal: {
       card: {
