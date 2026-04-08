@@ -1,0 +1,539 @@
+.container {
+  width: 100%;
+  /* max-width: 900px; */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 50px;
+}
+
+.hero {
+  text-align: center;
+  padding: 48px 32px;
+  background: linear-gradient(
+    135deg,
+    #1a1a2e 0%,
+    rgba(168, 85, 247, 0.1) 50%,
+    rgba(59, 130, 246, 0.08) 100%
+  );
+  border-radius: 20px;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.heroTitle {
+  font-family: var(--font-minecraft), monospace;
+  font-size: 2.4rem;
+  color: #e2e8f0;
+  margin: 0 0 12px 0;
+  letter-spacing: 1px;
+}
+
+.heroGreeting {
+  font-size: 1.15rem;
+  color: #a78bfa;
+  margin: 0;
+}
+
+.section {
+  padding: 32px;
+  background: #1a1a2e;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sectionTitle {
+  font-family: var(--font-minecraft), monospace;
+  font-size: 1.4rem;
+  color: #e2e8f0;
+  margin: 0 0 20px 0;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sectionTitle::before {
+  content: '';
+  width: 4px;
+  height: 24px;
+  background: #a855f7;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.introText {
+  font-size: 1.05rem;
+  color: #c4c9d4;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.addressCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.addressCard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 20px;
+  background: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.addressLabel {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+}
+
+.addressValue {
+  font-family: var(--font-minecraft), monospace;
+  font-size: 1.1rem;
+  color: #a78bfa;
+  user-select: all;
+}
+
+.linksGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.linkCard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 22px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.linkCard:hover {
+  transform: translateX(4px);
+}
+
+.linkCard div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.linkIcon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+.linkName {
+  font-family: var(--font-minecraft), monospace;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.linkDesc {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.linkArrow {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: all 0.25s ease;
+}
+
+.linkCard:hover .linkArrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.linkDiscord {
+  border-color: rgba(88, 101, 242, 0.25);
+}
+
+.linkDiscord .linkName {
+  color: #7289da;
+}
+
+.linkDiscord:hover {
+  background: rgba(88, 101, 242, 0.1);
+  border-color: rgba(88, 101, 242, 0.4);
+  box-shadow: 0 4px 20px rgba(88, 101, 242, 0.12);
+}
+
+.linkDiscord:hover .linkArrow {
+  color: #7289da;
+}
+
+.linkTelegram {
+  border-color: rgba(0, 136, 204, 0.25);
+}
+
+.linkTelegram .linkName {
+  color: #29b6f6;
+}
+
+.linkTelegram:hover {
+  background: rgba(0, 136, 204, 0.1);
+  border-color: rgba(0, 136, 204, 0.4);
+  box-shadow: 0 4px 20px rgba(0, 136, 204, 0.12);
+}
+
+.linkTelegram:hover .linkArrow {
+  color: #29b6f6;
+}
+.linkCreator {
+  border-color: rgba(251, 146, 60, 0.25);
+}
+
+.linkCreator .linkName {
+  color: #fb923c;
+}
+
+.linkCreator:hover {
+  background: rgba(251, 146, 60, 0.1);
+  border-color: rgba(251, 146, 60, 0.4);
+  box-shadow: 0 4px 20px rgba(251, 146, 60, 0.12);
+}
+
+.linkCreator:hover .linkArrow {
+  color: #fb923c;
+}
+
+.stepsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.stepNumber {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(168, 85, 247, 0.15);
+  border: 2px solid rgba(168, 85, 247, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-minecraft), monospace;
+  font-size: 1.1rem;
+  color: #a855f7;
+  flex-shrink: 0;
+}
+
+.stepContent {
+  flex: 1;
+  padding-top: 6px;
+}
+
+.stepTitle {
+  font-family: var(--font-minecraft), monospace;
+  font-size: 1.1rem;
+  color: #e2e8f0;
+  margin: 0 0 6px 0;
+}
+
+.stepText {
+  font-size: 0.92rem;
+  color: #9ca3af;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.stepDivider {
+  width: 2px;
+  height: 24px;
+  background: rgba(168, 85, 247, 0.2);
+  margin-left: 21px;
+}
+
+.noteCard {
+  padding: 22px 24px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  margin-bottom: 12px;
+}
+
+.noteCard:last-child {
+  margin-bottom: 0;
+}
+
+.noteHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.noteIcon {
+  font-size: 1.4rem;
+}
+
+.noteTitle {
+  font-family: var(--font-minecraft), monospace;
+  font-size: 1.05rem;
+  color: #e2e8f0;
+  margin: 0;
+}
+
+.noteText {
+  font-size: 0.92rem;
+  color: #9ca3af;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.noteTip {
+  margin-top: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 16px;
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 10px;
+}
+
+.tipIcon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.tipText {
+  font-size: 0.88rem;
+  color: #86efac;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.commandsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 10px;
+}
+
+.commandCard {
+  padding: 16px 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  transition: border-color 0.2s ease;
+}
+
+.commandCard:hover {
+  border-color: rgba(168, 85, 247, 0.3);
+}
+
+.commandName {
+  font-family: var(--font-minecraft), monospace;
+  font-size: 0.95rem;
+  color: #a78bfa;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.commandDesc {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.ticketBanner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 28px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(168, 85, 247, 0.08) 100%);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: 14px;
+}
+
+.ticketIcon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.ticketTitle {
+  font-family: var(--font-minecraft), monospace;
+  font-size: 1.1rem;
+  color: #60a5fa;
+  margin: 0 0 6px 0;
+}
+
+.ticketText {
+  font-size: 0.92rem;
+  color: #9ca3af;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.channelsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.channelItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+
+.channelItem:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.channelEmoji {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.channelItem div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.channelName {
+  font-family: var(--font-minecraft), monospace;
+  font-size: 0.95rem;
+  color: #e2e8f0;
+}
+
+.channelDesc {
+  font-size: 0.82rem;
+  color: #6b7280;
+}
+
+.outro {
+  text-align: center;
+  padding: 48px 32px;
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.06) 0%,
+    #1a1a2e 50%,
+    rgba(168, 85, 247, 0.08) 100%
+  );
+  border-radius: 20px;
+  border: 1px solid rgba(168, 85, 247, 0.15);
+}
+
+.outroTitle {
+  font-family: var(--font-minecraft), monospace;
+  font-size: 1.6rem;
+  color: #e2e8f0;
+  margin: 0 0 16px 0;
+}
+
+.outroText {
+  font-size: 1rem;
+  color: #9ca3af;
+  margin: 0 0 10px 0;
+  line-height: 1.7;
+}
+
+.outroText:last-of-type {
+  margin-bottom: 24px;
+}
+
+.outroCreator {
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.outroCreator span {
+  font-size: 0.88rem;
+  color: #6b7280;
+  font-style: italic;
+}
+
+@media (max-width: 640px) {
+  .container {
+    gap: 10px;
+  }
+
+  .hero {
+    padding: 36px 20px;
+  }
+
+  .heroTitle {
+    font-size: 1.8rem;
+  }
+
+  .section {
+    padding: 24px 18px;
+  }
+
+  .sectionTitle {
+    font-size: 1.2rem;
+  }
+
+  .addressCards {
+    grid-template-columns: 1fr;
+  }
+
+  .step {
+    gap: 14px;
+  }
+
+  .stepNumber {
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
+  }
+
+  .stepDivider {
+    margin-left: 18px;
+    height: 20px;
+  }
+
+  .commandsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .ticketBanner {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+    padding: 20px;
+  }
+
+  .linkCard {
+    padding: 14px 16px;
+    gap: 12px;
+  }
+
+  .outro {
+    padding: 36px 20px;
+  }
+
+  .outroTitle {
+    font-size: 1.3rem;
+  }
+}

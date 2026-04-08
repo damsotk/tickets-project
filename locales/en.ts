@@ -298,6 +298,103 @@ const en = {
       },
     },
   },
+  howToPlay: {
+    title: 'How to Play?',
+    greeting: 'Safe travels, Tavr!',
+    intro:
+      'The Chronicles of Elium is an RP project where thrilling adventures await you, every block holds a story, and every sunset promises new feats! You have stepped into a world full of mysteries, dangers, and boundless possibilities. Here your fate is in your hands, and your actions shape the future of this Plane.',
+    serverAddress: 'Server IP Address',
+    version: 'Version',
+    links: {
+      title: 'Links',
+      discord: 'Our Discord server',
+      telegram: 'We are on Telegram',
+      creatorChannel: "BN's Channel",
+      creatorDesc: "Creator's art channel",
+    },
+    howToStart: {
+      title: 'How to Start Playing',
+      step1: {
+        title: 'Submit an Application',
+        text: 'Write your nickname in the 🧩-whitelist channel on our Discord.',
+      },
+      step2: {
+        title: 'Wait for a Response',
+        text: 'An administrator will contact you to ask a couple of questions before adding you to the whitelist.',
+      },
+      step3: {
+        title: 'Read the Rules',
+        text: 'While you wait, familiarize yourself with the project and Discord server rules in the 💾-rules and 💾-role-rules channels.',
+      },
+    },
+    importantNotes: {
+      title: 'Important Notes',
+      tlSkin: {
+        title: 'We Do Not Use TL Skin Mod',
+        text: 'After approval and receiving a checkmark next to your nickname, make sure there is NO TL Skin mod in your modpack.',
+        tip: 'The server has a plugin for setting skins via the /skin (your skin link) command. This allows you to optimize the RP process without leaving the server to change skins.',
+      },
+      texturePack: {
+        title: 'Texture Pack Not Loading?',
+        text: 'Submit a ticket. Most often the issue is not on our end.',
+      },
+    },
+    commandsTitle: 'Basic RP Commands',
+    commands: {
+      menu: 'Server menu — useful links, race features, walk/run toggle',
+      name: "Change your character's name",
+      chatLabel: '(text)',
+      chat: 'Normal character speech (Cat: Meow meow)',
+      sh: 'Character whisper (Cat whispers: Meow meow)',
+      low: 'Character half-whisper (Tavr says quietly: Meow meow)',
+      scr: 'Character shout (Cat shouts: Meow meow)',
+      me: 'Character action (/me did a flip → "Cat did a flip")',
+      do: 'Event description (/do The flip was unsuccessful → "The flip was unsuccessful")',
+      try: 'Action attempt with a random outcome',
+      dice: 'Dice, like in DnD — a roll from 1 to 20',
+      sit: 'Sit down',
+      lay: 'Lay on your back',
+      nrpLabel: 'ooc (text)',
+      nrp: 'Out-of-character communication (grey text in chat)',
+      globalNrpLabel: '!ooc (text)',
+      globalNrp: 'Global out-of-character',
+    },
+    ticketsSection: {
+      title: 'Tickets',
+      text: 'For all questions regarding mechanics and lore, create a ticket in the 🎫-tickets channel on Discord. Click "Create Ticket" and describe your question.',
+    },
+    usefulChannels: 'Also Interesting to Read',
+    channels: {
+      chronicle: {
+        name: 'Chronicle',
+        desc: 'Timeline of events that have happened and are happening in our Plane',
+      },
+      truths: {
+        name: 'Bonds of Truth',
+        desc: 'RP archive with additional lore information',
+      },
+      news: {
+        name: 'News',
+        desc: 'News channel with server-related events',
+      },
+      sneakPeeks: {
+        name: 'Sneak Peeks',
+        desc: 'Additions and changes to mechanics',
+      },
+      announcements: {
+        name: 'Announcements',
+        desc: 'RP bulletin board in Nekodil, where every Tavr can post their announcement',
+      },
+    },
+    outro: {
+      title: 'Elium Awaits You!',
+      text1:
+        'We believe that every player can create their own unique story in our world. May your adventures be full of danger, yet generously rewarded. May your friends be loyal and your enemies — worthy opponents.',
+      text2:
+        'Welcome to The Chronicles of Elium — a world where your legend is just beginning! Safe travels, Tavr! May the stars of Elium light your path!',
+      creator: 'Creator and head of the server: Cefal | BN_1',
+    },
+  },
 };
 
 export default en;
