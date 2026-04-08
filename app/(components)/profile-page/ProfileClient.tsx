@@ -77,7 +77,6 @@ export default function ProfileClient({ user }: ProfileClientProps) {
 
           <div className={styles.userInfo}>
             <h1 className={styles.userName}>{user.name || t.defaultName}</h1>
-            <p className={styles.userEmail}>{user.email}</p>
 
             <div className={styles.balanceDisplay}>
               <Image
