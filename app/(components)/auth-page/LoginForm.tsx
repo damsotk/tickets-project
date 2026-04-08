@@ -7,7 +7,7 @@ import { useAuthFormHandlers } from '@/app/(hooks)/auth-page-hooks/use-auth-form
 import { useTranslation } from '@/app/(hooks)/use-translation';
 import { FormField } from './FormField';
 import useUser from '@/contexts/UserContext';
-import { User } from '@prisma/client';
+import { User } from '@/types/user';
 
 interface LoginResponse {
   user: User;
