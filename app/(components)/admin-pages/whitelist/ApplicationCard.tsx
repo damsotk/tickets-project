@@ -95,10 +95,6 @@ export function ApplicationCard({
               <span style={labelStyle}>Аккаунт на сайте</span>
               <p style={{ margin: '4px 0 0', fontSize: 14 }}>{app.user.name}</p>
             </div>
-            <div>
-              <span style={labelStyle}>Email</span>
-              <p style={{ margin: '4px 0 0', fontSize: 14 }}>{app.user.email}</p>
-            </div>
           </div>
 
           <div style={{ marginTop: 16 }}>

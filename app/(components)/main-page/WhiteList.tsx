@@ -6,6 +6,7 @@ import { useModalNavigation } from '@/app/(hooks)/modal-hooks/use-modal-navigati
 import { useTranslation } from '@/app/(hooks)/use-translation';
 import styles from '@/app/(styles)/white-list.module.css';
 import useUser from '@/contexts/UserContext';
+import Link from 'next/link';
 
 export default function WhiteList() {
   const { translate } = useTranslation();
@@ -195,23 +196,16 @@ export default function WhiteList() {
                   <div className={styles.successIcon}>✓</div>
                   <p className={styles.successText}>{translated.modal.pages.page4.successText}</p>
 
-                  <div className={styles.discordInfo}>
-                    <p className={styles.discordText}>
-                      {translated.modal.pages.page4.discordInfo.text}{' '}
-                      <span className={styles.channel}>
-                        {translated.modal.pages.page4.discordInfo.channel}
-                      </span>
-                      {translated.modal.pages.page4.discordInfo.textContinue}
-                    </p>
-                    <a
-                      href="https://discord.gg/U6muwVtSa"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.discordLink}
+                  <div className={styles.infoBlock}>
+                    <p className={styles.infoText}>{translated.modal.pages.page4.infoText}</p>
+                    <Link
+                      href="/how-to-play"
+                      className={styles.howToPlayLink}
+                      onClick={handleFinalClose}
                     >
-                      <span className={styles.discordIcon}>💬</span>
-                      <span>{translated.modal.pages.page4.discordInfo.linkText}</span>
-                    </a>
+                      <span className={styles.howToPlayIcon}>📖</span>
+                      <span>{translated.modal.pages.page4.howToPlayButton}</span>
+                    </Link>
                   </div>
                 </div>
               )}

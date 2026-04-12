@@ -281,19 +281,15 @@ const en = {
             },
           },
           page4: {
-            successText:
-              "Success! We have received your application. All that's left is to join Discord!",
-            discordInfo: {
-              text: 'Follow the link to Discord and read the channel',
-              channel: '#how-to-play',
-              textContinue: '. You will be added to the whitelist within 24 hours.',
-              linkText: 'Join Discord',
-            },
+            successText: 'Success! We have received your application.',
+            infoText:
+              'Go to the "How to Play" page using the button below to find all the additional information, and also join our Discord for active participation in our community — you will find the link on the "How to Play" page.',
+            howToPlayButton: 'How to Play',
           },
         },
         buttons: {
           next: 'Next',
-          submit: 'Submit whitelist application!',
+          submit: 'Close',
         },
       },
     },
@@ -316,11 +312,11 @@ const en = {
       title: 'How to Start Playing',
       step1: {
         title: 'Submit an Application',
-        text: 'Write your nickname in the 🧩-whitelist channel on our Discord.',
+        text: 'On the main page of the website, click on the "Submit" button and go through all the steps',
       },
       step2: {
         title: 'Wait for a Response',
-        text: 'An administrator will contact you to ask a couple of questions before adding you to the whitelist.',
+        text: 'You have to wait from 1 hour to 24 hours for your application to be accepted or rejected.',
       },
       step3: {
         title: 'Read the Rules',
