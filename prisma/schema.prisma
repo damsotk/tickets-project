@@ -49,6 +49,9 @@ model User {
   tickets         Ticket[]
   closedTickets   Ticket[]  @relation("ClosedBy")
   messages        Message[]
+
+  whitelistApplications  WhitelistApplication[]
+  reviewedApplications   WhitelistApplication[]  @relation("ReviewedBy")
   
   @@map("users")
 }
@@ -96,4 +99,42 @@ model Message {
   @@index([authorId])
   
   @@map("messages")
+}
+
+enum WhitelistStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model WhitelistApplication {
+  id             String          @id @default(cuid())
+
+  source         String          @db.VarChar(500)
+  rpExperience   String          @db.VarChar(1000)
+  plans          String?         @db.VarChar(2000)
+  minecraftNick  String          @db.VarChar(100)
+  discordNick    String          @db.VarChar(100)
+
+  status         WhitelistStatus @default(PENDING)
+
+  // Who want to join
+  userId         String
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Viewed by
+  reviewedAt     DateTime?
+  reviewedById   String?
+  reviewedBy     User?           @relation("ReviewedBy", fields: [reviewedById], references: [id], onDelete: SetNull)
+  reviewComment  String?         @db.VarChar(1000)
+
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  // One user one application
+  @@unique([userId, status], name: "unique_pending_application")
+  @@index([userId])
+  @@index([status])
+
+  @@map("whitelist_applications")
 }
