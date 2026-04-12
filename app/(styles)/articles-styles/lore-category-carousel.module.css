@@ -140,46 +140,194 @@
 
 @media (max-width: 768px) {
   .carouselContainer {
-    gap: 12px;
-    margin-bottom: 60px;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 40px;
+    padding: 10px 0;
   }
 
   .navButton {
-    width: 48px;
-    height: 48px;
-    font-size: 2rem;
+    width: 56px;
+    height: 56px;
+    font-size: 2.2rem;
+    border-radius: 50%;
   }
 
   .categoryCard {
-    width: calc(100vw - 120px);
-    max-width: 400px;
-    min-height: 350px;
-    padding: 24px;
+    width: 100%;
+    max-width: none;
+    min-height: 240px;
+    padding: 24px 20px;
+    border-radius: 16px;
   }
 
   .cardContent {
-    flex-direction: column;
-    text-align: center;
+    flex-direction: row;
+    text-align: left;
+    gap: 16px;
+    align-items: center;
   }
 
   .textSection {
-    width: 100%;
+    width: auto;
+    flex: 1;
+    min-width: 0;
   }
 
   .categoryTitle {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
   }
 
   .categoryDescription {
-    font-size: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
   }
 
   .iconSection {
-    width: 80px;
+    width: 72px;
+    flex-shrink: 0;
   }
 
   .categoryIcon {
-    width: 80px;
-    height: 80px;
+    width: 72px !important;
+    height: 72px !important;
+  }
+
+  .indicators {
+    margin-top: 20px;
+    gap: 10px;
+  }
+
+  .indicator {
+    width: 10px;
+    height: 10px;
+  }
+
+  .indicator.active {
+    width: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .carouselContainer {
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 40px;
+  }
+
+  .navButton {
+    order: 2;
+  }
+
+  .categoryCard {
+    order: 1;
+    width: 100%;
+    max-width: none;
+    min-height: 240px;
+    padding: 24px 20px;
+    margin-bottom: 16px;
+  }
+}
+
+.mobileNav {
+  display: none;
+}
+
+.desktopOnly {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .desktopOnly {
+    display: none;
+  }
+
+  .mobileNav {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .carouselContainer {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 16px;
+    margin-bottom: 40px;
+    padding: 10px 0;
+  }
+
+  .categoryCard {
+    width: 100%;
+    max-width: none;
+    min-height: 220px;
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
+
+  .cardContent {
+    flex-direction: row;
+    text-align: left;
+    gap: 16px;
+  }
+
+  .textSection {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .categoryTitle {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .categoryDescription {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .iconSection {
+    width: 72px;
+  }
+
+  .categoryIcon {
+    width: 72px !important;
+    height: 72px !important;
+  }
+
+  .indicators {
+    margin-top: 20px;
+  }
+
+  .navButton {
+    width: 56px;
+    height: 56px;
+    font-size: 2rem;
+    border-radius: 50%;
+  }
+}
+
+@media (max-width: 400px) {
+  .categoryCard {
+    padding: 18px 14px;
+    min-height: 190px;
+  }
+
+  .categoryTitle {
+    font-size: 1.25rem;
+  }
+
+  .categoryDescription {
+    font-size: 0.8rem;
+  }
+
+  .iconSection {
+    width: 56px;
+  }
+
+  .categoryIcon {
+    width: 56px !important;
+    height: 56px !important;
   }
 }

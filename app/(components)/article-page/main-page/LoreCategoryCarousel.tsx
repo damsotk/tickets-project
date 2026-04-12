@@ -24,7 +24,11 @@ export default function LoreCategoryCarousel({
 
   return (
     <div className={styles.carouselContainer}>
-      <button className={styles.navButton} onClick={handlePrev} aria-label="Previous category">
+      <button
+        className={`${styles.navButton} ${styles.desktopOnly}`}
+        onClick={handlePrev}
+        aria-label="Previous category"
+      >
         ‹
       </button>
 
@@ -60,9 +64,22 @@ export default function LoreCategoryCarousel({
         </div>
       </div>
 
-      <button className={styles.navButton} onClick={handleNext} aria-label="Next category">
+      <button
+        className={`${styles.navButton} ${styles.desktopOnly}`}
+        onClick={handleNext}
+        aria-label="Next category"
+      >
         ›
       </button>
+
+      <div className={styles.mobileNav}>
+        <button className={styles.navButton} onClick={handlePrev} aria-label="Previous category">
+          ‹
+        </button>
+        <button className={styles.navButton} onClick={handleNext} aria-label="Next category">
+          ›
+        </button>
+      </div>
     </div>
   );
 }

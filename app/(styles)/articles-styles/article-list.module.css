@@ -18,11 +18,17 @@
 }
 
 @media (max-width: 768px) {
+  .articlesContainer {
+    margin-top: 24px;
+  }
+
   .articlesGrid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .sectionTitle {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
   }
 }
