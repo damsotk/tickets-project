@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { toast } from 'sonner';
 
 interface FormData {
   source: string;
@@ -26,6 +27,9 @@ const initialFormData: FormData = {
 export function useWhiteListForm() {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [errors, setErrors] = useState<ValidationErrors>({});
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleInputChange = useCallback((field: keyof FormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -65,15 +69,42 @@ export function useWhiteListForm() {
     return Object.keys(newErrors).length === 0;
   }, [formData.minecraftNick, formData.discordNick]);
 
-  const handleSubmit = useCallback(() => {
-    console.log('Submitted:', formData);
-    // palce for future api
-    resetForm();
+  const handleSubmit = useCallback(async (): Promise<boolean> => {
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const res = await fetch('api/white-list/application', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        if (data.details) {
+          setErrors(data.details);
+        }
+        toast.error(`${data.error}`);
+        return false;
+      }
+
+      resetForm();
+      return true;
+    } catch (err) {
+      toast.error(`${err}`);
+      return false;
+    } finally {
+      setIsSubmitting(false);
+    }
   }, [formData, resetForm]);
 
   return {
     formData,
     errors,
+    isSubmitting,
+    submitError,
     handleInputChange,
     resetForm,
     validatePage2,

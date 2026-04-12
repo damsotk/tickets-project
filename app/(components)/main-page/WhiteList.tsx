@@ -21,6 +21,8 @@ export default function WhiteList() {
   const {
     formData,
     errors,
+    isSubmitting,
+    submitError,
     handleInputChange,
     resetForm,
     validatePage2,
@@ -34,8 +36,16 @@ export default function WhiteList() {
     resetForm();
   };
 
-  const handleFinalSubmit = () => {
-    handleSubmit();
+  const handlePage3Next = async () => {
+    if (!validatePage3()) return;
+
+    const success = await handleSubmit();
+    if (success) {
+      handleNext();
+    }
+  };
+
+  const handleFinalClose = () => {
     closeModal();
     resetPage();
   };
@@ -175,6 +185,8 @@ export default function WhiteList() {
                       </span>
                     )}
                   </div>
+
+                  {submitError && <p className={styles.errorText}>{submitError}</p>}
                 </div>
               )}
 
@@ -217,12 +229,16 @@ export default function WhiteList() {
                 </button>
               )}
               {currentPage === 3 && (
-                <button onClick={() => handleNext(validatePage3)} className={styles.nextButton}>
-                  {translated.modal.buttons.next}
+                <button
+                  onClick={handlePage3Next}
+                  className={styles.nextButton}
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? '...' : translated.modal.buttons.next}
                 </button>
               )}
               {currentPage === 4 && (
-                <button onClick={handleFinalSubmit} className={styles.submitButton}>
+                <button onClick={handleFinalClose} className={styles.submitButton}>
                   {translated.modal.buttons.submit}
                 </button>
               )}
