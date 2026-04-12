@@ -24,8 +24,6 @@ export default function WhitelistAdd() {
   return (
     <div className={styles.pageWrapper}>
       <div className={styles.contentContainer}>
-        <h2 className={styles.pageTitle}>Вайтлист</h2>
-
         <WhitelistToggle
           enabled={wl.enabled}
           toggling={wl.toggling}
