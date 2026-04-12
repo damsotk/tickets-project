@@ -24,6 +24,19 @@ const initialFormData: FormData = {
   discordNick: '',
 };
 
+const MINECRAFT_NICK_REGEX = /^[a-zA-Z0-9_]{3,16}$/;
+
+const DISCORD_NICK_REGEX = /^(?!\.)[a-z0-9_.]{2,32}(?<!\.)$/;
+const DISCORD_DOUBLE_DOT_REGEX = /\.\./;
+
+function sanitizeMinecraftNick(value: string): string {
+  return value.replace(/[^a-zA-Z0-9_]/g, '');
+}
+
+function sanitizeDiscordNick(value: string): string {
+  return value.toLowerCase().replace(/[^a-z0-9_.]/g, '');
+}
+
 export function useWhiteListForm() {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [errors, setErrors] = useState<ValidationErrors>({});
@@ -32,7 +45,17 @@ export function useWhiteListForm() {
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleInputChange = useCallback((field: keyof FormData, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+    let sanitizedValue = value;
+
+    if (field === 'minecraftNick') {
+      sanitizedValue = sanitizeMinecraftNick(value).slice(0, 16);
+    }
+
+    if (field === 'discordNick') {
+      sanitizedValue = sanitizeDiscordNick(value).slice(0, 32);
+    }
+
+    setFormData((prev) => ({ ...prev, [field]: sanitizedValue }));
     setErrors((prev) => ({ ...prev, [field]: undefined }));
   }, []);
 
@@ -58,11 +81,30 @@ export function useWhiteListForm() {
   const validatePage3 = useCallback((): boolean => {
     const newErrors: ValidationErrors = {};
 
-    if (!formData.minecraftNick.trim()) {
+    const mcNick = formData.minecraftNick.trim();
+    if (!mcNick) {
       newErrors.minecraftNick = 'required';
+    } else if (mcNick.length < 3) {
+      newErrors.minecraftNick = 'minecraftNickTooShort';
+    } else if (mcNick.length > 16) {
+      newErrors.minecraftNick = 'minecraftNickTooLong';
+    } else if (!MINECRAFT_NICK_REGEX.test(mcNick)) {
+      newErrors.minecraftNick = 'minecraftNickInvalid';
     }
-    if (!formData.discordNick.trim()) {
+
+    const dcNick = formData.discordNick.trim();
+    if (!dcNick) {
       newErrors.discordNick = 'required';
+    } else if (dcNick.length < 2) {
+      newErrors.discordNick = 'discordNickTooShort';
+    } else if (dcNick.length > 32) {
+      newErrors.discordNick = 'discordNickTooLong';
+    } else if (DISCORD_DOUBLE_DOT_REGEX.test(dcNick)) {
+      newErrors.discordNick = 'discordNickDoubleDot';
+    } else if (dcNick.startsWith('.') || dcNick.endsWith('.')) {
+      newErrors.discordNick = 'discordNickDotPosition';
+    } else if (!DISCORD_NICK_REGEX.test(dcNick)) {
+      newErrors.discordNick = 'discordNickInvalid';
     }
 
     setErrors(newErrors);

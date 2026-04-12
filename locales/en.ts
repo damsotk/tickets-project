@@ -248,6 +248,14 @@ const en = {
         title: 'White List Application',
         validation: {
           required: 'This field is required',
+          minecraftNickTooShort: 'Nickname must be at least 3 characters',
+          minecraftNickTooLong: 'Nickname must be up to 16 characters',
+          minecraftNickInvalid: 'Only Latin letters, numbers, and _',
+          discordNickTooShort: 'Name must be at least 2 characters',
+          discordNickTooLong: 'Name must be up to 32 characters',
+          discordNickInvalid: 'Only lowercase Latin letters, numbers, _, and .',
+          discordNickDoubleDot: 'You cannot use two consecutive periods',
+          discordNickDotPosition: 'Name cannot begin or end with a period',
         },
         pages: {
           page1: {
@@ -389,6 +397,157 @@ const en = {
       text2:
         'Welcome to The Chronicles of Elium — a world where your legend is just beginning! Safe travels, Tavr! May the stars of Elium light your path!',
       creator: 'Creator and head of the server: Cefal | BN_1',
+    },
+  },
+  privacyPolicy: {
+    title: 'Privacy Policy',
+    meta: {
+      title: 'Privacy Policy | Ellium Tickets',
+      description: 'Privacy policy and cookie usage information',
+    },
+    lastUpdated: 'Last updated:',
+    lastUpdatedDate: '28.03.2026',
+    sections: {
+      introduction: {
+        title: 'Introduction',
+        text: 'Welcome to Ellium Tickets. We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we use cookies and collect data when you use our service.',
+      },
+      whatDataWeCollect: {
+        title: 'What Data We Collect',
+        text: 'We collect minimal data necessary to provide and improve our service:',
+        essential: {
+          title: 'Essential Data (Always Active)',
+          items: [
+            {
+              label: 'Authentication Token:',
+              text: 'JWT token stored in cookies to maintain your logged-in session',
+            },
+            {
+              label: 'Language Preference:',
+              text: 'Your selected interface language for a personalized experience',
+            },
+            {
+              label: 'Message Cache:',
+              text: 'Temporary storage of messages to reduce API requests and improve performance',
+            },
+          ],
+        },
+        analytics: {
+          title: 'Analytics Data (Optional)',
+          text: 'With your consent, we collect anonymous analytics data through Vercel Analytics:',
+          items: [
+            'Page views and navigation patterns',
+            'Browser type and device information',
+            'Geographic location (country/city level only)',
+            'Performance metrics (page load times)',
+          ],
+          important:
+            'Analytics data is completely anonymous and cannot be used to identify individual users. No personal information is collected through analytics.',
+        },
+      },
+      whyWeUseCookies: {
+        title: 'Why We Use Cookies',
+        essential: {
+          title: 'Essential Cookies',
+          text: 'These cookies are necessary for the service to function and cannot be disabled:',
+          items: [
+            {
+              label: 'auth_token:',
+              text: 'Keeps you logged in and secure',
+            },
+            {
+              label: 'locale:',
+              text: 'Remembers your language choice',
+            },
+            {
+              label: 'message_cache:',
+              text: 'Stores recent messages locally to improve speed',
+            },
+          ],
+        },
+        analytics: {
+          title: 'Analytics Cookies',
+          text: 'These cookies help us understand how users interact with our service. You can opt-out at any time:',
+          items: [
+            {
+              label: 'Vercel Analytics:',
+              text: 'Privacy-friendly analytics without personal data collection',
+            },
+          ],
+        },
+      },
+      howWeUseYourData: {
+        title: 'How We Use Your Data',
+        items: [
+          {
+            label: 'Authentication:',
+            text: 'To verify your identity and maintain secure sessions',
+          },
+          {
+            label: 'Personalization:',
+            text: 'To display content in your preferred language',
+          },
+          {
+            label: 'Performance:',
+            text: 'To cache data and reduce loading times',
+          },
+          {
+            label: 'Improvement:',
+            text: 'To understand usage patterns and enhance the service',
+          },
+        ],
+      },
+      dataRetention: {
+        title: 'Data Retention',
+        items: [
+          {
+            label: 'Authentication tokens:',
+            text: 'Valid until logout or expiration',
+          },
+          {
+            label: 'Language preferences:',
+            text: 'Stored indefinitely until changed',
+          },
+          {
+            label: 'Message cache:',
+            text: 'Cleared periodically or on logout',
+          },
+          {
+            label: 'Analytics data:',
+            text: 'Aggregated and anonymized, retained for 90 days',
+          },
+        ],
+      },
+      yourRights: {
+        title: 'Your Rights',
+        text: 'You have the right to:',
+        items: [
+          'Opt-out of analytics at any time',
+          'Clear all cookies through your browser settings',
+          'Request deletion of your account and associated data',
+          'Access information about data we store',
+        ],
+      },
+      thirdPartyServices: {
+        title: 'Third-Party Services',
+        text: 'We use the following third-party services:',
+        items: [
+          {
+            label: 'Vercel Analytics:',
+            text: "Privacy-focused analytics that doesn't use cookies or collect personal data.",
+            linkText: 'Learn more',
+            linkUrl: 'https://vercel.com/docs/analytics/privacy-policy',
+          },
+        ],
+      },
+      changesToPolicy: {
+        title: 'Changes to This Policy',
+        text: 'We may update this privacy policy from time to time. We will notify you of any significant changes by posting the new policy on this page and updating the "Last updated" date.',
+      },
+      contactUs: {
+        title: 'Contact Us',
+        text: 'If you have questions about this privacy policy or your data, please contact us through our support system.',
+      },
     },
   },
 };

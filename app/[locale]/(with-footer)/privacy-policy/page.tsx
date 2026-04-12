@@ -1,160 +1,129 @@
+'use client';
 import styles from '@/app/(styles)/articles-styles/single-article-page.module.css';
-
-export const metadata = {
-  title: 'Privacy Policy | Ellium Tickets',
-  description: 'Privacy policy and cookie usage information',
-};
+import { useTranslation } from '@/app/(hooks)/use-translation';
 
 export default function PrivacyPolicyPage() {
+  const { translate } = useTranslation();
+  const t = translate.privacyPolicy;
+
   return (
     <div className={styles.pageWrapper} style={{ color: 'white' }}>
       <div className={styles.contentContainer}>
-        <h1 className={styles.pageTitle}>Privacy Policy</h1>
+        <h1 className={styles.pageTitle}>{t.title}</h1>
 
         <div className={styles.contentWrapper}>
           <div className={styles.content}>
             <p>
-              <strong>Last updated:</strong> 28.03.2026
+              <strong>{t.lastUpdated}</strong> {t.lastUpdatedDate}
             </p>
 
-            <h2>Introduction</h2>
+            <h2>{t.sections.introduction.title}</h2>
+            <p>{t.sections.introduction.text}</p>
+
+            <h2>{t.sections.whatDataWeCollect.title}</h2>
+            <p>{t.sections.whatDataWeCollect.text}</p>
+
+            <h3>{t.sections.whatDataWeCollect.essential.title}</h3>
+            <ul>
+              {t.sections.whatDataWeCollect.essential.items.map(
+                (item: { label: string; text: string }, i: number) => (
+                  <li key={i}>
+                    <strong>{item.label}</strong> {item.text}
+                  </li>
+                ),
+              )}
+            </ul>
+
+            <h3>{t.sections.whatDataWeCollect.analytics.title}</h3>
+            <p>{t.sections.whatDataWeCollect.analytics.text}</p>
+            <ul>
+              {t.sections.whatDataWeCollect.analytics.items.map((item: string, i: number) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
             <p>
-              Welcome to Ellium Tickets. We respect your privacy and are committed to protecting
-              your personal data. This privacy policy explains how we use cookies and collect data
-              when you use our service.
+              <strong>{t.sections.whatDataWeCollect.analytics.important}</strong>
             </p>
 
-            <h2>What Data We Collect</h2>
-            <p>We collect minimal data necessary to provide and improve our service:</p>
+            <h2>{t.sections.whyWeUseCookies.title}</h2>
 
-            <h3>Essential Data (Always Active)</h3>
+            <h3>{t.sections.whyWeUseCookies.essential.title}</h3>
+            <p>{t.sections.whyWeUseCookies.essential.text}</p>
             <ul>
-              <li>
-                <strong>Authentication Token:</strong> JWT token stored in cookies to maintain your
-                logged-in session
-              </li>
-              <li>
-                <strong>Language Preference:</strong> Your selected interface language for a
-                personalized experience
-              </li>
-              <li>
-                <strong>Message Cache:</strong> Temporary storage of messages to reduce API requests
-                and improve performance
-              </li>
+              {t.sections.whyWeUseCookies.essential.items.map(
+                (item: { label: string; text: string }, i: number) => (
+                  <li key={i}>
+                    <strong>{item.label}</strong> {item.text}
+                  </li>
+                ),
+              )}
             </ul>
 
-            <h3>Analytics Data (Optional)</h3>
-            <p>With your consent, we collect anonymous analytics data through Vercel Analytics:</p>
+            <h3>{t.sections.whyWeUseCookies.analytics.title}</h3>
+            <p>{t.sections.whyWeUseCookies.analytics.text}</p>
             <ul>
-              <li>Page views and navigation patterns</li>
-              <li>Browser type and device information</li>
-              <li>Geographic location (country/city level only)</li>
-              <li>Performance metrics (page load times)</li>
+              {t.sections.whyWeUseCookies.analytics.items.map(
+                (item: { label: string; text: string }, i: number) => (
+                  <li key={i}>
+                    <strong>{item.label}</strong> {item.text}
+                  </li>
+                ),
+              )}
             </ul>
 
-            <p>
-              <strong>Important:</strong> Analytics data is completely anonymous and cannot be used
-              to identify individual users. No personal information is collected through analytics.
-            </p>
-
-            <h2>Why We Use Cookies</h2>
-
-            <h3>Essential Cookies</h3>
-            <p>These cookies are necessary for the service to function and cannot be disabled:</p>
+            <h2>{t.sections.howWeUseYourData.title}</h2>
             <ul>
-              <li>
-                <strong>auth_token:</strong> Keeps you logged in and secure
-              </li>
-              <li>
-                <strong>locale:</strong> Remembers your language choice
-              </li>
-              <li>
-                <strong>message_cache:</strong> Stores recent messages locally to improve speed
-              </li>
+              {t.sections.howWeUseYourData.items.map(
+                (item: { label: string; text: string }, i: number) => (
+                  <li key={i}>
+                    <strong>{item.label}</strong> {item.text}
+                  </li>
+                ),
+              )}
             </ul>
 
-            <h3>Analytics Cookies</h3>
-            <p>
-              These cookies help us understand how users interact with our service. You can opt-out
-              at any time:
-            </p>
+            <h2>{t.sections.dataRetention.title}</h2>
             <ul>
-              <li>
-                <strong>Vercel Analytics:</strong> Privacy-friendly analytics without personal data
-                collection
-              </li>
+              {t.sections.dataRetention.items.map(
+                (item: { label: string; text: string }, i: number) => (
+                  <li key={i}>
+                    <strong>{item.label}</strong> {item.text}
+                  </li>
+                ),
+              )}
             </ul>
 
-            <h2>How We Use Your Data</h2>
+            <h2>{t.sections.yourRights.title}</h2>
+            <p>{t.sections.yourRights.text}</p>
             <ul>
-              <li>
-                <strong>Authentication:</strong> To verify your identity and maintain secure
-                sessions
-              </li>
-              <li>
-                <strong>Personalization:</strong> To display content in your preferred language
-              </li>
-              <li>
-                <strong>Performance:</strong> To cache data and reduce loading times
-              </li>
-              <li>
-                <strong>Improvement:</strong> To understand usage patterns and enhance the service
-              </li>
+              {t.sections.yourRights.items.map((item: string, i: number) => (
+                <li key={i}>{item}</li>
+              ))}
             </ul>
 
-            <h2>Data Retention</h2>
+            <h2>{t.sections.thirdPartyServices.title}</h2>
+            <p>{t.sections.thirdPartyServices.text}</p>
             <ul>
-              <li>
-                <strong>Authentication tokens:</strong> Valid until logout or expiration
-              </li>
-              <li>
-                <strong>Language preferences:</strong> Stored indefinitely until changed
-              </li>
-              <li>
-                <strong>Message cache:</strong> Cleared periodically or on logout
-              </li>
-              <li>
-                <strong>Analytics data:</strong> Aggregated and anonymized, retained for 90 days
-              </li>
+              {t.sections.thirdPartyServices.items.map(
+                (
+                  item: { label: string; text: string; linkText: string; linkUrl: string },
+                  i: number,
+                ) => (
+                  <li key={i}>
+                    <strong>{item.label}</strong> {item.text}{' '}
+                    <a href={item.linkUrl} target="_blank" rel="noopener noreferrer">
+                      {item.linkText}
+                    </a>
+                  </li>
+                ),
+              )}
             </ul>
 
-            <h2>Your Rights</h2>
-            <p>You have the right to:</p>
-            <ul>
-              <li>Opt-out of analytics at any time</li>
-              <li>Clear all cookies through your browser settings</li>
-              <li>Request deletion of your account and associated data</li>
-              <li>Access information about data we store</li>
-            </ul>
+            <h2>{t.sections.changesToPolicy.title}</h2>
+            <p>{t.sections.changesToPolicy.text}</p>
 
-            <h2>Third-Party Services</h2>
-            <p>We use the following third-party services:</p>
-            <ul>
-              <li>
-                <strong>Vercel Analytics:</strong> Privacy-focused analytics that doesn&apos;t use
-                cookies or collect personal data.{' '}
-                <a
-                  href="https://vercel.com/docs/analytics/privacy-policy"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Learn more
-                </a>
-              </li>
-            </ul>
-
-            <h2>Changes to This Policy</h2>
-            <p>
-              We may update this privacy policy from time to time. We will notify you of any
-              significant changes by posting the new policy on this page and updating the &quot;Last
-              updated&quot; date.
-            </p>
-
-            <h2>Contact Us</h2>
-            <p>
-              If you have questions about this privacy policy or your data, please contact us
-              through our support system.
-            </p>
+            <h2>{t.sections.contactUs.title}</h2>
+            <p>{t.sections.contactUs.text}</p>
           </div>
         </div>
       </div>

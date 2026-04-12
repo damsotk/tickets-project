@@ -161,10 +161,15 @@ export default function WhiteList() {
                       value={formData.minecraftNick}
                       onChange={(e) => handleInputChange('minecraftNick', e.target.value)}
                       placeholder={translated.modal.pages.page3.minecraftNick.placeholder}
+                      maxLength={16}
+                      autoComplete="off"
+                      spellCheck={false}
                     />
                     {errors.minecraftNick && (
                       <span className={styles.errorText}>
-                        {translated.modal.validation.required}
+                        {translated.modal.validation[
+                          errors.minecraftNick as keyof typeof translated.modal.validation
+                        ] ?? translated.modal.validation.required}
                       </span>
                     )}
                   </div>
@@ -179,10 +184,15 @@ export default function WhiteList() {
                       value={formData.discordNick}
                       onChange={(e) => handleInputChange('discordNick', e.target.value)}
                       placeholder={translated.modal.pages.page3.discordNick.placeholder}
+                      maxLength={32}
+                      autoComplete="off"
+                      spellCheck={false}
                     />
                     {errors.discordNick && (
                       <span className={styles.errorText}>
-                        {translated.modal.validation.required}
+                        {translated.modal.validation[
+                          errors.discordNick as keyof typeof translated.modal.validation
+                        ] ?? translated.modal.validation.required}
                       </span>
                     )}
                   </div>
