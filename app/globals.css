@@ -9,13 +9,7 @@ body {
 
 @media (max-width: 768px) {
   body {
-    padding: 0 8px !important;
-  }
-}
-
-@media (max-width: 400px) {
-  body {
-    padding: 0 4px !important;
+    padding: 0 2px !important;
   }
 }
 

@@ -23,9 +23,16 @@
 }
 
 @media (max-width: 768px) {
-  .articleLayout {
-    padding: 0.75rem;
-    gap: 1rem;
+  .contentContainer {
+    padding: 0 2px;
+  }
+
+  .pageWrapper {
+    padding: 40px 0;
+  }
+
+  .pageTitle {
+    margin-bottom: 40px;
   }
 }
 

@@ -137,8 +137,8 @@
 
 @media (max-width: 768px) {
   .contentWrapper {
-    padding: 1.25rem 1rem;
-    border-radius: 6px;
+    padding: 1rem 0.5rem;
+    border-radius: 4px;
   }
 
   .title {
