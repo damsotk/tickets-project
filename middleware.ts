@@ -5,7 +5,7 @@ const locales = ['en', 'uk', 'by', 'ru'];
 const defaultLocale = 'en';
 
 const protectedUserPaths = ['/discord-message', '/tickets', '/profile'];
-const protectedAdminPaths = ['/admin/all-tickets', `/admin/logs`];
+const protectedAdminPaths = ['/admin/all-tickets', `/admin/logs`, `/admin/whitelist`];
 
 function getLocale(request: NextRequest): string {
   const localeCookie = request.cookies.get('NEXT_LOCALE')?.value;
