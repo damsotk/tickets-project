@@ -30,7 +30,7 @@ export default function Header() {
 
   return (
     <header className={styles.header}>
-      <div className={styles.headerLeft}>
+      <div className={styles.headerLeft} onClick={handleTitleClick} style={{ cursor: 'pointer' }}>
         <Image
           src="/ellium-tickets-images/logo.png"
           alt="Ellium Logo"
@@ -39,9 +39,7 @@ export default function Header() {
           className={styles.iconWrapper}
           priority
         />
-        <h1 className={styles.title} onClick={handleTitleClick} style={{ cursor: 'pointer' }}>
-          {translated.title}
-        </h1>
+        <h1 className={styles.title}>{translated.title}</h1>
       </div>
 
       <div className={styles.headerRight}>
