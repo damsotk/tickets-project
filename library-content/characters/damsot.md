@@ -7,6 +7,7 @@ category: 'characters'
 
 infobox:
   image: '/articles/characters/damsot.webp'
+  imagePosition: 'top'
   Статус: 'Живой'
   Организация: 'Кодекс'
   Место жительства: 'Поместье Эйнмана'

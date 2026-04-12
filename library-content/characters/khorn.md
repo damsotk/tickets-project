@@ -7,6 +7,7 @@ category: 'characters'
 
 infobox:
   image: '/articles/characters/khorn.webp'
+  imagePosition: 'top'
   Статус: 'Живой'
   Организация: 'Ганза, Кровь и Вино'
   Место жительства: 'Город Нэкома'

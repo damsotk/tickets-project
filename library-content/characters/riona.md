@@ -7,6 +7,7 @@ category: 'characters'
 
 infobox:
   image: '/articles/characters/riona.webp'
+  imagePosition: 'top'
   Статус: 'Жива'
   Организация: 'Неизвестно'
   Место жительства: 'Акрос'

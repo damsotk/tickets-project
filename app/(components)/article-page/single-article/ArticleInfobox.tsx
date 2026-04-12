@@ -6,12 +6,15 @@ interface ArticleInfobox {
   article: Article;
 }
 
+const HIDDEN_INFOBOX_KEYS = ['image', 'imagePosition'];
+
 export default function ArticleInfobox({ article }: ArticleInfobox) {
   if (!article.infobox) {
     return null;
   }
 
   const { infobox } = article;
+  const imagePosition = (infobox.imagePosition as string) || 'center';
 
   return (
     <aside className={styles.infobox}>
@@ -23,6 +26,7 @@ export default function ArticleInfobox({ article }: ArticleInfobox) {
             width={350}
             height={350}
             className={styles.image}
+            style={{ objectPosition: imagePosition }}
             priority
           />
         </div>
@@ -32,7 +36,7 @@ export default function ArticleInfobox({ article }: ArticleInfobox) {
 
       <dl className={styles.infoList}>
         {Object.entries(infobox)
-          .filter(([key]) => key !== 'image')
+          .filter(([key]) => !HIDDEN_INFOBOX_KEYS.includes(key))
           .map(([key, value]) => (
             <div key={key} className={styles.infoItem}>
               <dt className={styles.label}>{key}</dt>
