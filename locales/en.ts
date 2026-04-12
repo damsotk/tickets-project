@@ -51,14 +51,14 @@ const en = {
   },
   home: {
     header: {
-      title: 'Ellium',
+      title: 'Elium',
       logout: 'Logout',
       login: 'Login',
       userAvatarAlt: 'User avatar',
       ticketIconAlt: 'Tickets',
     },
     heroSection: {
-      title: 'Welcome to Ellium',
+      title: 'Welcome to Elium',
       subtitle: 'Minecraft Roleplay Server',
     },
     navigatesButtons: {
@@ -70,7 +70,7 @@ const en = {
       articles: {
         title: 'Articles',
         description:
-          'Explore the world of Ellium. Here you`ll find articles about server lore, guides for newcomers, update news, and important announcements.',
+          'Explore the world of Elium. Here you`ll find articles about server lore, guides for newcomers, update news, and important announcements.',
       },
       rumors: {
         title: 'Rumors',
@@ -180,7 +180,7 @@ const en = {
     },
   },
   footer: {
-    title: 'Ellium Tickets',
+    title: 'Elium',
     description: 'Created and designed by Denys Piiak',
     quickLinks: 'Quick Links',
     home: 'Home',

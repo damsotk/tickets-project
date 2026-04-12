@@ -51,7 +51,7 @@ const by = {
   },
   home: {
     header: {
-      title: 'Ellium',
+      title: 'Elium',
       logout: 'Выйсці',
       login: 'Увайсці',
       userAvatarAlt: 'Аватар карыстальніка',
@@ -179,7 +179,7 @@ const by = {
     },
   },
   footer: {
-    title: 'Ellium Tickets',
+    title: 'Elium',
     description: 'Распрацаваў і дызайн Дзяніс Піак',
     quickLinks: 'Хуткія спасылкі',
     home: 'Галоўная',

@@ -51,7 +51,7 @@ const uk = {
   },
   home: {
     header: {
-      title: 'Ellium',
+      title: 'Elium',
       logout: 'Вийти',
       login: 'Увійти',
       userAvatarAlt: 'Аватар користувача',
@@ -180,7 +180,7 @@ const uk = {
     },
   },
   footer: {
-    title: 'Ellium Tickets',
+    title: 'Elium',
     description: 'Створено, спроектовано Денисом Піяком',
     quickLinks: 'Швидкі посилання',
     home: 'Головна',
