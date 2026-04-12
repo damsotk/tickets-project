@@ -1,0 +1,488 @@
+.pageWrapper {
+  min-height: 100vh;
+  padding: 0 0 40px;
+}
+
+.contentContainer {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 24px;
+  margin-top: 50px;
+}
+
+.pageTitle {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 48px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+}
+
+.toggleBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  background: #2b2d31;
+  border: 1px solid #3f4147;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: border-color 0.2s;
+}
+
+.toggleLabel {
+  font-size: 0.925rem;
+  color: #b5bac1;
+  font-weight: 500;
+}
+
+.toggleStatusOn {
+  font-weight: 700;
+  color: #23a559;
+}
+
+.toggleStatusOff {
+  font-weight: 700;
+  color: #f23f42;
+}
+
+.toggleButton {
+  padding: 0.5rem 1.25rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #ffffff;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.toggleButtonEnable {
+  background: #23a559;
+}
+
+.toggleButtonEnable:hover:not(:disabled) {
+  background: #1a8f4a;
+}
+
+.toggleButtonDisable {
+  background: #f23f42;
+}
+
+.toggleButtonDisable:hover:not(:disabled) {
+  background: #c72d2f;
+}
+
+.toggleButton:disabled {
+  background: #4e5058;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.addForm {
+  display: flex;
+  gap: 0.75rem;
+  background: #2b2d31;
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 1.25rem;
+}
+
+.addInput {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: #1e1f22;
+  border: 1px solid #3f4147;
+  border-radius: 6px;
+  color: #f2f3f5;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+}
+
+.addInput:focus {
+  outline: none;
+  border-color: #5865f2;
+  box-shadow: 0 0 0 3px rgba(88, 101, 242, 0.15);
+}
+
+.addInput::placeholder {
+  color: #6d6f78;
+}
+
+.addButton {
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  border: none;
+  background: #5865f2;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.addButton:hover:not(:disabled) {
+  background: #4752c4;
+}
+
+.addButton:disabled {
+  background: #4e5058;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.statusBar {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.statusSuccess {
+  background: rgba(35, 165, 89, 0.15);
+  color: #23a559;
+  border: 1px solid rgba(35, 165, 89, 0.3);
+}
+
+.statusError {
+  background: rgba(242, 63, 66, 0.15);
+  color: #f23f42;
+  border: 1px solid rgba(242, 63, 66, 0.3);
+}
+
+.section {
+  margin-top: 2rem;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #3f4147;
+}
+
+.sectionTitle {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #f2f3f5;
+  margin: 0;
+}
+
+.sectionCount {
+  font-size: 0.8rem;
+  color: #949ba4;
+  background: #1e1f22;
+  padding: 0.25rem 0.65rem;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.applicationsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.card {
+  background: #2b2d31;
+  border-radius: 8px;
+  border: 1px solid #3f4147;
+  overflow: hidden;
+  transition: border-color 0.2s;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.card:hover {
+  border-color: #5d6169;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.15rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
+}
+
+.cardHeader:hover {
+  background: #32353b;
+}
+
+.cardPlayerInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cardAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.cardPlayerName {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #f2f3f5;
+}
+
+.cardDate {
+  font-size: 0.75rem;
+  color: #6d6f78;
+  margin-top: 2px;
+}
+
+.cardExpandIcon {
+  color: #949ba4;
+  font-size: 0.75rem;
+  transition: transform 0.25s;
+}
+
+.cardExpandIconOpen {
+  transform: rotate(180deg);
+}
+
+.cardBody {
+  padding: 0 1.15rem 1rem;
+  border-top: 1px solid #3f4147;
+}
+
+.cardField {
+  margin-top: 0.85rem;
+}
+
+.cardFieldLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #949ba4;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 0.35rem;
+}
+
+.cardFieldValue {
+  font-size: 0.9rem;
+  color: #dbdee1;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+
+.cardActions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid #3f4147;
+}
+
+.approveButton {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  border: none;
+  background: #23a559;
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.approveButton:hover:not(:disabled) {
+  background: #1a8f4a;
+}
+
+.approveButton:disabled {
+  background: #4e5058;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.rejectButton {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  border: none;
+  background: #f23f42;
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.rejectButton:hover:not(:disabled) {
+  background: #c72d2f;
+}
+
+.rejectButton:disabled {
+  background: #4e5058;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.rejectInput {
+  width: 100%;
+  margin-top: 0.65rem;
+  padding: 0.6rem 0.85rem;
+  background: #1e1f22;
+  border: 1px solid #3f4147;
+  border-radius: 6px;
+  color: #f2f3f5;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+  resize: vertical;
+  min-height: 60px;
+}
+
+.rejectInput:focus {
+  outline: none;
+  border-color: #f23f42;
+  box-shadow: 0 0 0 3px rgba(242, 63, 66, 0.12);
+}
+
+.rejectInput::placeholder {
+  color: #6d6f78;
+}
+
+.playerList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: #2b2d31;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #3f4147;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.playerItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 1.15rem;
+  transition: background 0.15s;
+}
+
+.playerItem:hover {
+  background: #32353b;
+}
+
+.playerItem:not(:last-child) {
+  border-bottom: 1px solid #3f4147;
+}
+
+.playerAvatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.playerNick {
+  font-size: 0.9rem;
+  color: #f2f3f5;
+  font-weight: 500;
+}
+
+.loadingText {
+  color: #949ba4;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+.emptyState {
+  background: #2b2d31;
+  border-radius: 8px;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  border: 1px solid #3f4147;
+}
+
+.emptyIcon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.emptyText {
+  color: #949ba4;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .contentContainer {
+    padding: 0 14px;
+    margin-top: 32px;
+  }
+
+  .pageTitle {
+    margin-bottom: 32px;
+  }
+
+  .addForm {
+    flex-direction: column;
+  }
+
+  .addButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .toggleBar {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .toggleButton {
+    width: 100%;
+  }
+
+  .cardActions {
+    flex-direction: column;
+  }
+
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
