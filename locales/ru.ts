@@ -138,11 +138,13 @@ const ru = {
   articles: {
     mainPage: {
       titleOfCategory: {
+        basic: 'Основные концепции',
         characters: 'Персонажи',
         faith: 'Вера',
         cities: 'Города',
       },
       descOfCategory: {
+        basic: 'Основные концепции сервера',
         characters: 'Легенды и герои нашего мира',
         faith: 'Боги, культы и священные ритуалы',
         cities: 'Великие поселения и их история',

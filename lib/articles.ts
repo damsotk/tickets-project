@@ -10,7 +10,7 @@ export interface ArticleMetadata {
   preview: string;
   date: string;
   author: string;
-  category: 'characters' | 'faith' | 'cities';
+  category: 'basic' | 'characters' | 'faith' | 'cities';
   infobox?: Record<string, string | string[]>;
 }
 
@@ -21,7 +21,7 @@ export interface Article extends ArticleMetadata {
 const contentDirectory = path.join(process.cwd(), 'library-content');
 
 export function getArticlesByCategory(
-  category: 'characters' | 'faith' | 'cities',
+  category: 'basic' | 'characters' | 'faith' | 'cities',
 ): ArticleMetadata[] {
   const categoryPath = path.join(contentDirectory, category);
 
@@ -55,7 +55,7 @@ export function getArticlesByCategory(
 }
 
 export function getAllArticleSlugs(): { category: string; slug: string }[] {
-  const categories = ['characters', 'faith', 'cities'];
+  const categories = ['basic', 'characters', 'faith', 'cities'];
   const slugs: { category: string; slug: string }[] = [];
 
   categories.forEach((category) => {
@@ -76,7 +76,7 @@ export function getAllArticleSlugs(): { category: string; slug: string }[] {
 }
 
 export async function getArticleBySlug(
-  category: 'characters' | 'faith' | 'cities',
+  category: 'basic' | 'characters' | 'faith' | 'cities',
   slug: string,
 ): Promise<Article | null> {
   try {
@@ -105,7 +105,12 @@ export async function getArticleBySlug(
 }
 
 export function getAllArticles() {
-  const categories: ('characters' | 'faith' | 'cities')[] = ['characters', 'faith', 'cities'];
+  const categories: ('basic' | 'characters' | 'faith' | 'cities')[] = [
+    'basic',
+    'characters',
+    'faith',
+    'cities',
+  ];
   const allArticles: ArticleMetadata[] = [];
 
   categories.forEach((category) => {

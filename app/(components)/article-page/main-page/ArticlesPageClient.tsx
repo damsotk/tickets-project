@@ -7,6 +7,7 @@ import { ArticleMetadata } from '@/lib/articles';
 
 interface ArticlesPageClientProps {
   initialArticles: {
+    basic: ArticleMetadata[];
     characters: ArticleMetadata[];
     faith: ArticleMetadata[];
     cities: ArticleMetadata[];
@@ -14,9 +15,9 @@ interface ArticlesPageClientProps {
 }
 
 export default function ArticlesPageClient({ initialArticles }: ArticlesPageClientProps) {
-  const [currentCategory, setCurrentCategory] = useState<'characters' | 'faith' | 'cities'>(
-    'characters',
-  );
+  const [currentCategory, setCurrentCategory] = useState<
+    'basic' | 'characters' | 'faith' | 'cities'
+  >('characters');
 
   const currentArticles = initialArticles[currentCategory];
 

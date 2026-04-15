@@ -138,11 +138,13 @@ const en = {
   articles: {
     mainPage: {
       titleOfCategory: {
+        basic: 'Основные концепции',
         characters: 'Characters',
         faith: 'Faith',
         cities: 'Cities',
       },
       descOfCategory: {
+        basic: 'Основные концепции сервера',
         characters: 'Legends and heroes of our world',
         faith: 'Gods, cults and sacred rituals',
         cities: 'Great settlements and their history',

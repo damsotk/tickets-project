@@ -1,11 +1,17 @@
 interface Category {
-  id: 'characters' | 'faith' | 'cities';
+  id: 'basic' | 'characters' | 'faith' | 'cities';
   title: string;
   description: string;
   iconPath: string;
 }
 
 export const ARTICLE_CATEGORIES: Category[] = [
+  {
+    id: 'basic',
+    title: 'Basic',
+    description: 'Basic',
+    iconPath: '/icons/characters.png',
+  },
   {
     id: 'characters',
     title: 'Characters',

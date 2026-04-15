@@ -12,6 +12,8 @@ export default function ArticlesList({ currentArticles }: ArticleListProps) {
   const { translate } = useTranslation();
   const translated = translate.articles.articlesList;
 
+  console.log(currentArticles);
+
   return (
     <div className={styles.articlesContainer}>
       <h3 className={styles.sectionTitle}>{translated.title}</h3>

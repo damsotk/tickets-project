@@ -3,6 +3,7 @@ import { getArticlesByCategory } from '@/lib/articles';
 
 export default function ArticlesPageServer() {
   const initialArticles = {
+    basic: getArticlesByCategory('basic'),
     characters: getArticlesByCategory('characters'),
     faith: getArticlesByCategory('faith'),
     cities: getArticlesByCategory('cities'),

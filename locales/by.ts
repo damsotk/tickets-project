@@ -137,11 +137,13 @@ const by = {
   articles: {
     mainPage: {
       titleOfCategory: {
+        basic: 'Основные концепции',
         characters: 'Персонажі',
         faith: 'Віра',
         cities: 'Міста',
       },
       descOfCategory: {
+        basic: 'Основные концепции сервера',
         characters: 'Легенди та герої нашого світу',
         faith: 'Боги, культи та священні ритуали',
         cities: 'Великі поселення та їхня історія',

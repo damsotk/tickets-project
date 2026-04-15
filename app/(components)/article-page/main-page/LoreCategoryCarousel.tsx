@@ -6,8 +6,8 @@ import { useCategoryNavigation } from '@/app/(hooks)/articles-page-hooks/use-cha
 import { useTranslation } from '@/app/(hooks)/use-translation';
 
 interface LoreCategoryCarouselProps {
-  currentCategory: 'characters' | 'faith' | 'cities';
-  onCurrentCategoryChange: (category: 'characters' | 'faith' | 'cities') => void;
+  currentCategory: 'basic' | 'characters' | 'faith' | 'cities';
+  onCurrentCategoryChange: (category: 'basic' | 'characters' | 'faith' | 'cities') => void;
 }
 
 export default function LoreCategoryCarousel({

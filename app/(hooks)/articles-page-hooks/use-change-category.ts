@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { ARTICLE_CATEGORIES } from '@/constants/available_article_categories';
 
-type CategoryId = 'characters' | 'faith' | 'cities';
+type CategoryId = 'basic' | 'characters' | 'faith' | 'cities';
 
 interface UseCategoryNavigationProps {
   currentCategory: CategoryId;
