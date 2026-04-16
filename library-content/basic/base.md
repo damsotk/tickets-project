@@ -1,7 +1,7 @@
 ---
 title: 'Мироустройство Элиума'
 preview: 'Том I'
-date: '15.04.2026'
+date: '22.11.2025'
 author: 'CuSO4K, Adlerme_, Iletovegor, tcelovek(net), exxtezys'
 category: 'basic'
 ---
