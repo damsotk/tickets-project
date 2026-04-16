@@ -14,6 +14,16 @@
   align-items: start;
 }
 
+.articleLayoutFull {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
 @media (max-width: 1024px) {
   .articleLayout {
     grid-template-columns: 1fr;
@@ -22,7 +32,8 @@
 }
 
 @media (max-width: 768px) {
-  .articleLayout {
+  .articleLayout,
+  .articleLayoutFull {
     padding: 1rem;
   }
 }

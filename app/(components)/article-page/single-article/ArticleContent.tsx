@@ -4,11 +4,12 @@ import Link from 'next/link';
 
 interface ArticleContentProps {
   article: Article;
+  isBasic?: boolean;
 }
 
-export default function ArticleContent({ article }: ArticleContentProps) {
+export default function ArticleContent({ article, isBasic = false }: ArticleContentProps) {
   return (
-    <article className={styles.contentWrapper}>
+    <article className={`${styles.contentWrapper} ${isBasic ? styles.contentWrapperFull : ''}`}>
       <nav className={styles.breadcrumbs}>
         <Link href="/articles">Library</Link>
         <span className={styles.separator}>›</span>
@@ -23,7 +24,10 @@ export default function ArticleContent({ article }: ArticleContentProps) {
         <time className={styles.date}>{article.date}</time>
       </div>
 
-      <div className={styles.content} dangerouslySetInnerHTML={{ __html: article.content }} />
+      <div
+        className={`${styles.content} ${isBasic ? styles.contentBasic : ''}`}
+        dangerouslySetInnerHTML={{ __html: article.content }}
+      />
     </article>
   );
 }

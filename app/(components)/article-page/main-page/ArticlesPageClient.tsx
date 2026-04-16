@@ -17,7 +17,7 @@ interface ArticlesPageClientProps {
 export default function ArticlesPageClient({ initialArticles }: ArticlesPageClientProps) {
   const [currentCategory, setCurrentCategory] = useState<
     'basic' | 'characters' | 'faith' | 'cities'
-  >('characters');
+  >('basic');
 
   const currentArticles = initialArticles[currentCategory];
 

@@ -10,7 +10,7 @@ export const ARTICLE_CATEGORIES: Category[] = [
     id: 'basic',
     title: 'Basic',
     description: 'Basic',
-    iconPath: '/icons/characters.png',
+    iconPath: '/icons/basic.png',
   },
   {
     id: 'characters',

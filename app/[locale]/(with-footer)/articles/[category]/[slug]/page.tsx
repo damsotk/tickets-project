@@ -7,7 +7,7 @@ import ArticleInfobox from '@/app/(components)/article-page/single-article/Artic
 interface ArticlePageProps {
   params: Promise<{
     locale: string;
-    category: 'characters' | 'faith' | 'cities';
+    category: 'basic' | 'characters' | 'faith' | 'cities';
     slug: string;
   }>;
 }
@@ -49,11 +49,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     notFound();
   }
 
+  const isBasic = article.category === 'basic';
+
   return (
     <div className={styles.pageWrapper}>
-      <div className={styles.articleLayout}>
-        <ArticleContent article={article} />
-        <ArticleInfobox article={article} />
+      <div className={isBasic ? styles.articleLayoutFull : styles.articleLayout}>
+        <ArticleContent article={article} isBasic={isBasic} />
+        {!isBasic && <ArticleInfobox article={article} />}
       </div>
     </div>
   );
