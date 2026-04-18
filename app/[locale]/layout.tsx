@@ -8,8 +8,25 @@ import CookieConsentBanner from '../(components)/CookieConsentBanner';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Ellium Tickets',
-  description: 'Support ticket system',
+  metadataBase: new URL('https://elium.site'),
+  title: {
+    default: 'Library of Knowledge',
+    template: '%s | Library of Knowledge',
+  },
+  description: 'Explore the vast world of lore, characters, cities, and faith.',
+  openGraph: {
+    type: 'website',
+    siteName: 'Library of Knowledge',
+    locale: 'en_US',
+    images: [
+      {
+        url: '/ellium-tickets-images/logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'Library of Knowledge',
+      },
+    ],
+  },
 };
 
 export default async function LocaleLayout({
