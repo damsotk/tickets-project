@@ -92,6 +92,7 @@ const ru = {
     allTickets: {
       title: 'Мои тикеты',
       createButton: '+ Создать',
+      backButton: 'Назад',
       noTickets: 'Пока нет тикетов.',
       categories: {
         complaint: 'Жалоба',

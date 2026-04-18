@@ -92,6 +92,7 @@ const en = {
     allTickets: {
       title: 'My Tickets',
       createButton: '+ Create',
+      backButton: 'Back',
       noTickets: 'No tickets yet.',
       categories: {
         complaint: 'Complaint',

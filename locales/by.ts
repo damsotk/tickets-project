@@ -91,6 +91,7 @@ const by = {
     allTickets: {
       title: 'Мае квіткі',
       createButton: '+ Стварыць',
+      backButton: 'Назад',
       noTickets: 'Няма квіткоў.',
       categories: {
         complaint: 'Скарга',

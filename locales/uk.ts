@@ -92,6 +92,7 @@ const uk = {
     allTickets: {
       title: 'Мої Тікети',
       createButton: '+ Створити',
+      backButton: 'Назад',
       noTickets: 'Поки що немає тікетів.',
       categories: {
         complaint: 'Скарга',

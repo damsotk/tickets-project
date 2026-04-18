@@ -26,13 +26,23 @@ export default function AllUserTickets({
   const createTicketRedirect = () => {
     router.push(`/${locale}/create-ticket`);
   };
+
+  const backToMainRedirect = () => {
+    router.push(`/${locale}/`);
+  };
+
   return (
     <div className={styles.ticketsSection}>
       <div className={styles.ticketsHeader}>
         <h2>{translated.title}</h2>
-        <button onClick={createTicketRedirect} className={styles.newTicketBtn}>
-          {translated.createButton}
-        </button>
+        <div className={styles.headerButtons}>
+          <button onClick={createTicketRedirect} className={styles.newTicketBtn}>
+            {translated.createButton}
+          </button>
+          <button onClick={backToMainRedirect} className={styles.backBtn}>
+            {translated.backButton ?? '← Back'}
+          </button>
+        </div>
       </div>
 
       <div className={styles.ticketsList}>
