@@ -1,4 +1,5 @@
 import { useState, FormEvent } from 'react';
+import { useRouter } from 'next/navigation';
 import { PRESET_AVATARS } from '@/constants/urls_default_icons_ds';
 import { toast } from 'sonner';
 
@@ -12,6 +13,7 @@ interface FormData {
 type StatusType = '' | 'success' | 'error';
 
 export function useDsMsgForm() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     username: '',
     message: '',
@@ -83,7 +85,10 @@ export function useDsMsgForm() {
           username: '',
           message: '',
         }));
-        setTimeout(() => setStatus(''), 3000);
+        setTimeout(() => {
+          setStatus('');
+          router.push('/');
+        }, 3000);
       } else {
         setStatus('error');
       }
