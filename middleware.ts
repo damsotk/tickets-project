@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyAccessTokenEdge } from './lib/auth';
 
-const locales = ['en', 'uk', 'by', 'ru'];
-const defaultLocale = 'en';
+const locales = ['ru', 'en', 'uk', 'by'];
+const defaultLocale = 'ru';
 
 const protectedUserPaths = ['/discord-message', '/tickets', '/profile'];
 const protectedAdminPaths = ['/admin/all-tickets', `/admin/logs`, `/admin/whitelist`];
