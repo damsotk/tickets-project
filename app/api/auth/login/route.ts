@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { verifyPassword, generateAccessToken, generateRefreshToken } from '@/lib/auth';
 import { rateLimiters } from '@/lib/rate-limit';
+import { setAuthCookies } from '@/lib/auth-cookies';
 
 export async function POST(request: Request) {
   try {
@@ -52,19 +53,7 @@ export async function POST(request: Request) {
       message: 'Login successful',
     });
 
-    response.cookies.set('accessToken', accessToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: 60 * 60 * 24 * 7,
-    });
-
-    response.cookies.set('refreshToken', refreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: 60 * 60 * 24 * 30,
-    });
+    setAuthCookies(response, accessToken, refreshToken);
 
     return response;
   } catch (error) {

@@ -2,6 +2,9 @@ import bcrypt from 'bcryptjs';
 import jwt, { TokenExpiredError } from 'jsonwebtoken';
 import { jwtVerify } from 'jose';
 
+export const ACCESS_TOKEN_TTL = 60 * 15;
+export const REFRESH_TOKEN_TTL = 60 * 60 * 24 * 30;
+
 function getRequiredEnvVar(name: string): string {
   const value = process.env[name];
   if (!value) {
@@ -33,12 +36,12 @@ export async function verifyPassword(password: string, hashedPassword: string): 
 
 // Generate access token (1 week)
 export function generateAccessToken(userId: string, role: 'USER' | 'ADMIN'): string {
-  return jwt.sign({ userId, role }, JWT_SECRET, { expiresIn: '7d' });
+  return jwt.sign({ userId, role }, JWT_SECRET, { expiresIn: ACCESS_TOKEN_TTL });
 }
 
 // Generate refresh token (30 days)
 export function generateRefreshToken(userId: string, role: 'USER' | 'ADMIN'): string {
-  return jwt.sign({ userId, role }, JWT_REFRESH_SECRET, { expiresIn: '30d' });
+  return jwt.sign({ userId, role }, JWT_REFRESH_SECRET, { expiresIn: REFRESH_TOKEN_TTL });
 }
 
 // Verify access token
