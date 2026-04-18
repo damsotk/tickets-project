@@ -370,27 +370,15 @@ const en = {
       title: 'Tickets',
       text: 'For all questions regarding mechanics and lore, create a ticket in the 🎫-tickets channel on Discord. Click "Create Ticket" and describe your question.',
     },
-    usefulChannels: 'Also Interesting to Read',
-    channels: {
-      chronicle: {
-        name: 'Chronicle',
-        desc: 'Timeline of events that have happened and are happening in our Plane',
+    alsoInteresting: 'Also worth reading',
+    articles: {
+      worldStructure: {
+        name: 'World Structure of Elium',
+        desc: 'Discover what the world of Elium looks like in all its vast scale',
       },
-      truths: {
-        name: 'Bonds of Truth',
-        desc: 'RP archive with additional lore information',
-      },
-      news: {
-        name: 'News',
-        desc: 'News channel with server-related events',
-      },
-      sneakPeeks: {
-        name: 'Sneak Peeks',
-        desc: 'Additions and changes to mechanics',
-      },
-      announcements: {
-        name: 'Announcements',
-        desc: 'RP bulletin board in Nekodil, where every Tavr can post their announcement',
+      globalHistory: {
+        name: 'General History of Elium',
+        desc: 'The global history of Elium — events that shaped this world',
       },
     },
     outro: {

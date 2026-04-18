@@ -2,6 +2,7 @@
 
 import styles from '@/app/(styles)/how-to-play-styles/how-to-play.module.css';
 import { useTranslation } from '@/app/(hooks)/use-translation';
+import { useParams, useRouter } from 'next/navigation';
 
 const DISCORD_LINK = 'https://discord.gg/dgF5ScZ7eH';
 const TELEGRAM_LINK = 'https://t.me/eliumhronick';
@@ -10,6 +11,9 @@ const TELEGRAM_BN_LINK = 'https://t.me/bn1world';
 export default function HowToPlay() {
   const { translate } = useTranslation();
   const t = translate.howToPlay;
+  const params = useParams();
+  const router = useRouter();
+  const locale = params.locale as string;
 
   const commands = [
     { cmd: '/menu', desc: t.commands.menu },
@@ -28,12 +32,19 @@ export default function HowToPlay() {
     { cmd: t.commands.globalNrpLabel, desc: t.commands.globalNrp },
   ];
 
-  const channels = [
-    { emoji: '📖', name: t.channels.chronicle.name, desc: t.channels.chronicle.desc },
-    { emoji: '🏛️', name: t.channels.truths.name, desc: t.channels.truths.desc },
-    { emoji: '📢', name: t.channels.news.name, desc: t.channels.news.desc },
-    { emoji: '🌺', name: t.channels.sneakPeeks.name, desc: t.channels.sneakPeeks.desc },
-    { emoji: '🎪', name: t.channels.announcements.name, desc: t.channels.announcements.desc },
+  const articles = [
+    {
+      emoji: '🌍',
+      name: t.articles.worldStructure.name,
+      desc: t.articles.worldStructure.desc,
+      href: `/${locale}/articles/basic/base`,
+    },
+    {
+      emoji: '📜',
+      name: t.articles.globalHistory.name,
+      desc: t.articles.globalHistory.desc,
+      href: `/${locale}/articles/basic/global_history`,
+    },
   ];
 
   return (
@@ -181,14 +192,26 @@ export default function HowToPlay() {
       </section>
 
       <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>{t.usefulChannels}</h2>
+        <h2 className={styles.sectionTitle}>{t.alsoInteresting}</h2>
         <div className={styles.channelsList}>
-          {channels.map((ch, i) => (
-            <div key={i} className={styles.channelItem}>
-              <span className={styles.channelEmoji}>{ch.emoji}</span>
+          {articles.map((article, i) => (
+            <div
+              key={i}
+              className={styles.channelItem}
+              onClick={() => router.push(article.href)}
+              style={{ cursor: 'pointer' }}
+              role="link"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  router.push(article.href);
+                }
+              }}
+            >
+              <span className={styles.channelEmoji}>{article.emoji}</span>
               <div>
-                <span className={styles.channelName}>{ch.name}</span>
-                <span className={styles.channelDesc}>{ch.desc}</span>
+                <span className={styles.channelName}>{article.name}</span>
+                <span className={styles.channelDesc}>{article.desc}</span>
               </div>
             </div>
           ))}

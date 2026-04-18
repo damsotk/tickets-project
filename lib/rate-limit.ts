@@ -16,7 +16,7 @@ export const rateLimiters = {
   }),
   tickets: new Ratelimit({
     redis,
-    limiter: Ratelimit.slidingWindow(10, '1 h'),
+    limiter: Ratelimit.slidingWindow(55, '1 h'),
     prefix: 'rl:tickets',
   }),
 };
