@@ -6,7 +6,7 @@ const redis = Redis.fromEnv();
 export const rateLimiters = {
   auth: new Ratelimit({
     redis,
-    limiter: Ratelimit.slidingWindow(5, '15 m'),
+    limiter: Ratelimit.slidingWindow(25, '15 m'),
     prefix: 'rl:auth',
   }),
   messages: new Ratelimit({
