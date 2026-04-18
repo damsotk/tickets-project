@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt, { TokenExpiredError } from 'jsonwebtoken';
 import { jwtVerify } from 'jose';
 
-export const ACCESS_TOKEN_TTL = 60 * 15;
+export const ACCESS_TOKEN_TTL = 60 * 60 * 24 * 7;
 export const REFRESH_TOKEN_TTL = 60 * 60 * 24 * 30;
 
 function getRequiredEnvVar(name: string): string {
