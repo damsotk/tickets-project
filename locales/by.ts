@@ -141,7 +141,7 @@ const by = {
         basic: 'Основные концепции',
         characters: 'Персонажі',
         faith: 'Віра',
-        cities: 'Міста',
+        cities: 'Паселішча',
       },
       descOfCategory: {
         basic: 'Основные концепции сервера',

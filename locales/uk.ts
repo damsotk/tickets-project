@@ -142,7 +142,7 @@ const uk = {
         basic: 'Основные концепции',
         characters: 'Персонажі',
         faith: 'Віра',
-        cities: 'Міста',
+        cities: 'Поселення',
       },
       descOfCategory: {
         basic: 'Основные концепции сервера',

@@ -142,7 +142,7 @@ const ru = {
         basic: 'Основные концепции',
         characters: 'Персонажи',
         faith: 'Вера',
-        cities: 'Города',
+        cities: 'Поселения',
       },
       descOfCategory: {
         basic: 'Основные концепции сервера',

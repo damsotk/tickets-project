@@ -142,7 +142,7 @@ const en = {
         basic: 'Основные концепции',
         characters: 'Characters',
         faith: 'Faith',
-        cities: 'Cities',
+        cities: 'Settlement',
       },
       descOfCategory: {
         basic: 'Основные концепции сервера',

@@ -1,21 +1,23 @@
 ---
-title: 'Nordheim'
-preview: 'Northern capital, city of Vikings and warriors...'
-date: '2024-03-08'
-author: 'Cartographer'
+title: 'Эйнмана'
+preview: 'Поместье на западе Плана Тавров'
+date: '18.04.2026'
+author: 'damsot'
 category: 'cities'
 
 infobox:
-  image: '/articles/cities/nordheim.jpg'
-  type: 'Capital City'
-  population: '~100,000'
-  founded: 'Year 450'
-  ruler: 'Jarl Bjorn Ironside'
-  location: 'Northern Mountains'
-  economy: 'Trade, Mining, Magic'
-  notable: 'Magic Academy, Great Hall'
+  # image: '/articles/cities/nordheim.jpg'
+  тип: 'Поместье'
+  жителей: '3'
+  основан: '20.12.2025'
+  глава: 'Бронн'
+  локация: 'Западнее от Никодила'
 ---
 
-# Nordheim
+# Структура
 
-**Nordheim** is the capital of the Northern Kingdoms.....
+Эйнмана - родовое поместье основаное Дамсотом, изначально он жил сам в маленьком доме, после того как прибыл в План. Этот тогда еще
+просто дом мог и до сегодня остаться обычным лесными домиком, если бы не новая идея Дамсота. Бесправие и незаконность правили Планом,
+Дамсоту это не нравилось, и он нашел друга - Бронна, с которым они вместе начали строить из маленького дома огроменное Поместье.
+В итоге Эйнмана стало центром новой нации основаной Бронном и Эллиотом, Дамсот лишь стал заведовать самим Эйнмана, занимаясь делами Кодекса, не мешая
+Бронну и Эллиоту налаживать дипломатические дела внутри поместья.

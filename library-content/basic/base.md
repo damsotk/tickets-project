@@ -2,7 +2,7 @@
 title: 'Мироустройство Элиума'
 preview: 'Том I'
 date: '22.11.2025'
-author: 'CuSO4K, Adlerme_, Iletovegor, tcelovek(net), exxtezys'
+author: 'Добрые люди'
 category: 'basic'
 ---
 
