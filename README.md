@@ -1,4 +1,3 @@
-```markdown
 # Game Server Web Portal
 
 https://elium.site
@@ -47,4 +46,3 @@ Built with **Next.js 15**, **TypeScript**, **PostgreSQL**, **Prisma**, **Upstash
 | Auth                    | JWT, bcrypt, Discord OAuth2                                |
 | Styling                 | CSS Modules                                                |
 | Deployment              | Vercel                                                     |
-```
