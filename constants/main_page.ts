@@ -1,4 +1,4 @@
-export const SERVER_IP = 'mc.chroniclesofelium.com';
+export const SERVER_IP = 'elium.aboba.host';
 
 export const NAVIGATION_ITEMS = [
   {
