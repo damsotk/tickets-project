@@ -1,11 +1,27 @@
 'use client';
 
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import styles from '@/app/(styles)/navigation-grid.module.css';
 import { useTranslation } from '@/app/(hooks)/use-translation';
 import { NAVIGATION_ITEMS } from '@/constants/main_page';
 
+const AVAILABLE_LOCALES = ['ru', 'en', 'uk', 'by'];
+
+function withLocale(locale: string, href: string) {
+  if (href === '/') {
+    return `/${locale}`;
+  }
+
+  return `/${locale}${href.startsWith('/') ? href : `/${href}`}`;
+}
+
 export default function NavigationGrid() {
+  const params = useParams();
+  const localeFromParams = params.locale as string;
+
+  const locale = AVAILABLE_LOCALES.includes(localeFromParams) ? localeFromParams : 'en';
+
   const { translate } = useTranslation();
   const translations = translate.home.navigatesButtons;
 
@@ -22,7 +38,7 @@ export default function NavigationGrid() {
             return (
               <Link
                 key={item.id}
-                href={item.href}
+                href={withLocale(locale, item.href)}
                 className={`${styles.card} ${styles.featuredCard} ${styles[item.color]}`}
               >
                 <div className={styles.featuredBackground} />
@@ -48,7 +64,11 @@ export default function NavigationGrid() {
           const content = translations[item.id];
 
           return (
-            <Link key={item.id} href={item.href} className={`${styles.card} ${styles[item.color]}`}>
+            <Link
+              key={item.id}
+              href={withLocale(locale, item.href)}
+              className={`${styles.card} ${styles[item.color]}`}
+            >
               <div className={styles.iconWrapper}>
                 <span className={styles.icon}>{item.icon}</span>
               </div>
