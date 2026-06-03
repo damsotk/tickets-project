@@ -3,11 +3,12 @@ import styles from '@/app/(styles)/articles-styles/single-article-page.module.cs
 import { notFound } from 'next/navigation';
 import ArticleContent from '@/app/(components)/article-page/single-article/ArticleContent';
 import ArticleInfobox from '@/app/(components)/article-page/single-article/ArticleInfobox';
+import { ArticleCategory, getCategoryConfig } from '@/constants/available_article_categories';
 
 interface ArticlePageProps {
   params: Promise<{
     locale: string;
-    category: 'basic' | 'characters' | 'faith' | 'cities';
+    category: ArticleCategory;
     slug: string;
   }>;
 }
@@ -28,12 +29,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: ArticlePageProps) {
   const { category, slug } = await params;
   const article = await getArticleBySlug(category, slug);
-
-  if (!article) {
-    return {
-      title: 'Article Not Found',
-    };
-  }
+  if (!article) return { title: 'Article Not Found' };
 
   return {
     title: `${article.title} | Library of Knowledge`,
@@ -44,18 +40,15 @@ export async function generateMetadata({ params }: ArticlePageProps) {
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { category, slug } = await params;
   const article = await getArticleBySlug(category, slug);
+  if (!article) notFound();
 
-  if (!article) {
-    notFound();
-  }
-
-  const isBasic = article.category === 'basic';
+  const { hasInfobox } = getCategoryConfig(article.category);
 
   return (
     <div className={styles.pageWrapper}>
-      <div className={isBasic ? styles.articleLayoutFull : styles.articleLayout}>
-        <ArticleContent article={article} isBasic={isBasic} />
-        {!isBasic && <ArticleInfobox article={article} />}
+      <div className={!hasInfobox ? styles.articleLayoutFull : styles.articleLayout}>
+        <ArticleContent article={article} hasInfobox={hasInfobox} />
+        {hasInfobox && <ArticleInfobox article={article} />}
       </div>
     </div>
   );

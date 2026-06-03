@@ -1,33 +1,28 @@
-interface Category {
-  id: 'basic' | 'characters' | 'faith' | 'cities';
-  title: string;
-  description: string;
-  iconPath: string;
-}
-
-export const ARTICLE_CATEGORIES: Category[] = [
+export const ARTICLE_CATEGORIES = [
   {
     id: 'basic',
-    title: 'Basic',
-    description: 'Basic',
     iconPath: '/icons/basic.png',
+    hasInfobox: false,
   },
   {
     id: 'characters',
-    title: 'Characters',
-    description: 'Legends and heroes of our world',
     iconPath: '/icons/characters.png',
+    hasInfobox: true,
   },
   {
     id: 'faith',
-    title: 'Faith',
-    description: 'Gods, cults and sacred rituals',
     iconPath: '/icons/faith.png',
+    hasInfobox: true,
   },
   {
     id: 'cities',
-    title: 'Cities',
-    description: 'Great settlements and their history',
     iconPath: '/icons/cities.png',
+    hasInfobox: true,
   },
-];
+] as const;
+
+export type ArticleCategory = (typeof ARTICLE_CATEGORIES)[number]['id'];
+
+export function getCategoryConfig(id: ArticleCategory) {
+  return ARTICLE_CATEGORIES.find((cat) => cat.id === id)!;
+}

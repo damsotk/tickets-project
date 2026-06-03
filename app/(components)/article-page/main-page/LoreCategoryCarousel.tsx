@@ -1,13 +1,13 @@
 'use client';
 import Image from 'next/image';
 import styles from '@/app/(styles)/articles-styles/lore-category-carousel.module.css';
-import { ARTICLE_CATEGORIES } from '@/constants/available_article_categories';
+import { ARTICLE_CATEGORIES, ArticleCategory } from '@/constants/available_article_categories';
 import { useCategoryNavigation } from '@/app/(hooks)/articles-page-hooks/use-change-category';
 import { useTranslation } from '@/app/(hooks)/use-translation';
 
 interface LoreCategoryCarouselProps {
-  currentCategory: 'basic' | 'characters' | 'faith' | 'cities';
-  onCurrentCategoryChange: (category: 'basic' | 'characters' | 'faith' | 'cities') => void;
+  currentCategory: ArticleCategory;
+  onCurrentCategoryChange: (category: ArticleCategory) => void;
 }
 
 export default function LoreCategoryCarousel({

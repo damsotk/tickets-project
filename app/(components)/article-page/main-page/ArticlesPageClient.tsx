@@ -4,22 +4,14 @@ import LoreCategoryCarousel from '@/app/(components)/article-page/main-page/Lore
 import { useState } from 'react';
 import ArticlesList from '@/app/(components)/article-page/main-page/ArticlesList';
 import { ArticleMetadata } from '@/lib/articles';
+import { ArticleCategory, ARTICLE_CATEGORIES } from '@/constants/available_article_categories';
 
 interface ArticlesPageClientProps {
-  initialArticles: {
-    basic: ArticleMetadata[];
-    characters: ArticleMetadata[];
-    faith: ArticleMetadata[];
-    cities: ArticleMetadata[];
-  };
+  initialArticles: Record<ArticleCategory, ArticleMetadata[]>;
 }
 
 export default function ArticlesPageClient({ initialArticles }: ArticlesPageClientProps) {
-  const [currentCategory, setCurrentCategory] = useState<
-    'basic' | 'characters' | 'faith' | 'cities'
-  >('basic');
-
-  const currentArticles = initialArticles[currentCategory];
+  const [currentCategory, setCurrentCategory] = useState<ArticleCategory>(ARTICLE_CATEGORIES[0].id);
 
   return (
     <div className={styles.pageWrapper}>
@@ -28,8 +20,7 @@ export default function ArticlesPageClient({ initialArticles }: ArticlesPageClie
           currentCategory={currentCategory}
           onCurrentCategoryChange={setCurrentCategory}
         />
-
-        <ArticlesList currentArticles={currentArticles} />
+        <ArticlesList currentArticles={initialArticles[currentCategory]} />
       </div>
     </div>
   );

@@ -2,13 +2,13 @@ import { Article } from '@/lib/articles';
 import Image from 'next/image';
 import styles from '@/app/(styles)/articles-styles/article-infobox.module.css';
 
-interface ArticleInfobox {
+interface ArticleInfoboxProps {
   article: Article;
 }
 
 const HIDDEN_INFOBOX_KEYS = ['image', 'imagePosition'];
 
-export default function ArticleInfobox({ article }: ArticleInfobox) {
+export default function ArticleInfobox({ article }: ArticleInfoboxProps) {
   if (!article.infobox) {
     return null;
   }
