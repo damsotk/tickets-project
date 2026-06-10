@@ -18,23 +18,50 @@ interface TooltipState {
 interface SlotProps {
   ingredient: Ingredient;
   angle: number;
+  linkedRecipeId: string | null;
   onMouseEnter: (name: string, e: React.MouseEvent) => void;
   onMouseMove: (e: React.MouseEvent) => void;
   onMouseLeave: () => void;
+  onNavigate: (recipeId: string) => void;
 }
 
-function Slot({ ingredient, angle, onMouseEnter, onMouseMove, onMouseLeave }: SlotProps) {
+function Slot({
+  ingredient,
+  angle,
+  linkedRecipeId,
+  onMouseEnter,
+  onMouseMove,
+  onMouseLeave,
+  onNavigate,
+}: SlotProps) {
   const rad = (angle * Math.PI) / 180;
   const x = 50 + (RADIUS / 2.2) * Math.cos(rad);
   const y = 50 + (RADIUS / 2.2) * Math.sin(rad);
 
+  const tooltipText = linkedRecipeId ? `${ingredient.name} — открыть крафт` : ingredient.name;
+
+  function handleClick() {
+    if (linkedRecipeId) {
+      onNavigate(linkedRecipeId);
+    }
+  }
+
   return (
     <div
-      className={styles.slot}
+      className={`${styles.slot} ${linkedRecipeId ? styles.slotLinked : ''}`}
       style={{ left: `${x}%`, top: `${y}%` }}
-      onMouseEnter={(e) => onMouseEnter(ingredient.name, e)}
+      onMouseEnter={(e) => onMouseEnter(tooltipText, e)}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
+      onClick={handleClick}
+      role={linkedRecipeId ? 'button' : undefined}
+      tabIndex={linkedRecipeId ? 0 : undefined}
+      onKeyDown={(e) => {
+        if (linkedRecipeId && (e.key === 'Enter' || e.key === ' ')) {
+          e.preventDefault();
+          onNavigate(linkedRecipeId);
+        }
+      }}
     >
       <IngredientVisual ingredient={ingredient} size={36} className={styles.slotImage} />
     </div>
@@ -43,18 +70,20 @@ function Slot({ ingredient, angle, onMouseEnter, onMouseMove, onMouseLeave }: Sl
 
 interface CraftCircleProps {
   recipe: Recipe;
+  recipeIdByIngredientId: Record<string, string>;
+  onNavigate: (recipeId: string) => void;
 }
 
-export function CraftCircle({ recipe }: CraftCircleProps) {
+export function CraftCircle({ recipe, recipeIdByIngredientId, onNavigate }: CraftCircleProps) {
   const [tooltip, setTooltip] = useState<TooltipState>({ visible: false, text: '', x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
 
-  function showTooltip(name: string, e: React.MouseEvent) {
+  function showTooltip(text: string, e: React.MouseEvent) {
     const rect = containerRef.current?.getBoundingClientRect();
     if (!rect) return;
     setTooltip({
       visible: true,
-      text: name,
+      text,
       x: e.clientX - rect.left + 12,
       y: e.clientY - rect.top - 32,
     });
@@ -77,16 +106,22 @@ export function CraftCircle({ recipe }: CraftCircleProps) {
   return (
     <div className={styles.wrapper} ref={containerRef}>
       <div className={styles.circle}>
-        {recipe.slots.map((ingredient, i) => (
-          <Slot
-            key={i}
-            ingredient={ingredient}
-            angle={SLOT_ANGLES_DEG[i]}
-            onMouseEnter={showTooltip}
-            onMouseMove={moveTooltip}
-            onMouseLeave={hideTooltip}
-          />
-        ))}
+        {recipe.slots.map((ingredient, i) => {
+          const linkedRecipeId = recipeIdByIngredientId[ingredient.id] ?? null;
+          const targetId = linkedRecipeId === recipe.id ? null : linkedRecipeId;
+          return (
+            <Slot
+              key={i}
+              ingredient={ingredient}
+              angle={SLOT_ANGLES_DEG[i]}
+              linkedRecipeId={targetId}
+              onMouseEnter={showTooltip}
+              onMouseMove={moveTooltip}
+              onMouseLeave={hideTooltip}
+              onNavigate={onNavigate}
+            />
+          );
+        })}
 
         <div
           className={`${styles.slot} ${styles.centerSlot}`}

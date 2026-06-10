@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import type { Recipe } from '@/constants/server_recipes';
 import { CraftCircle } from './CraftCircle';
 import { IngredientVisual } from './IngredientVisual';
@@ -14,10 +14,22 @@ export function CraftsViewer({ recipes }: CraftsViewerProps) {
   const [activeId, setActiveId] = useState(recipes[0].id);
   const active = recipes.find((r) => r.id === activeId) ?? recipes[0];
 
+  const recipeIdByIngredientId = useMemo(() => {
+    const map: Record<string, string> = {};
+    for (const recipe of recipes) {
+      map[recipe.result.id] = recipe.id;
+    }
+    return map;
+  }, [recipes]);
+
   return (
     <div className={styles.viewer}>
       <div className={styles.circleArea}>
-        <CraftCircle recipe={active} />
+        <CraftCircle
+          recipe={active}
+          recipeIdByIngredientId={recipeIdByIngredientId}
+          onNavigate={setActiveId}
+        />
         <p className={styles.resultName}>{active.result.name}</p>
       </div>
 

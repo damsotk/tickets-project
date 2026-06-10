@@ -10,26 +10,13 @@ interface IngredientVisualProps {
 }
 
 export function IngredientVisual({ ingredient, size, className }: IngredientVisualProps) {
-  if (ingredient.texture) {
-    return (
-      <Image
-        src={ingredient.texture}
-        alt={ingredient.name}
-        width={size}
-        height={size}
-        className={className}
-      />
-    );
-  }
-
   return (
-    <span
+    <Image
+      src={ingredient.texture}
+      alt={ingredient.name}
+      width={size}
+      height={size}
       className={className}
-      role="img"
-      aria-label={ingredient.name}
-      style={{ fontSize: `${Math.round(size * 0.8)}px`, lineHeight: 1 }}
-    >
-      {ingredient.emoji}
-    </span>
+    />
   );
 }
