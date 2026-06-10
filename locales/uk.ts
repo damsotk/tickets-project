@@ -139,13 +139,13 @@ const uk = {
   articles: {
     mainPage: {
       titleOfCategory: {
-        basic: 'Основные концепции',
+        basic: 'Основні концепції',
         characters: 'Персонажі',
         faith: 'Віра',
         cities: 'Поселення',
       },
       descOfCategory: {
-        basic: 'Основные концепции сервера',
+        basic: 'Основний лор всього всесвіту',
         characters: 'Легенди та герої нашого світу',
         faith: 'Боги, культи та священні ритуали',
         cities: 'Великі поселення та їхня історія',

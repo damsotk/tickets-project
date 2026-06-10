@@ -58,7 +58,7 @@ const ru = {
       ticketIconAlt: 'Тикеты',
     },
     heroSection: {
-      title: 'Добро пожаловать в Эллиум',
+      title: 'Добро пожаловать в Элиум',
       subtitle: 'Minecraft Roleplay Server',
     },
     navigatesButtons: {
@@ -145,7 +145,7 @@ const ru = {
         cities: 'Поселения',
       },
       descOfCategory: {
-        basic: 'Основные концепции сервера',
+        basic: 'Основной лор всей вселенной',
         characters: 'Легенды и герои нашего мира',
         faith: 'Боги, культы и священные ритуалы',
         cities: 'Великие поселения и их история',
