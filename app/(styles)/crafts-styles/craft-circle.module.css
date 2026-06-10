@@ -1,0 +1,114 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+}
+
+.circle {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, #202225 0%, #121214 70%);
+  border: 1px solid #202225;
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 30px rgba(0, 0, 0, 0.5),
+    0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.slot {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #40444b;
+  border: 1px solid #202225;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slot:hover {
+  background-color: #5865f2;
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 0 0 2px #5865f2;
+  z-index: 5;
+}
+
+.centerSlot {
+  left: 50%;
+  top: 50%;
+  width: 64px;
+  height: 64px;
+  background-color: #36393f;
+  border: 2px solid #5865f2;
+  box-shadow: 0 0 16px rgba(88, 101, 242, 0.4);
+}
+
+.centerSlot:hover {
+  background-color: #4752c4;
+  box-shadow: 0 0 20px rgba(88, 101, 242, 0.6);
+}
+
+.slotImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  pointer-events: none;
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 1000;
+  padding: 6px 10px;
+  background-color: #18191c;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'minecraftFont', monospace;
+  letter-spacing: 0.3px;
+  border-radius: 4px;
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.24),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    max-width: 280px;
+  }
+
+  .slot {
+    width: 46px;
+    height: 46px;
+  }
+
+  .centerSlot {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    max-width: 240px;
+  }
+
+  .slot {
+    width: 40px;
+    height: 40px;
+  }
+
+  .centerSlot {
+    width: 50px;
+    height: 50px;
+  }
+}

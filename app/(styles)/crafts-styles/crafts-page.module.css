@@ -1,0 +1,26 @@
+.page {
+  padding: 40px 0 0;
+}
+
+.pageTitle {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  margin: 0 0 32px;
+  font-family: 'minecraftFont', monospace;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+  .pageTitle {
+    font-size: 22px;
+    margin: 0 0 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pageTitle {
+    font-size: 18px;
+  }
+}
