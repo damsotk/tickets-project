@@ -24,3 +24,25 @@
     font-size: 18px;
   }
 }
+
+.hint {
+  max-width: 640px;
+  margin: 32px 0 0;
+  padding: 16px 20px;
+  background-color: #121214;
+  border: 1px solid #202225;
+  border-left: 3px solid #5865f2;
+  border-radius: 6px;
+  color: #b9bbbe;
+  font-size: 14px;
+  line-height: 1.6;
+  font-family: 'minecraftFont', monospace;
+  letter-spacing: 0.3px;
+}
+
+@media (max-width: 768px) {
+  .hint {
+    font-size: 13px;
+    margin: 24px auto 0;
+  }
+}
