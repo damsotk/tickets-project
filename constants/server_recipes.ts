@@ -110,16 +110,52 @@ const DIAMOND_BOOTS: Ingredient = {
   texture: '/crafts-textures/diamond_boots.png',
 };
 
-const KODEKS_OBSIDIAN: Ingredient = {
+const DIAMOND_BLOCK: Ingredient = {
   id: 'kodeks_obsidian',
-  name: 'Обсидиан кодекса',
-  texture: '/crafts-textures/obsidian.png',
+  name: 'Алмазный Блок',
+  texture: '/crafts-textures/diamond_block.png',
 };
 
-const KODEKS_INGOT: Ingredient = {
-  id: 'kodeks_ingot',
-  name: 'Слиток кодекса',
-  texture: '/crafts-textures/ingot.png',
+const BLAZE_ROD: Ingredient = {
+  id: 'blaze_rod',
+  name: 'Огненный стержень',
+  texture: '/crafts-textures/blaze_rod.png',
+};
+
+const BONE_BLOCK: Ingredient = {
+  id: 'bone_block',
+  name: 'Блок костей',
+  texture: '/crafts-textures/bone_block.png',
+};
+
+const BONE: Ingredient = {
+  id: 'bone',
+  name: 'Кость',
+  texture: '/crafts-textures/bone.png',
+};
+
+const FLINT: Ingredient = {
+  id: 'flint',
+  name: 'Кремень',
+  texture: '/crafts-textures/flint.png',
+};
+
+const MAGMA_CREAM: Ingredient = {
+  id: 'magma_cream',
+  name: 'Магмовый крем',
+  texture: '/crafts-textures/magma_cream.png',
+};
+
+const NETHERITE_UPGRADE: Ingredient = {
+  id: 'netherite_upgrade',
+  name: 'Улучшение незеритом',
+  texture: '/crafts-textures/netherite_upgrade.png',
+};
+
+const POWDER: Ingredient = {
+  id: 'powder',
+  name: 'Порошок',
+  texture: '/crafts-textures/powder.png',
 };
 
 export const RECIPES: Recipe[] = [
@@ -188,14 +224,14 @@ export const RECIPES: Recipe[] = [
     name: 'Основа брони кодекса',
     result: DIAMOND,
     slots: [
-      KODEKS_OBSIDIAN,
-      ENDER_EYE,
-      KODEKS_INGOT,
-      NETHERITE_SCRAP,
-      ECHO_FRAGMENT,
-      SEA_HEARTH,
-      END_CRYSTAL,
-      KODEKS_INGOT,
+      NETHERITE_UPGRADE,
+      POWDER,
+      BONE_BLOCK,
+      BLAZE_ROD,
+      DIAMOND_BLOCK,
+      MAGMA_CREAM,
+      BONE,
+      FLINT,
     ],
   },
 ];
