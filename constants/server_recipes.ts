@@ -118,7 +118,7 @@ const FLINT: Ingredient = {
 
 const MAGMA_CREAM: Ingredient = {
   id: 'magma_cream',
-  name: 'Магмовый крем',
+  name: 'Сгусток магмы',
   texture: '/crafts-textures/magma_cream.png',
 };
 
@@ -130,13 +130,19 @@ const NETHERITE_UPGRADE: Ingredient = {
 
 const POWDER: Ingredient = {
   id: 'powder',
-  name: 'Порошок',
+  name: 'Порох',
   texture: '/crafts-textures/powder.png',
+};
+
+const REGILANT: Ingredient = {
+  id: 'regilant',
+  name: 'Регилянт',
+  texture: '/crafts-textures/amethyst_shard.png',
 };
 
 const AMETHYST_SHARD: Ingredient = {
   id: 'amethyst_shard',
-  name: 'Регилянт',
+  name: 'Аметистовый осколок',
   texture: '/crafts-textures/amethyst_shard.png',
 };
 
@@ -210,6 +216,72 @@ const NO_TEXTURE: Ingredient = {
   id: 'no_texture',
   name: 'Нету текстуры',
   texture: '/crafts-textures/barrier.png',
+};
+
+const BOTTLE_ENCHANTING: Ingredient = {
+  id: 'bottle_enchanting',
+  name: 'Бутылка опыта',
+  texture: '/crafts-textures/bottle_enchanting.png',
+};
+
+const GLOWSTONE: Ingredient = {
+  id: 'glowstone',
+  name: 'Светокамень',
+  texture: '/crafts-textures/glowstone.png',
+};
+
+const GOLD_INGOT: Ingredient = {
+  id: 'gold_ingot',
+  name: 'Золотой слиток',
+  texture: '/crafts-textures/gold_ingot.png',
+};
+
+const PAPER: Ingredient = {
+  id: 'paper',
+  name: 'Бумага',
+  texture: '/crafts-textures/paper.png',
+};
+
+const FLASH_SCROLL: Ingredient = {
+  id: 'flash_scroll',
+  name: 'Свиток вспышки',
+  texture: '/crafts-textures/paper.png',
+};
+
+const BACK_SCROLL: Ingredient = {
+  id: 'back_scroll',
+  name: 'Свиток возврата',
+  texture: '/crafts-textures/paper.png',
+};
+
+const CLOCK: Ingredient = {
+  id: 'clock',
+  name: 'Часы',
+  texture: '/crafts-textures/clock.gif',
+};
+
+const ENDER_PEARL: Ingredient = {
+  id: 'ender_pearl',
+  name: 'Жемчуг Края',
+  texture: '/crafts-textures/ender_pearl.png',
+};
+
+const NAUTILUS_SHELL: Ingredient = {
+  id: 'nautilus_shell',
+  name: 'Раковина nautilus',
+  texture: '/crafts-textures/nautilus_shell.png',
+};
+
+const PRISMARINE_SHARD: Ingredient = {
+  id: 'prismarine_shard',
+  name: 'Осколок призмарина',
+  texture: '/crafts-textures/prismarine_shard.png',
+};
+
+const RECOVERY_COMPASS: Ingredient = {
+  id: 'recovery_compass',
+  name: 'Компас восстановления',
+  texture: '/crafts-textures/recovery_compass.gif',
 };
 
 export const RECIPES: Recipe[] = [
@@ -291,7 +363,7 @@ export const RECIPES: Recipe[] = [
   {
     id: 'regilant',
     name: 'Регилянт',
-    result: AMETHYST_SHARD,
+    result: REGILANT,
     slots: [
       LAPIS,
       END_CRYSTAL,
@@ -301,6 +373,27 @@ export const RECIPES: Recipe[] = [
       TOTEM_OF_UNDYING,
       MAGMA_BLOCK,
       NETHERITE_INGOT,
+    ],
+  },
+  {
+    id: 'flash_scroll',
+    name: 'Свиток вспышки',
+    result: FLASH_SCROLL,
+    slots: [BOTTLE_ENCHANTING, POWDER, GOLD_INGOT, BLAZE_ROD, PAPER, MAGMA_CREAM, GLOWSTONE, FLINT],
+  },
+  {
+    id: 'back_scroll',
+    name: 'Свиток возврата',
+    result: BACK_SCROLL,
+    slots: [
+      ENDER_PEARL,
+      PRISMARINE_SHARD,
+      RECOVERY_COMPASS,
+      NETHERITE_SCRAP,
+      PAPER,
+      NAUTILUS_SHELL,
+      CLOCK,
+      AMETHYST_SHARD,
     ],
   },
 ];
