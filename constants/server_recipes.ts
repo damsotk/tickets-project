@@ -20,30 +20,6 @@ export type Recipe = {
   ];
 };
 
-const HELMET_ARMOR_KODEKS: Ingredient = {
-  id: 'helmet_armor_kodeks',
-  name: 'Шлем Брони Кодекса',
-  texture: '/crafts-textures/end_crystal.png',
-};
-
-const CHESTPLATE_ARMOR_KODEKS: Ingredient = {
-  id: 'chestplate_armor_kodeks',
-  name: 'Нагрудник Брони Кодекса',
-  texture: '/crafts-textures/end_crystal.png',
-};
-
-const LEGGINGS_ARMOR_KODEKS: Ingredient = {
-  id: 'leggings_armor_kodeks',
-  name: 'Штаны Брони Кодекса',
-  texture: '/crafts-textures/end_crystal.png',
-};
-
-const BOOTS_ARMOR_KODEKS: Ingredient = {
-  id: 'boots_armor_kodeks',
-  name: 'Сапоги Брони Кодекса',
-  texture: '/crafts-textures/end_crystal.png',
-};
-
 const END_CRYSTAL: Ingredient = {
   id: 'end_crystal',
   name: 'Кристалл энда',
@@ -158,11 +134,89 @@ const POWDER: Ingredient = {
   texture: '/crafts-textures/powder.png',
 };
 
+const AMETHYST_SHARD: Ingredient = {
+  id: 'amethyst_shard',
+  name: 'Регилянт',
+  texture: '/crafts-textures/amethyst_shard.png',
+};
+
+const CONDUIT: Ingredient = {
+  id: 'conduit',
+  name: 'Проводник',
+  texture: '/crafts-textures/conduit.png',
+};
+
+const LAPIS: Ingredient = {
+  id: 'lapis',
+  name: 'Лазурит',
+  texture: '/crafts-textures/lapis.png',
+};
+
+const MAGMA_BLOCK: Ingredient = {
+  id: 'magma_block',
+  name: 'Блок магмы',
+  texture: '/crafts-textures/magma_block.png',
+};
+
+const NETHERITE_INGOT: Ingredient = {
+  id: 'netherite_ingot',
+  name: 'Слиток незерита',
+  texture: '/crafts-textures/netherite_ingot.png',
+};
+
+const SOUL_SAND: Ingredient = {
+  id: 'soul_sand',
+  name: 'Песок душ',
+  texture: '/crafts-textures/soul_sand.png',
+};
+
+const TOTEM_OF_UNDYING: Ingredient = {
+  id: 'totem_of_undying',
+  name: 'Тотем бессмертия',
+  texture: '/crafts-textures/totem_of_undying.png',
+};
+
+const TURTLE_SHELL: Ingredient = {
+  id: 'turtle_shell',
+  name: 'Панцирь черепахи',
+  texture: '/crafts-textures/turtle_shell.png',
+};
+
+const KODEKS_HELMET: Ingredient = {
+  id: 'netherite_helmet',
+  name: 'Шлем Кодекса',
+  texture: '/crafts-textures/netherite_helmet.png',
+};
+
+const KODEKS_CHESTPLATE: Ingredient = {
+  id: 'netherite_chestplate',
+  name: 'Нагрудник Кодекса',
+  texture: '/crafts-textures/netherite_chestplate.png',
+};
+
+const KODEKS_LEGGINGS: Ingredient = {
+  id: 'netherite_leggings',
+  name: 'Штаны Кодекса',
+  texture: '/crafts-textures/netherite_leggings.png',
+};
+
+const KODEKS_BOOTS: Ingredient = {
+  id: 'netherite_boots',
+  name: 'Ботинки Кодекса',
+  texture: '/crafts-textures/netherite_boots.png',
+};
+
+const NO_TEXTURE: Ingredient = {
+  id: 'no_texture',
+  name: 'Нету текстуры',
+  texture: '/crafts-textures/barrier.png',
+};
+
 export const RECIPES: Recipe[] = [
   {
     id: 'helmet_armor_kodeks',
     name: 'Броня Кодекса, шлем',
-    result: HELMET_ARMOR_KODEKS,
+    result: KODEKS_HELMET,
     slots: [
       END_CRYSTAL,
       ENDER_EYE,
@@ -177,7 +231,7 @@ export const RECIPES: Recipe[] = [
   {
     id: 'chestplate_armor_kodeks',
     name: 'Броня Кодекса, нагрудник',
-    result: CHESTPLATE_ARMOR_KODEKS,
+    result: KODEKS_CHESTPLATE,
     slots: [
       END_CRYSTAL,
       ENDER_EYE,
@@ -192,7 +246,7 @@ export const RECIPES: Recipe[] = [
   {
     id: 'leggings_armor_kodeks',
     name: 'Броня Кодекса, штаны',
-    result: LEGGINGS_ARMOR_KODEKS,
+    result: KODEKS_LEGGINGS,
     slots: [
       END_CRYSTAL,
       ENDER_EYE,
@@ -207,7 +261,7 @@ export const RECIPES: Recipe[] = [
   {
     id: 'boots_armor_kodeks',
     name: 'Броня Кодекса, ботинки',
-    result: BOOTS_ARMOR_KODEKS,
+    result: KODEKS_BOOTS,
     slots: [
       END_CRYSTAL,
       ENDER_EYE,
@@ -232,6 +286,21 @@ export const RECIPES: Recipe[] = [
       MAGMA_CREAM,
       BONE,
       FLINT,
+    ],
+  },
+  {
+    id: 'regilant',
+    name: 'Регилянт',
+    result: AMETHYST_SHARD,
+    slots: [
+      LAPIS,
+      END_CRYSTAL,
+      SOUL_SAND,
+      TURTLE_SHELL,
+      CONDUIT,
+      TOTEM_OF_UNDYING,
+      MAGMA_BLOCK,
+      NETHERITE_INGOT,
     ],
   },
 ];
