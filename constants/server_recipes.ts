@@ -32,9 +32,15 @@ const ENDER_EYE: Ingredient = {
   texture: '/crafts-textures/ender_eye.png',
 };
 
+const BASE_KODEKS: Ingredient = {
+  id: 'base_kodeks',
+  name: 'Основа брони кодекса',
+  texture: '/crafts-textures/diamond.png',
+};
+
 const DIAMOND: Ingredient = {
   id: 'diamond',
-  name: 'Основа брони кодекса',
+  name: 'Алмаз',
   texture: '/crafts-textures/diamond.png',
 };
 
@@ -53,7 +59,7 @@ const SEA_HEARTH: Ingredient = {
 const ENCHANTED_BOOK: Ingredient = {
   id: 'enchanted_book',
   name: 'Зачарованная книга, прочность 3',
-  texture: '/crafts-textures/enchanted_book.png',
+  texture: '/crafts-textures/enchanted_book.gif',
 };
 
 const ECHO_FRAGMENT: Ingredient = {
@@ -245,13 +251,19 @@ const PAPER: Ingredient = {
 const FLASH_SCROLL: Ingredient = {
   id: 'flash_scroll',
   name: 'Свиток вспышки',
-  texture: '/crafts-textures/paper.png',
+  texture: '/crafts-textures/scroll.png',
 };
 
 const BACK_SCROLL: Ingredient = {
   id: 'back_scroll',
   name: 'Свиток возврата',
-  texture: '/crafts-textures/paper.png',
+  texture: '/crafts-textures/scroll.png',
+};
+
+const TIME_SCROLL: Ingredient = {
+  id: 'time_scroll',
+  name: 'Свиток время',
+  texture: '/crafts-textures/scroll.png',
 };
 
 const CLOCK: Ingredient = {
@@ -268,7 +280,7 @@ const ENDER_PEARL: Ingredient = {
 
 const NAUTILUS_SHELL: Ingredient = {
   id: 'nautilus_shell',
-  name: 'Раковина nautilus',
+  name: 'Раковина наутилуса',
   texture: '/crafts-textures/nautilus_shell.png',
 };
 
@@ -284,6 +296,84 @@ const RECOVERY_COMPASS: Ingredient = {
   texture: '/crafts-textures/recovery_compass.gif',
 };
 
+const KOEZISTRATUM: Ingredient = {
+  id: 'recovery_compass',
+  name: 'Коэкзистариум',
+  texture: '/crafts-textures/ender_pearl.png',
+};
+
+const KOEZISTRATUM_HROM: Ingredient = {
+  id: 'koezistratum_hrom',
+  name: 'Коэкзистариумхром',
+  texture: '/crafts-textures/chest.gif',
+};
+
+const WIND_CHARGE: Ingredient = {
+  id: 'wind_charge',
+  name: 'Заряд ветка',
+  texture: '/crafts-textures/wind_charge.png',
+};
+
+const MYSTIC_SCROLL: Ingredient = {
+  id: 'mystic_scroll',
+  name: 'Скриптор тайн',
+  texture: '/crafts-textures/scroll.png',
+};
+
+const KINETIK_BOOK: Ingredient = {
+  id: 'kinetik_book',
+  name: 'Книга кинетической энергии',
+  texture: '/crafts-textures/enchanted_book.gif',
+};
+
+const UNCHANT_BOOK: Ingredient = {
+  id: 'unchant_book',
+  name: 'Книга без зачарований',
+  texture: '/crafts-textures/enchanted_book.gif',
+};
+
+const NETHERITE_BLOCK: Ingredient = {
+  id: 'netherite_block',
+  name: 'Книга без зачарований',
+  texture: '/crafts-textures/netherite_block.png',
+};
+
+const WITHER_SKELETON_SKULL: Ingredient = {
+  id: 'wither_skeleton_skull',
+  name: 'Череп визер-скелета',
+  texture: '/crafts-textures/wither_skeleton_skull.png',
+};
+
+const GOLDEN_APPLE: Ingredient = {
+  id: 'golden_apple',
+  name: 'Золотое яблоко',
+  texture: '/crafts-textures/golden_apple.png',
+};
+
+const LAPIS_BLOCK: Ingredient = {
+  id: 'lapis_block',
+  name: 'Лазуритный блок',
+  texture: '/crafts-textures/lapis_block.png',
+};
+
+const IRON_INGOT: Ingredient = {
+  id: 'iron_ingot',
+  name: 'Железный слиток',
+  texture: '/crafts-textures/iron_ingot.png',
+};
+
+const ENDER_CHEST: Ingredient = {
+  id: 'ender_chest',
+  name: 'Эндер сундук',
+  texture: '/crafts-textures/ender_chest.gif',
+};
+
+const SEA_LENTERN: Ingredient = {
+  id: 'sea_lantern',
+  name: 'Морской фонарь',
+  texture: '/crafts-textures/sea_lantern.png',
+};
+
 export const RECIPES: Recipe[] = [
   {
     id: 'helmet_armor_kodeks',
@@ -292,7 +382,7 @@ export const RECIPES: Recipe[] = [
     slots: [
       END_CRYSTAL,
       ENDER_EYE,
-      DIAMOND,
+      BASE_KODEKS,
       NETHERITE_SCRAP,
       DIAMOND_HELMET,
       SEA_HEARTH,
@@ -307,7 +397,7 @@ export const RECIPES: Recipe[] = [
     slots: [
       END_CRYSTAL,
       ENDER_EYE,
-      DIAMOND,
+      BASE_KODEKS,
       NETHERITE_SCRAP,
       DIAMOND_CHESTPLATE,
       SEA_HEARTH,
@@ -322,7 +412,7 @@ export const RECIPES: Recipe[] = [
     slots: [
       END_CRYSTAL,
       ENDER_EYE,
-      DIAMOND,
+      BASE_KODEKS,
       NETHERITE_SCRAP,
       DIAMOND_LEGGINGS,
       SEA_HEARTH,
@@ -337,7 +427,7 @@ export const RECIPES: Recipe[] = [
     slots: [
       END_CRYSTAL,
       ENDER_EYE,
-      DIAMOND,
+      BASE_KODEKS,
       NETHERITE_SCRAP,
       DIAMOND_BOOTS,
       SEA_HEARTH,
@@ -346,9 +436,9 @@ export const RECIPES: Recipe[] = [
     ],
   },
   {
-    id: 'diamond',
+    id: 'base_kodeks',
     name: 'Основа брони кодекса',
-    result: DIAMOND,
+    result: BASE_KODEKS,
     slots: [
       NETHERITE_UPGRADE,
       POWDER,
@@ -394,6 +484,96 @@ export const RECIPES: Recipe[] = [
       NAUTILUS_SHELL,
       CLOCK,
       AMETHYST_SHARD,
+    ],
+  },
+  {
+    id: 'mystic_scroll',
+    name: 'Скриптор тайн',
+    result: MYSTIC_SCROLL,
+    slots: [
+      ECHO_FRAGMENT,
+      WIND_CHARGE,
+      BOTTLE_ENCHANTING,
+      NETHERITE_INGOT,
+      PAPER,
+      SEA_HEARTH,
+      KOEZISTRATUM,
+      NAUTILUS_SHELL,
+    ],
+  },
+  {
+    id: 'time_scroll',
+    name: 'Свиток время',
+    result: TIME_SCROLL,
+    slots: [
+      ECHO_FRAGMENT,
+      END_CRYSTAL,
+      CLOCK,
+      NETHERITE_INGOT,
+      PAPER,
+      TOTEM_OF_UNDYING,
+      LAPIS_BLOCK,
+      ENDER_EYE,
+    ],
+  },
+  {
+    id: 'koezistratum',
+    name: 'Коэкзистариум',
+    result: KOEZISTRATUM,
+    slots: [
+      ENDER_PEARL,
+      WIND_CHARGE,
+      CLOCK,
+      NETHERITE_INGOT,
+      REGILANT,
+      SEA_HEARTH,
+      TOTEM_OF_UNDYING,
+      NAUTILUS_SHELL,
+    ],
+  },
+  {
+    id: 'kinetik_book',
+    name: 'Книга кинетической энергии',
+    result: KINETIK_BOOK,
+    slots: [
+      MYSTIC_SCROLL,
+      UNCHANT_BOOK,
+      NETHERITE_BLOCK,
+      SEA_HEARTH,
+      TIME_SCROLL,
+      TOTEM_OF_UNDYING,
+      WITHER_SKELETON_SKULL,
+      ECHO_FRAGMENT,
+    ],
+  },
+  {
+    id: 'unchant_book',
+    name: 'Книга без зачарований',
+    result: UNCHANT_BOOK,
+    slots: [
+      REGILANT,
+      GOLD_INGOT,
+      GOLDEN_APPLE,
+      NETHERITE_SCRAP,
+      ENCHANTED_BOOK,
+      DIAMOND,
+      LAPIS_BLOCK,
+      IRON_INGOT,
+    ],
+  },
+  {
+    id: 'koezistratum_hrom',
+    name: 'Коэкзистариумхром',
+    result: KOEZISTRATUM_HROM,
+    slots: [
+      ENDER_CHEST,
+      DIAMOND,
+      ENDER_EYE,
+      NAUTILUS_SHELL,
+      KOEZISTRATUM,
+      SEA_LENTERN,
+      END_CRYSTAL,
+      NETHERITE_SCRAP,
     ],
   },
 ];
