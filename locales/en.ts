@@ -86,6 +86,14 @@ const en = {
         description:
           'Learn everything about the server concept, mechanics, classes and where to start your adventure.',
       },
+      altarCrafts: {
+        title: 'Altar Crafts',
+        description: 'Special server recipes',
+      },
+      moreSection: {
+        title: 'More Sections',
+        description: 'Guides, Tickets, Rumors',
+      },
     },
   },
   tickets: {

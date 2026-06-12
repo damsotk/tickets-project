@@ -85,9 +85,6 @@
   }
 }
 
-/* ========================
-   Regular Grid
-   ======================== */
 .grid {
   display: flex;
   flex-direction: column;
@@ -339,4 +336,99 @@
   .featuredCard .arrow {
     display: none;
   }
+}
+
+.card.altar {
+  border-color: rgba(139, 92, 246, 0.3);
+  background: linear-gradient(135deg, #1a1a2e 0%, rgba(139, 92, 246, 0.06) 100%);
+}
+
+.card.altar .iconWrapper {
+  background: rgba(139, 92, 246, 0.15);
+}
+
+.card.altar .title {
+  color: #a78bfa;
+}
+
+.card.altar:hover {
+  background: linear-gradient(135deg, #1a1a2e 0%, rgba(139, 92, 246, 0.15) 100%);
+  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.2);
+  border-color: rgba(139, 92, 246, 0.5);
+}
+
+.card.altar:hover .arrow {
+  color: #a78bfa;
+}
+
+.moreButton {
+  width: 100%;
+  background: transparent;
+  border-color: rgba(148, 163, 184, 0.15);
+  cursor: pointer;
+  text-align: left;
+  padding: 10px 18px;
+  justify-content: space-between;
+  font-family: minecraftFont;
+}
+
+.moreButton:hover {
+  border-color: rgba(148, 163, 184, 0.3);
+  background: rgba(148, 163, 184, 0.04);
+  transform: none;
+  box-shadow: none;
+}
+
+.moreButtonLabel {
+  font-size: 0.85rem;
+  color: #6b7280;
+  letter-spacing: 0.3px;
+}
+
+.moreButton:hover .moreButtonLabel {
+  color: #9ca3af;
+}
+
+.moreButton .chevron {
+  font-size: 1rem;
+  color: #4b5563;
+}
+
+.accordionWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.chevron {
+  margin-left: auto;
+  font-size: 1.4rem;
+  color: #4b5563;
+  flex-shrink: 0;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  line-height: 1;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.accordionBody {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordionBodyOpen {
+  grid-template-rows: 1fr;
+}
+
+.accordionInner {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.accordionInner .card:first-child {
+  margin-top: 12px;
 }
