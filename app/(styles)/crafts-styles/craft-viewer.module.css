@@ -128,3 +128,16 @@
     font-size: 14px;
   }
 }
+
+.recipeDescription {
+  max-width: 300px;
+  text-align: center;
+  color: #b9bbbe;
+  font-size: 13px;
+  line-height: 1.6;
+  font-family: 'minecraftFont', monospace;
+  letter-spacing: 0.3px;
+  margin: 0;
+  padding: 12px 16px;
+  border-radius: 6px;
+}

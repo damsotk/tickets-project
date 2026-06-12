@@ -31,6 +31,7 @@ export function CraftsViewer({ recipes }: CraftsViewerProps) {
           onNavigate={setActiveId}
         />
         <p className={styles.resultName}>{active.result.name}</p>
+        {active.description && <p className={styles.recipeDescription}>{active.description}</p>}
       </div>
 
       <div className={styles.listArea}>

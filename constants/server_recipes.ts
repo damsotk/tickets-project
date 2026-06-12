@@ -7,6 +7,7 @@ export type Ingredient = {
 export type Recipe = {
   id: string;
   name: string;
+  description?: string;
   result: Ingredient;
   slots: [
     Ingredient,
@@ -453,6 +454,8 @@ export const RECIPES: Recipe[] = [
   {
     id: 'regilant',
     name: 'Регилянт',
+    description:
+      'Предмет который забирает силу прыжка и дает скорость, если в другой руке то наоборот.',
     result: REGILANT,
     slots: [
       LAPIS,
@@ -468,12 +471,14 @@ export const RECIPES: Recipe[] = [
   {
     id: 'flash_scroll',
     name: 'Свиток вспышки',
+    description: 'Свиток, что позволяет зафлешить всех игроков вокруг.',
     result: FLASH_SCROLL,
     slots: [BOTTLE_ENCHANTING, POWDER, GOLD_INGOT, BLAZE_ROD, PAPER, MAGMA_CREAM, GLOWSTONE, FLINT],
   },
   {
     id: 'back_scroll',
     name: 'Свиток возврата',
+    description: 'Свиток, что позволяет мгновенно вернуться на последнее место смерти.',
     result: BACK_SCROLL,
     slots: [
       ENDER_PEARL,
@@ -489,6 +494,7 @@ export const RECIPES: Recipe[] = [
   {
     id: 'mystic_scroll',
     name: 'Скриптор тайн',
+    description: 'Свиток, что позволяет разговаривать с игроками на расстоянии.',
     result: MYSTIC_SCROLL,
     slots: [
       ECHO_FRAGMENT,
@@ -504,6 +510,7 @@ export const RECIPES: Recipe[] = [
   {
     id: 'time_scroll',
     name: 'Свиток время',
+    description: 'Свиток, что позволяет остановить всех игроков вокруг на несколько секунд.',
     result: TIME_SCROLL,
     slots: [
       ECHO_FRAGMENT,
@@ -519,6 +526,7 @@ export const RECIPES: Recipe[] = [
   {
     id: 'koezistratum',
     name: 'Коэкзистариум',
+    description: 'Предмет нужный для крафта линкованого сундука.',
     result: KOEZISTRATUM,
     slots: [
       ENDER_PEARL,
@@ -534,6 +542,7 @@ export const RECIPES: Recipe[] = [
   {
     id: 'kinetik_book',
     name: 'Книга кинетической энергии',
+    description: 'Книга которая ворует чужую скорость, и преобразует ее в вашу.',
     result: KINETIK_BOOK,
     slots: [
       MYSTIC_SCROLL,
@@ -564,6 +573,7 @@ export const RECIPES: Recipe[] = [
   {
     id: 'koezistratum_hrom',
     name: 'Коэкзистариумхром',
+    description: 'Сундук, чье содержимое видит весь сервер, работает всегда и везде.',
     result: KOEZISTRATUM_HROM,
     slots: [
       ENDER_CHEST,
