@@ -14,6 +14,11 @@
   margin: 0 auto;
 }
 
+.fullBleed {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
 @media (max-width: 768px) {
   .main {
     padding: 32px 16px;

@@ -7,8 +7,8 @@ import WhiteList from '@/app/(components)/main-page/WhiteList';
 export default function ElliumMain() {
   return (
     <div className={styles.app}>
+      <HeroSection />
       <main className={styles.main}>
-        <HeroSection />
         <WhiteList />
         <NavigationGrid />
         <OnlineStats />
