@@ -250,10 +250,7 @@ const en = {
   modals: {
     whilelistmodal: {
       card: {
-        badge: 'Closed Community',
-        description:
-          'Our server uses a whitelist system. Submit an application to join our closed community!',
-        button: 'Apply',
+        button: 'Whitelist Application',
       },
       modal: {
         title: 'White List Application',

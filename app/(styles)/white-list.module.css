@@ -1,94 +1,53 @@
-.container {
-  width: 100%;
-}
-
-.card {
-  position: relative;
-  padding: 0;
-  background: transparent;
-  text-align: center;
-}
-
-.content {
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.badge {
+.whitelistButton {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  background: rgba(168, 85, 247, 0.08);
-  border-radius: 16px;
-  margin-bottom: 16px;
-  font-size: 0.8rem;
-  color: #a855f7;
-  font-weight: 500;
-  letter-spacing: 0.3px;
+  justify-content: center;
+  padding: 14px 22px;
+  background: rgba(20, 21, 26, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(49, 53, 57);
+  border-radius: 10px;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
-.badgeIcon {
-  font-size: 0.9rem;
+.whitelistButton:hover {
+  border-color: rgba(255, 255, 255, 0.65);
+  background: rgba(24, 26, 32, 0.72);
+  transform: translateY(-1px);
 }
 
-.badgeText {
-  text-transform: uppercase;
+.whitelistButton:active {
+  transform: translateY(0);
 }
 
-.title {
+.whitelistButtonText {
   font-family: var(--font-minecraft), monospace;
-  font-size: 1.8rem;
-  margin: 0 0 12px 0;
+  font-size: 1rem;
   color: #ffffff;
   letter-spacing: 0.5px;
-  font-weight: 400;
 }
 
-.description {
-  font-size: 0.95rem;
-  color: #6b7280;
-  line-height: 1.6;
-  margin: 0 0 24px 0;
+@media (prefers-reduced-motion: reduce) {
+  .whitelistButton {
+    transition: none;
+  }
+  .whitelistButton:hover {
+    transform: none;
+  }
 }
 
-.button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 28px;
-  background: transparent;
-  border: 1px solid rgba(168, 85, 247, 0.4);
-  border-radius: 8px;
-  font-family: var(--font-minecraft), monospace;
-  font-size: 0.9rem;
-  color: #a855f7;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  letter-spacing: 0.3px;
-}
-
-.button:hover {
-  background: rgba(168, 85, 247, 0.1);
-  border-color: #a855f7;
-  transform: scale(1.02);
-}
-
-.button:active {
-  transform: scale(0.98);
-}
-
-.buttonText {
-  letter-spacing: 0.5px;
-}
-
-.buttonIcon {
-  font-size: 1.1rem;
-  transition: transform 0.25s ease;
-}
-
-.button:hover .buttonIcon {
-  transform: translateX(3px);
+@media (max-width: 768px) {
+  .whitelistButton {
+    padding: 12px 18px;
+  }
+  .whitelistButtonText {
+    font-size: 0.9rem;
+  }
 }
 
 .modalOverlay {
@@ -427,77 +386,6 @@
   font-weight: 500;
 }
 
-@media (max-width: 768px) {
-  .title {
-    font-size: 1.5rem;
-  }
-
-  .description {
-    font-size: 0.9rem;
-  }
-
-  .button {
-    padding: 11px 24px;
-    font-size: 0.85rem;
-  }
-
-  .modalHeader {
-    padding: 20px 24px;
-  }
-
-  .modalTitle {
-    font-size: 1.2rem;
-  }
-
-  .modalBody {
-    padding: 24px;
-  }
-
-  .modalFooter {
-    padding: 16px 24px;
-  }
-
-  .modalBody::-webkit-scrollbar {
-    width: 4px;
-  }
-}
-
-@media (max-width: 480px) {
-  .title {
-    font-size: 1.3rem;
-  }
-
-  .description {
-    font-size: 0.85rem;
-  }
-
-  .badge {
-    font-size: 0.75rem;
-    padding: 5px 12px;
-  }
-
-  .input,
-  .textarea {
-    font-size: 0.85rem;
-  }
-
-  .modalBody::-webkit-scrollbar {
-    width: 3px;
-  }
-}
-
-@media (hover: none) and (pointer: coarse) {
-  .modalBody::-webkit-scrollbar {
-    width: 0;
-    display: none;
-  }
-
-  .modalBody {
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-}
-
 .infoBlock {
   margin-top: 28px;
   padding: 20px;
@@ -539,4 +427,16 @@
 
 .howToPlayIcon {
   font-size: 1.2rem;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .modalBody::-webkit-scrollbar {
+    width: 0;
+    display: none;
+  }
+
+  .modalBody {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
 }

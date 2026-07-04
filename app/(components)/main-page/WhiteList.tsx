@@ -52,22 +52,10 @@ export default function WhiteList() {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.card}>
-        <div className={styles.content}>
-          <div className={styles.badge}>
-            <span className={styles.badgeIcon}>🛡️</span>
-            <span className={styles.badgeText}>{translated.card.badge}</span>
-          </div>
-
-          <p className={styles.description}>{translated.card.description}</p>
-
-          <button onClick={openModal} className={styles.button}>
-            <span className={styles.buttonText}>{translated.card.button}</span>
-            <span className={styles.buttonIcon}>→</span>
-          </button>
-        </div>
-      </div>
+    <>
+      <button className={styles.whitelistButton} onClick={openModal}>
+        <span className={styles.whitelistButtonText}>{translated.card.button}</span>
+      </button>
 
       {isOpen && (
         <div className={styles.modalOverlay} onClick={handleClose}>
@@ -250,6 +238,6 @@ export default function WhiteList() {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
