@@ -7,16 +7,10 @@
 .main {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   gap: 40px;
   padding: 48px 24px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.fullBleed {
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
+  width: 100%;
 }
 
 @media (max-width: 768px) {
