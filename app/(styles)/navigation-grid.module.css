@@ -69,40 +69,8 @@
   max-width: 44ch;
 }
 
-.shopCta {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 6px;
-  padding: 12px 18px;
-  width: fit-content;
-  background: rgba(20, 21, 26, 0.5);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  transition: border-color 0.2s ease;
-}
-
 .shopCard:hover .shopCta {
   border-color: var(--border-hover);
-}
-
-.shopCtaLabel {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.shopCtaDivider {
-  width: 1px;
-  height: 14px;
-  background: rgba(154, 161, 171, 0.25);
-}
-
-.shopCtaArrow {
-  color: var(--text-faint);
-  transition:
-    transform 0.2s ease,
-    color 0.2s ease;
 }
 
 .shopCard:hover .shopCtaArrow {
