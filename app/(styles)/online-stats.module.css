@@ -1,13 +1,23 @@
 .container {
+  --bg-panel: rgba(20, 21, 26, 0.55);
+  --bg-panel-hover: rgba(24, 26, 32, 0.75);
+  --border: rgba(154, 161, 171, 0.18);
+  --border-hover: rgba(88, 101, 242, 0.5);
+  --text-primary: #eef0f2;
+  --text-secondary: #9aa1ab;
+  --text-faint: #6b7280;
+  --online: #3ba55d;
+
   width: 100%;
 }
 
 .card {
-  background: #1a1a2e;
-  border-radius: 16px;
+  background: var(--bg-panel);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: 12px;
   padding: 28px;
-  border: 1px solid rgba(34, 197, 94, 0.3);
-  background: linear-gradient(135deg, #1a1a2e 0%, rgba(34, 197, 94, 0.06) 100%);
 }
 
 .header {
@@ -16,7 +26,7 @@
   justify-content: space-between;
   margin-bottom: 24px;
   padding-bottom: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--border);
 }
 
 .titleRow {
@@ -26,9 +36,9 @@
 }
 
 .indicator {
-  width: 12px;
-  height: 12px;
-  background: #22c55e;
+  width: 10px;
+  height: 10px;
+  background: var(--online);
   border-radius: 50%;
   animation: pulse 2s ease-in-out infinite;
 }
@@ -36,32 +46,32 @@
 @keyframes pulse {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    box-shadow: 0 0 0 0 rgba(59, 165, 93, 0.5);
   }
   50% {
-    box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+    box-shadow: 0 0 0 8px rgba(59, 165, 93, 0);
   }
 }
 
 .title {
   font-family: var(--font-minecraft), monospace;
-  font-size: 1.5rem;
-  color: #22c55e;
+  font-size: 1.4rem;
+  color: var(--text-primary);
   margin: 0;
   letter-spacing: 0.5px;
 }
 
 .count {
   font-family: var(--font-minecraft), monospace;
-  font-size: 2rem;
-  color: #22c55e;
+  font-size: 1.8rem;
+  color: var(--text-primary);
   font-weight: 700;
 }
 
 .playersGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 12px;
+  gap: 10px;
 }
 
 .playerCard {
@@ -70,23 +80,28 @@
   gap: 12px;
   padding: 12px 16px;
   background: rgba(255, 255, 255, 0.03);
+  border: 1px solid transparent;
   border-radius: 10px;
-  transition: all 0.2s ease;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .playerCard:hover {
-  background: rgba(255, 255, 255, 0.08);
-  transform: translateX(4px);
+  background: var(--bg-panel-hover);
+  border-color: var(--border-hover);
+  transform: translateX(3px);
 }
 
 .playerAvatar {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   color: #ffffff;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
@@ -94,8 +109,8 @@
 }
 
 .playerName {
-  font-size: 0.95rem;
-  color: #e5e7eb;
+  font-size: 0.92rem;
+  color: var(--text-primary);
   font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
@@ -112,12 +127,12 @@
 }
 
 .emptyIcon {
-  font-size: 3rem;
+  color: var(--text-faint);
 }
 
 .emptyText {
-  color: #6b7280;
-  font-size: 1rem;
+  color: var(--text-faint);
+  font-size: 0.95rem;
   margin: 0;
 }
 
@@ -127,16 +142,17 @@
   justify-content: center;
   gap: 12px;
   padding: 48px 24px;
-  border-color: rgba(239, 68, 68, 0.3);
-  background: linear-gradient(135deg, #1a1a2e 0%, rgba(239, 68, 68, 0.06) 100%);
+  border-color: rgba(237, 66, 69, 0.3);
 }
 
 .errorIcon {
-  font-size: 1.5rem;
+  color: #ed4245;
+  flex-shrink: 0;
 }
 
 .errorText {
-  color: #9ca3af;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
 }
 
 .skeleton {
@@ -145,7 +161,12 @@
 
 .skeletonHeader {
   height: 40px;
-  background: linear-gradient(90deg, #2a2a4a 25%, #3a3a5a 50%, #2a2a4a 75%);
+  background: linear-gradient(
+    90deg,
+    rgba(154, 161, 171, 0.06) 25%,
+    rgba(154, 161, 171, 0.14) 50%,
+    rgba(154, 161, 171, 0.06) 75%
+  );
   background-size: 200% 100%;
   border-radius: 8px;
   margin-bottom: 24px;
@@ -155,13 +176,18 @@
 .skeletonAvatars {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
 }
 
 .skeletonAvatar {
   width: 200px;
-  height: 62px;
-  background: linear-gradient(90deg, #2a2a4a 25%, #3a3a5a 50%, #2a2a4a 75%);
+  height: 60px;
+  background: linear-gradient(
+    90deg,
+    rgba(154, 161, 171, 0.06) 25%,
+    rgba(154, 161, 171, 0.14) 50%,
+    rgba(154, 161, 171, 0.06) 75%
+  );
   background-size: 200% 100%;
   border-radius: 10px;
   animation: shimmer 1.5s infinite;
@@ -186,11 +212,11 @@
   }
 
   .count {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 
   .title {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
   }
 }
 

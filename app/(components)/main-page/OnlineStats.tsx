@@ -27,8 +27,24 @@ export default function OnlineStats() {
     return (
       <section className={styles.container}>
         <div className={`${styles.card} ${styles.error}`}>
-          <span className={styles.errorIcon}>⚠️</span>
-          <span className={styles.errorText}>Failed to load online data</span>
+          <svg
+            className={styles.errorIcon}
+            width="20"
+            height="20"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8 1.5L15 14H1L8 1.5Z"
+              stroke="currentColor"
+              strokeWidth="1.4"
+              strokeLinejoin="round"
+            />
+            <path d="M8 6.5V9.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+            <circle cx="8" cy="11.7" r="0.8" fill="currentColor" />
+          </svg>
+          <span className={styles.errorText}>Не удалось загрузить данные онлайна</span>
         </div>
       </section>
     );
@@ -40,7 +56,7 @@ export default function OnlineStats() {
         <div className={styles.header}>
           <div className={styles.titleRow}>
             <span className={styles.indicator}></span>
-            <h2 className={styles.title}>Online</h2>
+            <h2 className={styles.title}>Онлайн</h2>
           </div>
           <span className={styles.count}>{data?.count || 0}</span>
         </div>
@@ -61,8 +77,23 @@ export default function OnlineStats() {
           </div>
         ) : (
           <div className={styles.empty}>
-            <span className={styles.emptyIcon}>🌙</span>
-            <p className={styles.emptyText}>No players online</p>
+            <svg
+              className={styles.emptyIcon}
+              width="32"
+              height="32"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="8" cy="8" r="6.5" stroke="currentColor" strokeWidth="1.2" />
+              <path
+                d="M6 8H10M8 6V10"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+              />
+            </svg>
+            <p className={styles.emptyText}>🌙</p>
           </div>
         )}
       </div>
