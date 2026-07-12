@@ -68,9 +68,8 @@ const en = {
           'Contact the server administration. File a complaint against a player, ask a lore question, get technical support, or resolve other issues.',
       },
       articles: {
-        title: 'Articles',
-        description:
-          'Explore the world of Elium. Here you`ll find articles about server lore, guides for newcomers, update news, and important announcements.',
+        title: 'Lore',
+        description: 'The wiki of the Elium world',
       },
       rumors: {
         title: 'Rumors',
@@ -87,8 +86,8 @@ const en = {
           'Learn everything about the server concept, mechanics, classes and where to start your adventure.',
       },
       altarCrafts: {
-        title: 'Altar Crafts',
-        description: 'Special server recipes',
+        title: 'Altar Recipes',
+        description: 'Special recipes for special items',
       },
       moreSection: {
         title: 'More Sections',

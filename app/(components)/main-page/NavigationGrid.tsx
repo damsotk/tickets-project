@@ -10,9 +10,32 @@ import { NAVIGATION_ITEMS } from '@/constants/main_page';
 
 const AVAILABLE_LOCALES = ['ru', 'en', 'uk', 'by'];
 
+const ARROW_PATH = 'M3 8H13M13 8L9 4M13 8L9 12';
+
 function withLocale(locale: string, href: string) {
   if (href === '/') return `/${locale}`;
   return `/${locale}${href.startsWith('/') ? href : `/${href}`}`;
+}
+
+function ArrowIcon({ className, size = 16 }: { className: string; size?: number }) {
+  return (
+    <svg
+      className={className}
+      width={size}
+      height={size}
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d={ARROW_PATH}
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
 }
 
 export default function NavigationGrid() {
@@ -57,22 +80,7 @@ export default function NavigationGrid() {
               <span className={styles.shopCta}>
                 <span className={styles.shopCtaLabel}>Перейти</span>
                 <span className={styles.shopCtaDivider} />
-                <svg
-                  className={styles.shopCtaArrow}
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M3 8H13M13 8L9 4M13 8L9 12"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                <ArrowIcon className={styles.shopCtaArrow} />
               </span>
             </div>
 
@@ -90,36 +98,36 @@ export default function NavigationGrid() {
         );
       })}
 
-      <div className={styles.list}>
+      <div className={styles.secondaryGrid}>
         {regularItems.map((item) => {
           const content = translations[item.id];
+          const image = 'image' in item ? item.image : undefined;
+
           return (
-            <Link key={item.id} href={withLocale(locale, item.href)} className={styles.row}>
-              <div className={styles.rowContent}>
-                <span className={styles.rowTitle}>{content.title}</span>
-                <span className={styles.rowDescription}>{content.description}</span>
+            <Link
+              key={item.id}
+              href={withLocale(locale, item.href)}
+              className={styles.secondaryCard}
+            >
+              <div className={styles.secondaryCardImageFrame}>
+                {image && <img src={image} alt="" className={styles.secondaryCardImageTag} />}
+                <div className={styles.secondaryCardScrim} />
               </div>
-              <svg
-                className={styles.rowArrow}
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M3 8H13M13 8L9 4M13 8L9 12"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+
+              <div className={styles.secondaryCardContent}>
+                <h4 className={styles.secondaryCardTitle}>{content.title}</h4>
+                <p className={styles.secondaryCardDescription}>{content.description}</p>
+                <span className={styles.secondaryCardCta}>
+                  <ArrowIcon className={styles.secondaryCardArrow} size={14} />
+                </span>
+              </div>
             </Link>
           );
         })}
+      </div>
 
-        {groupedItems.length > 0 && (
+      {groupedItems.length > 0 && (
+        <div className={styles.list}>
           <div className={styles.category}>
             <button
               className={styles.categoryHeader}
@@ -158,30 +166,15 @@ export default function NavigationGrid() {
                         <span className={styles.rowTitle}>{content.title}</span>
                         <span className={styles.rowDescription}>{content.description}</span>
                       </div>
-                      <svg
-                        className={styles.rowArrow}
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M3 8H13M13 8L9 4M13 8L9 12"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
+                      <ArrowIcon className={styles.rowArrow} />
                     </Link>
                   );
                 })}
               </div>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </section>
   );
 }

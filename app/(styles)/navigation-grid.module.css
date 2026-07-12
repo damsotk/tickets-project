@@ -113,7 +113,6 @@
 .shopImageFrame {
   position: relative;
   overflow: hidden;
-  background: #1a1a1e;
 }
 
 .shopImage {
@@ -138,7 +137,6 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(to right, rgba(20, 21, 26, 0.65) 0%, transparent 25%);
 }
 
 .list {
@@ -267,6 +265,107 @@
   padding-top: 10px;
 }
 
+.secondaryGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  width: 100%;
+}
+
+.secondaryCard {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 195px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  text-decoration: none;
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.secondaryCard:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+}
+
+.secondaryCard:focus-visible {
+  outline: 2px solid #5865f2;
+  outline-offset: 2px;
+}
+
+.secondaryCardImageFrame {
+  position: absolute;
+  inset: 0;
+  background: var(--bg-panel);
+}
+
+.secondaryCardImageTag {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+  filter: saturate(0.9) contrast(1.05);
+  display: block;
+}
+
+.secondaryCardScrim {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 0% 100%,
+    rgba(10, 11, 15, 0.92) 0%,
+    rgba(10, 11, 15, 0.75) 30%,
+    rgba(10, 11, 15, 0.4) 50%,
+    rgba(10, 11, 15, 0) 72%
+  );
+}
+
+.secondaryCardContent {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px 26px;
+  max-width: 70%;
+}
+
+.secondaryCardTitle {
+  font-family: var(--font-minecraft), monospace;
+  font-size: 1.4rem;
+  letter-spacing: 0.4px;
+  color: var(--text-primary);
+  margin: 0;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+}
+
+.secondaryCardDescription {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.secondaryCardCta {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 4px;
+  color: var(--text-faint);
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+
+.secondaryCard:hover .secondaryCardCta {
+  transform: translateX(3px);
+  color: var(--text-secondary);
+}
+
 @media (max-width: 720px) {
   .shopCard {
     grid-template-columns: 1fr;
@@ -300,6 +399,22 @@
 
   .rowDescription {
     font-size: 0.85rem;
+  }
+  .secondaryGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .secondaryCard {
+    min-height: 170px;
+  }
+
+  .secondaryCardContent {
+    padding: 20px 22px;
+    max-width: 78%;
+  }
+
+  .secondaryCardTitle {
+    font-size: 1.2rem;
   }
 }
 

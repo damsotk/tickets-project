@@ -44,7 +44,7 @@ export default function OnlineStats() {
             <path d="M8 6.5V9.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
             <circle cx="8" cy="11.7" r="0.8" fill="currentColor" />
           </svg>
-          <span className={styles.errorText}>Не удалось загрузить данные онлайна</span>
+          <span className={styles.errorText}>Something wrong</span>
         </div>
       </section>
     );
@@ -56,7 +56,7 @@ export default function OnlineStats() {
         <div className={styles.header}>
           <div className={styles.titleRow}>
             <span className={styles.indicator}></span>
-            <h2 className={styles.title}>Онлайн</h2>
+            <h2 className={styles.title}>Online</h2>
           </div>
           <span className={styles.count}>{data?.count || 0}</span>
         </div>

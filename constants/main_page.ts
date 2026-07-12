@@ -10,11 +10,13 @@ export const NAVIGATION_ITEMS = [
     id: 'altarCrafts' as const,
     href: '/crafts',
     featured: false,
+    image: '/ellium-tickets-images/altar_icon.png',
   },
   {
     id: 'articles' as const,
     href: '/articles',
     featured: false,
+    image: '/ellium-tickets-images/wiki_icon.png',
   },
   {
     id: 'howToPlay' as const,
