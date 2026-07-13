@@ -335,7 +335,7 @@ const UNCHANT_BOOK: Ingredient = {
 
 const NETHERITE_BLOCK: Ingredient = {
   id: 'netherite_block',
-  name: 'Книга без зачарований',
+  name: 'Незеритовый блок',
   texture: '/crafts-textures/netherite_block.png',
 };
 
