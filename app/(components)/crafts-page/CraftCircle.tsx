@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import type { Recipe, Ingredient } from '@/constants/server_recipes';
+import { useTranslation } from '@/app/(hooks)/use-translation';
 import { IngredientVisual } from './IngredientVisual';
 import styles from '@/app/(styles)/crafts-styles/craft-circle.module.css';
 
@@ -17,6 +18,8 @@ interface TooltipState {
 
 interface SlotProps {
   ingredient: Ingredient;
+  ingredientName: string;
+  openCraftLabel: string;
   angle: number;
   linkedRecipeId: string | null;
   onMouseEnter: (name: string, e: React.MouseEvent) => void;
@@ -27,6 +30,8 @@ interface SlotProps {
 
 function Slot({
   ingredient,
+  ingredientName,
+  openCraftLabel,
   angle,
   linkedRecipeId,
   onMouseEnter,
@@ -38,7 +43,7 @@ function Slot({
   const x = 50 + (RADIUS / 2.2) * Math.cos(rad);
   const y = 50 + (RADIUS / 2.2) * Math.sin(rad);
 
-  const tooltipText = linkedRecipeId ? `${ingredient.name} — открыть крафт` : ingredient.name;
+  const tooltipText = linkedRecipeId ? `${ingredientName} — ${openCraftLabel}` : ingredientName;
 
   function handleClick() {
     if (linkedRecipeId) {
@@ -78,6 +83,10 @@ export function CraftCircle({ recipe, recipeIdByIngredientId, onNavigate }: Craf
   const [tooltip, setTooltip] = useState<TooltipState>({ visible: false, text: '', x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const { translate } = useTranslation();
+  const ingredientNames = translate.crafts.ingredients;
+  const openCraftLabel = 'открыть крафт';
+
   function showTooltip(text: string, e: React.MouseEvent) {
     const rect = containerRef.current?.getBoundingClientRect();
     if (!rect) return;
@@ -113,6 +122,8 @@ export function CraftCircle({ recipe, recipeIdByIngredientId, onNavigate }: Craf
             <Slot
               key={i}
               ingredient={ingredient}
+              ingredientName={ingredientNames[ingredient.id as keyof typeof ingredientNames]}
+              openCraftLabel={openCraftLabel}
               angle={SLOT_ANGLES_DEG[i]}
               linkedRecipeId={targetId}
               onMouseEnter={showTooltip}
@@ -125,7 +136,9 @@ export function CraftCircle({ recipe, recipeIdByIngredientId, onNavigate }: Craf
 
         <div
           className={`${styles.slot} ${styles.centerSlot}`}
-          onMouseEnter={(e) => showTooltip(recipe.result.name, e)}
+          onMouseEnter={(e) =>
+            showTooltip(ingredientNames[recipe.result.id as keyof typeof ingredientNames], e)
+          }
           onMouseMove={moveTooltip}
           onMouseLeave={hideTooltip}
         >

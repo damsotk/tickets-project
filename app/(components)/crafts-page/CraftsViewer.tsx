@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import type { Recipe } from '@/constants/server_recipes';
+import { useTranslation } from '@/app/(hooks)/use-translation';
 import { CraftCircle } from './CraftCircle';
 import { IngredientVisual } from './IngredientVisual';
 import styles from '@/app/(styles)/crafts-styles/craft-viewer.module.css';
@@ -14,6 +15,9 @@ export function CraftsViewer({ recipes }: CraftsViewerProps) {
   const [activeId, setActiveId] = useState(recipes[0].id);
   const active = recipes.find((r) => r.id === activeId) ?? recipes[0];
 
+  const { translate } = useTranslation();
+  const t = translate.crafts;
+
   const recipeIdByIngredientId = useMemo(() => {
     const map: Record<string, string> = {};
     for (const recipe of recipes) {
@@ -21,6 +25,9 @@ export function CraftsViewer({ recipes }: CraftsViewerProps) {
     }
     return map;
   }, [recipes]);
+
+  const resultName = t.ingredients[active.result.id as keyof typeof t.ingredients];
+  const description = t.recipes[active.id as keyof typeof t.recipes]?.description;
 
   return (
     <div className={styles.viewer}>
@@ -30,8 +37,8 @@ export function CraftsViewer({ recipes }: CraftsViewerProps) {
           recipeIdByIngredientId={recipeIdByIngredientId}
           onNavigate={setActiveId}
         />
-        <p className={styles.resultName}>{active.result.name}</p>
-        {active.description && <p className={styles.recipeDescription}>{active.description}</p>}
+        <p className={styles.resultName}>{resultName}</p>
+        {description && <p className={styles.recipeDescription}>{description}</p>}
       </div>
 
       <div className={styles.listArea}>
@@ -48,7 +55,9 @@ export function CraftsViewer({ recipes }: CraftsViewerProps) {
                 size={32}
                 className={styles.recipeBtnImage}
               />
-              <span className={styles.recipeBtnName}>{recipe.result.name}</span>
+              <span className={styles.recipeBtnName}>
+                {t.ingredients[recipe.result.id as keyof typeof t.ingredients]}
+              </span>
             </button>
           ))}
         </div>
