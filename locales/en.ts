@@ -626,6 +626,8 @@ const en = {
           'A chest whose contents are visible to the whole server; it works anywhere, anytime.',
       },
     },
+    altarInstruction:
+      'Custom crafts are made at the altar on the server, which is laid out with magnetite just like on the website. To craft something, you need to place the items in the item frames on the magnetite exactly as shown on the website, adding a nether star to the center block — it is present in every craft.',
   },
 };
 
