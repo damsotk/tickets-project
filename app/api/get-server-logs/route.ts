@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
-import { verifyAccessToken } from '@/lib/auth';
-import { prisma } from '@/lib/prisma';
+import { requireAdmin } from '@/lib/api/guards';
 
 const REQUEST_TIMEOUT = 10000;
 
@@ -19,27 +17,8 @@ interface MinecraftErrorResponse {
 
 export async function GET(request: NextRequest) {
   try {
-    const cookieStore = await cookies();
-    const accessToken = cookieStore.get('accessToken')?.value;
-
-    if (!accessToken) {
-      return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
-    }
-
-    const payload = verifyAccessToken(accessToken);
-
-    if (!payload) {
-      return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
-    }
-
-    const user = await prisma.user.findUnique({
-      where: { id: payload.userId },
-      select: { role: true },
-    });
-
-    if (!user || user.role !== 'ADMIN') {
-      return NextResponse.json({ error: 'Access denied. Admin role required.' }, { status: 403 });
-    }
+    const { error } = await requireAdmin();
+    if (error) return error;
 
     const searchParams = request.nextUrl.searchParams;
     const player = searchParams.get('player');
@@ -85,9 +64,7 @@ export async function GET(request: NextRequest) {
     try {
       response = await fetch(minecraftApiUrl.toString(), {
         method: 'GET',
-        headers: {
-          Accept: 'application/json',
-        },
+        headers: { Accept: 'application/json' },
         signal: controller.signal,
         cache: 'no-store',
       });
