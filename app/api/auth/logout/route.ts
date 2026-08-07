@@ -1,10 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { rateLimiters } from '@/lib/rate-limit';
+import { isIpRateLimited } from '@/lib/api/guards';
 
 export async function POST(request: NextRequest) {
-  const ip = request.headers.get('x-forwarded-for') ?? 'anonymous';
-  const { success } = await rateLimiters.auth.limit(ip);
-  if (!success) {
+  if (await isIpRateLimited(request, 'auth')) {
     return NextResponse.json({ error: 'Too many requests.' }, { status: 429 });
   }
 

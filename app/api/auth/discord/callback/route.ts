@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { generateAccessToken, generateRefreshToken } from '@/lib/auth';
-import { rateLimiters } from '@/lib/rate-limit';
+import { isIpRateLimited } from '@/lib/api/guards';
+import { issueAuthTokens } from '@/lib/api/auth-session';
 import { setAuthCookies } from '@/lib/auth-cookies';
 
 interface DiscordTokenResponse {
@@ -25,9 +25,7 @@ interface DiscordUser {
 async function exchangeCode(code: string): Promise<DiscordTokenResponse> {
   const response = await fetch('https://discord.com/api/v10/oauth2/token', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams({
       client_id: process.env.DISCORD_CLIENT_ID!,
       client_secret: process.env.DISCORD_CLIENT_SECRET!,
@@ -46,9 +44,7 @@ async function exchangeCode(code: string): Promise<DiscordTokenResponse> {
 
 async function getDiscordUser(accessToken: string): Promise<DiscordUser> {
   const response = await fetch('https://discord.com/api/v10/users/@me', {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
+    headers: { Authorization: `Bearer ${accessToken}` },
   });
 
   if (!response.ok) {
@@ -66,9 +62,7 @@ function getDiscordAvatarUrl(user: DiscordUser): string | null {
 
 export async function GET(request: NextRequest) {
   try {
-    const ip = request.headers.get('x-forwarded-for') ?? 'anonymous';
-    const { success } = await rateLimiters.auth.limit(ip);
-    if (!success) {
+    if (await isIpRateLimited(request, 'auth')) {
       return NextResponse.redirect(new URL('/auth?error=rate_limit', request.url));
     }
 
@@ -84,7 +78,6 @@ export async function GET(request: NextRequest) {
     }
 
     const tokenData = await exchangeCode(code);
-
     const discordUser = await getDiscordUser(tokenData.access_token);
 
     if (!discordUser.email) {
@@ -95,9 +88,7 @@ export async function GET(request: NextRequest) {
     const displayName = discordUser.global_name || discordUser.username;
 
     let user = await prisma.user.findFirst({
-      where: {
-        OR: [{ discordId: discordUser.id }, { email: discordUser.email }],
-      },
+      where: { OR: [{ discordId: discordUser.id }, { email: discordUser.email }] },
     });
 
     if (user) {
@@ -119,13 +110,7 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    const accessToken = generateAccessToken(user.id, user.role);
-    const refreshToken = generateRefreshToken(user.id, user.role);
-
-    await prisma.user.update({
-      where: { id: user.id },
-      data: { refreshToken },
-    });
+    const { accessToken, refreshToken } = await issueAuthTokens(user.id, user.role);
 
     const response = NextResponse.redirect(new URL('/', request.url));
     setAuthCookies(response, accessToken, refreshToken);

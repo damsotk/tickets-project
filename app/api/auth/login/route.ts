@@ -1,28 +1,26 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { verifyPassword, generateAccessToken, generateRefreshToken } from '@/lib/auth';
-import { rateLimiters } from '@/lib/rate-limit';
+import { verifyPassword } from '@/lib/auth';
+import { isIpRateLimited } from '@/lib/api/guards';
+import { issueAuthTokens } from '@/lib/api/auth-session';
 import { setAuthCookies } from '@/lib/auth-cookies';
 
 export async function POST(request: Request) {
   try {
-    const ip = request.headers.get('x-forwarded-for') ?? 'anonymous';
-    const { success } = await rateLimiters.auth.limit(ip);
-    if (!success) {
+    if (await isIpRateLimited(request, 'auth')) {
       return NextResponse.json(
         { error: 'Too many attempts. Try again in 15 minutes.' },
         { status: 429 },
       );
     }
+
     const { email, password } = await request.json();
 
     if (!email || !password) {
       return NextResponse.json({ error: 'Email and password are required' }, { status: 400 });
     }
 
-    const user = await prisma.user.findUnique({
-      where: { email },
-    });
+    const user = await prisma.user.findUnique({ where: { email } });
 
     if (!user || !user.password) {
       return NextResponse.json({ error: 'Email is incorrect' }, { status: 401 });
@@ -34,13 +32,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Password is incorrect' }, { status: 401 });
     }
 
-    const accessToken = generateAccessToken(user.id, user.role);
-    const refreshToken = generateRefreshToken(user.id, user.role);
-
-    await prisma.user.update({
-      where: { id: user.id },
-      data: { refreshToken },
-    });
+    const { accessToken, refreshToken } = await issueAuthTokens(user.id, user.role);
 
     const response = NextResponse.json({
       user: {

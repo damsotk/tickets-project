@@ -1,14 +1,13 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { hashPassword, generateAccessToken, generateRefreshToken } from '@/lib/auth';
-import { rateLimiters } from '@/lib/rate-limit';
+import { hashPassword } from '@/lib/auth';
+import { isIpRateLimited } from '@/lib/api/guards';
+import { issueAuthTokens } from '@/lib/api/auth-session';
 import { setAuthCookies } from '@/lib/auth-cookies';
 
 export async function POST(request: Request) {
   try {
-    const ip = request.headers.get('x-forwarded-for') ?? 'anonymous';
-    const { success } = await rateLimiters.auth.limit(ip);
-    if (!success) {
+    if (await isIpRateLimited(request, 'auth')) {
       return NextResponse.json(
         { error: 'Too many attempts. Try again in 15 minutes.' },
         { status: 429 },
@@ -28,9 +27,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const existingUser = await prisma.user.findUnique({
-      where: { email },
-    });
+    const existingUser = await prisma.user.findUnique({ where: { email } });
 
     if (existingUser) {
       return NextResponse.json({ error: 'User with this email already exists' }, { status: 400 });
@@ -55,22 +52,12 @@ export async function POST(request: Request) {
       },
     });
 
-    const accessToken = generateAccessToken(user.id, user.role);
-    const refreshToken = generateRefreshToken(user.id, user.role);
-
-    await prisma.user.update({
-      where: { id: user.id },
-      data: { refreshToken },
-    });
+    const { accessToken, refreshToken } = await issueAuthTokens(user.id, user.role);
 
     const response = NextResponse.json(
-      {
-        user,
-        message: 'Registration successful',
-      },
+      { user, message: 'Registration successful' },
       { status: 201 },
     );
-
     setAuthCookies(response, accessToken, refreshToken);
 
     return response;

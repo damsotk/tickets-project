@@ -64,3 +64,11 @@ export async function checkRateLimit(
   }
   return null;
 }
+
+export function isIpRateLimited(
+  request: Request,
+  limiterKey: keyof typeof rateLimiters,
+): Promise<boolean> {
+  const ip = request.headers.get('x-forwarded-for') ?? 'anonymous';
+  return rateLimiters[limiterKey].limit(ip).then(({ success }) => !success);
+}
