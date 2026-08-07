@@ -1,49 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
-import { verifyAccessToken } from '@/lib/auth';
+import { requireAuth, checkRateLimit } from '@/lib/api/guards';
 import { prisma } from '@/lib/prisma';
-import { rateLimiters } from '@/lib/rate-limit';
 
 export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
-    const cookieStore = await cookies();
-    const accessToken = cookieStore.get('accessToken')?.value;
 
-    if (!accessToken) {
-      return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
-    }
+    const { error, user } = await requireAuth();
+    if (error) return error;
 
-    const payload = verifyAccessToken(accessToken);
-
-    if (!payload) {
-      return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
-    }
-
-    const { success } = await rateLimiters.tickets.limit(payload.userId);
-    if (!success) {
-      return NextResponse.json({ error: 'Too many requests.' }, { status: 429 });
-    }
-
-    const user = await prisma.user.findUnique({
-      where: { id: payload.userId },
-      select: {
-        id: true,
-        role: true,
-      },
-    });
-
-    if (!user) {
-      return NextResponse.json({ error: 'User not found' }, { status: 404 });
-    }
+    const limitError = await checkRateLimit(user!.id, 'tickets');
+    if (limitError) return limitError;
 
     const existingTicket = await prisma.ticket.findUnique({
-      where: { id: id },
-      select: {
-        id: true,
-        userId: true,
-        status: true,
-      },
+      where: { id },
+      select: { id: true, userId: true, status: true },
     });
 
     if (!existingTicket) {
@@ -54,7 +25,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
       return NextResponse.json({ error: 'Ticket already closed' }, { status: 400 });
     }
 
-    if (existingTicket.userId !== user.id && user.role !== 'ADMIN') {
+    if (existingTicket.userId !== user!.id && user!.role !== 'ADMIN') {
       return NextResponse.json(
         { error: 'You do not have permission to close this ticket' },
         { status: 403 },
@@ -62,27 +33,11 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     }
 
     const ticket = await prisma.ticket.update({
-      where: { id: id },
-      data: {
-        status: 'CLOSED',
-        closedAt: new Date(),
-        closedById: user.id,
-        updatedAt: new Date(),
-      },
+      where: { id },
+      data: { status: 'CLOSED', closedAt: new Date(), closedById: user!.id, updatedAt: new Date() },
       include: {
-        user: {
-          select: {
-            id: true,
-            name: true,
-            email: true,
-          },
-        },
-        closedBy: {
-          select: {
-            id: true,
-            name: true,
-          },
-        },
+        user: { select: { id: true, name: true, email: true } },
+        closedBy: { select: { id: true, name: true } },
       },
     });
 

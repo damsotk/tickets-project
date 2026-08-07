@@ -1,44 +1,29 @@
-import { verifyAccessToken } from '@/lib/auth';
-import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
+import { requireAuth, checkRateLimit } from '@/lib/api/guards';
+import { requireTicketAccess } from '@/lib/api/tickets';
 import { prisma } from '@/lib/prisma';
-import { rateLimiters } from '@/lib/rate-limit';
 
 const MAX_MESSAGE_LENGTH = 5000;
 const MIN_MESSAGE_LENGTH = 1;
 
 export async function POST(request: NextRequest) {
   try {
-    const cookieStore = await cookies();
-    const accessToken = cookieStore.get('accessToken')?.value;
-    if (!accessToken) {
-      return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
-    }
+    const { error, user } = await requireAuth();
+    if (error) return error;
 
-    const payload = verifyAccessToken(accessToken);
-    if (!payload) {
-      return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
-    }
+    const limitError = await checkRateLimit(user!.id, 'messages');
+    if (limitError) return limitError;
 
-    const { success } = await rateLimiters.messages.limit(payload.userId);
-    if (!success) {
-      return NextResponse.json({ error: 'Too many requests.' }, { status: 429 });
-    }
-
-    const body = await request.json();
-
-    const { text, ticketId } = body;
+    const { text, ticketId } = await request.json();
 
     if (!text || typeof text !== 'string') {
       return NextResponse.json({ error: 'Text must be a string' }, { status: 400 });
     }
 
     const trimmedText = text.trim();
-
     if (trimmedText.length < MIN_MESSAGE_LENGTH) {
       return NextResponse.json({ error: 'Message cannot be empty' }, { status: 400 });
     }
-
     if (trimmedText.length > MAX_MESSAGE_LENGTH) {
       return NextResponse.json(
         { error: `Message too long (max ${MAX_MESSAGE_LENGTH} characters)` },
@@ -46,54 +31,22 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const ticket = await prisma.ticket.findUnique({
-      where: { id: ticketId },
-      select: { userId: true, status: true },
-    });
-
-    if (!ticket) {
-      return NextResponse.json({ error: 'Ticket not found' }, { status: 404 });
-    }
-
-    if (ticket.userId !== payload.userId && payload.role !== 'ADMIN') {
-      return NextResponse.json({ error: 'Access denied' }, { status: 403 });
-    }
+    const { error: ticketError, ticket } = await requireTicketAccess<{
+      userId: string;
+      status: string;
+    }>(ticketId, user!, { userId: true, status: true });
+    if (ticketError) return ticketError;
 
     if (ticket.status === 'CLOSED') {
       return NextResponse.json({ error: 'Cannot send message to closed ticket' }, { status: 400 });
     }
 
-    const user = await prisma.user.findUnique({
-      where: { id: payload.userId },
-      select: {
-        id: true,
-        name: true,
-      },
-    });
-    if (!user) {
-      return NextResponse.json({ error: 'User not found' }, { status: 404 });
-    }
-
     const message = await prisma.message.create({
-      data: {
-        text,
-        ticketId,
-        authorId: user.id,
-      },
-      include: {
-        author: {
-          select: {
-            id: true,
-            name: true,
-            avatar: true,
-          },
-        },
-      },
+      data: { text, ticketId, authorId: user!.id },
+      include: { author: { select: { id: true, name: true, avatar: true } } },
     });
-    await prisma.ticket.update({
-      where: { id: ticketId },
-      data: { updatedAt: new Date() },
-    });
+
+    await prisma.ticket.update({ where: { id: ticketId }, data: { updatedAt: new Date() } });
 
     return NextResponse.json({ message }, { status: 201 });
   } catch (error) {

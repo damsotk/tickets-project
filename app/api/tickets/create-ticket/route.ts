@@ -1,32 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
+import { requireAuth, checkRateLimit } from '@/lib/api/guards';
 import { prisma } from '@/lib/prisma';
-import { verifyAccessToken } from '@/lib/auth';
-import { rateLimiters } from '@/lib/rate-limit';
 
 export async function POST(request: NextRequest) {
   try {
-    const cookieStore = await cookies();
-    const accessToken = cookieStore.get('accessToken')?.value;
+    const { error, user } = await requireAuth();
+    if (error) return error;
 
-    if (!accessToken) {
-      return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
-    }
+    const limitError = await checkRateLimit(user!.id, 'tickets');
+    if (limitError) return limitError;
 
-    const payload = verifyAccessToken(accessToken);
-
-    if (!payload) {
-      return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
-    }
-
-    const { success } = await rateLimiters.tickets.limit(payload.userId);
-    if (!success) {
-      return NextResponse.json({ error: 'Too many requests.' }, { status: 429 });
-    }
-
-    const body = await request.json();
-    const { category } = body;
-
+    const { category } = await request.json();
     const validCategories = ['complaint', 'lore', 'tech'];
 
     if (!category || !validCategories.includes(category.toLowerCase())) {
@@ -35,33 +19,17 @@ export async function POST(request: NextRequest) {
 
     const categoryEnum = category.toUpperCase() as 'COMPLAINT' | 'LORE' | 'TECH';
 
-    const user = await prisma.user.findUnique({
-      where: { id: payload.userId },
-      select: {
-        id: true,
-        name: true,
-      },
+    const dbUser = await prisma.user.findUnique({
+      where: { id: user!.id },
+      select: { id: true, name: true },
     });
-
-    if (!user) {
+    if (!dbUser) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
     const existingTicket = await prisma.ticket.findFirst({
-      where: {
-        userId: user.id,
-        category: categoryEnum,
-        status: {
-          not: 'CLOSED',
-        },
-      },
-      select: {
-        id: true,
-        title: true,
-        category: true,
-        status: true,
-        createdAt: true,
-      },
+      where: { userId: dbUser.id, category: categoryEnum, status: { not: 'CLOSED' } },
+      select: { id: true, title: true, category: true, status: true, createdAt: true },
     });
 
     if (existingTicket) {
@@ -69,24 +37,14 @@ export async function POST(request: NextRequest) {
         {
           error: 'Ticket already exists',
           message: `You already have an open ticket in the "${category}" category. Please close it before creating a new one.`,
-          existingTicket: {
-            id: existingTicket.id,
-            title: existingTicket.title,
-            category: existingTicket.category,
-            status: existingTicket.status,
-            createdAt: existingTicket.createdAt,
-          },
+          existingTicket,
         },
         { status: 409 },
       );
     }
 
     const ticket = await prisma.ticket.create({
-      data: {
-        title: `${user.name} ticket`,
-        category: categoryEnum,
-        userId: user.id,
-      },
+      data: { title: `${dbUser.name} ticket`, category: categoryEnum, userId: dbUser.id },
     });
 
     return NextResponse.json(
