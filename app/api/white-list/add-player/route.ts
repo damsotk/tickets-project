@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/api/guards';
-import { callWhitelistServer } from '@/lib/api/whitelist';
+import { callWhitelistServer, WhitelistMessageResponse } from '@/lib/api/whitelist';
 
 export async function PUT(request: NextRequest) {
   try {
@@ -12,7 +12,7 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: 'Need to write a nickname of user' }, { status: 400 });
     }
 
-    const result = await callWhitelistServer(
+    const result = await callWhitelistServer<WhitelistMessageResponse>(
       {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },

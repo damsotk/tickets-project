@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/api/guards';
-import { callWhitelistServer } from '@/lib/api/whitelist';
+import { callWhitelistServer, WhitelistPlayersResponse } from '@/lib/api/whitelist';
 
 export async function GET() {
   try {
     const { error } = await requireAdmin();
     if (error) return error;
 
-    const result = await callWhitelistServer({ cache: 'no-store' });
+    const result = await callWhitelistServer<WhitelistPlayersResponse>({ cache: 'no-store' });
     if (!result.ok) return result.response;
 
     return NextResponse.json({
