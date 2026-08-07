@@ -1,45 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
-import { verifyAccessToken } from '@/lib/auth';
+import { requireAuth, checkRateLimit } from '@/lib/api/guards';
 import { prisma } from '@/lib/prisma';
-import { rateLimiters } from '@/lib/rate-limit';
 
 export async function POST(request: NextRequest) {
   try {
-    const cookieStore = await cookies();
-    const accessToken = cookieStore.get('accessToken')?.value;
+    const { error, user } = await requireAuth();
+    if (error) return error;
 
-    if (!accessToken) {
-      return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
-    }
-
-    const payload = verifyAccessToken(accessToken);
-    if (!payload) {
-      return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
-    }
-
-    const { success } = await rateLimiters.tickets.limit(payload.userId);
-    if (!success) {
-      return NextResponse.json({ error: 'Too many requests.' }, { status: 429 });
-    }
-
-    const user = await prisma.user.findUnique({
-      where: { id: payload.userId },
-      select: {
-        id: true,
-        role: true,
-      },
-    });
-
-    if (!user) {
-      return NextResponse.json({ error: 'User not found' }, { status: 404 });
-    }
+    const limitError = await checkRateLimit(user!.id, 'tickets');
+    if (limitError) return limitError;
 
     const body = await request.json();
     const { source, rpExperience, plans, minecraftNick, discordNick } = body;
 
     const errors: Record<string, string> = {};
-
     if (!source?.trim()) errors.source = 'required';
     if (!rpExperience?.trim()) errors.rpExperience = 'required';
     if (!minecraftNick?.trim()) errors.minecraftNick = 'required';
@@ -50,10 +24,7 @@ export async function POST(request: NextRequest) {
     }
 
     const existingApplication = await prisma.whitelistApplication.findFirst({
-      where: {
-        userId: user.id,
-        status: 'PENDING',
-      },
+      where: { userId: user!.id, status: 'PENDING' },
     });
 
     if (existingApplication) {
@@ -70,7 +41,7 @@ export async function POST(request: NextRequest) {
         plans: plans?.trim() || null,
         minecraftNick: minecraftNick.trim(),
         discordNick: discordNick.trim(),
-        userId: user.id,
+        userId: user!.id,
       },
     });
 
@@ -98,30 +69,11 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   try {
-    const cookieStore = await cookies();
-    const accessToken = cookieStore.get('accessToken')?.value;
-
-    if (!accessToken) {
-      return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
-    }
-
-    const payload = verifyAccessToken(accessToken);
-
-    if (!payload) {
-      return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
-    }
-
-    const user = await prisma.user.findUnique({
-      where: { id: payload.userId },
-      select: { id: true },
-    });
-
-    if (!user) {
-      return NextResponse.json({ error: 'User not found' }, { status: 404 });
-    }
+    const { error, user } = await requireAuth();
+    if (error) return error;
 
     const application = await prisma.whitelistApplication.findFirst({
-      where: { userId: user.id },
+      where: { userId: user!.id },
       orderBy: { createdAt: 'desc' },
       select: {
         id: true,

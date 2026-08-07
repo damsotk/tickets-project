@@ -1,58 +1,28 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
-import { verifyAccessToken } from '@/lib/auth';
-import { prisma } from '@/lib/prisma';
+import { requireAdmin } from '@/lib/api/guards';
+import { callWhitelistServer } from '@/lib/api/whitelist';
 
 export async function PUT(request: NextRequest) {
   try {
-    const cookieStore = await cookies();
-    const accessToken = cookieStore.get('accessToken')?.value;
+    const { error } = await requireAdmin();
+    if (error) return error;
 
-    if (!accessToken) {
-      return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
-    }
-
-    const payload = verifyAccessToken(accessToken);
-
-    if (!payload) {
-      return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
-    }
-
-    const user = await prisma.user.findUnique({
-      where: { id: payload.userId },
-      select: { id: true, role: true },
-    });
-
-    if (!user) {
-      return NextResponse.json({ error: 'User not found' }, { status: 404 });
-    }
-
-    if (user.role !== 'ADMIN') {
-      return NextResponse.json({ error: 'Admin access required' }, { status: 403 });
-    }
-
-    const body = await request.json();
-    const { state } = body;
-
+    const { state } = await request.json();
     if (typeof state !== 'boolean') {
       return NextResponse.json({ error: 'You need send state (boolean)' }, { status: 400 });
     }
 
-    const res = await fetch(`${process.env.SERVER_API_FOR_WHITE_LIST}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ state }),
-    });
+    const result = await callWhitelistServer(
+      {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ state }),
+      },
+      'Error with on/off whitelist',
+    );
+    if (!result.ok) return result.response;
 
-    const data = await res.json();
-    if (!res.ok) {
-      return NextResponse.json(
-        { error: data.error ?? 'Error with on/off whitelist' },
-        { status: res.status },
-      );
-    }
-
-    return NextResponse.json({ message: data.message });
+    return NextResponse.json({ message: result.data.message });
   } catch {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
