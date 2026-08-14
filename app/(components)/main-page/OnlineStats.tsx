@@ -77,22 +77,6 @@ export default function OnlineStats() {
           </div>
         ) : (
           <div className={styles.empty}>
-            <svg
-              className={styles.emptyIcon}
-              width="32"
-              height="32"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="8" cy="8" r="6.5" stroke="currentColor" strokeWidth="1.2" />
-              <path
-                d="M6 8H10M8 6V10"
-                stroke="currentColor"
-                strokeWidth="1.2"
-                strokeLinecap="round"
-              />
-            </svg>
             <p className={styles.emptyText}>🌙</p>
           </div>
         )}
