@@ -6,6 +6,7 @@ import Header from '@/app/(components)/discord-message-page/Header';
 import InputField from '@/app/(components)/discord-message-page/FormFields/InputField';
 import TextareaField from '@/app/(components)/discord-message-page/FormFields/TextareaField';
 import AvatarSelectorField from '@/app/(components)/discord-message-page/FormFields/AvatarSelector/AvatarSelectorField';
+import MessagePreview from '@/app/(components)/discord-message-page/MessagePreview/MessagePreview';
 
 export default function DiscordMessage() {
   const { translate } = useTranslation();
@@ -17,6 +18,7 @@ export default function DiscordMessage() {
     status,
     loading,
     formData,
+    finalAvatarUrl,
     useCustomAvatar,
   } = useDsMsgForm();
 
@@ -56,6 +58,12 @@ export default function DiscordMessage() {
               maxLength={2000}
               rows={6}
               showCharCount={true}
+              showMarkdownToolbar={true}
+            />
+            <MessagePreview
+              username={formData.username}
+              avatarUrl={finalAvatarUrl}
+              message={formData.message}
             />
 
             <button type="submit" className={styles.button} disabled={loading}>

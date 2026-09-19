@@ -23,6 +23,7 @@ export async function POST(request: Request) {
         username: username,
         content: message,
         avatar_url: avatarUrl || 'https://cdn.discordapp.com/embed/avatars/0.png',
+        allowed_mentions: { parse: [] },
       }),
     });
 

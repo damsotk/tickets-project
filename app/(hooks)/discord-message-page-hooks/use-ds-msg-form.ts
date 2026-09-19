@@ -55,13 +55,13 @@ export function useDsMsgForm() {
     }
   };
 
+  const finalAvatarUrl =
+    useCustomAvatar && formData.customAvatarUrl ? formData.customAvatarUrl : formData.avatarUrl;
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setStatus('');
-
-    const finalAvatarUrl =
-      useCustomAvatar && formData.customAvatarUrl ? formData.customAvatarUrl : formData.avatarUrl;
 
     try {
       const response = await fetch('/api/send-discord', {
@@ -108,6 +108,7 @@ export function useDsMsgForm() {
     status,
     loading,
     formData,
+    finalAvatarUrl,
     useCustomAvatar,
   };
 }
