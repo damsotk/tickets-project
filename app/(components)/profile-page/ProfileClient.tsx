@@ -125,7 +125,7 @@ export default function ProfileClient({ user }: ProfileClientProps) {
           </div>
         </div>
 
-        <TransferCoins userId={user.id} balance={balance} onTransferred={handleTransferred} />
+        <TransferCoins balance={balance} onTransferred={handleTransferred} />
 
         <div className={styles.statsSection}>
           <h2 className={styles.statsTitle}>{t.stats.title}</h2>

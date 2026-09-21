@@ -2,36 +2,35 @@ import { useState, useCallback } from 'react';
 import { toast } from 'sonner';
 import { TransferClient } from '@/utils/api-client/transfer-client';
 import { useTranslation } from '@/app/(hooks)/use-translation';
+import type { UserSearchResult } from '@/types/user';
 
 const MIN_TRANSFER_AMOUNT = 1;
 
 interface UseTransferCoinsOptions {
-  userId: string;
   balance: number;
   onSuccess: (newBalance: number) => void;
 }
 
-export function useTransferCoins({ userId, balance, onSuccess }: UseTransferCoinsOptions) {
+export function useTransferCoins({ balance, onSuccess }: UseTransferCoinsOptions) {
   const { translate } = useTranslation();
   const t = translate.profile.transfer;
 
-  const [recipientId, setRecipientId] = useState('');
+  const [recipient, setRecipient] = useState<UserSearchResult | null>(null);
   const [amount, setAmount] = useState('');
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const parsedAmount = Number(amount);
-  const trimmedRecipientId = recipientId.trim();
+  const isOverBalance = amount !== '' && parsedAmount > balance;
 
   const validate = useCallback((): string | null => {
-    if (!trimmedRecipientId) return t.errors.recipientRequired;
-    if (trimmedRecipientId === userId) return t.errors.selfTransfer;
+    if (!recipient) return t.errors.recipientRequired;
     if (!Number.isInteger(parsedAmount) || parsedAmount < MIN_TRANSFER_AMOUNT) {
       return t.errors.invalidAmount;
     }
-    if (parsedAmount > balance) return t.errors.insufficientFunds;
+    if (isOverBalance) return t.errors.insufficientFunds;
     return null;
-  }, [trimmedRecipientId, userId, parsedAmount, balance, t]);
+  }, [recipient, parsedAmount, isOverBalance, t]);
 
   const openConfirm = useCallback(() => {
     const error = validate();
@@ -47,12 +46,14 @@ export function useTransferCoins({ userId, balance, onSuccess }: UseTransferCoin
   }, [isSubmitting]);
 
   const confirmTransfer = useCallback(async () => {
+    if (!recipient) return;
+
     setIsSubmitting(true);
     try {
-      const data = await TransferClient.transferCoins(trimmedRecipientId, parsedAmount);
+      const data = await TransferClient.transferCoins(recipient.id, parsedAmount);
       onSuccess(data.balance);
       toast.success(t.success);
-      setRecipientId('');
+      setRecipient(null);
       setAmount('');
       setIsConfirmOpen(false);
     } catch (error) {
@@ -60,16 +61,16 @@ export function useTransferCoins({ userId, balance, onSuccess }: UseTransferCoin
     } finally {
       setIsSubmitting(false);
     }
-  }, [trimmedRecipientId, parsedAmount, onSuccess, t]);
+  }, [recipient, parsedAmount, onSuccess, t]);
 
   return {
-    recipientId,
+    recipient,
     amount,
     parsedAmount,
-    trimmedRecipientId,
+    isOverBalance,
     isConfirmOpen,
     isSubmitting,
-    setRecipientId,
+    setRecipient,
     setAmount,
     openConfirm,
     closeConfirm,

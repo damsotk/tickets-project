@@ -21,6 +21,7 @@
 }
 
 .field {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -43,6 +44,8 @@
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 10px;
   padding: 0.75rem 1rem;
+  height: 46px;
+  box-sizing: border-box;
   outline: none;
   transition: border-color 0.2s ease;
 }
@@ -51,8 +54,135 @@
   border-color: rgba(255, 215, 0, 0.5);
 }
 
+.input:disabled {
+  opacity: 0.6;
+}
+
+.inputError,
+.inputError:focus {
+  border-color: #f23f43;
+  background: rgba(242, 63, 67, 0.08);
+}
+
+.fieldError {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  font-family: 'minecraftFont', monospace;
+  font-size: 0.8rem;
+  color: #f23f43;
+}
+
 .input::placeholder {
   color: #6d6f78;
+}
+
+.searchWrapper {
+  position: relative;
+}
+
+.searchWrapper .input {
+  width: 100%;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: #1e1f22;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.dropdownItemActive {
+  background: rgba(255, 215, 0, 0.1);
+}
+
+.dropdownHint {
+  padding: 10px;
+  font-family: 'minecraftFont', monospace;
+  font-size: 0.85rem;
+  color: #949ba4;
+}
+
+.selectedRecipient {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 46px;
+  box-sizing: border-box;
+  padding: 0 0.5rem 0 0.75rem;
+  background: rgba(255, 215, 0, 0.08);
+  border: 1px solid rgba(255, 215, 0, 0.35);
+  border-radius: 10px;
+}
+
+.recipientName {
+  font-family: 'minecraftFont', monospace;
+  font-size: 1rem;
+  color: #f2f3f5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.recipientId {
+  font-family: 'minecraftFont', monospace;
+  font-size: 0.8rem;
+  color: #6d6f78;
+  flex-shrink: 0;
+}
+
+.clearRecipient {
+  margin-left: auto;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: #949ba4;
+  cursor: pointer;
+}
+
+.clearRecipient:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f2f3f5;
+}
+
+.avatar,
+.avatarPlaceholder {
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatarPlaceholder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'minecraftFont', monospace;
+  font-weight: 700;
+  color: #ffffff;
 }
 
 .submitButton,
@@ -147,11 +277,11 @@
   color: #ffd700;
 }
 
-.confirmValue {
-  font-family: 'minecraftFont', monospace;
-  font-size: 1rem;
-  color: #f2f3f5;
-  word-break: break-all;
+.confirmRecipient {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
 }
 
 .confirmWarning {
@@ -170,6 +300,7 @@
 @media (max-width: 768px) {
   .transferForm {
     grid-template-columns: 1fr;
+    row-gap: 1.75rem;
   }
 
   .modalActions {

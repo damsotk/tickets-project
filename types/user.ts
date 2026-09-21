@@ -9,6 +9,16 @@ export interface User {
   balance: number;
 }
 
+export interface UserSearchResult {
+  id: string;
+  name: string;
+  avatar: string | null;
+}
+
+export interface SearchUsersResponse {
+  users: UserSearchResult[];
+}
+
 export interface AuthResponse {
   user: User;
   message: string;

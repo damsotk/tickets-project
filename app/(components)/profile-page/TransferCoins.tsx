@@ -1,33 +1,35 @@
 'use client';
 
 import Image from 'next/image';
+import RecipientSearch from '@/app/(components)/profile-page/RecipientSearch';
+import UserAvatar from '@/app/(components)/profile-page/UserAvatar';
 import { useTransferCoins } from '@/app/(hooks)/profile-page-hooks/use-transfer-coins';
 import { useTranslation } from '@/app/(hooks)/use-translation';
+import { formatShortId } from '@/utils/format-short-id';
 import styles from '@/app/(styles)/profile-styles/transfer-coins.module.css';
 
 interface TransferCoinsProps {
-  userId: string;
   balance: number;
   onTransferred: (newBalance: number) => void;
 }
 
-export default function TransferCoins({ userId, balance, onTransferred }: TransferCoinsProps) {
+export default function TransferCoins({ balance, onTransferred }: TransferCoinsProps) {
   const { translate } = useTranslation();
   const t = translate.profile.transfer;
 
   const {
-    recipientId,
+    recipient,
     amount,
     parsedAmount,
-    trimmedRecipientId,
+    isOverBalance,
     isConfirmOpen,
     isSubmitting,
-    setRecipientId,
+    setRecipient,
     setAmount,
     openConfirm,
     closeConfirm,
     confirmTransfer,
-  } = useTransferCoins({ userId, balance, onSuccess: onTransferred });
+  } = useTransferCoins({ balance, onSuccess: onTransferred });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,39 +41,41 @@ export default function TransferCoins({ userId, balance, onTransferred }: Transf
       <h2 className={styles.transferTitle}>{t.title}</h2>
 
       <form className={styles.transferForm} onSubmit={handleSubmit}>
-        <label className={styles.field}>
+        <div className={styles.field}>
           <span className={styles.fieldLabel}>{t.recipientLabel}</span>
-          <input
-            className={styles.input}
-            type="text"
-            value={recipientId}
-            onChange={(e) => setRecipientId(e.target.value)}
-            placeholder={t.recipientPlaceholder}
-            maxLength={50}
-          />
-        </label>
+          <RecipientSearch selected={recipient} onSelect={setRecipient} disabled={isSubmitting} />
+        </div>
 
         <label className={styles.field}>
           <span className={styles.fieldLabel}>{t.amountLabel}</span>
           <input
-            className={styles.input}
+            className={`${styles.input} ${isOverBalance ? styles.inputError : ''}`}
             type="number"
             inputMode="numeric"
             min={1}
-            max={balance}
             step={1}
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             placeholder={t.amountPlaceholder}
+            aria-invalid={isOverBalance}
           />
+          {isOverBalance && (
+            <span className={styles.fieldError} role="alert">
+              {t.errors.insufficientFunds}
+            </span>
+          )}
         </label>
 
-        <button type="submit" className={styles.submitButton} disabled={isSubmitting}>
+        <button
+          type="submit"
+          className={styles.submitButton}
+          disabled={isSubmitting || isOverBalance}
+        >
           {t.submit}
         </button>
       </form>
 
-      {isConfirmOpen && (
+      {isConfirmOpen && recipient && (
         <div className={styles.modalOverlay} onClick={closeConfirm}>
           <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
             <h3 className={styles.modalTitle}>{t.confirm.title}</h3>
@@ -86,7 +90,11 @@ export default function TransferCoins({ userId, balance, onTransferred }: Transf
               </div>
               <div className={styles.confirmRow}>
                 <span className={styles.fieldLabel}>{t.confirm.recipient}</span>
-                <span className={styles.confirmValue}>{trimmedRecipientId}</span>
+                <span className={styles.confirmRecipient}>
+                  <UserAvatar name={recipient.name} avatar={recipient.avatar} size={32} />
+                  <span className={styles.recipientName}>{recipient.name}</span>
+                  <span className={styles.recipientId}>{formatShortId(recipient.id)}</span>
+                </span>
               </div>
             </div>
 
