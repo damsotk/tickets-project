@@ -251,6 +251,21 @@
   padding: 28px;
 }
 
+.modalNeutral {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.confirmButtonNeutral {
+  color: #ffffff;
+  background: #1f6e3f;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.confirmButtonNeutral:hover:not(:disabled) {
+  background: #248049;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
 .modalTitle {
   font-family: 'minecraftFont', monospace;
   font-size: 1.3rem;

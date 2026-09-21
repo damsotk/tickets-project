@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import type { User } from '@/types/user';
 import { useTranslation } from '@/app/(hooks)/use-translation';
+import EditableName from '@/app/(components)/profile-page/EditableName';
 import TransferCoins from '@/app/(components)/profile-page/TransferCoins';
 import TransferHistory from '@/app/(components)/profile-page/TransferHistory';
 import useUser from '@/contexts/UserContext';
@@ -19,11 +20,19 @@ export default function ProfileClient({ user }: ProfileClientProps) {
   const { user: contextUser, setUser } = useUser();
   const [balance, setBalance] = useState(user.balance);
   const [historyRefreshKey, setHistoryRefreshKey] = useState(0);
+  const [name, setName] = useState(user.name);
+  const [nameChangedAt, setNameChangedAt] = useState(user.nameChangedAt);
 
   const handleTransferred = (newBalance: number) => {
     setBalance(newBalance);
     setHistoryRefreshKey((prev) => prev + 1);
     if (contextUser) setUser({ ...contextUser, balance: newBalance });
+  };
+
+  const handleNameChanged = (newName: string, changedAt: string) => {
+    setName(newName);
+    setNameChangedAt(new Date(changedAt));
+    if (contextUser) setUser({ ...contextUser, name: newName, nameChangedAt: new Date(changedAt) });
   };
 
   const formatDate = (date: Date) => {
@@ -62,8 +71,8 @@ export default function ProfileClient({ user }: ProfileClientProps) {
   };
 
   const getInitials = () => {
-    if (user.name) {
-      return user.name.charAt(0).toUpperCase();
+    if (name) {
+      return name.charAt(0).toUpperCase();
     }
     return user.email.charAt(0).toUpperCase();
   };
@@ -81,7 +90,7 @@ export default function ProfileClient({ user }: ProfileClientProps) {
               <img
                 src={user.avatar || 'https://api.dicebear.com/9.x/adventurer-neutral/svg?radius=0'}
                 className={styles.userAvatar}
-                title={user.name}
+                title={name}
               />
             ) : (
               <div className={styles.avatarPlaceholder}>{getInitials()}</div>
@@ -89,7 +98,12 @@ export default function ProfileClient({ user }: ProfileClientProps) {
           </div>
 
           <div className={styles.userInfo}>
-            <h1 className={styles.userName}>{user.name || t.defaultName}</h1>
+            <EditableName
+              name={name || t.defaultName}
+              nameChangedAt={nameChangedAt}
+              className={styles.userName}
+              onChanged={handleNameChanged}
+            />
 
             <div className={styles.balanceDisplay}>
               <Image

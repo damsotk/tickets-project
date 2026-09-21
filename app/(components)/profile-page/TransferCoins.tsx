@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import ConfirmModal from '@/app/(components)/profile-page/ConfirmModal';
 import RecipientSearch from '@/app/(components)/profile-page/RecipientSearch';
 import UserAvatar from '@/app/(components)/profile-page/UserAvatar';
 import { useTransferCoins } from '@/app/(hooks)/profile-page-hooks/use-transfer-coins';
@@ -76,50 +77,34 @@ export default function TransferCoins({ balance, onTransferred }: TransferCoinsP
       </form>
 
       {isConfirmOpen && recipient && (
-        <div className={styles.modalOverlay} onClick={closeConfirm}>
-          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-            <h3 className={styles.modalTitle}>{t.confirm.title}</h3>
-
-            <div className={styles.confirmDetails}>
-              <div className={styles.confirmRow}>
-                <span className={styles.fieldLabel}>{t.confirm.amount}</span>
-                <span className={styles.confirmAmount}>
-                  {parsedAmount.toLocaleString('en-US')}
-                  <Image src="/icons/custom_gold_ingot.png" alt="" width={18} height={18} />
-                </span>
-              </div>
-              <div className={styles.confirmRow}>
-                <span className={styles.fieldLabel}>{t.confirm.recipient}</span>
-                <span className={styles.confirmRecipient}>
-                  <UserAvatar name={recipient.name} avatar={recipient.avatar} size={32} />
-                  <span className={styles.recipientName}>{recipient.name}</span>
-                  <span className={styles.recipientId}>{formatShortId(recipient.id)}</span>
-                </span>
-              </div>
+        <ConfirmModal
+          title={t.confirm.title}
+          warning={t.confirm.warning}
+          cancelLabel={t.confirm.cancel}
+          confirmLabel={t.confirm.submit}
+          sendingLabel={t.confirm.sending}
+          isSubmitting={isSubmitting}
+          onConfirm={confirmTransfer}
+          onClose={closeConfirm}
+        >
+          <div className={styles.confirmDetails}>
+            <div className={styles.confirmRow}>
+              <span className={styles.fieldLabel}>{t.confirm.amount}</span>
+              <span className={styles.confirmAmount}>
+                {parsedAmount.toLocaleString('en-US')}
+                <Image src="/icons/custom_gold_ingot.png" alt="" width={18} height={18} />
+              </span>
             </div>
-
-            <p className={styles.confirmWarning}>{t.confirm.warning}</p>
-
-            <div className={styles.modalActions}>
-              <button
-                type="button"
-                className={styles.cancelButton}
-                onClick={closeConfirm}
-                disabled={isSubmitting}
-              >
-                {t.confirm.cancel}
-              </button>
-              <button
-                type="button"
-                className={styles.submitButton}
-                onClick={confirmTransfer}
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? t.confirm.sending : t.confirm.submit}
-              </button>
+            <div className={styles.confirmRow}>
+              <span className={styles.fieldLabel}>{t.confirm.recipient}</span>
+              <span className={styles.confirmRecipient}>
+                <UserAvatar name={recipient.name} avatar={recipient.avatar} size={32} />
+                <span className={styles.recipientName}>{recipient.name}</span>
+                <span className={styles.recipientId}>{formatShortId(recipient.id)}</span>
+              </span>
             </div>
           </div>
-        </div>
+        </ConfirmModal>
       )}
     </div>
   );

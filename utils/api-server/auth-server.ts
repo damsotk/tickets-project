@@ -27,6 +27,7 @@ export async function getCurrentUser(): Promise<User | null> {
       createdAt: true,
       updatedAt: true,
       role: true,
+      nameChangedAt: true,
     },
   });
 

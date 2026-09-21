@@ -209,6 +209,28 @@ const en = {
     badges: {
       admin: 'Administrator',
     },
+    nameChange: {
+      editHint: 'Click to change your nickname',
+      inputLabel: 'New nickname',
+      save: 'Save',
+      success: 'Nickname changed',
+      cooldown: 'You can change your nickname again on {date}',
+      confirm: {
+        title: 'Change nickname',
+        text: 'Are you sure you want to change your nickname to:',
+        warning: 'This can only be done once a week.',
+        cancel: 'Cancel',
+        submit: 'Change',
+        sending: 'Saving...',
+      },
+      errors: {
+        required: 'Nickname cannot be empty',
+        spaces: 'Nickname cannot contain spaces',
+        tooShort: 'Nickname must be at least 2 characters',
+        tooLong: 'Nickname must be at most 32 characters',
+        generic: 'Failed to change nickname',
+      },
+    },
     transfer: {
       title: 'Transfer coins',
       recipientLabel: 'Recipient',

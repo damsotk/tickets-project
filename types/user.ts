@@ -7,6 +7,7 @@ export interface User {
   createdAt: Date;
   updatedAt: Date;
   balance: number;
+  nameChangedAt?: Date | null;
 }
 
 export interface UserSearchResult {
@@ -17,6 +18,10 @@ export interface UserSearchResult {
 
 export interface SearchUsersResponse {
   users: UserSearchResult[];
+}
+
+export interface ChangeNameResponse {
+  user: { name: string; nameChangedAt: string };
 }
 
 export interface AuthResponse {

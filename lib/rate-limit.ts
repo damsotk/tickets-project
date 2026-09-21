@@ -29,4 +29,9 @@ export const rateLimiters = {
     limiter: Ratelimit.slidingWindow(60, '1 m'),
     prefix: 'rl:user-search',
   }),
+  nameChange: new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(10, '1 m'),
+    prefix: 'rl:name-change',
+  }),
 };

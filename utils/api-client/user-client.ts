@@ -1,4 +1,4 @@
-import { SearchUsersResponse } from '@/types/user';
+import { ChangeNameResponse, SearchUsersResponse } from '@/types/user';
 
 export class UserClient {
   private static async request<T>(url: string, options?: RequestInit): Promise<T> {
@@ -21,6 +21,13 @@ export class UserClient {
   static async searchUsers(query: string, signal?: AbortSignal) {
     return this.request<SearchUsersResponse>(`/api/users/search?q=${encodeURIComponent(query)}`, {
       signal,
+    });
+  }
+
+  static async changeName(name: string) {
+    return this.request<ChangeNameResponse>('/api/users/name', {
+      method: 'PATCH',
+      body: JSON.stringify({ name }),
     });
   }
 }
