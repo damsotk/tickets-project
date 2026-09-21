@@ -209,6 +209,31 @@ const en = {
     badges: {
       admin: 'Administrator',
     },
+    transfer: {
+      title: 'Transfer coins',
+      recipientLabel: 'Recipient ID',
+      recipientPlaceholder: 'Player ID from their profile',
+      amountLabel: 'Amount',
+      amountPlaceholder: '0',
+      submit: 'Transfer',
+      success: 'Coins transferred successfully',
+      confirm: {
+        title: 'Confirm transfer',
+        amount: 'Amount',
+        recipient: 'Recipient',
+        warning: 'Transfers cannot be undone. Make sure the recipient ID is correct.',
+        cancel: 'Cancel',
+        submit: 'Confirm',
+        sending: 'Sending...',
+      },
+      errors: {
+        recipientRequired: 'Enter the recipient ID',
+        selfTransfer: 'You cannot transfer coins to yourself',
+        invalidAmount: 'Amount must be a whole number of at least 1',
+        insufficientFunds: 'Not enough coins on your balance',
+        generic: 'Failed to transfer coins',
+      },
+    },
   },
   footer: {
     title: 'Elium',

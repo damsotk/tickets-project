@@ -209,6 +209,31 @@ const ru = {
     badges: {
       admin: 'Администратор',
     },
+    transfer: {
+      title: 'Перевод коинов',
+      recipientLabel: 'ID получателя',
+      recipientPlaceholder: 'ID игрока из его профиля',
+      amountLabel: 'Сумма',
+      amountPlaceholder: '0',
+      submit: 'Перевести',
+      success: 'Коины успешно переведены',
+      confirm: {
+        title: 'Подтверждение перевода',
+        amount: 'Сумма',
+        recipient: 'Получатель',
+        warning: 'Перевод нельзя отменить. Убедитесь, что ID получателя указан верно.',
+        cancel: 'Отмена',
+        submit: 'Подтвердить',
+        sending: 'Отправка...',
+      },
+      errors: {
+        recipientRequired: 'Укажите ID получателя',
+        selfTransfer: 'Нельзя перевести коины самому себе',
+        invalidAmount: 'Сумма должна быть целым числом не меньше 1',
+        insufficientFunds: 'Недостаточно коинов на балансе',
+        generic: 'Не удалось перевести коины',
+      },
+    },
   },
   footer: {
     title: 'Elium',

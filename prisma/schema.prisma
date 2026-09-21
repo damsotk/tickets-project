@@ -52,7 +52,10 @@ model User {
 
   whitelistApplications  WhitelistApplication[]
   reviewedApplications   WhitelistApplication[]  @relation("ReviewedBy")
-  
+
+  sentTransfers          CoinTransfer[]          @relation("SentTransfers")
+  receivedTransfers      CoinTransfer[]          @relation("ReceivedTransfers")
+
   @@map("users")
 }
 
@@ -137,4 +140,23 @@ model WhitelistApplication {
   @@index([status])
 
   @@map("whitelist_applications")
+}
+
+model CoinTransfer {
+  id           String   @id @default(cuid())
+  amount       Int
+
+  // Nullable to keep transfer history if a user is deleted
+  senderId     String?
+  sender       User?    @relation("SentTransfers", fields: [senderId], references: [id], onDelete: SetNull)
+
+  recipientId  String?
+  recipient    User?    @relation("ReceivedTransfers", fields: [recipientId], references: [id], onDelete: SetNull)
+
+  createdAt    DateTime @default(now())
+
+  @@index([senderId, createdAt])
+  @@index([recipientId, createdAt])
+
+  @@map("coin_transfers")
 }

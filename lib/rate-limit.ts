@@ -19,4 +19,9 @@ export const rateLimiters = {
     limiter: Ratelimit.slidingWindow(15, '1 h'),
     prefix: 'rl:tickets',
   }),
+  transfers: new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(10, '1 m'),
+    prefix: 'rl:transfers',
+  }),
 };

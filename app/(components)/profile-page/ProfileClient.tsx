@@ -1,8 +1,11 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 import type { User } from '@/types/user';
 import { useTranslation } from '@/app/(hooks)/use-translation';
+import TransferCoins from '@/app/(components)/profile-page/TransferCoins';
+import useUser from '@/contexts/UserContext';
 import styles from '@/app/(styles)/profile-styles/profile-client.module.css';
 
 interface ProfileClientProps {
@@ -12,6 +15,13 @@ interface ProfileClientProps {
 export default function ProfileClient({ user }: ProfileClientProps) {
   const { translate } = useTranslation();
   const t = translate.profile;
+  const { user: contextUser, setUser } = useUser();
+  const [balance, setBalance] = useState(user.balance);
+
+  const handleTransferred = (newBalance: number) => {
+    setBalance(newBalance);
+    if (contextUser) setUser({ ...contextUser, balance: newBalance });
+  };
 
   const formatDate = (date: Date) => {
     return new Date(date).toLocaleDateString('en-EN', {
@@ -86,7 +96,7 @@ export default function ProfileClient({ user }: ProfileClientProps) {
                 height={24}
                 className={styles.coinIcon}
               />
-              <span className={styles.balanceAmount}>{formatBalance(user.balance)}</span>
+              <span className={styles.balanceAmount}>{formatBalance(balance)}</span>
             </div>
           </div>
         </div>
@@ -114,6 +124,8 @@ export default function ProfileClient({ user }: ProfileClientProps) {
             </span>
           </div>
         </div>
+
+        <TransferCoins userId={user.id} balance={balance} onTransferred={handleTransferred} />
 
         <div className={styles.statsSection}>
           <h2 className={styles.statsTitle}>{t.stats.title}</h2>

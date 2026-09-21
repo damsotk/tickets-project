@@ -1,0 +1,53 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { requireAuth, checkRateLimit } from '@/lib/api/guards';
+import { transferCoins, MIN_TRANSFER_AMOUNT, MAX_TRANSFER_AMOUNT } from '@/lib/api/transfers';
+
+const MAX_RECIPIENT_ID_LENGTH = 50;
+
+export async function POST(request: NextRequest) {
+  try {
+    const { error, user } = await requireAuth();
+    if (error) return error;
+
+    const limitError = await checkRateLimit(user!.id, 'transfers');
+    if (limitError) return limitError;
+
+    const { recipientId, amount } = await request.json();
+
+    if (
+      !recipientId ||
+      typeof recipientId !== 'string' ||
+      recipientId.length > MAX_RECIPIENT_ID_LENGTH
+    ) {
+      return NextResponse.json({ error: 'Invalid recipient' }, { status: 400 });
+    }
+
+    if (
+      typeof amount !== 'number' ||
+      !Number.isInteger(amount) ||
+      amount < MIN_TRANSFER_AMOUNT ||
+      amount > MAX_TRANSFER_AMOUNT
+    ) {
+      return NextResponse.json(
+        { error: `Amount must be an integer of at least ${MIN_TRANSFER_AMOUNT}` },
+        { status: 400 },
+      );
+    }
+
+    if (recipientId === user!.id) {
+      return NextResponse.json({ error: 'Cannot transfer coins to yourself' }, { status: 400 });
+    }
+
+    const {
+      error: transferError,
+      transfer,
+      balance,
+    } = await transferCoins(user!.id, recipientId, amount);
+    if (transferError) return transferError;
+
+    return NextResponse.json({ transfer, balance }, { status: 201 });
+  } catch (error) {
+    console.error('Error transferring coins:', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  }
+}

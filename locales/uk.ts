@@ -209,6 +209,31 @@ const uk = {
     badges: {
       admin: 'Адміністратор',
     },
+    transfer: {
+      title: 'Переказ коїнів',
+      recipientLabel: 'ID отримувача',
+      recipientPlaceholder: 'ID гравця з його профілю',
+      amountLabel: 'Сума',
+      amountPlaceholder: '0',
+      submit: 'Переказати',
+      success: 'Коїни успішно переказано',
+      confirm: {
+        title: 'Підтвердження переказу',
+        amount: 'Сума',
+        recipient: 'Отримувач',
+        warning: 'Переказ неможливо скасувати. Переконайтеся, що ID отримувача вказано правильно.',
+        cancel: 'Скасувати',
+        submit: 'Підтвердити',
+        sending: 'Надсилання...',
+      },
+      errors: {
+        recipientRequired: 'Вкажіть ID отримувача',
+        selfTransfer: 'Не можна переказати коїни самому собі',
+        invalidAmount: 'Сума має бути цілим числом не менше 1',
+        insufficientFunds: 'Недостатньо коїнів на балансі',
+        generic: 'Не вдалося переказати коїни',
+      },
+    },
   },
   footer: {
     title: 'Elium',

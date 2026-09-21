@@ -209,6 +209,31 @@ const by = {
     badges: {
       admin: 'Адміністратар',
     },
+    transfer: {
+      title: 'Перавод коінаў',
+      recipientLabel: 'ID атрымальніка',
+      recipientPlaceholder: 'ID гульца з яго профілю',
+      amountLabel: 'Сума',
+      amountPlaceholder: '0',
+      submit: 'Перавесці',
+      success: 'Коіны паспяхова пераведзены',
+      confirm: {
+        title: 'Пацверджанне пераводу',
+        amount: 'Сума',
+        recipient: 'Атрымальнік',
+        warning: 'Перавод немагчыма адмяніць. Упэўніцеся, што ID атрымальніка пазначаны правільна.',
+        cancel: 'Адмена',
+        submit: 'Пацвердзіць',
+        sending: 'Адпраўка...',
+      },
+      errors: {
+        recipientRequired: 'Пазначце ID атрымальніка',
+        selfTransfer: 'Нельга перавесці коіны самому сабе',
+        invalidAmount: 'Сума павінна быць цэлым лікам не менш за 1',
+        insufficientFunds: 'Недастаткова коінаў на балансе',
+        generic: 'Не атрымалася перавесці коіны',
+      },
+    },
   },
   footer: {
     title: 'Elium',
