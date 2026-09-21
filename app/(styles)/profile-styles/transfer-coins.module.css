@@ -170,10 +170,16 @@
 }
 
 .avatar,
-.avatarPlaceholder {
+.avatarPlaceholder,
+.avatarBroken {
   flex-shrink: 0;
   border-radius: 50%;
   object-fit: cover;
+}
+
+.avatarBroken {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .avatarPlaceholder {
