@@ -1,4 +1,8 @@
-import { CreateTransferResponse } from '@/types/transfer';
+import {
+  CreateTransferResponse,
+  GetTransferHistoryResponse,
+  TransferDirection,
+} from '@/types/transfer';
 
 export class TransferClient {
   private static async request<T>(url: string, options?: RequestInit): Promise<T> {
@@ -23,5 +27,16 @@ export class TransferClient {
       method: 'POST',
       body: JSON.stringify({ recipientId, amount }),
     });
+  }
+
+  static async getHistory(
+    direction: TransferDirection,
+    cursor: string | null,
+    signal?: AbortSignal,
+  ) {
+    const params = new URLSearchParams({ direction });
+    if (cursor) params.set('cursor', cursor);
+
+    return this.request<GetTransferHistoryResponse>(`/api/transfers?${params}`, { signal });
   }
 }

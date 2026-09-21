@@ -1,8 +1,42 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAuth, checkRateLimit } from '@/lib/api/guards';
-import { transferCoins, MIN_TRANSFER_AMOUNT, MAX_TRANSFER_AMOUNT } from '@/lib/api/transfers';
+import {
+  transferCoins,
+  getTransferHistory,
+  MIN_TRANSFER_AMOUNT,
+  MAX_TRANSFER_AMOUNT,
+  TRANSFER_DIRECTIONS,
+  type TransferDirection,
+} from '@/lib/api/transfers';
 
 const MAX_RECIPIENT_ID_LENGTH = 50;
+const MAX_CURSOR_LENGTH = 50;
+
+export async function GET(request: NextRequest) {
+  try {
+    const { error, user } = await requireAuth();
+    if (error) return error;
+
+    const params = request.nextUrl.searchParams;
+    const direction = params.get('direction') ?? 'all';
+    const cursor = params.get('cursor');
+
+    if (!TRANSFER_DIRECTIONS.includes(direction as TransferDirection)) {
+      return NextResponse.json({ error: 'Invalid direction' }, { status: 400 });
+    }
+
+    if (cursor !== null && (cursor.length === 0 || cursor.length > MAX_CURSOR_LENGTH)) {
+      return NextResponse.json({ error: 'Invalid cursor' }, { status: 400 });
+    }
+
+    const history = await getTransferHistory(user!.id, direction as TransferDirection, cursor);
+
+    return NextResponse.json(history);
+  } catch (error) {
+    console.error('Error fetching transfer history:', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {

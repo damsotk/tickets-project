@@ -68,3 +68,54 @@ export async function transferCoins(
     throw error;
   }
 }
+
+export const TRANSFER_DIRECTIONS = ['all', 'sent', 'received'] as const;
+export type TransferDirection = (typeof TRANSFER_DIRECTIONS)[number];
+
+const HISTORY_PAGE_SIZE = 10;
+
+const counterpartySelect = { select: { id: true, name: true, avatar: true } };
+
+export async function getTransferHistory(
+  userId: string,
+  direction: TransferDirection,
+  cursor: string | null,
+) {
+  const where =
+    direction === 'sent'
+      ? { senderId: userId }
+      : direction === 'received'
+        ? { recipientId: userId }
+        : { OR: [{ senderId: userId }, { recipientId: userId }] };
+
+  const rows = await prisma.coinTransfer.findMany({
+    where,
+    orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
+    take: HISTORY_PAGE_SIZE + 1,
+    ...(cursor && { cursor: { id: cursor }, skip: 1 }),
+    select: {
+      id: true,
+      amount: true,
+      createdAt: true,
+      senderId: true,
+      sender: counterpartySelect,
+      recipient: counterpartySelect,
+    },
+  });
+
+  const hasMore = rows.length > HISTORY_PAGE_SIZE;
+  const page = hasMore ? rows.slice(0, HISTORY_PAGE_SIZE) : rows;
+
+  const transfers = page.map(({ id, amount, createdAt, senderId, sender, recipient }) => {
+    const isSent = senderId === userId;
+    return {
+      id,
+      amount,
+      createdAt,
+      direction: isSent ? ('sent' as const) : ('received' as const),
+      counterparty: isSent ? recipient : sender,
+    };
+  });
+
+  return { transfers, nextCursor: hasMore ? page[page.length - 1].id : null };
+}

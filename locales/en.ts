@@ -238,6 +238,20 @@ const en = {
         generic: 'Failed to transfer coins',
       },
     },
+    transferHistory: {
+      title: 'Transfer history',
+      tabs: {
+        all: 'All',
+        sent: 'Sent',
+        received: 'Received',
+      },
+      sent: 'Sent',
+      received: 'Received',
+      empty: 'No transfers yet',
+      deletedUser: 'Deleted user',
+      loadMore: 'Show more',
+      loading: 'Loading...',
+    },
   },
   footer: {
     title: 'Elium',

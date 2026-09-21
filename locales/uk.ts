@@ -238,6 +238,20 @@ const uk = {
         generic: 'Не вдалося переказати коїни',
       },
     },
+    transferHistory: {
+      title: 'Історія переказів',
+      tabs: {
+        all: 'Усі',
+        sent: 'Надіслано',
+        received: 'Отримано',
+      },
+      sent: 'Надіслано',
+      received: 'Отримано',
+      empty: 'Переказів поки немає',
+      deletedUser: 'Видалений користувач',
+      loadMore: 'Показати ще',
+      loading: 'Завантаження...',
+    },
   },
   footer: {
     title: 'Elium',

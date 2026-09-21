@@ -238,6 +238,20 @@ const by = {
         generic: 'Не атрымалася перавесці коіны',
       },
     },
+    transferHistory: {
+      title: 'Гісторыя пераводаў',
+      tabs: {
+        all: 'Усе',
+        sent: 'Адпраўлена',
+        received: 'Атрымана',
+      },
+      sent: 'Адпраўлена',
+      received: 'Атрымана',
+      empty: 'Пераводаў пакуль няма',
+      deletedUser: 'Выдалены карыстальнік',
+      loadMore: 'Паказаць яшчэ',
+      loading: 'Загрузка...',
+    },
   },
   footer: {
     title: 'Elium',

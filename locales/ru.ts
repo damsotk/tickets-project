@@ -238,6 +238,20 @@ const ru = {
         generic: 'Не удалось перевести коины',
       },
     },
+    transferHistory: {
+      title: 'История переводов',
+      tabs: {
+        all: 'Все',
+        sent: 'Отправлено',
+        received: 'Получено',
+      },
+      sent: 'Отправлено',
+      received: 'Получено',
+      empty: 'Переводов пока нет',
+      deletedUser: 'Удалённый пользователь',
+      loadMore: 'Показать ещё',
+      loading: 'Загрузка...',
+    },
   },
   footer: {
     title: 'Elium',

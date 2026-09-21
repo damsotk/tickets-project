@@ -5,6 +5,7 @@ import Image from 'next/image';
 import type { User } from '@/types/user';
 import { useTranslation } from '@/app/(hooks)/use-translation';
 import TransferCoins from '@/app/(components)/profile-page/TransferCoins';
+import TransferHistory from '@/app/(components)/profile-page/TransferHistory';
 import useUser from '@/contexts/UserContext';
 import styles from '@/app/(styles)/profile-styles/profile-client.module.css';
 
@@ -17,9 +18,11 @@ export default function ProfileClient({ user }: ProfileClientProps) {
   const t = translate.profile;
   const { user: contextUser, setUser } = useUser();
   const [balance, setBalance] = useState(user.balance);
+  const [historyRefreshKey, setHistoryRefreshKey] = useState(0);
 
   const handleTransferred = (newBalance: number) => {
     setBalance(newBalance);
+    setHistoryRefreshKey((prev) => prev + 1);
     if (contextUser) setUser({ ...contextUser, balance: newBalance });
   };
 
@@ -126,6 +129,8 @@ export default function ProfileClient({ user }: ProfileClientProps) {
         </div>
 
         <TransferCoins balance={balance} onTransferred={handleTransferred} />
+
+        <TransferHistory refreshKey={historyRefreshKey} />
 
         <div className={styles.statsSection}>
           <h2 className={styles.statsTitle}>{t.stats.title}</h2>
