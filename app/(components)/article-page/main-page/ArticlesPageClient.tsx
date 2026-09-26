@@ -20,7 +20,10 @@ export default function ArticlesPageClient({ initialArticles }: ArticlesPageClie
           currentCategory={currentCategory}
           onCurrentCategoryChange={setCurrentCategory}
         />
-        <ArticlesList currentArticles={initialArticles[currentCategory]} />
+        <ArticlesList
+          category={currentCategory}
+          currentArticles={initialArticles[currentCategory]}
+        />
       </div>
     </div>
   );

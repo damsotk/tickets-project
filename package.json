@@ -11,6 +11,11 @@
   },
   "dependencies": {
     "@prisma/client": "5.22.0",
+    "@tiptap/extensions": "3.31.3",
+    "@tiptap/markdown": "3.31.3",
+    "@tiptap/pm": "3.31.3",
+    "@tiptap/react": "3.31.3",
+    "@tiptap/starter-kit": "3.31.3",
     "@upstash/ratelimit": "2.0.8",
     "@upstash/redis": "1.37.0",
     "@vercel/analytics": "2.0.0",

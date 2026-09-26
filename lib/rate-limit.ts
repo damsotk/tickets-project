@@ -34,4 +34,9 @@ export const rateLimiters = {
     limiter: Ratelimit.slidingWindow(10, '1 m'),
     prefix: 'rl:name-change',
   }),
+  articles: new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(20, '1 m'),
+    prefix: 'rl:articles',
+  }),
 };

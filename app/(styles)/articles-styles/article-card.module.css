@@ -57,7 +57,37 @@
   color: rgba(255, 255, 255, 0.4);
 }
 
+.addCard {
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  background: transparent;
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+}
+
+.addCard:hover {
+  background: rgba(40, 40, 45, 0.5);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.addIcon {
+  font-family: 'minecraftFont', monospace;
+  font-size: 3rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.addLabel {
+  font-family: 'minecraftFont', monospace;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
 @media (max-width: 768px) {
+  .addCard {
+    min-height: 120px;
+  }
+
   .card {
     padding: 18px 16px;
     gap: 12px;
