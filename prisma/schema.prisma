@@ -161,3 +161,25 @@ model CoinTransfer {
 
   @@map("coin_transfers")
 }
+
+model Article {
+  id         String   @id @default(cuid())
+  slug       String   @db.VarChar(100)
+  category   String   @db.VarChar(50)
+
+  title      String   @db.VarChar(200)
+  preview    String   @db.VarChar(300)
+  author     String   @db.VarChar(100)
+  date       DateTime @db.Date
+
+  infobox    Json?    @db.Json
+  content    String   @db.Text
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([category, slug])
+  @@index([category, date])
+
+  @@map("articles")
+}
