@@ -1,4 +1,4 @@
-import { getAllArticleSlugs, getArticleBySlug } from '@/lib/articles';
+import { getArticleBySlug } from '@/lib/articles';
 import styles from '@/app/(styles)/articles-styles/single-article-page.module.css';
 import { notFound } from 'next/navigation';
 import ArticleContent from '@/app/(components)/article-page/single-article/ArticleContent';
@@ -13,18 +13,7 @@ interface ArticlePageProps {
   }>;
 }
 
-export async function generateStaticParams() {
-  const slugs = getAllArticleSlugs();
-  const locales = ['en', 'uk', 'by', 'ru'];
-
-  return slugs.flatMap((item) =>
-    locales.map((locale) => ({
-      locale,
-      category: item.category,
-      slug: item.slug,
-    })),
-  );
-}
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: ArticlePageProps) {
   const { category, slug } = await params;
