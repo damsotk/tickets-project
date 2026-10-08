@@ -135,8 +135,6 @@ model WhitelistApplication {
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
 
-  // One user one application
-  @@unique([userId, status], name: "unique_pending_application")
   @@index([userId])
   @@index([status])
 
