@@ -53,8 +53,35 @@
   transform: translateY(0);
 }
 
-.whitelistButton:disabled {
-  cursor: wait;
+.statusSkeleton {
+  cursor: default;
+  border-color: var(--border);
+  background: linear-gradient(
+    90deg,
+    rgba(154, 161, 171, 0.06) 25%,
+    rgba(154, 161, 171, 0.14) 50%,
+    rgba(154, 161, 171, 0.06) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.statusSkeleton:hover {
+  border-color: var(--border);
+  transform: none;
+}
+
+.statusSkeleton .whitelistButtonText {
+  visibility: hidden;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 .whitelistButtonText {
@@ -152,7 +179,8 @@
     transform: none;
   }
   .statusPending,
-  .statusDot {
+  .statusDot,
+  .statusSkeleton {
     animation: none;
   }
 }

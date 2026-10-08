@@ -67,21 +67,29 @@ export default function WhiteList() {
 
   return (
     <>
-      {status === 'PENDING' && (
+      {loading && (
+        <div className={`${styles.whitelistButton} ${styles.statusSkeleton}`} aria-busy="true">
+          <span className={styles.whitelistButtonText} aria-hidden="true">
+            {translated.card.button}
+          </span>
+        </div>
+      )}
+
+      {!loading && status === 'PENDING' && (
         <div className={`${styles.whitelistButton} ${styles.statusPending}`} role="status">
           <span className={styles.statusDot} aria-hidden="true" />
           <span className={styles.whitelistButtonText}>{translated.card.pending}</span>
         </div>
       )}
 
-      {status === 'APPROVED' && (
+      {!loading && status === 'APPROVED' && (
         <div className={`${styles.whitelistButton} ${styles.statusApproved}`} role="status">
           <span className={styles.statusDot} aria-hidden="true" />
           <span className={styles.whitelistButtonText}>{translated.card.approved}</span>
         </div>
       )}
 
-      {status === 'REJECTED' && (
+      {!loading && status === 'REJECTED' && (
         <button
           className={`${styles.whitelistButton} ${styles.statusRejected}`}
           onClick={openRejectedModal}
@@ -91,13 +99,8 @@ export default function WhiteList() {
         </button>
       )}
 
-      {!status && (
-        <button
-          className={styles.whitelistButton}
-          onClick={openModal}
-          disabled={loading}
-          aria-busy={loading}
-        >
+      {!loading && !status && (
+        <button className={styles.whitelistButton} onClick={openModal}>
           <span className={styles.whitelistButtonText}>{translated.card.button}</span>
         </button>
       )}
