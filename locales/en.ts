@@ -379,6 +379,16 @@ const en = {
     whilelistmodal: {
       card: {
         button: 'Whitelist Application',
+        pending: 'Your application is under review',
+        approved: "You're already whitelisted!",
+        rejected: 'Your application was rejected. Click to see the reason',
+      },
+      rejectedModal: {
+        title: 'Application rejected',
+        text: 'Unfortunately, the administration has rejected your application.',
+        reasonLabel: 'Reason',
+        noReason: 'No reason provided',
+        reapplyButton: 'Apply again',
       },
       modal: {
         title: 'White List Application',

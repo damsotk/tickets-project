@@ -25,11 +25,74 @@
   transform: translateY(0);
 }
 
+.whitelistButton:disabled {
+  cursor: wait;
+}
+
 .whitelistButtonText {
   font-family: var(--font-minecraft), monospace;
   font-size: 1rem;
   color: #ffffff;
   letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.statusPending,
+.statusApproved {
+  cursor: default;
+}
+
+.statusPending {
+  border-color: rgba(168, 85, 247, 0.6);
+  animation: pendingPulse 1.8s ease-in-out infinite;
+}
+
+.statusPending:hover {
+  border-color: rgba(168, 85, 247, 0.6);
+  background: rgba(20, 21, 26, 0.55);
+  transform: none;
+}
+
+@keyframes pendingPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.45);
+  }
+  50% {
+    transform: scale(1.04);
+    box-shadow: 0 0 18px 2px rgba(168, 85, 247, 0.35);
+  }
+}
+
+.statusApproved {
+  border-color: rgba(34, 197, 94, 0.6);
+  background: rgba(34, 197, 94, 0.12);
+}
+
+.statusApproved:hover {
+  border-color: rgba(34, 197, 94, 0.6);
+  background: rgba(34, 197, 94, 0.12);
+  transform: none;
+}
+
+.statusApproved .whitelistButtonText {
+  color: #4ade80;
+}
+
+.statusRejected {
+  max-width: 420px;
+  border-color: rgba(239, 68, 68, 0.6);
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.statusRejected:hover {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.18);
+}
+
+.statusRejected .whitelistButtonText {
+  color: #f87171;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -38,6 +101,9 @@
   }
   .whitelistButton:hover {
     transform: none;
+  }
+  .statusPending {
+    animation: none;
   }
 }
 
@@ -363,6 +429,44 @@
   margin-top: 6px;
   font-style: italic;
   animation: fadeSlideIn 0.2s ease;
+}
+
+.rejectedIcon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 20px;
+  background: rgba(239, 68, 68, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: #ef4444;
+}
+
+.reasonBlock {
+  margin-top: 24px;
+  padding: 16px 20px;
+  background: rgba(239, 68, 68, 0.06);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 12px;
+}
+
+.reasonLabel {
+  font-size: 0.8rem;
+  color: #f87171;
+  margin: 0 0 8px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.reasonText {
+  font-size: 0.95rem;
+  color: #d1d5db;
+  line-height: 1.6;
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 .almostDoneIcon {

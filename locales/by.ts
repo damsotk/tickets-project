@@ -378,6 +378,16 @@ const by = {
     whilelistmodal: {
       card: {
         button: 'Заяўка на вайтліст',
+        pending: 'Ваша заяўка на разглядзе',
+        approved: 'Вы ўжо ў вайтлісце!',
+        rejected: 'Вас не прынялі ў вайтліст. Націсніце, каб даведацца прычыну',
+      },
+      rejectedModal: {
+        title: 'Заяўка адхілена',
+        text: 'На жаль, адміністрацыя адхіліла вашу заяўку.',
+        reasonLabel: 'Прычына',
+        noReason: 'Прычына не пазначана',
+        reapplyButton: 'Падаць заяўку паўторна',
       },
       modal: {
         title: 'Заяўка ў White List',

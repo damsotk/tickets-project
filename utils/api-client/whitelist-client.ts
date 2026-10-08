@@ -4,6 +4,7 @@ import {
   AddPlayerResponse,
   ApplicationsResponse,
   ApplicationActionResponse,
+  MyApplicationResponse,
 } from '@/types/whitelist';
 
 export class WhitelistClient {
@@ -40,6 +41,10 @@ export class WhitelistClient {
       method: 'PUT',
       body: JSON.stringify({ state }),
     });
+  }
+
+  static async getMyApplication() {
+    return this.request<MyApplicationResponse>('/api/white-list/application');
   }
 
   static async getApplications() {

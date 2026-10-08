@@ -16,6 +16,18 @@ export interface Application {
   user: ApplicationUser;
 }
 
+export type ApplicationStatus = 'PENDING' | 'APPROVED' | 'REJECTED';
+
+export interface MyApplication {
+  id: string;
+  status: ApplicationStatus;
+  reviewComment?: string | null;
+}
+
+export interface MyApplicationResponse {
+  application: MyApplication | null;
+}
+
 export interface WhitelistResponse {
   players: string[];
   state: boolean;

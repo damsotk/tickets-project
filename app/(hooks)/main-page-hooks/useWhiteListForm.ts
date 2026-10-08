@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { toast } from 'sonner';
+import { MyApplication } from '@/types/whitelist';
 
 interface FormData {
   source: string;
@@ -111,7 +112,7 @@ export function useWhiteListForm() {
     return Object.keys(newErrors).length === 0;
   }, [formData.minecraftNick, formData.discordNick]);
 
-  const handleSubmit = useCallback(async (): Promise<boolean> => {
+  const handleSubmit = useCallback(async (): Promise<MyApplication | null> => {
     setIsSubmitting(true);
     setSubmitError(null);
 
@@ -129,14 +130,14 @@ export function useWhiteListForm() {
           setErrors(data.details);
         }
         toast.error(`${data.error}`);
-        return false;
+        return null;
       }
 
       resetForm();
-      return true;
+      return data.application as MyApplication;
     } catch (err) {
       toast.error(`${err}`);
-      return false;
+      return null;
     } finally {
       setIsSubmitting(false);
     }

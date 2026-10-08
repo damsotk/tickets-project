@@ -1,5 +1,6 @@
 'use client';
 
+import { useMyApplication } from '@/app/(hooks)/main-page-hooks/useMyApplication';
 import { useWhiteListForm } from '@/app/(hooks)/main-page-hooks/useWhiteListForm';
 import { useModal } from '@/app/(hooks)/modal-hooks/use-modal';
 import { useModalNavigation } from '@/app/(hooks)/modal-hooks/use-modal-navigation';
@@ -17,7 +18,14 @@ export default function WhiteList() {
     redirectUrl: '/auth',
     checkAccess: () => !!user,
   });
+  const {
+    isOpen: isRejectedOpen,
+    openModal: openRejectedModal,
+    closeModal: closeRejectedModal,
+  } = useModal(false);
   const { currentPage, handleNext, resetPage } = useModalNavigation();
+  const { application, setApplication, loading } = useMyApplication(!!user);
+  const status = application?.status;
 
   const {
     formData,
@@ -40,8 +48,9 @@ export default function WhiteList() {
   const handlePage3Next = async () => {
     if (!validatePage3()) return;
 
-    const success = await handleSubmit();
-    if (success) {
+    const created = await handleSubmit();
+    if (created) {
+      setApplication(created);
       handleNext();
     }
   };
@@ -51,11 +60,77 @@ export default function WhiteList() {
     resetPage();
   };
 
+  const handleReapply = () => {
+    closeRejectedModal();
+    openModal();
+  };
+
   return (
     <>
-      <button className={styles.whitelistButton} onClick={openModal}>
-        <span className={styles.whitelistButtonText}>{translated.card.button}</span>
-      </button>
+      {status === 'PENDING' && (
+        <div className={`${styles.whitelistButton} ${styles.statusPending}`} role="status">
+          <span className={styles.whitelistButtonText}>{translated.card.pending}</span>
+        </div>
+      )}
+
+      {status === 'APPROVED' && (
+        <div className={`${styles.whitelistButton} ${styles.statusApproved}`} role="status">
+          <span className={styles.whitelistButtonText}>{translated.card.approved}</span>
+        </div>
+      )}
+
+      {status === 'REJECTED' && (
+        <button
+          className={`${styles.whitelistButton} ${styles.statusRejected}`}
+          onClick={openRejectedModal}
+        >
+          <span className={styles.whitelistButtonText}>{translated.card.rejected}</span>
+        </button>
+      )}
+
+      {!status && (
+        <button
+          className={styles.whitelistButton}
+          onClick={openModal}
+          disabled={loading}
+          aria-busy={loading}
+        >
+          <span className={styles.whitelistButtonText}>{translated.card.button}</span>
+        </button>
+      )}
+
+      {isRejectedOpen && (
+        <div className={styles.modalOverlay} onClick={closeRejectedModal}>
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.modalHeader}>
+              <h2 className={styles.modalTitle}>{translated.rejectedModal.title}</h2>
+              <button onClick={closeRejectedModal} className={styles.closeButton}>
+                ✕
+              </button>
+            </div>
+
+            <div className={styles.modalBody}>
+              <div className={styles.page}>
+                <div className={styles.rejectedIcon}>✕</div>
+                <p className={styles.pageText}>{translated.rejectedModal.text}</p>
+
+                <div className={styles.reasonBlock}>
+                  <p className={styles.reasonLabel}>{translated.rejectedModal.reasonLabel}</p>
+                  <p className={styles.reasonText}>
+                    {application?.reviewComment?.trim() || translated.rejectedModal.noReason}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.modalFooter}>
+              <button onClick={handleReapply} className={styles.nextButton}>
+                {translated.rejectedModal.reapplyButton}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {isOpen && (
         <div className={styles.modalOverlay} onClick={handleClose}>
