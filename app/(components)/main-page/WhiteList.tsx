@@ -69,12 +69,14 @@ export default function WhiteList() {
     <>
       {status === 'PENDING' && (
         <div className={`${styles.whitelistButton} ${styles.statusPending}`} role="status">
+          <span className={styles.statusDot} aria-hidden="true" />
           <span className={styles.whitelistButtonText}>{translated.card.pending}</span>
         </div>
       )}
 
       {status === 'APPROVED' && (
         <div className={`${styles.whitelistButton} ${styles.statusApproved}`} role="status">
+          <span className={styles.statusDot} aria-hidden="true" />
           <span className={styles.whitelistButtonText}>{translated.card.approved}</span>
         </div>
       )}
@@ -84,6 +86,7 @@ export default function WhiteList() {
           className={`${styles.whitelistButton} ${styles.statusRejected}`}
           onClick={openRejectedModal}
         >
+          <span className={styles.statusDot} aria-hidden="true" />
           <span className={styles.whitelistButtonText}>{translated.card.rejected}</span>
         </button>
       )}
